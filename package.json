@@ -1,0 +1,28 @@
+{
+  "name": "sellercontrol-node-v1",
+  "version": "1.0.0",
+  "description": "Software para control del seller, conexión con Amazon, Mercadolibre y claroshop.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[D\u001b[D, Woocommerce y Claroshop.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gergab00/sellercontrol-node-v1.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "amazon",
+    "mercadolibre",
+    "woocommerce",
+    "claroshop",
+    "api"
+  ],
+  "author": "Gerardo Gonzalez",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/Gergab00/sellercontrol-node-v1/issues"
+  },
+  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme"
+}
