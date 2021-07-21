@@ -4,7 +4,9 @@
   "description": "Software para control del seller, conexión con Amazon, Mercadolibre y claroshop.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[D\u001b[D, Woocommerce y Claroshop.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "log": "git log --oneline --decorate --graph --all",
+    "up": "git push --mirror origin"
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,20 @@
   "bugs": {
     "url": "https://github.com/Gergab00/sellercontrol-node-v1/issues"
   },
-  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme"
+  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme",
+  "dependencies": {
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "amazon-sp-api": "^0.5.2",
+    "axios": "^0.21.1",
+    "chrome-launcher": "^0.13.4",
+    "colors": "^1.4.0",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^10.0.0",
+    "fs": "0.0.1-security",
+    "puppeteer-autoscroll-down": "^0.1.7",
+    "puppeteer-core": "^8.0.0",
+    "request": "^2.88.2",
+    "util": "^0.12.4",
+    "yargs": "^17.0.1"
+  }
 }
