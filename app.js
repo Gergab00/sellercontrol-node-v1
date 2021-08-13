@@ -2,8 +2,8 @@ const AmazonAPIModel = require('./amazon/AmazonAPIModel.js');
 
 (async() => {
 
-let asin = 'B07XB3JZMR';
-let report_id = "51392018835";
+let asin = 'B01ASVCZBC';
+let report_id = "51394018836";
 let reportDocumentId = "";
 let report_document = null;
 const amz = new AmazonAPIModel();
@@ -16,7 +16,7 @@ await amz.connect(amz.REFRESHTOKEN);
     console.log("Error: ", error);
 });
 
-/*await amz.getEAN()
+await amz.getEAN()
 .then(async(res)=>{
     console.log("Ean: ", res);
 })
@@ -66,7 +66,7 @@ await amz.getModelNumber()
 
 await amz.getPricing(asin)
 .then(async(res)=>{
-    console.log("Buying Price: ", res[0].BuyingPrice, "Regular Price: ", res[0].RegularPrice);
+    console.log("Buying Price: ", res);
 })
 .catch(async(error)=>{
     console.log("Error: ", error);
@@ -86,7 +86,15 @@ await amz.getItemOffers(asin)
 })
 .catch(async(error)=>{
     console.log("Error: ", error);
-}); 
+});
+
+/*await amz.getInventorySummaries()
+.then(async(res)=>{
+    console.log("getInventorySummaries: ", res);
+})
+.catch(async(error)=>{
+    console.log("Error: ", error);
+});
 
 await amz.createReport()
 .then(async(res)=>{

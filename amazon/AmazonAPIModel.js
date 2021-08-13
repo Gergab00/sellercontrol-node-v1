@@ -1,6 +1,5 @@
 require('dotenv').config();
 const SellingPartnerAPI = require('amazon-sp-api');
-const colors = require('colors');
 
 class AmazonAPIModel {
 
@@ -26,7 +25,6 @@ class AmazonAPIModel {
     }
 
     /**
-     * 
      * Función que obtiene el AccessToken y el RoleCredentials por medio del refresh_token que se pasa como un string como parametro. El refresh_token, como las demas credenciales se tienen que configurar en el archivo credential.env.
      * Retorna una promesa que si se cumple regresa un objeto de tipo amazon-sp-api; si no se cumple la promesa retorna un String con la descripción del error.
      * @see https://github.com/amz-tools/amazon-sp-api
@@ -72,7 +70,7 @@ class AmazonAPIModel {
                 this.item = res;
                 resolve(this.item);
             } catch (e) {
-                reject(e)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
             }
         });
     }
@@ -163,7 +161,7 @@ class AmazonAPIModel {
                         ItemType: 'Asin'
                     }
                 });
-                resolve(res[0].Product.Offers);
+                resolve(res[0].Product.Offers[0].BuyingPrice.LandedPrice.Amount);
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
             }
@@ -182,7 +180,7 @@ class AmazonAPIModel {
                         ItemType: 'Asin'
                     }
                 });
-                resolve(res[0].Product.CompetitivePricing.CompetitivePrices[0]);
+                resolve(res[0].Product.CompetitivePricing.CompetitivePrices[0].Price.LandedPrice.Amount);
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
             }
@@ -203,13 +201,57 @@ class AmazonAPIModel {
                         ItemCondition: 'New'
                     }
                 });
-                resolve(res.Offers);
+                let offers = [];
+                for (let i = 0; i < res.Offers.length; i++) {
+                    let element = {
+                        Price: res.Offers[i].ListingPrice.Amount + res.Offers[i].Shipping.Amount,
+                        IsBuyBoxWinner: res.Offers[i].IsBuyBoxWinner
+                    }
+                    let j = `offer_${i+1}`;
+                    offers[j] = element;
+                }
+                resolve(offers);
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
             }
         });
     }
 
+    async getInventorySummaries(nextToken = null) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.sellingPartner.callAPI({
+                    operation: 'getInventorySummaries',
+                    endpoint: 'fbaInventory',
+                    query: {
+                        details: true,
+                        nextToken: nextToken,
+                        granularityType: 'Marketplace',
+                        granularityId: process.env.MARKETPLACEID,
+                        marketplaceIds: [process.env.MARKETPLACEID]
+                    }
+                });
+                let inventory = [];
+                
+                for (let i = 0; i < res.inventorySummaries.length; i++) {
+                    let element = {
+                        asin: res.inventorySummaries[i].asin,
+                        totalQuantity: res.inventorySummaries[i].totalQuantity,
+                    }
+                    inventory.push(element);
+                }
+
+                inventory['nextToken'] = res.nextToken;
+
+                resolve(inventory);
+            } catch (e) {
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+            }
+        });
+    }
+
+
+    //! EMPIEZA AREA DE FUNCIONES DE REPORTES
     async createReport() {
         return new Promise(async (resolve, reject) => {
             try {
@@ -217,8 +259,8 @@ class AmazonAPIModel {
                     operation: 'createReport',
                     endpoint: 'reports',
                     body: {
-                        "reportType": "GET_MERCHANT_LISTINGS_DATA",
-                        "dataStartTime": "2021-07-24T16:11:24.000Z",
+                        "reportType": "GET_FLAT_FILE_OPEN_LISTINGS_DATA",
+                        "dataStartTime": "2021-07-27T16:11:24.000Z",
                         "marketplaceIds": [
                             process.env.MARKETPLACEID
                         ]
@@ -281,23 +323,18 @@ class AmazonAPIModel {
         });
     }
 
-    async getQuantities(report_document = this.report_document){
-        return new Promise(async(resolve, reject) => {
-            try{
+    async getQuantities(report_document = this.report_document) {
+        return new Promise(async (resolve, reject) => {
+            try {
                 let element = [];
                 for (let i = 0; i < report_document.length; i++) {
-                    element[`${report_document[i].asin1}`] = report_document[i].quantity;
+                    element[`${report_document[i].asin}`] = report_document[i].quantity;
                 }
                 resolve(element);
-            }catch(e){
+            } catch (e) {
                 reject(e)
             }
         });
-    }
-
-    
-    asinObject = {
-
     }
 
 }
