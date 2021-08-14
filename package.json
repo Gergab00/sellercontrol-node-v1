@@ -6,7 +6,7 @@
   "scripts": {
     "log": "git log --oneline --decorate --graph --all",
     "sync": "git push origin --all",
-    "unir" : "concurrently \"git checkout master\" \"git merge dev\" \"git checkout dev\""
+    "unir": "concurrently \"git checkout master\" \"git merge dev\" \"git checkout dev\""
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,15 @@
   "bugs": {
     "url": "https://github.com/Gergab00/sellercontrol-node-v1/issues"
   },
-  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme"
+  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme",
+  "dependencies": {
+    "amazon-sp-api": "^0.5.4",
+    "chrome-launcher": "^0.14.0",
+    "colors": "^1.4.0",
+    "dotenv": "^10.0.0",
+    "puppeteer": "^10.2.0",
+    "puppeteer-autoscroll-down": "^0.1.7",
+    "puppeteer-core": "^10.2.0",
+    "request": "^2.88.2"
+  }
 }

@@ -1,9 +1,15 @@
 const AmazonAPIModel = require('./amazon/AmazonAPIModel.js');
+const AmazonScraperModel = require('./amazon/AmazonScraperModel.js');
 
 (async() => {
 
 let asin = 'B01ASVCZBC';
-let report_id = "51394018836";
+
+const amzScrap = new AmazonScraperModel();
+//let browser = await amzScrap.startBrowser();
+let browser = await amzScrap.startPuppeterr();
+await amzScrap.pageScraper(browser,asin);
+/* let report_id = "51394018836";
 let reportDocumentId = "";
 let report_document = null;
 const amz = new AmazonAPIModel();
@@ -88,7 +94,7 @@ await amz.getItemOffers(asin)
     console.log("Error: ", error);
 });
 
-/*await amz.getInventorySummaries()
+await amz.getInventorySummaries()
 .then(async(res)=>{
     console.log("getInventorySummaries: ", res);
 })
