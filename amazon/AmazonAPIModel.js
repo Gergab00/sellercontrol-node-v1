@@ -6,7 +6,7 @@ class AmazonAPIModel {
     sellingPartner = null;
     access_token = null;
     role_credentials = null;
-    item = null;
+    item = [];
     report_document = [];
     SELLING_PARTNER_APP_CLIENT_ID = null;
     SELLING_PARTNER_APP_CLIENT_SECRET = null;
@@ -67,10 +67,70 @@ class AmazonAPIModel {
                         includedData: ['identifiers', 'images', 'productTypes', 'salesRanks', 'summaries', 'variations']
                     }
                 });
-                this.item = res;
+
+                this.item.length = 0;
+
+                this.item.push(res);
+
+                //WARING: Prueba de código
+                let res_2 = await this.sellingPartner.callAPI({
+                    api_path: `/catalog/v0/items/${asin}`,
+                    method: 'GET',
+                    query: {
+                        MarketplaceId: process.env.MARKETPLACEID, //Se obtiene el ID del market por medio del credentials.env, que es necesario crear en la carpeta.
+                    }
+                });
+                //WARING: Prueba de código
+
+                this.item.push(res_2);
                 resolve(this.item);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getAsinData`)
+            }
+        });
+    }
+
+    async getHeight(item = this.item){
+        return new Promise(async(resolve, reject) => {
+            try{
+                let res = item[1].AttributeSets[0].PackageDimensions.Height.value*2.54
+                resolve(res.toString())
+            }catch(e){
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getHeight`)
+            }
+        });
+    }
+
+    async getLength(item = this.item){
+        return new Promise(async(resolve, reject) => {
+            try{
+                let res = item[1].AttributeSets[0].PackageDimensions.Length.value*2.54
+                resolve(res.toString())
+            }catch(e){
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getLength`)
+            }
+        });
+    }
+
+    async getWidth(item = this.item){
+        return new Promise(async(resolve, reject) => {
+            try{
+                let res = item[1].AttributeSets[0].PackageDimensions.Width.value*2.54
+                resolve(res.toString())
+            }catch(e){
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getWidth`)
+            }
+        });
+    }
+
+    async getWeight(item = this.item){
+        return new Promise(async(resolve, reject) => {
+            try{
+                //console.log('Debug: ', item[1].AttributeSets[0].PackageDimensions.Weight.value)
+                let res = item[1].AttributeSets[0].PackageDimensions.Weight.value*2.205
+                resolve(res.toString())
+            }catch(e){
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getWeight`)
             }
         });
     }
@@ -78,11 +138,20 @@ class AmazonAPIModel {
     async getEAN(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = item.identifiers[0].identifiers[1].identifier;
+                let res = "";
+                console.log('Debug: ',item[0].identifiers[0].identifiers, " Length Object: ", item[0].identifiers[0].identifiers.length)
+                for (let i = 0; i < item[0].identifiers[0].identifiers.length; i++) {
+                    const element = item[0].identifiers[0].identifiers[i].identifierType;
+                    console.log('Debug: ', element);
+                    if (element.includes('EAN')) {
+                        res = item[0].identifiers[0].identifiers[i].identifier;
+                        console.log('Debug: ', res);
+                    }
+                }
                 resolve(res)
 
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getEAN`)
             }
         });
     }
@@ -90,10 +159,10 @@ class AmazonAPIModel {
     async getBrandName(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = item.summaries[0].brandName;
+                let res = item[0].summaries[0].brandName;
                 resolve(res);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getBrandName`)
             }
         });
     }
@@ -101,10 +170,10 @@ class AmazonAPIModel {
     async getManufacturer(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = item.summaries[0].manufacturer;
+                let res = item[0].summaries[0].manufacturer;
                 resolve(res);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getManufacturer`)
             }
         });
     }
@@ -112,10 +181,10 @@ class AmazonAPIModel {
     async getItemName(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = item.summaries[0].itemName
+                let res = item[0].summaries[0].itemName
                 resolve(res);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getItemName`)
             }
         });
     }
@@ -123,10 +192,10 @@ class AmazonAPIModel {
     async getModelNumber(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = item.summaries[0].modelNumber
+                let res = item[0].summaries[0].modelNumber
                 resolve(res);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getModelNumber`)
             }
         });
     }
@@ -142,9 +211,10 @@ class AmazonAPIModel {
                         ASIN: asin,
                     }
                 });
+                //console.log('Debug getCategory: ', res);
                 resolve(res[0].ProductCategoryName);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getCategory`)
             }
         });
     }
@@ -161,9 +231,16 @@ class AmazonAPIModel {
                         ItemType: 'Asin'
                     }
                 });
-                resolve(res[0].Product.Offers[0].BuyingPrice.LandedPrice.Amount);
+                let price = 0;
+                try {
+                    price = res[0].Product.Offers[0].BuyingPrice.LandedPrice.Amount;    
+                } catch (error) {
+                    console.log("Catch getPricing error: ", res);
+                }
+                
+                resolve(price.toString());
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getPricing`)
             }
         });
     }
@@ -180,9 +257,14 @@ class AmazonAPIModel {
                         ItemType: 'Asin'
                     }
                 });
-                resolve(res[0].Product.CompetitivePricing.CompetitivePrices[0].Price.LandedPrice.Amount);
+                try {
+                    resolve(res[0].Product.CompetitivePricing.CompetitivePrices[0].Price.LandedPrice.Amount);
+                } catch (error) {
+                    resolve(this.getPricing(asin));
+                }
+                //console.log('Debug getCompetitivePricing: ', res[0].Product.CompetitivePricing.CompetitivePrices)
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getCompetitivePricing`)
             }
         });
     }
@@ -212,11 +294,12 @@ class AmazonAPIModel {
                 }
                 resolve(offers);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getItemOffers`)
             }
         });
     }
 
+    //TODO Falta ingresar al dataProducts.js y al WooMeta.php
     async getInventorySummaries(nextToken = null) {
         return new Promise(async (resolve, reject) => {
             try {
@@ -231,6 +314,8 @@ class AmazonAPIModel {
                         marketplaceIds: [process.env.MARKETPLACEID]
                     }
                 });
+
+                // NOTE Debug console.log("Debug Res: ", res);
                 let inventory = [];
                 
                 for (let i = 0; i < res.inventorySummaries.length; i++) {
@@ -245,13 +330,13 @@ class AmazonAPIModel {
 
                 resolve(inventory);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getInventorySummaries`)
             }
         });
     }
 
 
-    //! EMPIEZA AREA DE FUNCIONES DE REPORTES
+    //! EMPIEZA AREA DE FUNCIONES DE REPORTES 
     async createReport() {
         return new Promise(async (resolve, reject) => {
             try {

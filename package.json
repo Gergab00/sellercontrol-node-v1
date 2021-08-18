@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme",
   "dependencies": {
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "amazon-sp-api": "^0.5.4",
     "chrome-launcher": "^0.14.0",
     "colors": "^1.4.0",

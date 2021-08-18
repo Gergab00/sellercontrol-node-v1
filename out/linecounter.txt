@@ -1,0 +1,92 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-08-15 16:29:06
+count workspace : c:\Users\Gerardo\Google Drive\www\sellercontrol-node-v1
+total files : 10
+total code lines : 1837
+total comment lines : 159
+total blank lines : 118
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            223|              7|             56|     12|
+   |          .json|           1089|              0|              1|     59|
+   |            .js|            523|            152|             61|     28|
+   |            .md|              2|              0|              0|   0.11|
+   -------------------------------------------------------------------------
+.env, code is 14, comment is 1, blank is 1.
+.gitignore, code is 79, comment is 6, blank is 29.
+amazon\AmazonAPIModel.js, code is 349, comment is 13, blank is 39.
+amazon\AmazonScraperModel.js, code is 129, comment is 15, blank is 12.
+app.js, code is 31, comment is 124, blank is 7.
+asinObject.js, code is 14, comment is 0, blank is 3.
+LICENSE, code is 130, comment is 0, blank is 26.
+package-lock.json, code is 1050, comment is 0, blank is 0.
+package.json, code is 39, comment is 0, blank is 1.
+README.md, code is 2, comment is 0, blank is 0.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-08-15 22:21:26
+count workspace : c:\Users\Gerardo\Google Drive\www\sellercontrol-node-v1
+total files : 11
+total code lines : 2000
+total comment lines : 165
+total blank lines : 124
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            223|              7|             56|     11|
+   |            .md|              2|              0|              0|   0.10|
+   |          .json|           1228|              0|              1|     61|
+   |            .js|            547|            158|             67|     27|
+   -------------------------------------------------------------------------
+.env, code is 14, comment is 1, blank is 1.
+.gitignore, code is 79, comment is 6, blank is 29.
+amazon\AmazonAPIModel.js, code is 349, comment is 13, blank is 39.
+amazon\AmazonScraperModel.js, code is 129, comment is 15, blank is 12.
+app.js, code is 31, comment is 124, blank is 7.
+dataProduct.js, code is 10, comment is 6, blank is 2.
+LICENSE, code is 130, comment is 0, blank is 26.
+package-lock.json, code is 1188, comment is 0, blank is 0.
+package.json, code is 40, comment is 0, blank is 1.
+README.md, code is 2, comment is 0, blank is 0.
+woocommerce\WoocommerceAPIModel.js, code is 28, comment is 0, blank is 7.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-08-16 22:16:55
+count workspace : c:\Users\Gerardo\Google Drive\www\sellercontrol-node-v1
+total files : 11
+total code lines : 2034
+total comment lines : 167
+total blank lines : 124
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            223|              7|             56|     11|
+   |            .js|            581|            160|             67|     29|
+   |          .json|           1228|              0|              1|     60|
+   |            .md|              2|              0|              0|  0.098|
+   -------------------------------------------------------------------------
+.env, code is 14, comment is 1, blank is 1.
+.gitignore, code is 79, comment is 6, blank is 29.
+amazon\AmazonAPIModel.js, code is 349, comment is 13, blank is 39.
+amazon\AmazonScraperModel.js, code is 129, comment is 15, blank is 12.
+app.js, code is 31, comment is 124, blank is 7.
+dataProduct.js, code is 44, comment is 8, blank is 2.
+LICENSE, code is 130, comment is 0, blank is 26.
+package-lock.json, code is 1188, comment is 0, blank is 0.
+package.json, code is 40, comment is 0, blank is 1.
+README.md, code is 2, comment is 0, blank is 0.
+woocommerce\WoocommerceAPIModel.js, code is 28, comment is 0, blank is 7.
+===============================================================================
