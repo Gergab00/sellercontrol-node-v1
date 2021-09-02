@@ -5,10 +5,10 @@ class WoocommerceAPIModel {
 
     api = null;
 
-    constructor(url="http://localhost:8081/wordpress"){
+    constructor(url = "http://localhost:8081/wordpress") {
         this.url = url;
     }
-    
+
     async connect() {
         this.api = new WooCommerceRestApi({
             url: this.url,
@@ -16,18 +16,34 @@ class WoocommerceAPIModel {
             consumerSecret: "cs_431b0dfaf94c88857d7c09e112edf478bd1236e4",
             version: "wc/v3"
         });
-        
+
         return this.api;
     }
 
-    async createProduct(dataProduct, api = this.api){
-        return new Promise(async(resolve, reject) => {
-            try{
+    async createProduct(dataProduct, api = this.api) {
+        return new Promise(async (resolve, reject) => {
+            try {
                 let res = api.post("products", dataProduct);
                 resolve(res)
-            }catch(e){
-                reject(e)
+            } catch (error) {
+                reject(error.response.data)
             }
+        });
+    }
+
+    async getProduct(sku, api = this.api) {
+        return new Promise(async (resolve, reject) => {
+            let ret;
+            api.get("products", {
+                    sku: sku
+                })
+                .then((response) => {
+                    // Successful requess
+                    if(1===response.data.length){ret = true;}else{ret = false;}
+                })
+                .finally(() => {
+                    resolve(ret);
+                });
         });
     }
 }

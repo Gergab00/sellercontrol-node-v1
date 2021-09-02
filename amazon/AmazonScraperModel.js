@@ -5,7 +5,6 @@ const chromeLauncher = require('chrome-launcher');
 const scrollPageToBottom = require('puppeteer-autoscroll-down');
 const request = require('request');
 const util = require('util');
-const colors = require('colors');
 
 class AmazonScraperModel {
 
@@ -24,7 +23,7 @@ class AmazonScraperModel {
                 // Launch chrome using chrome-launcher.
                 const chrome = await chromeLauncher.launch(opts);
                 opts.port = chrome.port;
-                console.log("Opening the browser......");
+                //console.log("Opening the browser......");
                 // Connect to it using puppeteer.connect().
                 const resp = await util.promisify(request)(`http://localhost:${opts.port}/json/version`);
                 const {
@@ -36,7 +35,7 @@ class AmazonScraperModel {
                 });
                 resolve(browser);
             } catch (err) {
-                console.log("Could not create a browser instance => : ", err);
+                //console.log("Could not create a browser instance => : ", err);
                 reject("Could not create a browser instance => : ", err)
             }
         });
@@ -48,7 +47,7 @@ class AmazonScraperModel {
                 const browser = await puppeteer.launch();
                 resolve(browser)
             } catch (err) {
-                console.log("Could not create a browser instance => : ", err);
+                //console.log("Could not create a browser instance => : ", err);
                 reject("Could not create a browser instance => : ", err)
             }
         });
@@ -56,44 +55,38 @@ class AmazonScraperModel {
 
     async pageScraper(browser, asin) {
         return new Promise(async (resolve, reject) => {
-            try {
+            
                 const url = 'http://amazon.com.mx/dp/';
                 let newPage = await browser.newPage();
                 await newPage.setDefaultNavigationTimeout(60000);
-                await newPage.goto(url + asin);
+                await newPage.goto(url + asin)
+                //.then(async(res)=>{console.log("Respuesta: ", url , asin);});
                 await newPage.waitForTimeout(3000)
-                    .then(() => console.log(colors.bold.green('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...')));
+                    //.then(() => console.log(colors.bold.green('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...')));
                 let lastPosition = await scrollPageToBottom(newPage, 500, 50);
-                console.log(`Finish Scroll at: ${lastPosition}`);
+                //console.log(`Finish Scroll at: ${lastPosition}`);
                 await newPage.click(`a[title="Ver opciones de compra"]`)
                     .catch(async () => {
-                        console.log('Fallo click en a[title="Ver opciones de compra"]');
+                        //console.log('Fallo click en a[title="Ver opciones de compra"]');
                         await newPage.click(`#olp_feature_div > div.a-section.a-spacing-small.a-spacing-top-small > span > a`)
                             .catch(async () => {
-                                console.log("Fallo click en #olp_feature_div");
+                                //console.log("Fallo click en #olp_feature_div");
                                 await newPage.click("#landingImage")
                                     .catch(async () => {
-                                        console.log("Fallo click en #landingImage");
+                                        //console.log("Fallo click en #landingImage");
                                         newPage.close();
-                                        resolve("No existe la pagina del producto")
+                                        reject("No existe la pagina del producto")
                                     });
                             });
                     });
-                await newPage.waitForSelector('#aod-offer-list', {
-                        timeout: 5000
-                    })
-                    .catch(() => console.log("There is no selector #aod-offer-list\nNo existe el selector #aod-offer-list"));
 
                 //*Get description
-                let description = await newPage.$eval('#productDescription', (e) => e.innerText)
-                    .catch(async (error) => {
-                        return "No se encontro descripción del producto.\nError: " + error
-                    });
+                let description = await newPage.$('#productDescription') == null? "No se encontro descripción del producto." : await newPage.$eval('#productDescription', (e) => e.innerText);
 
                 //*Get short description
                 let shortDescription = await newPage.$eval('#feature-bullets', (e) => e.innerText)
                     .catch(async (error) => {
-                        return "No se encontro descripción del producto.\nError: " + error
+                        return "No se encontro descripción corta del producto."
                     });
 
                 //*Get images URL
@@ -123,20 +116,37 @@ class AmazonScraperModel {
                     });
 
                 //a-expander-content a-expander-partial-collapse-content
-                let list= await newPage.$eval('#aplus > div', (e)=>{
-                    /* let elementOuter = "";
-                    elementOuter += e.innerText;
-                    let img = e.getElementsByTagName('img');
-                    for (let i = 0; i < img.length; i++) {
-                        elementOuter += img[i].outerHTML;
+                let longDescription = await newPage.$eval('#aplus > div', (e)=>{
+                    let elementOuter = "";
+                    //let elementText = [];
+                    //elementText.push(e.innerText);
+                    elementOuter += e.innerText
+                    //let img = e.getElementsByTagName('img');
+                    let p = e.getElementsByTagName('p');
+                    let h4 = e.getElementsByTagName('h4');
+                    /*if (0!=img.length) {
+                        for (let i = 0; i < img.length; i++) {
+                            //elementImg += img[i].outerHTML;
+                            elementOuter+= img[i].outerHTML;
+                        }
+                    }*/
+                    //NOTE Revisar la función de imagenes para mejorar la descripción larga
+                
+                    for (let i = 0; i < p.length; i++) {
+                        if(i < h4.length){
+                            elementOuter+= "<h4>"+h4[i].innerText+"</h4>";
+                        }
+                        elementOuter+= "<p>"+p[i].innerText+"</p>";
                     }
-                    return elementOuter; */
-                    return e.innerHTML
+                    
+                    console.log("elementOuter: ", elementOuter);
+                    return elementOuter;
+                    //return e.innerHTML
                 })
                 .catch(async (error) => {
                     return "No se encontro descripción larga del producto."
                 });
-                let longDescription = list.replace(/(\r\n|\n|\r)/gm, "");
+                //let longDescription = list.replace(/(\r\n|\n|\r)/gm, "");//TODO Eliminar replace, modificar el newPAge.$eval de arriba para darle estructura  a la longDescription
 
                 let res = [];
                 res['description'] = description;
@@ -148,9 +158,6 @@ class AmazonScraperModel {
                 //await browser.close().then(async () => console.log("The page was close!")).catch(async () => console.log("The page was close!"));
                 this.item = res;
                 resolve(this.item)
-            } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función pageScraper`)
-            }
         });
     }
 

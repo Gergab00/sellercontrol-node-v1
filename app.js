@@ -1,4 +1,4 @@
-//const AmazonAPIModel = require('./amazon/AmazonAPIModel.js');
+const AmazonAPIModel = require('./amazon/AmazonAPIModel.js');
 //const AmazonScraperModel = require('./amazon/AmazonScraperModel.js');
 const AmazonWoocommerceController = require('./controller/AmazonWoocommerceController.js');
 
@@ -6,7 +6,7 @@ const AmazonWoocommerceController = require('./controller/AmazonWoocommerceContr
 
     const AmzWooCon = new AmazonWoocommerceController();
 
-    await AmzWooCon.copyAmazonToWoocommerce()
+    await AmzWooCon.createConections()
         .then(async (res) => {
             console.log("Respuesta: ", res);
         })
@@ -14,9 +14,28 @@ const AmazonWoocommerceController = require('./controller/AmazonWoocommerceContr
             console.log("Error: ", error);
         });
 
+    let inventory = await AmzWooCon.getInventory()
+    .then(async (res) => {
+        console.log("Respuesta: ", res.msg);
+        return res.data;
+    })
+    .catch(async (error) => {
+        console.log("Error: ", error);
+    });
+
+    for (let i = 0; i < inventory.length; i++) {
+        await AmzWooCon.copyAmazonToWoocommerce(inventory[i])
+        .then(async (res) => {
+            console.log(i,".Respuesta: ", res);
+        })
+        .catch(async (error) => {
+            console.log("Error en for app.js: ", error);
+        });
+    }
+
     /*
     let asin = 'B07C8L9CRJ';
-    const amzScrap = new AmazonScraperModel();
+    /*const amzScrap = new AmazonScraperModel();
     //let browser = await amzScrap.startBrowser();
     let browser = await amzScrap.startPuppeterr();
     await amzScrap.pageScraper(browser,asin)
@@ -31,13 +50,17 @@ const AmazonWoocommerceController = require('./controller/AmazonWoocommerceContr
     let report_document = null;
     const amz = new AmazonAPIModel();
     await amz.connect(amz.REFRESHTOKEN);
-     await amz.getAsinData(asin)
+    let inventoryTemp = await amz.getInventorySummaries();
+    for (let i = 0; i < inventoryTemp.length; i++) {
+        const element = inventoryTemp[i].asin;
+     await amz.getAsinData(element)
     .then(async(res)=>{
         console.log("Respuesta: ", res);
     })
     .catch(async(error)=>{
         console.log("Error: ", error);
     });
+
 
     await amz.getHeight()
     .then(async(res)=>{
@@ -95,7 +118,7 @@ const AmazonWoocommerceController = require('./controller/AmazonWoocommerceContr
         console.log("Error: ", error);
     });
 
-    await amz.getPricing(asin)
+    await amz.getPricing(element)
     .then(async(res)=>{
         console.log("Buying Price: ", res);
     })
@@ -103,7 +126,7 @@ const AmazonWoocommerceController = require('./controller/AmazonWoocommerceContr
         console.log("Error: ", error);
     });
 
-    await amz.getCompetitivePricing(asin)
+    await amz.getCompetitivePricing(element)
     .then(async(res)=>{
         console.log("CompetitivePricing: ", res);
     })
@@ -111,6 +134,8 @@ const AmazonWoocommerceController = require('./controller/AmazonWoocommerceContr
         console.log("Error: ", error);
     });
 
+}//Fin for loop
+/*
     await amz.getItemOffers(asin)
     .then(async(res)=>{
         console.log("ItemOffers: ", res);

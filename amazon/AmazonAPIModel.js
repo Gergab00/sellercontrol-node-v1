@@ -1,5 +1,6 @@
 require('dotenv').config();
 const SellingPartnerAPI = require('amazon-sp-api');
+const tools = require('gergab-toolbox');
 
 class AmazonAPIModel {
 
@@ -72,7 +73,6 @@ class AmazonAPIModel {
 
                 this.item.push(res);
 
-                //WARING: Prueba de código
                 let res_2 = await this.sellingPartner.callAPI({
                     api_path: `/catalog/v0/items/${asin}`,
                     method: 'GET',
@@ -80,7 +80,6 @@ class AmazonAPIModel {
                         MarketplaceId: process.env.MARKETPLACEID, //Se obtiene el ID del market por medio del credentials.env, que es necesario crear en la carpeta.
                     }
                 });
-                //WARING: Prueba de código
 
                 this.item.push(res_2);
                 resolve(this.item);
@@ -139,13 +138,13 @@ class AmazonAPIModel {
         return new Promise(async (resolve, reject) => {
             try {
                 let res = "";
-                console.log('Debug: ',item[0].identifiers[0].identifiers, " Length Object: ", item[0].identifiers[0].identifiers.length)
+                //console.log('Debug: ',item[0].identifiers[0].identifiers, " Length Object: ", item[0].identifiers[0].identifiers.length)
                 for (let i = 0; i < item[0].identifiers[0].identifiers.length; i++) {
                     const element = item[0].identifiers[0].identifiers[i].identifierType;
-                    console.log('Debug: ', element);
+                    //console.log('Debug: ', element);
                     if (element.includes('EAN')) {
                         res = item[0].identifiers[0].identifiers[i].identifier;
-                        console.log('Debug: ', res);
+                        //console.log('Debug: ', res);
                     }
                 }
                 resolve(res)
@@ -232,10 +231,12 @@ class AmazonAPIModel {
                     }
                 });
                 let price = 0;
-                try {
-                    price = res[0].Product.Offers[0].BuyingPrice.LandedPrice.Amount;    
-                } catch (error) {
-                    console.log("Catch getPricing error: ", res);
+                let condition = await tools.checkNested(res[0], 'Product', 'Offers');
+                if (condition) {
+                    condition = await tools.checkNested(res[0].Product.Offers[0], 'BuyingPrice', 'LandedPrice', 'Amount');
+                    if(condition){
+                        price = res[0].Product.Offers[0].BuyingPrice.LandedPrice.Amount;
+                    }
                 }
                 
                 resolve(price.toString());
@@ -257,12 +258,16 @@ class AmazonAPIModel {
                         ItemType: 'Asin'
                     }
                 });
-                try {
-                    resolve(res[0].Product.CompetitivePricing.CompetitivePrices[0].Price.LandedPrice.Amount);
-                } catch (error) {
-                    resolve(this.getPricing(asin));
+                let condition = await tools.checkNested(res[0], 'Product', 'CompetitivePricing', 'CompetitivePrices');
+                if (condition) {
+                    condition = await tools.checkNested(res[0].Product.CompetitivePricing.CompetitivePrices[0], 'Price', 'LandedPrice', 'Amount');
+                    if (condition) {
+                        resolve(res[0].Product.CompetitivePricing.CompetitivePrices[0].Price.LandedPrice.Amount);   
+                    }else{
+                        resolve(this.getPricing(asin));
+                    }
                 }
-                //console.log('Debug getCompetitivePricing: ', res[0].Product.CompetitivePricing.CompetitivePrices)
+               
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getCompetitivePricing`)
             }
