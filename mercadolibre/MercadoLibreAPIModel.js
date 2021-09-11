@@ -390,6 +390,3 @@ class MercadoLibreAPIModel {
 }
 
 module.exports = MercadoLibreAPIModel;
-
-//curl -X GET -H 'Authorization: Bearer  APP_USR-8732582719465046-090719-a2af73322027473e9c5fee751ba68892-86979722' https://api.mercadolibre.com/items/MLM857357637
-//curl -X GET -H 'Authorization: Bearer APP_USR-8732582719465046-090719-a2af73322027473e9c5fee751ba68892-86979722' https://api.mercadolibre.com/users/86979722/items/search?sku=B07FFKH4H7
