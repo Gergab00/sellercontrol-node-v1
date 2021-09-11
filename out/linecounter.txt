@@ -90,3 +90,72 @@ package.json, code is 40, comment is 0, blank is 1.
 README.md, code is 2, comment is 0, blank is 0.
 woocommerce\WoocommerceAPIModel.js, code is 28, comment is 0, blank is 7.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-09-03 01:43:45
+count workspace : c:\Users\Gerardo\Google Drive\www\sellercontrol-node-v1
+total files : 14
+total code lines : 2421
+total comment lines : 318
+total blank lines : 169
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            227|              7|             58|    9.4|
+   |            .md|              2|              0|              0|  0.083|
+   |          .json|           1239|              0|              1|     51|
+   |            .js|            953|            311|            110|     39|
+   -------------------------------------------------------------------------
+.env, code is 16, comment is 1, blank is 2.
+.gitignore, code is 81, comment is 6, blank is 30.
+amazon\AmazonAPIModel.js, code is 373, comment is 18, blank is 43.
+amazon\AmazonScraperModel.js, code is 165, comment is 30, blank is 22.
+app.js, code is 14, comment is 199, blank is 5.
+controller\AmazonWoocommerceController.js, code is 82, comment is 2, blank is 10.
+dataProduct.js, code is 44, comment is 14, blank is 2.
+json\AuthCode.json, code is 5, comment is 0, blank is 0.
+LICENSE, code is 130, comment is 0, blank is 26.
+mercadolibre\MercadoLibreAPIModel.js, code is 233, comment is 47, blank is 20.
+package-lock.json, code is 1193, comment is 0, blank is 0.
+package.json, code is 41, comment is 0, blank is 1.
+README.md, code is 2, comment is 0, blank is 0.
+woocommerce\WoocommerceAPIModel.js, code is 42, comment is 1, blank is 8.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-09-07 15:15:06
+count workspace : c:\Users\Gerardo\Google Drive\www\sellercontrol-node-v1
+total files : 15
+total code lines : 2490
+total comment lines : 146
+total blank lines : 176
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            227|              7|             58|    9.1|
+   |            .md|              2|              0|              0|  0.080|
+   |          .json|           1239|              0|              1|     50|
+   |            .js|           1022|            139|            117|     41|
+   -------------------------------------------------------------------------
+.env, code is 16, comment is 1, blank is 2.
+.gitignore, code is 81, comment is 6, blank is 30.
+amazon\AmazonAPIModel.js, code is 373, comment is 18, blank is 43.
+amazon\AmazonScraperModel.js, code is 165, comment is 30, blank is 22.
+app.js, code is 12, comment is 19, blank is 4.
+controller\AmazonWoocommerceController.js, code is 82, comment is 5, blank is 10.
+controller\MercadolibreWoocommerceController.js, code is 45, comment is 6, blank is 6.
+dataProduct.js, code is 48, comment is 15, blank is 2.
+json\AuthCode.json, code is 5, comment is 0, blank is 0.
+LICENSE, code is 130, comment is 0, blank is 26.
+mercadolibre\MercadoLibreAPIModel.js, code is 255, comment is 44, blank is 22.
+package-lock.json, code is 1193, comment is 0, blank is 0.
+package.json, code is 41, comment is 0, blank is 1.
+README.md, code is 2, comment is 0, blank is 0.
+woocommerce\WoocommerceAPIModel.js, code is 42, comment is 2, blank is 8.
+===============================================================================

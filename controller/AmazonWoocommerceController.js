@@ -13,14 +13,15 @@ class AmazonWoocommerceController {
     async createConections() {
         return new Promise(async (resolve, reject) => {
             try {
+                let msg;
                 this.amzAPI = new AmazonAPIModel();
-                await this.amzAPI.connect(this.amzAPI.REFRESHTOKEN);
+                msg = await this.amzAPI.connect(this.amzAPI.REFRESHTOKEN);
                 this.amzScrap = new AmazonScraperModel();
                 this.browser = await this.amzScrap.startPuppeter();
                 this.wooAPI = new WoocommerceApiModel();
                 await this.wooAPI.connect();
 
-                resolve('Conexión creada con éxito!.')
+                resolve(msg)
             } catch (e) {
                 reject('Error al crear la conexión. Error: ', e)
             }
@@ -54,9 +55,13 @@ class AmazonWoocommerceController {
     async copyAmazonToWoocommerce(element) {
         return new Promise(async (resolve, reject) => {
             
-                let condition = await this.wooAPI.getProduct(element.asin);
-                if (!condition) {
-                    await this.amzAPI.getAsinData(element.asin);
+                let condition = await this.wooAPI.existsProduct(element.asin);
+                //let condition = true;
+                if (condition) {
+                    await this.amzAPI.getAsinData(element.asin)
+                    .catch(async(res)=>{
+                        reject(`No se pudo crear el producto con SKU ${element.asin}. ${res}`)
+                    });
                     await this.amzScrap.pageScraper(this.browser, element.asin);
                     dataProduct.sku = element.asin;
                     dataProduct.regular_price = await this.amzAPI.getPricing(element.asin);
@@ -73,7 +78,6 @@ class AmazonWoocommerceController {
                     dataProduct.meta_data[5].value = await this.amzAPI.getCompetitivePricing(element.asin);
                     dataProduct.description = await this.amzScrap.getDescription();
                     dataProduct.name = await this.amzAPI.getItemName();
-                    //dataProduct.description += `\n ${await this.amzScrap.getLongDescription()}`;
                     dataProduct.description += await this.amzScrap.getLongDescription();
                     dataProduct.short_description = await this.amzScrap.getShortDescription();
                     dataProduct.images = await this.amzScrap.getImages();

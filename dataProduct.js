@@ -51,6 +51,11 @@ const dataProduct = {
         {
             key: "_competitive_pricing",
             value: "",
+        },
+        //dataProduct.meta_data[6].value
+        {
+            key: "_mercadolibre_category_code",
+            value: ""
         }
     ],
 }

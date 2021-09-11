@@ -22,12 +22,27 @@ class WoocommerceAPIModel {
 
     async createProduct(dataProduct, api = this.api) {
         return new Promise(async (resolve, reject) => {
-            try {
-                let res = api.post("products", dataProduct);
-                resolve(res)
-            } catch (error) {
-                reject(error.response.data)
-            }
+                api.post("products", dataProduct)
+                .then(async(res)=>{
+                    resolve(res)
+                })
+                .catch(async(error)=>{
+                    reject(error.response.data)
+                });
+        });
+    }
+
+    async existsProduct(sku, api = this.api) {
+        return new Promise(async (resolve, reject) => {
+            let ret;
+            api.get("products", {
+                    sku: sku
+                })
+                .then((response) => {
+                    // Successful requess
+                    if(1===response.data.length){ret = false;}else{ret = true;} //Si existe el producto regresa true, si no existe regresa false
+                    resolve(ret);
+                });
         });
     }
 
@@ -39,11 +54,22 @@ class WoocommerceAPIModel {
                 })
                 .then((response) => {
                     // Successful requess
-                    if(1===response.data.length){ret = true;}else{ret = false;}
+                   resolve(response.data);
                 })
-                .finally(() => {
-                    resolve(ret);
-                });
+        });
+    }
+
+    async getInventorySummaries(page = 1, api = this.api){
+        return new Promise(async (resolve, reject) => {
+            api.get("products",{
+                page:page
+            })
+            .then(async(res)=>{
+                resolve(res.data)
+            })
+            .catch(async(error)=>{
+                reject(error)
+            })
         });
     }
 }

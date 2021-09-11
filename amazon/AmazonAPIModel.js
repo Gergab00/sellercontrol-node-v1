@@ -50,9 +50,9 @@ class AmazonAPIModel {
                 this.access_token = this.sellingPartner.access_token;
                 this.role_credentials = this.sellingPartner.role_credentials;
 
-                resolve(this.sellingPartner);
+                resolve(`Conexión lograda con Amazon con éxito!. Access toke ${this.access_token}. Role Credentials ${this.role_credentials}`);
             } catch (e) {
-                reject(e);
+                reject(`Error en connect: ${e.message}`);
             }
         });
     }

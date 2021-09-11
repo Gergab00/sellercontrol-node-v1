@@ -105,4 +105,7 @@ dist
 
 # TernJS port file
 .tern-port
-amazon/amzspapi/credentials.env
+
+# Json variables
+.json
+json/AuthCode.json
