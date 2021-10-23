@@ -109,3 +109,4 @@ dist
 # Json variables
 .json
 json/AuthCode.json
+json/amazon_cookies.json

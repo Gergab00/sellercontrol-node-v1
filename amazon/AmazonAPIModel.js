@@ -49,6 +49,8 @@ class AmazonAPIModel {
 
                 this.access_token = this.sellingPartner.access_token;
                 this.role_credentials = this.sellingPartner.role_credentials;
+                
+                //console.log(`Conexión lograda con Amazon con éxito!. Access toke ${this.access_token}. Role Credentials ${this.role_credentials}`);
 
                 resolve(`Conexión lograda con Amazon con éxito!. Access toke ${this.access_token}. Role Credentials ${this.role_credentials}`);
             } catch (e) {
@@ -93,6 +95,7 @@ class AmazonAPIModel {
         return new Promise(async(resolve, reject) => {
             try{
                 let res = item[1].AttributeSets[0].PackageDimensions.Height.value*2.54
+                console.log(`Debug getHeight: res[${res}] item[${item[1]}]`);
                 resolve(res.toString())
             }catch(e){
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getHeight`)
@@ -211,7 +214,7 @@ class AmazonAPIModel {
                     }
                 });
                 //console.log('Debug getCategory: ', res);
-                resolve(res[0].ProductCategoryName);
+                res == 0 ? resolve('undefined') : resolve(res[0].ProductCategoryName);
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getCategory`)
             }

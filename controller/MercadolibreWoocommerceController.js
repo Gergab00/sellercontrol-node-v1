@@ -74,6 +74,22 @@ class MercadoLibreWoocommerceController {
         });
     }
 
+    async updateWoocommerceWithMercadoLibre(dataProduct){
+        return new Promise(async (resolve, reject) => {
+            dataProduct.meta_data[6].value = await this.mlAPI.getProductCategory(dataProduct.name);
+            dataProduct.meta_data[7].value = await this.mlAPI.getProductCategoryName(dataProduct.name);
+            await this.wooAPI.updateProduct(dataProduct)
+            .then(async(res)=>{
+                resolve(`El producto con SKU ${res.sku} se ha actualizado con éxito.`)
+            })
+            .catch(async(error)=>{
+                //console.log("Error: ", error);
+                reject(`Error al actualizar el producto. Error: ${error}`)
+            })
+        });
+    }
+
+    //NOTE Modificar esta función para crearla como el AmazonWoocommerceController
     async copyWoocommerceToMercadoLibre(sku) {
         return new Promise(async (resolve, reject) => {
             if (!await this.mlAPI.existsProduct(sku)) {

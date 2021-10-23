@@ -10,14 +10,19 @@ class AmazonWoocommerceController {
     browser;
     wooAPI;
 
-    async createConections() {
+    /**
+     * 
+     * @param {boolean} boolean Si se manda true no se inicia el explorador de chrome launcher, y si se manda false si se inicia.
+     * @returns Devuelve un mensaje de exito o error si se logran todas las conexiones.
+     */
+    async createConections(boolean = true) {
         return new Promise(async (resolve, reject) => {
             try {
-                let msg;
+                let msg = 'Conexión exitosa!';
                 this.amzAPI = new AmazonAPIModel();
                 msg = await this.amzAPI.connect(this.amzAPI.REFRESHTOKEN);
                 this.amzScrap = new AmazonScraperModel();
-                this.browser = await this.amzScrap.startPuppeter();
+                if(boolean){this.browser = await this.amzScrap.startPuppeter();}else{this.browser = await this.amzScrap.startBrowser();}
                 this.wooAPI = new WoocommerceApiModel();
                 await this.wooAPI.connect();
 
@@ -52,9 +57,27 @@ class AmazonWoocommerceController {
         });
     }
 
+    async getSellerInventory() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let inventory = [];
+                //*Se obtiene los ASIN y el inventario de Amazon
+                inventory = await this.amzScrap.scrapeSellerInventory(this.browser);
+                
+                let res = {
+                    msg: 'Inventario obtenido con éxito',
+                    data: inventory,
+                }
+                resolve(res)
+            } catch (e) {
+                reject('Error al obtener el inventario. Error: ', e)
+            }
+        });
+    }
+
     async copyAmazonToWoocommerce(element) {
         return new Promise(async (resolve, reject) => {
-            
+                
                 let condition = await this.wooAPI.existsProduct(element.asin);
                 //let condition = true;
                 if (condition) {
@@ -66,7 +89,7 @@ class AmazonWoocommerceController {
                     dataProduct.sku = element.asin;
                     dataProduct.regular_price = await this.amzAPI.getPricing(element.asin);
                     dataProduct.stock_quantity = element.totalQuantity;
-                    dataProduct.dimensions.height = await this.amzAPI.getHeight();
+                    dataProduct.dimensions.height = await this.amzAPI.getHeight().catch(async()=>{return '15'});
                     dataProduct.dimensions.length = await this.amzAPI.getLength();
                     dataProduct.dimensions.width = await this.amzAPI.getWidth();
                     dataProduct.weight = await this.amzAPI.getWeight();
@@ -87,6 +110,12 @@ class AmazonWoocommerceController {
                 } else {
                     reject(`No se pudo crear el producto con SKU ${element.asin}. El proucto ya existe.`)
                 }
+        });
+    }
+
+    async getDataProduct(){
+        return new Promise(async (resolve, reject) => {
+            (dataProduct.sku != "") ? resolve(dataProduct) : reject(`El objeto dataProduct esta vacio.`)
         });
     }
 

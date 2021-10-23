@@ -56,6 +56,11 @@ const dataProduct = {
         {
             key: "_mercadolibre_category_code",
             value: ""
+        },
+        //dataProduct.meta_data[7].value
+        {
+            key: "_mercadolibre_category_name",
+            value: ""
         }
     ],
 }

@@ -29,14 +29,15 @@
   "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme",
   "dependencies": {
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
-    "amazon-sp-api": "^0.5.4",
-    "chrome-launcher": "^0.14.0",
+    "amazon-sp-api": "^0.5.5",
+    "chrome-launcher": "^0.14.1",
     "colors": "^1.4.0",
+    "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
     "gergab-toolbox": "^1.0.1",
-    "puppeteer": "^10.2.0",
+    "puppeteer": "^10.4.0",
     "puppeteer-autoscroll-down": "^0.1.7",
-    "puppeteer-core": "^10.2.0",
+    "puppeteer-core": "^10.4.0",
     "request": "^2.88.2"
   }
 }

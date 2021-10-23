@@ -1,56 +1,43 @@
-require('dotenv').config();
-const MercadoLibreWoocommerceController = require('./controller/MercadolibreWoocommerceController');
-//const AmazonWoocommerceController = require('./controller/AmazonWoocommerceController.js');
+//require('dotenv').config();
+const fs = require('fs');
+const MarketsyncModel = require('./marketsync/MarketsyncModel');
+const AllController = require('./controller/AllController');
 
 (async () => {
 
-    const  mlwooCon = new MercadoLibreWoocommerceController();
-    await mlwooCon.createConections()
-    .then(async (res) => {
-        console.log("Respuesta: ", res);
-    })
-    .catch(async (error) => {
-        console.log("Error: ", error);
-    });
-
-    let skus;
     
-    await mlwooCon.getAvailableSku()
-    .then(async(res)=>{
-        skus = res;
-        console.log("Respuesta: ", res);
-    })
-    .catch(async(error)=>{
-        console.log("Error: ", error);
-    });
-
-    for (let i = 0; i < 10; i++) {
-        await mlwooCon.copyWoocommerceToMercadoLibre(skus[i])
-        .then(async(res)=>{
-            console.log("Respuesta: ", res);
-        })
-        .catch(async(error)=>{
-            console.log("Error: ", error);
-        })
-    }
-
-    /*const AmzWooCon = new AmazonWoocommerceController();
-
-    await AmzWooCon.createConections()
+    const Controller = new AllController();
+    await Controller.connect()
         .then(async (res) => {
-            console.log("Respuesta: ", res);
+            console.log("Respuesta de connect: ", res);
         })
         .catch(async (error) => {
-            console.log("Error: ", error);
+            console.log("Error en connect: ", error);
         });
 
-    let inventory = await AmzWooCon.getInventory()
+    /*let inventory = await Controller.getAmazonSellerInventory()
         .then(async (res) => {
-            console.log("Respuesta: ", res.msg);
+            console.log("Respuesta de getAmazonSellerInventory: ", res.msg);
             return res.data;
         })
         .catch(async (error) => {
-            console.log("Error: ", error);
+            console.log("Error en getAmazonSellerInventory: ", error);
         });*/
+    let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+    let inventory = await JSON.parse(rawdata);
+
+    const browser = await Controller.startBrowser(false);
+    for (let i = 0; i < inventory.length; i++) {
+        const element = inventory[i];
+        await Controller.copyAmazonToWoocommerce(element, browser)
+            .then(async (res) => {
+                console.log("Respuesta de copyAmazonToWoocommerce: ", res);
+            })
+            .catch(async (error) => {
+                console.log("Error de copyAmazonToWoocommerce: ", error);
+            });
+    }
+
+    await Controller.stopBrowser(browser);
 
 })();

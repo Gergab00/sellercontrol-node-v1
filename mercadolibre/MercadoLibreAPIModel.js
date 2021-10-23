@@ -5,16 +5,97 @@ const axios = require('axios');
 class MercadoLibreAPIModel {
 
     access_token;
+    category_name;
     category_id;
     description;
+
+    async connect(code) {
+        return new Promise(async (resolve, reject) => {
+            let options;
+            if (fs.existsSync('./json/AuthCode.json')) {
+                let rawdata = fs.readFileSync("./json/AuthCode.json", 'utf8');
+                let retJSON = await JSON.parse(rawdata);
+                let start = new Date(retJSON.date);
+                let actual = new Date();
+                let dif = (actual - start) / 1000;
+                if (dif > 21600) {
+                    options = {
+                        method: 'post',
+                        baseURL: 'https://api.mercadolibre.com/oauth/token',
+                        headers: {
+                            'accept': 'application/json',
+                            'content-type': 'application/x-www-form-urlencoded'
+                        },
+                        data: {
+                            'grant_type': 'refresh_token',
+                            'client_id': `${process.env.APP_ID}`,
+                            'client_secret': `${process.env.SECRET_KEY}`,
+                            'refresh_token': `${retJSON.refresh_token}`,
+                        }
+                    }
+
+                } else {
+                    await this.setAccessToken(retJSON.access_token);
+                    resolve(`Access Token válido.`)
+                }
+            } else {
+                options = {
+                    method: 'post',
+                    baseURL: 'https://api.mercadolibre.com/oauth/token',
+                    headers: {
+                        'accept': 'application/json',
+                        'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    params: {
+                        'grant_type': 'authorization_code',
+                        'client_id': `${process.env.APP_ID}`,
+                        'client_secret': `${process.env.SECRET_KEY}`,
+                        'code': `${code}`,
+                        'redirect_uri': `${process.env.REDIRECT_URI}`
+                    }
+                }
+            }
+
+            await axios(options)
+                .then(async (res) => {
+                    let fecha = new Date();
+                    let data = {
+                        date: fecha,
+                        access_token: res.data.access_token,
+                        refresh_token: res.data.refresh_token
+                    }
+                    this.access_token = res.data.access_token;
+                    fs.writeFile(
+                        './json/AuthCode.json',
+                        JSON.stringify(data, null, 2),
+                        (err) => {
+                            if (err) console.log(err)
+                            else {
+                                //console.log('\nFile data written successfully\n'.green);
+                                //console.log('The written has the following contents:')
+                                //console.log(fs.readFileSync('./json/AuthCode.json', 'utf8').blue);
+                                console.log(`Conexión lograda con Mercadolibre con éxito! Access token recibido: ${res.data.access_token} y refresh token ${res.data.refresh_token}`);
+                                resolve(`Conexión lograda con Mercadolibre con éxito! Access token recibido: ${res.data.access_token} y refresh token ${res.data.refresh_token}`);
+                            }
+                        },
+                    );
+
+                })
+                .catch((error) => {
+                    //console.log("Error en getAuthCode:".bgRed.black," ",error.message.red);
+                    //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
+                    reject(`Error en connect: ${error.message}`);
+                });
+
+        });
+    }
     /**
      * @version 1.0.0
      * @params {String} code - Código obtenido en https://auth.mercadolibre.com.mx/authorization?response_type=code&client_id=$APP_ID&redirect_uri=$YOUR_URL
      * @returns {Promise} If the promise are resolve, the metho return the response data and save a file with the info, if the promise will be reject the method return the response with the error
-     * 
+     * @deprecated
      */
     async getAuthCode(code) {
-
         return new Promise(async (resolve, reject) => {
             let options = {
                 method: 'post',
@@ -64,6 +145,9 @@ class MercadoLibreAPIModel {
         });
     }
 
+    /**
+     * @deprecated
+     */
     async refreshCode(refresh_token) {
         return new Promise(async (resolve, reject) => {
             let options = {
@@ -132,10 +216,43 @@ class MercadoLibreAPIModel {
             };
             await axios(options)
                 .then((res) => {
+                    //console.log("Categoria obtenida exitosamente: ");
+                    //console.log(res);
+                    (res.data.length == 0) ? this.category_id = 'undefined' : this.category_id = res.data[0].category_id;
+                    resolve(this.category_id);
+                })
+                .catch((error) => {
+                    //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
+                    //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
+                    reject(`Error en getProductCategory: ${error.message}`);
+                });
+        });
+    }
+
+    /**
+     * 
+     * @param {String} access_token 
+     * @param {String} product 
+     * @returns {!Promise<String>} That if are resolve return a String with the name of category
+     */
+    async getProductCategoryName(product, access_token = this.access_token) {
+        return new Promise(async (resolve, reject) => {
+            let sanProduct = await this.normalize(product);
+            //console.log('Producto Sanitizado: ', sanProduct);
+            let options = {
+                method: 'get',
+                baseURL: `https://api.mercadolibre.com/sites/MLM/domain_discovery/search?limit=1&q=${sanProduct}`,
+                headers: {
+                    'Authorization': `bearer ${access_token}`
+                }
+            };
+            await axios(options)
+                .then((res) => {
                     //console.log("Categoria obtenida exitosamente: ".green,colors.green(res.data));
                     //console.log(res.data[0].category_id);
-                    this.category_id = res.data[0].category_id;
-                    resolve(res.data[0].category_id);
+                    (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
+                    
+                    resolve(this.category_name);
                 })
                 .catch((error) => {
                     //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
@@ -240,7 +357,7 @@ class MercadoLibreAPIModel {
                 }
             }
 
-            this.description = dataProduct.description+dataProduct.short_description;
+            this.description = dataProduct.description + dataProduct.short_description;
 
             await axios(options)
                 .then((res) => {
