@@ -1,15 +1,43 @@
 [
   {
-    "asin": "B0797J6HNC",
-    "totalQuantity": 4
+    "asin": "B082WZ1Z18",
+    "totalQuantity": 0
   },
   {
-    "asin": "B00M75C7OS",
+    "asin": "B07NQFWZM6",
     "totalQuantity": 5
   },
   {
-    "asin": "B07M7XJSKD",
+    "asin": "B079DCFQN4",
     "totalQuantity": 1
+  },
+  {
+    "asin": "B07Y94SGYX",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B07F3FYG6D",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B07YQNQ8FM",
+    "totalQuantity": 3
+  },
+  {
+    "asin": "B01N29DCYG",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B07FHHZ88V",
+    "totalQuantity": 3
+  },
+  {
+    "asin": "B07F39P3R3",
+    "totalQuantity": 3
+  },
+  {
+    "asin": "B07P91QXHR",
+    "totalQuantity": 5
   },
   {
     "asin": "B08NK8MZDQ",
@@ -25,7 +53,7 @@
   },
   {
     "asin": "B08LK2C5QD",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B08FF5R6QP",
@@ -52,10 +80,6 @@
     "totalQuantity": 2
   },
   {
-    "asin": "B0757MTSXN",
-    "totalQuantity": 1
-  },
-  {
     "asin": "B07Y5YBQ8C",
     "totalQuantity": 2
   },
@@ -77,11 +101,11 @@
   },
   {
     "asin": "B07NQDJGQH",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B08V4P6W5L",
-    "totalQuantity": 4
+    "totalQuantity": 0
   },
   {
     "asin": "B08V4B5PMZ",
@@ -153,11 +177,11 @@
   },
   {
     "asin": "B08WYS8MCV",
-    "totalQuantity": 5
+    "totalQuantity": 0
   },
   {
     "asin": "B00ENDG5ZO",
-    "totalQuantity": 1
+    "totalQuantity": 10
   },
   {
     "asin": "B0756376V9",
@@ -189,7 +213,7 @@
   },
   {
     "asin": "B075KJ1N6P",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08J5S81ZH",
@@ -217,7 +241,7 @@
   },
   {
     "asin": "B07XF98T7L",
-    "totalQuantity": 4
+    "totalQuantity": 1
   },
   {
     "asin": "B09313SP2J",
@@ -225,15 +249,15 @@
   },
   {
     "asin": "B08R58KQ76",
-    "totalQuantity": 1
+    "totalQuantity": 22
   },
   {
     "asin": "B07ZPLNXV9",
-    "totalQuantity": 4
+    "totalQuantity": 2
   },
   {
     "asin": "B07CH9JCFL",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07FDRJBK2",
@@ -241,7 +265,7 @@
   },
   {
     "asin": "B09317RRPN",
-    "totalQuantity": 3
+    "totalQuantity": 9
   },
   {
     "asin": "B08HFVNL6V",
@@ -253,7 +277,7 @@
   },
   {
     "asin": "B00000IZQP",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B00GUO2XY6",
@@ -281,7 +305,7 @@
   },
   {
     "asin": "B07WXMGB1R",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07MQP4M7K",
@@ -289,7 +313,7 @@
   },
   {
     "asin": "B07MQP4M7K",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08V44FLZN",
@@ -305,7 +329,7 @@
   },
   {
     "asin": "B01KNMFO0A",
-    "totalQuantity": 4
+    "totalQuantity": 1
   },
   {
     "asin": "B08H5W2W8L",
@@ -317,43 +341,43 @@
   },
   {
     "asin": "B00ITOAYOQ",
-    "totalQuantity": 1
+    "totalQuantity": 7
   },
   {
     "asin": "B07CK4YL9V",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07DRGPG85",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07DRBWYC5",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07MPLDQCP",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07S1BMWLQ",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07BR8ZKHG",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08QDT7X5R",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08L9MHX8P",
-    "totalQuantity": 3
+    "totalQuantity": 1
   },
   {
     "asin": "B01NCU9IQF",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07T2D2ZZH",
@@ -365,11 +389,11 @@
   },
   {
     "asin": "B07NQGB4H4",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07NQGCFNS",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B095CWJ8DS",
@@ -389,7 +413,7 @@
   },
   {
     "asin": "B07HD27YZT",
-    "totalQuantity": 1
+    "totalQuantity": 3
   },
   {
     "asin": "B08WYZJ7FK",
@@ -417,7 +441,7 @@
   },
   {
     "asin": "B083VM1X4F",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B083VMRGHR",
@@ -437,7 +461,7 @@
   },
   {
     "asin": "B01DVEHNLA",
-    "totalQuantity": 0
+    "totalQuantity": 1
   },
   {
     "asin": "B08JHH2Y43",
@@ -445,11 +469,11 @@
   },
   {
     "asin": "B08BQBD3FD",
-    "totalQuantity": 3
+    "totalQuantity": 1
   },
   {
     "asin": "B07VR8PDBH",
-    "totalQuantity": 5
+    "totalQuantity": 4
   },
   {
     "asin": "B00GY266VK",
@@ -473,7 +497,7 @@
   },
   {
     "asin": "B07Y9FVQPN",
-    "totalQuantity": 0
+    "totalQuantity": 3
   },
   {
     "asin": "B076Q6731Z",
@@ -489,11 +513,11 @@
   },
   {
     "asin": "B08S6M6FQN",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07NQF5BLK",
-    "totalQuantity": 1
+    "totalQuantity": 3
   },
   {
     "asin": "B079FXJWVZ",
@@ -501,15 +525,15 @@
   },
   {
     "asin": "B076696STB",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B00GUO26PC",
-    "totalQuantity": 10
+    "totalQuantity": 7
   },
   {
     "asin": "B07GLMHMNT",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B08XMYMM7G",
@@ -525,7 +549,7 @@
   },
   {
     "asin": "B07VSCC61D",
-    "totalQuantity": 5
+    "totalQuantity": 0
   },
   {
     "asin": "B07ZPP3QLV",
@@ -537,7 +561,7 @@
   },
   {
     "asin": "B08S6P7RJ4",
-    "totalQuantity": 1
+    "totalQuantity": 6
   },
   {
     "asin": "B08S6YGC1N",
@@ -589,15 +613,15 @@
   },
   {
     "asin": "B083T7Q4C5",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B08S72LXSB",
-    "totalQuantity": 4
+    "totalQuantity": 3
   },
   {
     "asin": "B08442QBX2",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07PJT57TF",
@@ -605,7 +629,7 @@
   },
   {
     "asin": "B00YPUM1GC",
-    "totalQuantity": 5
+    "totalQuantity": 2
   },
   {
     "asin": "B08X5Z8YXM",
@@ -613,15 +637,11 @@
   },
   {
     "asin": "B08X4Z8HXJ",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08X51RXV7",
-    "totalQuantity": 1
-  },
-  {
-    "asin": "B06XH5CG1Z",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07X8Z14N9",
@@ -645,19 +665,15 @@
   },
   {
     "asin": "B07Y94QH56",
-    "totalQuantity": 4
+    "totalQuantity": 1
   },
   {
     "asin": "B07VG9JY5Q",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07DDB5CR2",
     "totalQuantity": 2
-  },
-  {
-    "asin": "B07DD8Y53F",
-    "totalQuantity": 0
   },
   {
     "asin": "B07DD5MDPZ",
@@ -665,7 +681,7 @@
   },
   {
     "asin": "B076DGN423",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08J4FXDDK",
@@ -673,11 +689,11 @@
   },
   {
     "asin": "B08J4GMJWK",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07VMHB6YK",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B011YZCJSU",
@@ -689,7 +705,7 @@
   },
   {
     "asin": "B07SXDD94R",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B079FVBL9H",
@@ -701,10 +717,6 @@
   },
   {
     "asin": "B07VKXP52R",
-    "totalQuantity": 3
-  },
-  {
-    "asin": "B08J5NS833",
     "totalQuantity": 0
   },
   {
@@ -717,7 +729,7 @@
   },
   {
     "asin": "B01BYBUWOW",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B007GE75G0",
@@ -733,7 +745,7 @@
   },
   {
     "asin": "B076FLF7CB",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B0756376V9",
@@ -749,15 +761,15 @@
   },
   {
     "asin": "B00GUO26PC",
-    "totalQuantity": 11
+    "totalQuantity": 9
   },
   {
     "asin": "B07P3GFGS7",
-    "totalQuantity": 3
+    "totalQuantity": 1
   },
   {
     "asin": "B084LL6K1S",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07ZPPSM6T",
@@ -781,11 +793,11 @@
   },
   {
     "asin": "B076N1J5JN",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07FDJRNWC",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B077WY4155",
@@ -793,7 +805,7 @@
   },
   {
     "asin": "B01LYFS5CZ",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07YFC5C46",
@@ -801,7 +813,7 @@
   },
   {
     "asin": "B0797JM49W",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B0000206FS",
@@ -809,19 +821,19 @@
   },
   {
     "asin": "B07YVWY1XX",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07PJ6XQ8Q",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07GTKVCYJ",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07NQGS5V6",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B084KW4QP6",
@@ -845,7 +857,7 @@
   },
   {
     "asin": "B086FRC49G",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07T5XRW5W",
@@ -853,11 +865,11 @@
   },
   {
     "asin": "B084ZSWHLF",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B084ZSVXS4",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07D8F6CN5",
@@ -865,7 +877,7 @@
   },
   {
     "asin": "B01MUH7FRG",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07P6RWXZN",
@@ -873,7 +885,7 @@
   },
   {
     "asin": "B07ZYCLXFP",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B083TG29KX",
@@ -881,7 +893,7 @@
   },
   {
     "asin": "B07Y62RPGJ",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B07BKLMXJV",
@@ -893,7 +905,7 @@
   },
   {
     "asin": "B07DY7SNMH",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08SRBG64S",
@@ -917,11 +929,11 @@
   },
   {
     "asin": "B07X8Z1K2G",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07VKH4TCF",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08488DFLN",
@@ -929,7 +941,7 @@
   },
   {
     "asin": "B07D8CSCQR",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07KWTS1K9",
@@ -941,27 +953,19 @@
   },
   {
     "asin": "B07X6VYVDB",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B01H3LNIZM",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07CCPT8QY",
     "totalQuantity": 2
   },
   {
-    "asin": "B08ZC9N2FZ",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B08M8N18DV",
     "totalQuantity": 1
-  },
-  {
-    "asin": "B07N9QPTDW",
-    "totalQuantity": 0
   },
   {
     "asin": "B00PPWP0EO",
@@ -980,20 +984,16 @@
     "totalQuantity": 3
   },
   {
-    "asin": "B07FWW9TLR",
-    "totalQuantity": 1
-  },
-  {
     "asin": "B07MJLVF1T",
     "totalQuantity": 1
   },
   {
     "asin": "B07SXDFBBJ",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B06ZZNTZFC",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B07FFWFKYD",
@@ -1009,7 +1009,7 @@
   },
   {
     "asin": "B071WT3JKN",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B07FT75SS7",
@@ -1017,7 +1017,7 @@
   },
   {
     "asin": "B00PPWFY90",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B08ZCHTVFY",
@@ -1029,7 +1029,7 @@
   },
   {
     "asin": "B083W4C98K",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B07Y92454H",
@@ -1040,20 +1040,12 @@
     "totalQuantity": 4
   },
   {
-    "asin": "B07Y94SGYX",
-    "totalQuantity": 1
-  },
-  {
     "asin": "B07NQGDXRS",
     "totalQuantity": 1
   },
   {
     "asin": "B07XF98T7L",
     "totalQuantity": 1
-  },
-  {
-    "asin": "B0794Z54RM",
-    "totalQuantity": 0
   },
   {
     "asin": "B07PGWXCYG",
@@ -1077,7 +1069,7 @@
   },
   {
     "asin": "B07D89BGLB",
-    "totalQuantity": 4
+    "totalQuantity": 2
   },
   {
     "asin": "B07PZF3177",
@@ -1109,7 +1101,7 @@
   },
   {
     "asin": "B07FDHL4QR",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07FDJRDX1",
@@ -1141,7 +1133,7 @@
   },
   {
     "asin": "B0829KVGXM",
-    "totalQuantity": 3
+    "totalQuantity": 2
   },
   {
     "asin": "B01M9E1438",
@@ -1153,7 +1145,7 @@
   },
   {
     "asin": "B0885V8QSV",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B01H3LNIWA",
@@ -1193,7 +1185,7 @@
   },
   {
     "asin": "B07FWMHLV1",
-    "totalQuantity": 2
+    "totalQuantity": 4
   },
   {
     "asin": "B07Y95HPGC",
@@ -1201,10 +1193,6 @@
   },
   {
     "asin": "B019RP6OE4",
-    "totalQuantity": 0
-  },
-  {
-    "asin": "B01NCUIHPA",
     "totalQuantity": 0
   },
   {
@@ -1233,7 +1221,7 @@
   },
   {
     "asin": "B07FFLBX6T",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B07XF93NVH",
@@ -1261,7 +1249,7 @@
   },
   {
     "asin": "B07GLNM51W",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07FDSBSRY",
@@ -1309,11 +1297,11 @@
   },
   {
     "asin": "B07JQCVSG8",
-    "totalQuantity": 0
+    "totalQuantity": 3
   },
   {
     "asin": "B07PM8X837",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07DKQ3V42",
@@ -1349,7 +1337,7 @@
   },
   {
     "asin": "B07JVV9Z6F",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B01N9G2TW7",
@@ -1357,7 +1345,7 @@
   },
   {
     "asin": "B079H97FSB",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07NQ93214",
@@ -1369,7 +1357,7 @@
   },
   {
     "asin": "B0794ZL5DC",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B086XLS6CN",
@@ -1412,14 +1400,6 @@
     "totalQuantity": 2
   },
   {
-    "asin": "B0794XMJYZ",
-    "totalQuantity": 0
-  },
-  {
-    "asin": "B079DCFQN4",
-    "totalQuantity": 2
-  },
-  {
     "asin": "B0794ZL97F",
     "totalQuantity": 3
   },
@@ -1441,7 +1421,7 @@
   },
   {
     "asin": "B07XD6DD17",
-    "totalQuantity": 0
+    "totalQuantity": 1
   },
   {
     "asin": "B07Y94Z7Y8",
@@ -1466,10 +1446,6 @@
   {
     "asin": "B015TNB9KW",
     "totalQuantity": 2
-  },
-  {
-    "asin": "B081GBLS98",
-    "totalQuantity": 0
   },
   {
     "asin": "B08M38FM7B",
@@ -1497,7 +1473,7 @@
   },
   {
     "asin": "B01NCU9IQF",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07DKRB28G",
@@ -1517,7 +1493,7 @@
   },
   {
     "asin": "B07PW1MF4J",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B01LXGQ4R6",
@@ -1529,7 +1505,7 @@
   },
   {
     "asin": "B08175FKQJ",
-    "totalQuantity": 0
+    "totalQuantity": 4
   },
   {
     "asin": "B01608LFJU",
@@ -1544,16 +1520,12 @@
     "totalQuantity": 1
   },
   {
-    "asin": "B08J5W4FW2",
+    "asin": "B07Y94SBGM",
     "totalQuantity": 0
   },
   {
-    "asin": "B07Y94SBGM",
-    "totalQuantity": 2
-  },
-  {
     "asin": "B074RBFB82",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B087YFXV1W",
@@ -1561,7 +1533,7 @@
   },
   {
     "asin": "B015TNF29Q",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B084BZCBKG",
@@ -1573,7 +1545,7 @@
   },
   {
     "asin": "B07MWJ699K",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B08HRC5X9Q",
@@ -1582,10 +1554,6 @@
   {
     "asin": "B079M2R89W",
     "totalQuantity": 2
-  },
-  {
-    "asin": "B08589RK5X",
-    "totalQuantity": 0
   },
   {
     "asin": "B07XS1W2LV",
@@ -1645,7 +1613,7 @@
   },
   {
     "asin": "B07XD6DXBY",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07MZHGWKZ",
@@ -1669,7 +1637,7 @@
   },
   {
     "asin": "B00Z56TR12",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B075M51ZD7",
@@ -1681,7 +1649,7 @@
   },
   {
     "asin": "B07XD6F2ZK",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B0825KT4MD",
@@ -1701,7 +1669,7 @@
   },
   {
     "asin": "B07XF94KZC",
-    "totalQuantity": 0
+    "totalQuantity": 2
   },
   {
     "asin": "B08175PJ2C",
@@ -1717,7 +1685,7 @@
   },
   {
     "asin": "B07NFLM8B3",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B017J020YW",
@@ -1725,11 +1693,11 @@
   },
   {
     "asin": "B01IH8I3JQ",
-    "totalQuantity": 3
+    "totalQuantity": 2
   },
   {
     "asin": "B07L43XJMY",
-    "totalQuantity": 5
+    "totalQuantity": 4
   },
   {
     "asin": "B087YYLTG2",
@@ -1753,7 +1721,7 @@
   },
   {
     "asin": "B01IH8HODC",
-    "totalQuantity": 5
+    "totalQuantity": 4
   },
   {
     "asin": "B01G3SVGF0",
@@ -1765,15 +1733,15 @@
   },
   {
     "asin": "B07VR8PDBH",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B015TNB6JG",
-    "totalQuantity": 3
+    "totalQuantity": 2
   },
   {
     "asin": "B015TNF87M",
-    "totalQuantity": 3
+    "totalQuantity": 2
   },
   {
     "asin": "B07LB6HL9L",
@@ -1813,7 +1781,7 @@
   },
   {
     "asin": "B01IKOZ6GA",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B006JVUH1G",
@@ -1853,7 +1821,7 @@
   },
   {
     "asin": "B0751XSNXP",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B07DKQ3V42",
@@ -1909,7 +1877,7 @@
   },
   {
     "asin": "B0797HF181",
-    "totalQuantity": 4
+    "totalQuantity": 0
   },
   {
     "asin": "B07JK9PQXM",
@@ -1917,7 +1885,7 @@
   },
   {
     "asin": "B07XB3JFYY",
-    "totalQuantity": 0
+    "totalQuantity": 1
   },
   {
     "asin": "B07YFXSDD6",
@@ -1925,7 +1893,7 @@
   },
   {
     "asin": "B086G2KRWY",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B01G23L03O",
@@ -1941,7 +1909,7 @@
   },
   {
     "asin": "B089DR3N7S",
-    "totalQuantity": 2
+    "totalQuantity": 1
   },
   {
     "asin": "B07DKQ27T8",
@@ -1949,7 +1917,7 @@
   },
   {
     "asin": "B07VN2C1WL",
-    "totalQuantity": 4
+    "totalQuantity": 2
   },
   {
     "asin": "B07HFV7FQR",
@@ -2005,7 +1973,7 @@
   },
   {
     "asin": "B07NQGB4H4",
-    "totalQuantity": 2
+    "totalQuantity": 0
   },
   {
     "asin": "B0848GQKQ4",
@@ -2017,15 +1985,15 @@
   },
   {
     "asin": "B075KJ1N6P",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07XC3JHV5",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B004ZWVVP2",
-    "totalQuantity": 2
+    "totalQuantity": 3
   },
   {
     "asin": "B00N1Q5WYO",
@@ -2041,7 +2009,7 @@
   },
   {
     "asin": "B085618663",
-    "totalQuantity": 3
+    "totalQuantity": 0
   },
   {
     "asin": "B01IH8IHPG",
@@ -2049,7 +2017,7 @@
   },
   {
     "asin": "B087YM87GX",
-    "totalQuantity": 10
+    "totalQuantity": 9
   },
   {
     "asin": "B082DGZ8N2",
@@ -2057,11 +2025,11 @@
   },
   {
     "asin": "B07JY1SCM6",
-    "totalQuantity": 1
+    "totalQuantity": 0
   },
   {
     "asin": "B07JPB1T4X",
-    "totalQuantity": 0
+    "totalQuantity": 3
   },
   {
     "asin": "B087YN7DSM",
@@ -2097,7 +2065,7 @@
   },
   {
     "asin": "B07VSCC61D",
-    "totalQuantity": 5
+    "totalQuantity": 4
   },
   {
     "asin": "B015TNAXTA",
@@ -2109,7 +2077,7 @@
   },
   {
     "asin": "B017J01WAU",
-    "totalQuantity": 4
+    "totalQuantity": 1
   },
   {
     "asin": "B07V254NF8",

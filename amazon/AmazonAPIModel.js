@@ -59,6 +59,12 @@ class AmazonAPIModel {
         });
     }
 
+    /**
+     * @description Se obtenie la información del ASIN por medio de la API, se ingresa un código ASIN y devuelve un array con la información.
+     * @param String Código ASIN de Amazon.
+     * @see https://sellercentral.amazon.es/forums/t/que-significan-los-codigos-asin-ean-etc/83955/4
+     * @return Array con la información del ASIN
+     */
     async getAsinData(asin) {
         return new Promise(async (resolve, reject) => {
             try {

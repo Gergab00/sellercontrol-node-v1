@@ -61,6 +61,11 @@ const dataProduct = {
         {
             key: "_mercadolibre_category_name",
             value: ""
+        },
+        //dataProduct.meta_data[8].value
+        {
+            key: "_marketsync_category_code",
+            value: ""
         }
     ],
 }

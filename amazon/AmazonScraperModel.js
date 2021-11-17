@@ -45,11 +45,14 @@ class AmazonScraperModel {
         });
     }
 
+    /**
+     * @description Inicia Chrominuin sin headers
+     */
     async startPuppeter() {
         return new Promise(async (resolve, reject) => {
             try {
                 const browser = await puppeteer.launch();
-                //console.log('Browser iniciado con éxito.')
+                console.log('Browser iniciado con éxito.')
                 resolve(browser)
             } catch (err) {
                 //console.log("Could not create a browser instance => : ", err);
@@ -65,7 +68,7 @@ class AmazonScraperModel {
             let newPage = await browser.newPage();
             await newPage.setDefaultNavigationTimeout(60000);
             await newPage.goto(url + asin)
-            .then(async(res)=>{console.log("Respuesta: ", url , asin);});
+            .then(async()=>{console.log("Navegando a: ", url, asin);});
             await newPage.waitForTimeout(3000)
             .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
             let lastPosition = await scrollPageToBottom(newPage, 500, 50);
@@ -378,7 +381,7 @@ class AmazonScraperModel {
             }).catch(async (error) => {
                 reject("Error: ", error);
             });
-            console.log(`Información array: ${asinArray.length}`);
+            //console.log(`Información array: ${asinArray.length}`);
             /* priceArray = await page.$$eval('td[data-column="price"] span > input', tds => {
                 tds = tds.map(el => el.value);
                 return tds

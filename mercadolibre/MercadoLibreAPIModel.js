@@ -262,9 +262,43 @@ class MercadoLibreAPIModel {
         });
     }
 
+     /**
+     * 
+     * @param {String} access_token 
+     * @param {String} product 
+     * @returns {!Promise<String>} That if are resolve return a Array with the category att
+     */
+      async getProductCategoryAtt(product, access_token = this.access_token) {
+        return new Promise(async (resolve, reject) => {
+            let sanProduct = await this.normalize(product);
+            //console.log('Producto Sanitizado: ', sanProduct);
+            let options = {
+                method: 'get',
+                baseURL: `https://api.mercadolibre.com/sites/MLM/domain_discovery/search?limit=1&q=${sanProduct}`,
+                headers: {
+                    'Authorization': `bearer ${access_token}`
+                }
+            };
+            await axios(options)
+                .then((res) => {
+                    //console.log("Categoria obtenida exitosamente: ".green,colors.green(res.data));
+                    //console.log(res.data[0].category_id);
+                    //(res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
+                    
+                    resolve(res.data[0]);
+                })
+                .catch((error) => {
+                    //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
+                    //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
+                    reject(`Error en getProductCategory: ${error.message}`);
+                });
+        });
+    }
+
     //NOTE se esta probando, ya funciono una vez se esta mejorando, ya se logro que acepte los articulos, se procede a mandar el json para hacerlo dinamico.
     async createProduct(dataProduct, category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
+
             let options = {
                 method: 'post',
                 baseURL: 'https://api.mercadolibre.com/items',
@@ -315,7 +349,7 @@ class MercadoLibreAPIModel {
                             }]
                         }
                     ],
-                    "pictures": await this.normalizePictures(dataProduct),
+                    "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
                     "attributes": [{
                             "id": "MANUFACTURER",
                             "value_name": `${dataProduct.meta_data[2].value}`
@@ -361,11 +395,12 @@ class MercadoLibreAPIModel {
 
             await axios(options)
                 .then((res) => {
+                    console.log(`Producto creado exitosamente en Mercadolibre con SKU ${res.data}`)
                     resolve(res.data);
                 }).catch((error) => {
 
-                    reject(`Error en createProduct: ${error.message}`);
-
+                    reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
+                    
                 });
         });
     }
@@ -419,7 +454,30 @@ class MercadoLibreAPIModel {
                 })
                 .catch(async (error) => {
                     reject(error)
+                });
+        });
+    }
+
+    async searchProducts(key_word,product_identifier, access_token = this.access_token){
+        return new Promise(async (resolve, reject) => {
+            let baseURL;
+            (key_word != "") ? baseURL = `https://api.mercadolibre.com/products/search?status=inactive&site_id=MLM&q=${encodeURIComponent(key_word)}` : baseURL=`https://api.mercadolibre.com/products/search?status=inactive&site_id=MLM&product_identifier=${product_identifier}`
+            let options = {
+                method: 'get',
+                baseURL: baseURL,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            };
+
+            await axios(options)
+                .then(async (res) => {
+                    console.log('Respuesta de searchProducts obtenida con exito.');
+                    resolve(res)
                 })
+                .catch(async (error) => {
+                    reject(error)
+                });
         });
     }
 
