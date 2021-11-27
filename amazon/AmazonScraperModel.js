@@ -237,7 +237,7 @@ class AmazonScraperModel {
     }
 
     async scrapeSellerInventory(browser) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             const url = 'https://sellercentral.amazon.com.mx/home';
             const page = await browser.newPage();
             await page.setDefaultNavigationTimeout(0);
@@ -363,7 +363,7 @@ class AmazonScraperModel {
 
             let a =[];
             let asinArray = [];
-            //let priceArray = [];
+            let priceArray = [];
             let quantityArray = [];
             //await page.waitForSelector('#td[data-column="upcOrEan"] span.mt-text-content');
                 console.log('Waited a second!\n The page area loading...');
@@ -382,12 +382,12 @@ class AmazonScraperModel {
                 reject("Error: ", error);
             });
             //console.log(`Información array: ${asinArray.length}`);
-            /* priceArray = await page.$$eval('td[data-column="price"] span > input', tds => {
+            priceArray = await page.$$eval('td[data-column="price"] span > input', tds => {
                 tds = tds.map(el => el.value);
                 return tds
             }).catch(async (error) => {
                 reject("Error: ", error);
-            }); */
+            });
             quantityArray = await page.$$eval('td[data-column="quantity"]',e =>{
                 let ret = [];
                 for (let i = 0; i < e.length; i++) {
@@ -406,7 +406,7 @@ class AmazonScraperModel {
             for (let i = 0; i < asinArray.length; i++) {
                 a = {
                     asin: asinArray[i],
-                    //price: priceArray[i],
+                    price: priceArray[i],
                     totalQuantity: Number.parseInt(quantityArray[i])
                 };
                 console.log(`Array información: ${a.asin}, ${a.totalQuantity}`);

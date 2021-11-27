@@ -1,2142 +1,2707 @@
 [
   {
+    "asin": "B079GH9GGP",
+    "price": "899.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B08MPZHSMS",
+    "price": "999.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B08MQBGQXM",
+    "price": "599.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B00GUO26PC",
+    "price": "499.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B08M4DD55S",
+    "price": "504.00",
+    "totalQuantity": 2
+  },
+  {
     "asin": "B082WZ1Z18",
+    "price": "799.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07NQFWZM6",
+    "price": "1,987.00",
     "totalQuantity": 5
   },
   {
     "asin": "B079DCFQN4",
+    "price": "999.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07Y94SGYX",
+    "price": "1,099.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07F3FYG6D",
+    "price": "289.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07YQNQ8FM",
-    "totalQuantity": 3
+    "price": "699.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B01N29DCYG",
-    "totalQuantity": 1
+    "price": "739.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07FHHZ88V",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07F39P3R3",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07P91QXHR",
+    "price": "699.00",
     "totalQuantity": 5
   },
   {
+    "asin": "B076VV5BW7",
+    "price": "449.00",
+    "totalQuantity": 0
+  },
+  {
+    "asin": "B09HL6PFK6",
+    "price": "499.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B095PWB51V",
+    "price": "499.00",
+    "totalQuantity": 0
+  },
+  {
+    "asin": "B095PXT5FP",
+    "price": "499.00",
+    "totalQuantity": 0
+  },
+  {
+    "asin": "B08R5KSKPK",
+    "price": "799.00",
+    "totalQuantity": 2
+  },
+  {
+    "asin": "B08R589TGL",
+    "price": "999.00",
+    "totalQuantity": 4
+  },
+  {
+    "asin": "B08N6VCSWB",
+    "price": "999.00",
+    "totalQuantity": 2
+  },
+  {
+    "asin": "B0757MTSXN",
+    "price": "579.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B07JLS3ZM7",
+    "price": "779.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B08N6YJFZW",
+    "price": "599.00",
+    "totalQuantity": 1
+  },
+  {
+    "asin": "B08BLCW28Z",
+    "price": "2,890.00",
+    "totalQuantity": 0
+  },
+  {
+    "asin": "B08J4GJ8HH",
+    "price": "939.00",
+    "totalQuantity": 0
+  },
+  {
+    "asin": "B0797J6HNC",
+    "price": "899.00",
+    "totalQuantity": 4
+  },
+  {
+    "asin": "B00M75C7OS",
+    "price": "388.00",
+    "totalQuantity": 5
+  },
+  {
+    "asin": "B07M7XJSKD",
+    "price": "899.00",
+    "totalQuantity": 1
+  },
+  {
     "asin": "B08NK8MZDQ",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08S752FTT",
-    "totalQuantity": 7
+    "price": "349.00",
+    "totalQuantity": 6
   },
   {
     "asin": "B08M14SNQ9",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08LK2C5QD",
-    "totalQuantity": 0
+    "price": "419.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B08FF5R6QP",
+    "price": "506.00",
     "totalQuantity": 2
   },
   {
     "asin": "B084LKQYZY",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01HHUBYHS",
+    "price": "299.00",
     "totalQuantity": 0
   },
   {
     "asin": "B076VVN83B",
+    "price": "299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08S6LFD5Y",
-    "totalQuantity": 2
+    "price": "699.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B08S6MSF5G",
-    "totalQuantity": 2
+    "price": "739.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07Y5YBQ8C",
+    "price": "1,499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B01CIGN3TS",
+    "price": "1,887.04",
     "totalQuantity": 1
   },
   {
     "asin": "B08442W5HS",
-    "totalQuantity": 1
+    "price": "997.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B08LDTVYSY",
+    "price": "999.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07PB9Y8MR",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07NQDJGQH",
+    "price": "999.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08V4P6W5L",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08V4B5PMZ",
+    "price": "649.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08V8TYQJY",
+    "price": "649.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08V8PXZSF",
+    "price": "899.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08J5RH5H7",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08V8SBSVG",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08KVXHBZ7",
+    "price": "329.00",
     "totalQuantity": 3
   },
   {
     "asin": "B0912LKSFW",
+    "price": "3,899.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08RS2GYH5",
+    "price": "299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07GBGSFJ2",
+    "price": "1,099.00",
     "totalQuantity": 1
   },
   {
     "asin": "B097CNV7G6",
+    "price": "1,099.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08R5541TT",
+    "price": "699.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07HD27YZT",
-    "totalQuantity": 6
+    "price": "699.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07JLFL7HD",
+    "price": "249.00",
     "totalQuantity": 1
   },
   {
     "asin": "B006EHX9OC",
+    "price": "499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08J59PQBL",
+    "price": "999.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08V83R6DZ",
+    "price": "999.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08V45CVP8",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08WYS8MCV",
+    "price": "1,149.00",
     "totalQuantity": 0
   },
   {
     "asin": "B00ENDG5ZO",
-    "totalQuantity": 10
+    "price": "549.00",
+    "totalQuantity": 9
   },
   {
     "asin": "B0756376V9",
+    "price": "885.89",
     "totalQuantity": 10
   },
   {
     "asin": "B08ZGH4HQV",
+    "price": "690.00",
     "totalQuantity": 2
   },
   {
     "asin": "B095PTGZRK",
+    "price": "689.00",
     "totalQuantity": 1
   },
   {
     "asin": "B076DGN423",
+    "price": "249.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07MCRZKZM",
+    "price": "779.00",
     "totalQuantity": 3
   },
   {
     "asin": "B00FEACP9K",
-    "totalQuantity": 1
+    "price": "629.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B09317RRPN",
+    "price": "769.00",
     "totalQuantity": 12
   },
   {
     "asin": "B075KJ1N6P",
+    "price": "599.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08J5S81ZH",
+    "price": "699.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08V8CRM92",
-    "totalQuantity": 5
+    "price": "467.60",
+    "totalQuantity": 4
   },
   {
     "asin": "B08V89XLTH",
+    "price": "476.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08V4DVDR6",
+    "price": "545.00",
     "totalQuantity": 3
   },
   {
     "asin": "B095PWV83F",
+    "price": "687.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08S6P7RJ4",
+    "price": "345.00",
     "totalQuantity": 9
   },
   {
     "asin": "B07XF98T7L",
-    "totalQuantity": 1
+    "price": "997.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B09313SP2J",
+    "price": "599.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08R58KQ76",
-    "totalQuantity": 22
+    "price": "1,034.16",
+    "totalQuantity": 23
   },
   {
     "asin": "B07ZPLNXV9",
-    "totalQuantity": 2
+    "price": "1,297.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07CH9JCFL",
+    "price": "632.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07FDRJBK2",
-    "totalQuantity": 2
+    "price": "899.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B09317RRPN",
+    "price": "780.00",
     "totalQuantity": 9
   },
   {
     "asin": "B08HFVNL6V",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01N7QZG8B",
+    "price": "234.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00000IZQP",
+    "price": "319.00",
     "totalQuantity": 0
   },
   {
     "asin": "B00GUO2XY6",
+    "price": "699.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00M75EKAW",
+    "price": "399.00",
     "totalQuantity": 5
   },
   {
     "asin": "B08ZG686X1",
+    "price": "649.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08ZG686X1",
+    "price": "729.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08F2NJYRQ",
+    "price": "729.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08F2NJYRQ",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07WXMGB1R",
+    "price": "1,199.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07MQP4M7K",
+    "price": "799.00",
     "totalQuantity": 2
   },
   {
-    "asin": "B07MQP4M7K",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B08V44FLZN",
+    "price": "999.00",
     "totalQuantity": 5
   },
   {
-    "asin": "B079FXXN3T",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B08J5NMDS7",
+    "price": "1,800.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01KNMFO0A",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08H5W2W8L",
+    "price": "526.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07JBCLF2V",
+    "price": "900.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00ITOAYOQ",
+    "price": "999.00",
     "totalQuantity": 7
   },
   {
     "asin": "B07CK4YL9V",
+    "price": "1,025.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07DRGPG85",
+    "price": "412.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07DRBWYC5",
+    "price": "411.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07MPLDQCP",
+    "price": "412.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07S1BMWLQ",
+    "price": "525.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07BR8ZKHG",
+    "price": "599.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08QDT7X5R",
-    "totalQuantity": 0
+    "price": "618.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B08L9MHX8P",
-    "totalQuantity": 1
+    "price": "649.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B01NCU9IQF",
+    "price": "699.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07T2D2ZZH",
+    "price": "899.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07MCMDFRN",
+    "price": "223.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07NQGB4H4",
+    "price": "1,099.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07NQGCFNS",
+    "price": "799.00",
     "totalQuantity": 0
   },
   {
     "asin": "B095CWJ8DS",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07FWKQCRW",
+    "price": "699.00",
     "totalQuantity": 1
   },
   {
     "asin": "B015TN9K7Q",
-    "totalQuantity": 4
-  },
-  {
-    "asin": "B07Y952ZK1",
-    "totalQuantity": 1
-  },
-  {
-    "asin": "B07HD27YZT",
+    "price": "1,199.00",
     "totalQuantity": 3
   },
   {
+    "asin": "B07Y952ZK1",
+    "price": "768.00",
+    "totalQuantity": 0
+  },
+  {
+    "asin": "B07HD27YZT",
+    "price": "699.00",
+    "totalQuantity": 1
+  },
+  {
     "asin": "B08WYZJ7FK",
+    "price": "1,499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08WZ2LNPZ",
+    "price": "1,599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B095ND4BLG",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0746V55XB",
+    "price": "359.00",
     "totalQuantity": 0
   },
   {
     "asin": "B083W4B86T",
-    "totalQuantity": 1
+    "price": "149.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B083VMJQS1",
+    "price": "199.00",
     "totalQuantity": 0
   },
   {
     "asin": "B083VM1X4F",
+    "price": "149.00",
     "totalQuantity": 0
   },
   {
     "asin": "B083VMRGHR",
-    "totalQuantity": 1
+    "price": "149.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B0769TZDGS",
+    "price": "449.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01CW6EL72",
-    "totalQuantity": 2
+    "price": "299.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B075YSF2K9",
+    "price": "1,300.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01DVEHNLA",
+    "price": "260.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08JHH2Y43",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08BQBD3FD",
+    "price": "612.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VR8PDBH",
-    "totalQuantity": 4
+    "price": "599.00",
+    "totalQuantity": 3
   },
   {
     "asin": "B00GY266VK",
+    "price": "399.00",
     "totalQuantity": 12
   },
   {
     "asin": "B00GY266VK",
+    "price": "299.00",
     "totalQuantity": 15
   },
   {
     "asin": "B06XBZSJX5",
+    "price": "999.00",
     "totalQuantity": 1
   },
   {
     "asin": "B079N49Q3J",
+    "price": "899.00",
     "totalQuantity": 1
   },
   {
     "asin": "B079N1FTWL",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07Y9FVQPN",
-    "totalQuantity": 3
+    "price": "799.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B076Q6731Z",
+    "price": "699.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08P52HC3B",
+    "price": "1,099.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08S795MQB",
+    "price": "919.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08S6M6FQN",
+    "price": "679.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07NQF5BLK",
-    "totalQuantity": 3
+    "price": "848.99",
+    "totalQuantity": 2
   },
   {
     "asin": "B079FXJWVZ",
+    "price": "499.00",
     "totalQuantity": 0
   },
   {
     "asin": "B076696STB",
+    "price": "1,799.00",
     "totalQuantity": 0
   },
   {
-    "asin": "B00GUO26PC",
-    "totalQuantity": 7
-  },
-  {
     "asin": "B07GLMHMNT",
+    "price": "589.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08XMYMM7G",
+    "price": "399.00",
     "totalQuantity": 0
   },
   {
     "asin": "B0751HHXRT",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0751HLNFS",
-    "totalQuantity": 1
-  },
-  {
-    "asin": "B07VSCC61D",
+    "price": "499.00",
     "totalQuantity": 0
   },
   {
+    "asin": "B07VSCC61D",
+    "price": "1,099.00",
+    "totalQuantity": 1
+  },
+  {
     "asin": "B07ZPP3QLV",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B074JGMQW4",
+    "price": "1,145.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08S6P7RJ4",
+    "price": "345.00",
     "totalQuantity": 6
   },
   {
     "asin": "B08S6YGC1N",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08S752SV3",
+    "price": "399.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07ZQYLMPN",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
-    "asin": "B072QX21KB",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B00BBTQUVM",
+    "price": "1,319.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00O4E4J9Q",
-    "totalQuantity": 1
-  },
-  {
-    "asin": "B08K1NRMTT",
+    "price": "1,399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0177SRNAC",
+    "price": "1,500.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0177SRMOY",
+    "price": "1,000.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01CYL0DPO",
+    "price": "949.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01JJ62M5Q",
+    "price": "959.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01JJ62M6A",
-    "totalQuantity": 1
+    "price": "1,299.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B083T7Q4C5",
+    "price": "556.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08S72LXSB",
+    "price": "935.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08442QBX2",
+    "price": "1,099.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07PJT57TF",
+    "price": "778.00",
     "totalQuantity": 3
   },
   {
     "asin": "B00YPUM1GC",
+    "price": "691.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08X5Z8YXM",
+    "price": "149.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08X4Z8HXJ",
+    "price": "211.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08X51RXV7",
+    "price": "211.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07X8Z14N9",
-    "totalQuantity": 2
+    "price": "650.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07XF98T8B",
-    "totalQuantity": 1
+    "price": "815.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07PJYD3GM",
-    "totalQuantity": 2
+    "price": "450.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B00000IZQP",
-    "totalQuantity": 1
+    "price": "319.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B01N7QZG8B",
-    "totalQuantity": 1
+    "price": "249.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07Y94QH56",
+    "price": "815.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VG9JY5Q",
+    "price": "921.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07DDB5CR2",
-    "totalQuantity": 2
+    "price": "914.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07DD5MDPZ",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
-    "asin": "B076DGN423",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B08J4FXDDK",
+    "price": "899.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08J4GMJWK",
+    "price": "751.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07VMHB6YK",
-    "totalQuantity": 0
+    "price": "418.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B011YZCJSU",
+    "price": "249.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07D88KHY6",
+    "price": "319.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07SXDD94R",
+    "price": "630.00",
     "totalQuantity": 0
   },
   {
     "asin": "B079FVBL9H",
+    "price": "489.00",
     "totalQuantity": 4
   },
   {
     "asin": "B08R5RG1BL",
+    "price": "499.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07VKXP52R",
+    "price": "1,120.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08RJ6Q7N8",
+    "price": "1,499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XB3JZMR",
+    "price": "844.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01BYBUWOW",
-    "totalQuantity": 1
+    "price": "377.00",
+    "totalQuantity": 5
   },
   {
     "asin": "B007GE75G0",
+    "price": "329.00",
     "totalQuantity": 0
   },
   {
     "asin": "B007GE75HY",
+    "price": "349.00",
     "totalQuantity": 4
   },
   {
     "asin": "B07DK5ZRD1",
+    "price": "849.00",
     "totalQuantity": 2
   },
   {
     "asin": "B076FLF7CB",
+    "price": "733.00",
     "totalQuantity": 0
   },
   {
     "asin": "B0756376V9",
+    "price": "769.00",
     "totalQuantity": 9
   },
   {
     "asin": "B079FZ2GP1",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07NQFWZM6",
+    "price": "1,899.00",
     "totalQuantity": 3
   },
   {
-    "asin": "B00GUO26PC",
-    "totalQuantity": 9
-  },
-  {
     "asin": "B07P3GFGS7",
-    "totalQuantity": 1
+    "price": "2,299.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B084LL6K1S",
+    "price": "1,199.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07ZPPSM6T",
+    "price": "599.00",
     "totalQuantity": 4
   },
   {
     "asin": "B078CYVB93",
+    "price": "415.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01MR4YG41",
+    "price": "514.00",
     "totalQuantity": 2
   },
   {
     "asin": "B01N6PVM65",
+    "price": "514.00",
     "totalQuantity": 2
   },
   {
     "asin": "B01MS6EU43",
+    "price": "514.00",
     "totalQuantity": 1
   },
   {
     "asin": "B076N1J5JN",
+    "price": "1,381.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07FDJRNWC",
-    "totalQuantity": 0
-  },
-  {
-    "asin": "B077WY4155",
+    "price": "599.00",
     "totalQuantity": 4
   },
   {
-    "asin": "B01LYFS5CZ",
-    "totalQuantity": 0
+    "asin": "B077WY4155",
+    "price": "477.00",
+    "totalQuantity": 3
   },
   {
-    "asin": "B07YFC5C46",
+    "asin": "B01LYFS5CZ",
+    "price": "512.00",
     "totalQuantity": 0
   },
   {
     "asin": "B0797JM49W",
+    "price": "772.00",
     "totalQuantity": 0
   },
   {
     "asin": "B0000206FS",
-    "totalQuantity": 1
+    "price": "319.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B07YVWY1XX",
+    "price": "821.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07PJ6XQ8Q",
+    "price": "856.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07GTKVCYJ",
+    "price": "832.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07NQGS5V6",
+    "price": "474.00",
     "totalQuantity": 0
   },
   {
     "asin": "B084KW4QP6",
+    "price": "369.00",
     "totalQuantity": 2
   },
   {
     "asin": "B089KTFQ1R",
+    "price": "369.00",
     "totalQuantity": 2
   },
   {
     "asin": "B088NFD9PS",
+    "price": "369.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08J5SDNL2",
+    "price": "999.00",
     "totalQuantity": 4
   },
   {
     "asin": "B08J5T81NP",
+    "price": "899.00",
     "totalQuantity": 1
   },
   {
     "asin": "B086FRC49G",
-    "totalQuantity": 0
+    "price": "420.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07T5XRW5W",
-    "totalQuantity": 2
+    "price": "566.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B084ZSWHLF",
+    "price": "364.00",
     "totalQuantity": 0
   },
   {
     "asin": "B084ZSVXS4",
+    "price": "236.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07D8F6CN5",
+    "price": "478.00",
     "totalQuantity": 2
   },
   {
     "asin": "B01MUH7FRG",
+    "price": "649.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07P6RWXZN",
+    "price": "655.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07ZYCLXFP",
+    "price": "799.00",
     "totalQuantity": 0
   },
   {
     "asin": "B083TG29KX",
+    "price": "720.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07Y62RPGJ",
-    "totalQuantity": 1
+    "price": "1,321.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07BKLMXJV",
+    "price": "466.45",
     "totalQuantity": 0
   },
   {
     "asin": "B076MMN6ML",
+    "price": "724.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07DY7SNMH",
+    "price": "516.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08SRBG64S",
+    "price": "183.49",
     "totalQuantity": 1
   },
   {
     "asin": "B08R6JG4P3",
+    "price": "119.42",
     "totalQuantity": 2
   },
   {
     "asin": "B08P2C78R9",
+    "price": "148.66",
     "totalQuantity": 2
   },
   {
     "asin": "B08FF4RT9Z",
+    "price": "825.19",
     "totalQuantity": 2
   },
   {
     "asin": "B079FWYNV4",
+    "price": "698.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07X8Z1K2G",
+    "price": "698.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07VKH4TCF",
+    "price": "671.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08488DFLN",
-    "totalQuantity": 2
+    "price": "519.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07D8CSCQR",
+    "price": "431.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07KWTS1K9",
+    "price": "1,598.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07Y15ZLLY",
+    "price": "599.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07X6VYVDB",
+    "price": "624.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01H3LNIZM",
+    "price": "175.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07CCPT8QY",
+    "price": "1,071.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08M8N18DV",
+    "price": "900.96",
     "totalQuantity": 1
   },
   {
     "asin": "B00PPWP0EO",
+    "price": "599.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00PPWP2X8",
+    "price": "730.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00PPWGNTA",
+    "price": "599.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07Y954NY4",
+    "price": "799.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07MJLVF1T",
+    "price": "609.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07SXDFBBJ",
+    "price": "626.00",
     "totalQuantity": 1
   },
   {
     "asin": "B06ZZNTZFC",
+    "price": "619.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07FFWFKYD",
+    "price": "549.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07NQ9YL97",
+    "price": "499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08J5XWSXH",
+    "price": "699.00",
     "totalQuantity": 0
   },
   {
     "asin": "B071WT3JKN",
+    "price": "715.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07FT75SS7",
+    "price": "749.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00PPWFY90",
+    "price": "714.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08ZCHTVFY",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07YFWG8NY",
+    "price": "1,049.00",
     "totalQuantity": 1
   },
   {
     "asin": "B083W4C98K",
+    "price": "2,601.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07Y92454H",
+    "price": "1,599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07P8QTFYW",
+    "price": "1,499.00",
     "totalQuantity": 4
   },
   {
     "asin": "B07NQGDXRS",
-    "totalQuantity": 1
+    "price": "580.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07XF98T7L",
+    "price": "915.86",
     "totalQuantity": 1
   },
   {
     "asin": "B07PGWXCYG",
+    "price": "325.00",
     "totalQuantity": 2
   },
   {
     "asin": "B084BVCWBR",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B084BVXTLM",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01MRVTH43",
+    "price": "265.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07D8HLS7Q",
+    "price": "499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07D89BGLB",
-    "totalQuantity": 2
+    "price": "399.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07PZF3177",
+    "price": "429.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07JN739PJ",
+    "price": "749.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07MSVFZFP",
+    "price": "799.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07MJH9675",
+    "price": "399.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07MM2R5DP",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07R9CPTRM",
+    "price": "245.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07PJ1PCY5",
+    "price": "299.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07FDHL4QR",
+    "price": "689.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07FDJRDX1",
+    "price": "519.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07WMJDWCY",
+    "price": "758.02",
     "totalQuantity": 3
   },
   {
     "asin": "B07PC375BB",
+    "price": "599.00",
     "totalQuantity": 3
   },
   {
     "asin": "B072K82VHH",
+    "price": "1,348.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07NQD64P6",
+    "price": "999.00",
     "totalQuantity": 2
   },
   {
     "asin": "B071K1MNVX",
-    "totalQuantity": 2
+    "price": "395.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B08H5X7FX9",
+    "price": "625.00",
     "totalQuantity": 2
   },
   {
     "asin": "B0829KVGXM",
-    "totalQuantity": 2
+    "price": "249.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B01M9E1438",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VF74SC3",
+    "price": "299.00",
     "totalQuantity": 2
   },
   {
     "asin": "B0885V8QSV",
+    "price": "130.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01H3LNIWA",
+    "price": "169.00",
     "totalQuantity": 3
   },
   {
     "asin": "B01N0XQMTC",
+    "price": "299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VDVVVG6",
+    "price": "690.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07RFB11PH",
+    "price": "1,148.03",
     "totalQuantity": 3
   },
   {
     "asin": "B07PB9L58X",
+    "price": "399.00",
     "totalQuantity": 4
   },
   {
     "asin": "B07RX813JT",
+    "price": "1,047.03",
     "totalQuantity": 3
   },
   {
     "asin": "B08J4HDNNH",
+    "price": "489.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08J4H1981",
+    "price": "867.01",
     "totalQuantity": 1
   },
   {
     "asin": "B07FWHX2MC",
-    "totalQuantity": 2
+    "price": "339.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07FWMHLV1",
-    "totalQuantity": 4
+    "price": "699.00",
+    "totalQuantity": 3
   },
   {
     "asin": "B07Y95HPGC",
+    "price": "649.00",
     "totalQuantity": 2
   },
   {
     "asin": "B019RP6OE4",
+    "price": "2,077.03",
     "totalQuantity": 0
   },
   {
     "asin": "B0716S4VCL",
+    "price": "2,999.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00PPWP5C6",
+    "price": "552.50",
     "totalQuantity": 2
   },
   {
     "asin": "B00PPWMDZI",
+    "price": "719.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00PPWEEJ6",
-    "totalQuantity": 2
-  },
-  {
-    "asin": "B079GH9GGP",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07VRF2Q7T",
+    "price": "599.00",
     "totalQuantity": 4
   },
   {
     "asin": "B07FFLBX6T",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XF93NVH",
+    "price": "549.00",
     "totalQuantity": 4
   },
   {
     "asin": "B07XB3J6PW",
+    "price": "549.00",
     "totalQuantity": 5
   },
   {
     "asin": "B00PPWMFUG",
+    "price": "499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07WRN32GJ",
-    "totalQuantity": 4
+    "price": "699.00",
+    "totalQuantity": 3
   },
   {
     "asin": "B07NQGCFNS",
-    "totalQuantity": 2
+    "price": "699.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07V257499",
+    "price": "699.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07GLNM51W",
+    "price": "800.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07FDSBSRY",
+    "price": "719.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01B7OXHUW",
+    "price": "1,098.03",
     "totalQuantity": 2
   },
   {
     "asin": "B0883NCVDF",
+    "price": "399.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07T2D2ZZH",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01B7OXQLC",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07W6TY4SP",
+    "price": "699.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07MD1PNQM",
+    "price": "549.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07J4YRSDC",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07N9JLNZY",
-    "totalQuantity": 1
+    "price": "345.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07N9H9YLT",
+    "price": "449.00",
     "totalQuantity": 0
   },
   {
     "asin": "B00PPWMKJC",
+    "price": "1,149.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07JQCVSG8",
-    "totalQuantity": 3
+    "price": "1,199.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07PM8X837",
+    "price": "2,899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07DKQ3V42",
+    "price": "1,499.99",
     "totalQuantity": 0
   },
   {
     "asin": "B07JKRK5X4",
+    "price": "712.85",
     "totalQuantity": 2
   },
   {
     "asin": "B07WYGSZFR",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07LFW5G35",
+    "price": "449.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07LFP2VPH",
+    "price": "449.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07JKB2H59",
+    "price": "246.99",
     "totalQuantity": 2
   },
   {
     "asin": "B07FCWXCQV",
+    "price": "299.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07FCWV3P2",
+    "price": "299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07JVV9Z6F",
+    "price": "459.90",
     "totalQuantity": 1
   },
   {
     "asin": "B01N9G2TW7",
+    "price": "1,300.00",
     "totalQuantity": 1
   },
   {
     "asin": "B079H97FSB",
+    "price": "1,999.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07NQ93214",
+    "price": "1,047.03",
     "totalQuantity": 4
   },
   {
     "asin": "B08J4HF1L9",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0794ZL5DC",
+    "price": "349.00",
     "totalQuantity": 0
   },
   {
     "asin": "B086XLS6CN",
-    "totalQuantity": 1
+    "price": "249.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B08F78P755",
+    "price": "356.25",
     "totalQuantity": 2
   },
   {
     "asin": "B08F726XPM",
+    "price": "286.25",
     "totalQuantity": 3
   },
   {
     "asin": "B08F7H7WJS",
-    "totalQuantity": 3
+    "price": "249.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B08F76T81M",
+    "price": "311.25",
     "totalQuantity": 1
   },
   {
     "asin": "B086R8GHQT",
+    "price": "249.00",
     "totalQuantity": 1
   },
   {
     "asin": "B086R7P2X8",
+    "price": "249.00",
     "totalQuantity": 2
   },
   {
     "asin": "B086R8BS4R",
+    "price": "249.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07KZBR9MP",
+    "price": "373.75",
     "totalQuantity": 1
   },
   {
     "asin": "B0849FV7Y2",
+    "price": "536.00",
     "totalQuantity": 2
   },
   {
     "asin": "B0794ZL97F",
-    "totalQuantity": 3
+    "price": "339.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B087Z2XCHN",
+    "price": "988.00",
     "totalQuantity": 5
   },
   {
     "asin": "B01LZZ8IVD",
+    "price": "2,123.75",
     "totalQuantity": 2
   },
   {
     "asin": "B008AK3W9I",
+    "price": "299.00",
     "totalQuantity": 3
   },
   {
     "asin": "B076696X4K",
+    "price": "849.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XD6DD17",
-    "totalQuantity": 1
+    "price": "629.03",
+    "totalQuantity": 0
   },
   {
     "asin": "B07Y94Z7Y8",
+    "price": "699.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00V0EZB1S",
+    "price": "999.00",
     "totalQuantity": 3
   },
   {
     "asin": "B01MYBJZJS",
+    "price": "799.01",
     "totalQuantity": 1
   },
   {
     "asin": "B016MTYWXI",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B016MTYZUS",
+    "price": "699.00",
     "totalQuantity": 4
   },
   {
     "asin": "B015TNB9KW",
+    "price": "589.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08M38FM7B",
+    "price": "749.00",
     "totalQuantity": 3
   },
   {
     "asin": "B0753H2KJG",
-    "totalQuantity": 1
+    "price": "2,499.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07LDWLHWX",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0817677BV",
+    "price": "1,699.00",
     "totalQuantity": 1
   },
   {
     "asin": "B075KCZYB5",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00LD3MT6G",
-    "totalQuantity": 2
+    "price": "559.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B01NCU9IQF",
+    "price": "799.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07DKRB28G",
+    "price": "1,499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07GB5Z5W6",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01ASVCZBC",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07NJR7K7N",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07PW1MF4J",
-    "totalQuantity": 1
+    "price": "699.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B01LXGQ4R6",
+    "price": "1,299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01LY43G61",
-    "totalQuantity": 1
+    "price": "1,150.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B08175FKQJ",
+    "price": "649.00",
     "totalQuantity": 4
   },
   {
     "asin": "B01608LFJU",
-    "totalQuantity": 1
+    "price": "359.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B072KNWZNJ",
+    "price": "899.00",
     "totalQuantity": 1
   },
   {
     "asin": "B08GQCZWQH",
+    "price": "949.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07Y94SBGM",
+    "price": "699.00",
     "totalQuantity": 0
   },
   {
     "asin": "B074RBFB82",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B087YFXV1W",
+    "price": "599.00",
     "totalQuantity": 2
   },
   {
     "asin": "B015TNF29Q",
+    "price": "578.00",
     "totalQuantity": 1
   },
   {
     "asin": "B084BZCBKG",
+    "price": "649.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07JBCLF2V",
+    "price": "900.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07MWJ699K",
+    "price": "269.00",
     "totalQuantity": 0
   },
   {
     "asin": "B08HRC5X9Q",
+    "price": "421.44",
     "totalQuantity": 1
   },
   {
     "asin": "B079M2R89W",
+    "price": "699.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07XS1W2LV",
+    "price": "898.03",
     "totalQuantity": 2
   },
   {
     "asin": "B08N6W6K1X",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VRF2M7T",
+    "price": "1,040.20",
     "totalQuantity": 2
   },
   {
-    "asin": "B07FFVWP3V",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B079KGSSK3",
+    "price": "1,048.03",
     "totalQuantity": 1
   },
   {
     "asin": "B08H5WDQPC",
+    "price": "549.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XB3J373",
+    "price": "699.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07XD6F2WN",
+    "price": "360.00",
     "totalQuantity": 2
   },
   {
     "asin": "B06WPBPJ63",
+    "price": "599.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07FFKH4H7",
+    "price": "575.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07MZD27ZX",
+    "price": "498.57",
     "totalQuantity": 3
   },
   {
     "asin": "B07MZ9V11G",
+    "price": "349.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XC3HPW5",
+    "price": "699.00",
     "totalQuantity": 4
   },
   {
     "asin": "B07XD6F52L",
+    "price": "1,330.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07XD6DXBY",
+    "price": "799.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07MZHGWKZ",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XD6DXBW",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07XD6F535",
+    "price": "899.00",
     "totalQuantity": 2
   },
   {
     "asin": "B079K54HGF",
+    "price": "699.00",
     "totalQuantity": 3
   },
   {
     "asin": "B08HFQG3YY",
+    "price": "570.00",
     "totalQuantity": 1
   },
   {
     "asin": "B00Z56TR12",
+    "price": "640.25",
     "totalQuantity": 0
   },
   {
     "asin": "B075M51ZD7",
+    "price": "595.00",
     "totalQuantity": 2
   },
   {
     "asin": "B08HFLCFDH",
+    "price": "898.01",
     "totalQuantity": 1
   },
   {
     "asin": "B07XD6F2ZK",
-    "totalQuantity": 1
+    "price": "1,019.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B0825KT4MD",
-    "totalQuantity": 4
+    "price": "900.00",
+    "totalQuantity": 3
   },
   {
     "asin": "B015TNF1VU",
+    "price": "549.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00Z56TR12",
+    "price": "529.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07PHK162V",
+    "price": "849.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07XF94KZC",
-    "totalQuantity": 2
+    "price": "749.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B08175PJ2C",
+    "price": "415.00",
     "totalQuantity": 5
   },
   {
     "asin": "B01LXGQ4R6",
+    "price": "1,299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07B83B93Z",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07NFLM8B3",
+    "price": "699.00",
     "totalQuantity": 0
   },
   {
     "asin": "B017J020YW",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01IH8I3JQ",
+    "price": "1,624.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07L43XJMY",
+    "price": "818.00",
     "totalQuantity": 4
   },
   {
     "asin": "B087YYLTG2",
+    "price": "948.00",
     "totalQuantity": 5
   },
   {
     "asin": "7501062019397",
-    "totalQuantity": 9
+    "price": "988.00",
+    "totalQuantity": 4
   },
   {
     "asin": "B07GBHCCD5",
-    "totalQuantity": 3
+    "price": "1,144.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B015TNAYCQ",
+    "price": "1,299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VWCTNL2",
+    "price": "859.54",
     "totalQuantity": 2
   },
   {
     "asin": "B01IH8HODC",
+    "price": "1,031.00",
     "totalQuantity": 4
   },
   {
     "asin": "B01G3SVGF0",
+    "price": "549.00",
     "totalQuantity": 4
   },
   {
     "asin": "B01B1N5Q9Y",
+    "price": "999.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07VR8PDBH",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B015TNB6JG",
-    "totalQuantity": 2
+    "price": "1,005.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B015TNF87M",
+    "price": "597.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07LB6HL9L",
+    "price": "348.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07MVMNXR9",
-    "totalQuantity": 2
+    "price": "269.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07NY43VFS",
+    "price": "299.00",
     "totalQuantity": 14
   },
   {
     "asin": "B07P2JV8C2",
+    "price": "699.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07DK516GX",
+    "price": "599.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07MCRZKZM",
+    "price": "699.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07VSHNBTB",
+    "price": "549.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07P4N61WT",
+    "price": "245.67",
     "totalQuantity": 1
   },
   {
     "asin": "B07FDLZJ84",
-    "totalQuantity": 1
-  },
-  {
-    "asin": "B01IKOZ6GA",
+    "price": "349.00",
     "totalQuantity": 1
   },
   {
     "asin": "B006JVUH1G",
+    "price": "499.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07FCWXCQV",
+    "price": "310.00",
     "totalQuantity": 1
   },
   {
     "asin": "B0842GHCSN",
+    "price": "559.99",
     "totalQuantity": 1
   },
   {
     "asin": "B0844QKQFB",
+    "price": "818.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07GBHT353",
+    "price": "600.00",
     "totalQuantity": 1
   },
   {
     "asin": "B017J01XGI",
+    "price": "699.01",
     "totalQuantity": 3
   },
   {
     "asin": "B07QGLQ6LR",
+    "price": "4,999.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07QJSJYVF",
+    "price": "9,999.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00J8MDPI0",
+    "price": "7,467.08",
     "totalQuantity": 3
   },
   {
     "asin": "B0751XSNXP",
-    "totalQuantity": 0
+    "price": "13,499.00",
+    "totalQuantity": 1
   },
   {
     "asin": "B07DKQ3V42",
+    "price": "999.00",
     "totalQuantity": 0
   },
   {
     "asin": "B075KB9T2B",
+    "price": "799.00",
     "totalQuantity": 5
   },
   {
     "asin": "B08442LTZV",
+    "price": "499.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07XB3J7CF",
+    "price": "499.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07GYY9MJN",
+    "price": "1,999.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07NQB3KZX",
+    "price": "499.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07GZZKKMW",
+    "price": "1,799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07X8Z1XS1",
-    "totalQuantity": 1
+    "price": "1,006.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B07BFYNR5S",
+    "price": "460.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07QWZQ25K",
+    "price": "690.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07DKV9L7Y",
+    "price": "499.00",
     "totalQuantity": 13
   },
   {
     "asin": "B07FFRXRQS",
+    "price": "449.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07Y953XS1",
-    "totalQuantity": 1
+    "price": "749.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B0797HF181",
+    "price": "818.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07JK9PQXM",
+    "price": "549.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07XB3JFYY",
-    "totalQuantity": 1
-  },
-  {
-    "asin": "B07YFXSDD6",
+    "price": "599.00",
     "totalQuantity": 0
   },
   {
     "asin": "B086G2KRWY",
+    "price": "1,100.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01G23L03O",
+    "price": "799.00",
     "totalQuantity": 10
   },
   {
     "asin": "B07DKNZ6J4",
+    "price": "599.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07V257499",
+    "price": "654.44",
     "totalQuantity": 0
   },
   {
     "asin": "B089DR3N7S",
+    "price": "299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07DKQ27T8",
+    "price": "749.00",
     "totalQuantity": 6
   },
   {
     "asin": "B07VN2C1WL",
+    "price": "890.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07HFV7FQR",
+    "price": "963.01",
     "totalQuantity": 0
   },
   {
     "asin": "B07HFTGPBX",
+    "price": "899.00",
     "totalQuantity": 0
   },
   {
     "asin": "B075KG4QNV",
+    "price": "149.00",
     "totalQuantity": 1
   },
   {
-    "asin": "B01EOI6YE4",
-    "totalQuantity": 0
-  },
-  {
-    "asin": "B075K53MHV",
-    "totalQuantity": 0
-  },
-  {
     "asin": "B07P82Y389",
+    "price": "350.00",
     "totalQuantity": 5
   },
   {
     "asin": "B017J01UH0",
+    "price": "530.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07575SGLS",
+    "price": "898.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07NQGCRDK",
+    "price": "590.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07W6TY4SP",
+    "price": "599.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07W5TJVCP",
+    "price": "1,399.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01B1N5Q94",
+    "price": "489.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07NQD64P6",
+    "price": "881.31",
     "totalQuantity": 2
   },
   {
     "asin": "B07NQGB4H4",
+    "price": "999.00",
     "totalQuantity": 0
   },
   {
     "asin": "B0848GQKQ4",
+    "price": "2,199.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07WGHZMGX",
+    "price": "299.00",
     "totalQuantity": 1
   },
   {
     "asin": "B075KJ1N6P",
+    "price": "499.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07XC3JHV5",
+    "price": "999.00",
     "totalQuantity": 0
   },
   {
     "asin": "B004ZWVVP2",
-    "totalQuantity": 3
+    "price": "339.00",
+    "totalQuantity": 2
   },
   {
     "asin": "B00N1Q5WYO",
+    "price": "856.00",
     "totalQuantity": 1
   },
   {
     "asin": "B017J01YK8",
+    "price": "420.00",
     "totalQuantity": 1
   },
   {
     "asin": "B01J124WNI",
+    "price": "799.00",
     "totalQuantity": 1
   },
   {
     "asin": "B085618663",
+    "price": "499.00",
     "totalQuantity": 0
   },
   {
     "asin": "B01IH8IHPG",
+    "price": "300.72",
     "totalQuantity": 1
   },
   {
     "asin": "B087YM87GX",
+    "price": "550.00",
     "totalQuantity": 9
   },
   {
     "asin": "B082DGZ8N2",
+    "price": "849.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07JY1SCM6",
+    "price": "906.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07JPB1T4X",
+    "price": "1,199.00",
     "totalQuantity": 3
   },
   {
     "asin": "B087YN7DSM",
+    "price": "499.00",
     "totalQuantity": 3
   },
   {
     "asin": "B07NQF1VDL",
+    "price": "659.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07F6LR3MF",
+    "price": "229.00",
     "totalQuantity": 0
   },
   {
     "asin": "B07BFPXDH9",
+    "price": "948.00",
     "totalQuantity": 1
   },
   {
     "asin": "B017J01G7Y",
+    "price": "495.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07GL668MV",
+    "price": "899.00",
     "totalQuantity": 3
   },
   {
     "asin": "B081VR5M6H",
+    "price": "837.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07LGX989V",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VSCC61D",
-    "totalQuantity": 4
+    "price": "859.00",
+    "totalQuantity": 0
   },
   {
     "asin": "B015TNAXTA",
+    "price": "843.00",
     "totalQuantity": 1
   },
   {
     "asin": "B017J01V5G",
+    "price": "719.00",
     "totalQuantity": 5
   },
   {
     "asin": "B017J01WAU",
+    "price": "849.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07V254NF8",
+    "price": "879.00",
     "totalQuantity": 5
   },
   {
     "asin": "B01B1N5NLU",
+    "price": "895.00",
     "totalQuantity": 2
   },
   {
     "asin": "B087WS67MR",
+    "price": "386.00",
     "totalQuantity": 1
   },
   {
     "asin": "B087WHVTNP",
+    "price": "399.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07VP21YW4",
+    "price": "419.00",
     "totalQuantity": 1
   },
   {
     "asin": "B07WYGCKKM",
+    "price": "501.00",
     "totalQuantity": 5
   },
   {
     "asin": "B07WWHZ9B6",
+    "price": "590.00",
     "totalQuantity": 2
   },
   {
     "asin": "B07WVDDWMM",
+    "price": "420.00",
     "totalQuantity": 1
   },
   {
     "asin": "B017J020EW",
+    "price": "680.00",
     "totalQuantity": 3
   },
   {
     "asin": "B015TNF7P0",
+    "price": "1,629.00",
     "totalQuantity": 3
   },
   {
     "asin": "B015TNF9B2",
+    "price": "1,399.00",
     "totalQuantity": 3
   },
   {
     "asin": "B015TNB7QS",
+    "price": "481.02",
     "totalQuantity": 2
   },
   {
     "asin": "B01IH8IM2Y",
+    "price": "1,591.94",
     "totalQuantity": 1
   },
   {
     "asin": "B011MIUQXY",
+    "price": "199.00",
     "totalQuantity": 2
   },
   {
     "asin": "B00004TZY8",
+    "price": "199.00",
     "totalQuantity": 2
   }
 ]

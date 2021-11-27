@@ -4,7 +4,7 @@ const AmazonAPIModel = require("../amazon/amazonAPIModel");
 const AmazonScraperModel = require('../amazon/AmazonScraperModel');
 const MarketsyncModel = require('../marketsync/MarketsyncModel');
 const MarketsyncScraperModel = require('../marketsync/MarketSyncScraperModel');
-const dataProduct = require('../dataProduct');
+const ClaroshopModel = require('../claroshop/ClaroshopModel.js');
 const fs = require('fs');
 
 class AllController {
@@ -15,8 +15,11 @@ class AllController {
     wooMod = new WoocommerceApiModel('https://distribuidorariveragonzalez.com/');
     mktMod = new MarketsyncModel();
     mktScrap = new MarketsyncScraperModel();
+    claroMod = new ClaroshopModel();
+    inventory;
     browser;
     cat_mkt;
+    error_log = "";
 
     //* Generales
     async connectAll(mlCode) {
@@ -34,16 +37,34 @@ class AllController {
             //this.cat_mkt = await this.mktMod.getCategories();
             resolve(msg);
         });
-
     }
 
-    async getDataProduct() {
+    async createLogFile(){
         return new Promise(async (resolve, reject) => {
-            (dataProduct.sku != "") ? resolve(dataProduct): reject(`El objeto dataProduct esta vacio.`)
+            fs.writeFile(
+                './json/error_log.json',
+                this.error_log,
+                (err) => {
+                    if (err){ 
+                        console.log(err)
+                        reject(err)
+                    } else {
+                        console.log('\nFile data written successfully\n');
+                        //console.log('The written has the following contents:')
+                        //console.log(fs.readFileSync('./json/claroshop_cat.json', 'utf8').blue);
+                        resolve('\nFile data written successfully\n')
+                    }
+                },
+            );            
         });
     }
 
     //*Sección de Amazon
+    /**
+     * @description Función que inicia el Browser, ya sea sin cabecera o con, para esto se manda un valor boolean, por defecto true.
+     * @param boolean Por defecto true, para iniciar el Browser sin cabecera, y false para inicarlo con cabeceras en Chormelauncher.
+     * @return Browser Retorna una promesa con el valor de Browser para poder utilizar un scrapper con puppeter si la promesa se cumple. O un string conel mensaje de error si algo ocurre.
+     */
     async startBrowser(boolean = true) {
         return new Promise(async (resolve, reject) => {
             if (boolean) {
@@ -53,6 +74,7 @@ class AllController {
                         resolve(browser);
                     })
                     .catch(async (error) => {
+                        this.error_log += `Error en startBrowser - startPuppeter: ${error}.\n`
                         reject("Error: ", error);
                     });
             } else {
@@ -62,6 +84,7 @@ class AllController {
                         resolve(browser);
                     })
                     .catch(async (error) => {
+                        this.error_log += `Error en startBrowser - startBrowser: ${error}.\n`
                         reject("Error: ", error);
                     });
             }
@@ -75,6 +98,7 @@ class AllController {
                     resolve(`Navegador cerrado con éxito.`)
                 })
                 .catch(async (error) => {
+                    this.error_log += `Error al cerrar el navegador. Error en stopBrowser: ${error}\n`
                     reject(`Error al cerrar el navegador. ${error}`)
                 });
         });
@@ -85,107 +109,185 @@ class AllController {
     async getAmazonInventory() {
         return new Promise(async (resolve, reject) => {
             try {
-                let inventory = [];
+
                 let inventoryTemp = [];
                 inventoryTemp.nextToken = null;
                 //*Se obtiene los ASIN y el inventario de Amazon
                 do {
                     inventoryTemp = await this.amzMod.getInventorySummaries(inventoryTemp.nextToken);
                     for (let i = 0; i < inventoryTemp.length; i++) {
-                        inventory.push(inventoryTemp[i]);
+                        this.inventory.push(inventoryTemp[i]);
                     }
                 } while (null != inventoryTemp.nextToken);
                 let res = {
                     msg: 'Inventario obtenido con éxito.',
-                    data: inventory,
+                    data: this.inventory,
                 }
                 resolve(res)
             } catch (e) {
+                this.error_log += `Error al obtener el inventario. Error en getAmazonInventory: ${e}.\n`
                 reject('Error al obtener el inventario. Error: ', e)
             }
         });
     }
 
+    /**
+     * @description Se obtiene el inventario de la página del seller a partir de un scrapper. Se pasa el Browser para poder iniciarlo.
+     * @param Browser
+     * @return Promise. Devuelve una promesa donde si se cumple retorna un objeto con el inventario (key: data) y el mensaje de éxito (key: msg). Si no se cumple se retorna un string con el mensaje de error.
+     */
     async getAmazonSellerInventory(browser = this.browser) {
         return new Promise(async (resolve, reject) => {
             try {
-                let inventory = [];
+
                 //const browser = await this.amzScrap.startBrowser();
                 //*Se obtiene los ASIN y el inventario de Amazon
-                inventory = await this.amzScrap.scrapeSellerInventory(browser);
+                this.inventory = await this.amzScrap.scrapeSellerInventory(browser);
 
                 let res = {
                     msg: 'Inventario obtenido con éxito',
-                    data: inventory,
+                    data: this.inventory,
                 }
                 await browser.close();
                 resolve(res)
             } catch (e) {
+                this.error_log += `Error al obtener el inventario. Error en getAmazonSellerInventory: ${e}.\n`
                 reject('Error al obtener el inventario. Error: ', e)
             }
         });
     }
 
-    async copyAmazonToWoocommerce(element, browser) {
+    //NOTE Modificar la función como la demás.
+    async copyAmazonToWoocommerce(boolean = true, inventory = []) {
         return new Promise(async (resolve, reject) => {
 
-            let condition = await this.wooMod.existsProduct(element.asin);
-            //let condition = true;
-            if (condition) {
-                await this.amzMod.getAsinData(element.asin)
-                    .catch(async (res) => {
-                        reject(`No se pudo crear el producto con SKU ${element.asin}. ${res}`)
-                    });
-                await this.amzScrap.pageScraper(browser, element.asin).catch(async (res) => {
-                    reject(res);
-                });
-                dataProduct.sku = element.asin;
-                dataProduct.name = await this.amzMod.getItemName();
-                dataProduct.regular_price = await this.amzMod.getPricing(element.asin);
-                dataProduct.stock_quantity = element.totalQuantity;
-                dataProduct.dimensions.height = await this.amzMod.getHeight().catch(async () => {
-                    return '15'
-                });
-                dataProduct.dimensions.length = await this.amzMod.getLength().catch(async () => {
-                    return '15'
-                });
-                dataProduct.dimensions.width = await this.amzMod.getWidth().catch(async () => {
-                    return '15'
-                });
-                dataProduct.weight = await this.amzMod.getWeight().catch(async () => {
-                    return '15'
-                });
-                dataProduct.meta_data[0].value = await this.amzMod.getEAN().catch(async () => {
-                    return ''
-                });
-                dataProduct.meta_data[1].value = await this.amzMod.getBrandName().catch(async () => {
-                    return ''
-                });
-                dataProduct.meta_data[2].value = await this.amzMod.getManufacturer().catch(async () => {
-                    return ''
-                });
-                dataProduct.meta_data[3].value = await this.amzMod.getModelNumber().catch(async () => {
-                    return ''
-                });
-                dataProduct.meta_data[4].value = await this.amzMod.getCategory(element.asin);
-                dataProduct.meta_data[5].value = await this.amzMod.getCompetitivePricing(element.asin);
-                dataProduct.meta_data[6].value = await this.mlMod.getProductCategory(dataProduct.name);
-                dataProduct.meta_data[7].value = await this.mlMod.getProductCategoryName(dataProduct.name);
-                //dataProduct.meta_data[8].value = await this.mktMod.getCategorieID(dataProduct.meta_data[7].value, this.cat_mkt);
-                dataProduct.description = await this.amzScrap.getDescription();
-                dataProduct.description += await this.amzScrap.getLongDescription();
-                dataProduct.short_description = await this.amzScrap.getShortDescription();
-                dataProduct.images = await this.amzScrap.getImages();
+            if (inventory.length == 0) {
+                if (boolean) {
+                    await this.amzScrap.startPuppeter()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                } else {
+                    await this.amzScrap.startBrowser()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                }
 
-                await this.wooMod.createProduct(dataProduct);
-
-                resolve(`Producto ${dataProduct.name} creado con éxito.`)
-            } else {
-                reject(`No se pudo crear el producto con SKU ${element.asin}. El proucto ya existe.`)
+                inventory = await this.amzScrap.scrapeSellerInventory(this.browser);
             }
+
+            for (let grey = 0; grey < inventory.length; grey++) {
+                if (await this.wooMod.existsProduct(inventory[grey].asin)) {
+
+                    await Promise.all([
+                            this.amzMod.getAsinData(inventory[grey].asin),
+                            this.amzScrap.pageScraper(this.browser, inventory[grey].asin)
+                        ])
+                        .then(async (res) => {
+                            console.log("Respuesta de PromiseAll: ", res);
+
+                            let dataProduct = {
+
+                                sku: inventory[grey].asin, //ASIN
+                                name: await this.amzMod.getItemName(),
+                                regular_price: await this.amzMod.getPricing(inventory[grey].asin), //Amazon Price
+                                description: await this.amzScrap.getDescription() + " " + await this.amzScrap.getLongDescription(),
+                                short_description: await this.amzScrap.getShortDescription(),
+                                manage_stock: true,
+                                stock_quantity: inventory[grey].totalQuantity,
+                                weight: await this.amzMod.getWeight().catch(async () => {
+                                    return '15'
+                                }),
+                                dimensions: {
+                                    length: await this.amzMod.getLength().catch(async () => {
+                                        return '15'
+                                    }),
+                                    width: await this.amzMod.getWidth().catch(async () => {
+                                        return '15'
+                                    }),
+                                    height: await this.amzMod.getHeight().catch(async () => {
+                                        return '15'
+                                    }),
+                                },
+                                images: await this.amzScrap.getImages(),
+                                meta_data: [{
+                                        key: "_ean",
+                                        value: await this.amzMod.getEAN().catch(async () => {
+                                            return ''
+                                        }),
+                                    },
+                                    {
+                                        key: "_brand_name",
+                                        value: await this.amzMod.getBrandName().catch(async () => {
+                                            return ''
+                                        }),
+                                    },
+                                    {
+                                        key: "_manufacturer",
+                                        value: await this.amzMod.getManufacturer().catch(async () => {
+                                            return ''
+                                        }),
+                                    },
+                                    {
+                                        key: "_model_number",
+                                        value: await this.amzMod.getModelNumber().catch(async () => {
+                                            return ''
+                                        }),
+                                    },
+                                    {
+                                        key: "_amazon_category",
+                                        value: await this.amzMod.getCategory(inventory[grey].asin)
+                                    },
+                                    {
+                                        key: "_competitive_pricing",
+                                        value: await this.amzMod.getCompetitivePricing(inventory[grey].asin),
+                                    },
+                                    {
+                                        key: "_mercadolibre_category_code",
+                                        value: await this.mlMod.getProductCategory(await this.amzMod.getItemName())
+                                    },
+                                    {
+                                        key: "_mercadolibre_category_name",
+                                        value: await this.mlMod.getProductCategoryName(await this.amzMod.getItemName())
+                                    },
+                                    {
+                                        key: "_claroshop_category_code",
+                                        value: await this.claroMod.getClaroCategory(await this.mlMod.getProductCategory(await this.amzMod.getItemName()))
+                                    }
+                                ]
+                            }
+        
+                            await this.wooMod.createProduct(dataProduct)
+                                .then(async (res) => {
+                                    console.log(`Producto ${dataProduct.name} creado con éxito.`);
+                                })
+                                .catch(async (error) => {
+                                    this.error_log += `Error en createProduct de copyAmazonToWoocommerce: ${error}`
+                                    console.log("Error: ", error);
+                                });
+                        })
+                        .catch(async (error) => {
+                            this.error_log += `Error de PromiseAll: ${error}`
+                            console.log("Error de PromiseAll: ", error);
+                        });
+
+                } else {
+                    this.error_log += `No se pudo crear el producto con SKU ${inventory[grey].asin}. El proucto ya existe.`;
+                    console.log(`No se pudo crear el producto con SKU ${inventory[grey].asin}. El proucto ya existe.`);
+                }
+            }
+            resolve('Productos copiados a woocommerce exitosamente.')
         });
     }
 
+    //WARING Podría ser eliminada del programa.
     async updateWooMarketWithAmazonData() {
         return new Promise(async (resolve, reject) => {
             let inventory = [];
@@ -286,49 +388,26 @@ class AllController {
     async connectWoo() {
         return await this.wooMod.connect()
     }
-    // async getWoocommerceAvailableSku() {
-    //     return new Promise(async (resolve, reject) => {
-    //         let i = 1;
-    //         let ret = [];
-    //         let condition;
-    //         do {
-    //             await this.wooMod.getInventorySummaries(i)
-    //                 .then(async (res) => {
-    //                     condition = res.length;
-    //                     for (let j = 0; j < res.length; j++) {
-    //                         if (res[j].stock_status == "instock") ret.push(res[j].sku);
-    //                     }
-    //                     i++;
-    //                 })
-    //                 .catch(async (error) => {
-    //                     reject(error)
-    //                 })
-    //         } while (condition != 0);
 
-    //         resolve(ret);
-    //     });
-    // }
-
+    //WARING Es posible que se elimine de la app.
     async copyWoocommerceToMarketsync(sku) {
         return new Promise(async (resolve, reject) => {
 
             if (!await this.wooMod.existsProduct(sku)) {
                 await this.wooMod.getProduct(sku)
                     .then(async (res) => {
-                        let code = await this.mktMod.getMarketsycCategoryCode(res);
-                        console.log('Code: ', code, 'Condición: ', code.includes('Producto'));
-                        if(true){
-                            let id = await this.mktMod.createProducts(res).then(async res => {
-                                console.log(res.data)
-                                return res.data.answer[0].id
-                            });
-                            
-                            console.log("ID: ", id);
-                            await this.mktMod.createVaration(id, res);
-                            await this.mktMod.publicarProducto(id);
-                            await this.mktMod.setPrice(id, res);
-                            resolve(`Articulo con SKU ${sku}, copiado con éxito.!`);    
-                        }
+                        await this.mktMod.getMarketsycCategoryCode(res);
+
+                        let id = await this.mktMod.createProducts(res).then(async res => {
+                            console.log(res.data)
+                            return res.data.answer[0].id
+                        });
+
+                        //console.log("ID: ", id);
+                        await this.mktMod.createVaration(id, res);
+                        await this.mktMod.publicarProducto(id);
+                        await this.mktMod.setPrice(id, res);
+                        resolve(`Articulo con SKU ${sku}, copiado con éxito.!`);
                     })
                     .catch(async (error) => {
                         reject(error)
@@ -339,7 +418,7 @@ class AllController {
         });
     }
 
-    //WARING Revisar esta función para mejorarla.
+    //WARING Es posible que se elimine de la app.
     async updateWoocommerceWithMercadoLibre(dataProduct) {
         return new Promise(async (resolve, reject) => {
             dataProduct.meta_data[6].value = await this.mlMod.getProductCategory(dataProduct.name);
@@ -358,33 +437,34 @@ class AllController {
     //NOTE Modificar esta función para crearla como el AmazonWoocommerceController
     async copyWoocommerceToMercadoLibre(element) {
         return new Promise(async (resolve, reject) => {
-            if(!await this.mlMod.existsProduct(element.asin)){
+            if (!await this.mlMod.existsProduct(element.asin)) {
                 await this.wooMod.getProduct(element.asin)
-                .then(async(res)=>{
-                    let cat;
-                    for (let i = 0; i < res.meta_data.length; i++) {
-                        if(res.meta_data[i].key == '_mercadolibre_category_code'){
-                            cat = res.meta_data[i].value;
+                    .then(async (res) => {
+                        let cat;
+                        for (let i = 0; i < res.meta_data.length; i++) {
+                            if (res.meta_data[i].key == '_mercadolibre_category_code') {
+                                cat = res.meta_data[i].value;
+                            }
                         }
-                    }
-                    await this.mlMod.createProduct(res, cat)
-                    .then(async(res)=>{
-                        await this.mlMod.createDescription(res.id)
-                        .then(async(res)=>{
-                            resolve(`Producto creado exitosamente. SKU: ${element.asin}`)
-                        })
-                        .catch(async(error)=>{
-                            reject(`Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error}`)
-                        })
+                        await this.mlMod.createProduct(res, cat)
+                            .then(async (res) => {
+                                await this.mlMod.createDescription(res.id)
+                                    .then(async (res) => {
+                                        resolve(`Producto creado exitosamente. SKU: ${element.asin}`)
+                                    })
+                                    .catch(async (error) => {
+                                        this.error_log += `Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error}`;
+                                        reject(`Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error}`)
+                                    })
+                            })
+                            .catch(async (error) => {
+                                reject(`Error en copyWoocommerceToMercadoLibre en catch de mlMod.createProduct(): ${error}`)
+                            })
                     })
-                    .catch(async(error)=>{
-                        reject(`Error en copyWoocommerceToMercadoLibre en catch de mlMod.createProduct(): ${error}`)
+                    .catch(async (error) => {
+                        reject(`Error en copyWoocommerceToMercadoLibre en catch de wooMod.getProduct(): ${error}`)
                     })
-                })
-                .catch(async(error)=>{
-                    reject(`Error en copyWoocommerceToMercadoLibre en catch de wooMod.getProduct(): ${error}`)
-                })
-            }else{ 
+            } else {
                 resolve(`Ya existe el produdcto ${element.asin}`)
             }
         });
@@ -430,74 +510,78 @@ class AllController {
             let page = await this.mktScrap.ingresarMarketsyn(this.browser);
 
             for (let pw = 0; pw < products_woo.length; pw++) {
-                let cat = await this.mktScrap.buclePaginacategorias(page,products_woo[pw]);
-                    let update_woo;
-                    for (let k = 0; k < cat.meta_data.length; k++) {
-                        if(cat.meta_data[k].key == '_marketsync_category_code'){
-                            update_woo = {
-                                meta_data: [{
-                                    key: '_marketsync_category_code',
-                                    value: cat.meta_data[k].value
-                                }]
-                            };
-                        }
+                let cat = await this.mktScrap.buclePaginacategorias(page, products_woo[pw]);
+                let update_woo;
+                for (let k = 0; k < cat.meta_data.length; k++) {
+                    if (cat.meta_data[k].key == '_marketsync_category_code') {
+                        update_woo = {
+                            meta_data: [{
+                                key: '_marketsync_category_code',
+                                value: cat.meta_data[k].value
+                            }]
+                        };
                     }
+                }
                 console.log('Producto ID: ', products_woo[pw].id, ' Update_woo: ', cat);
                 await this.wooMod.updateProduct(products_woo[pw].id, update_woo)
-                .then(async(res)=>{
-                    console.log("Respuesta: ", res.data.sku);
-                })
-                .catch(async(error)=>{
-                    console.log("Error: ", error);
-                });
+                    .then(async (res) => {
+                        console.log("Respuesta: ", res.data.sku);
+                    })
+                    .catch(async (error) => {
+                        console.log("Error: ", error);
+                    });
             }
 
             resolve('Productos actualizados.')
         });
     }
 
-    async updateWoocommerceStock(boolean = true){
+    async updateWoocommerceStock(boolean = true, inventory = []) {
         return new Promise(async (resolve, reject) => {
-            if (boolean) {
-                await this.amzScrap.startPuppeter()
-                    .then(async (browser) => {
-                        this.browser = browser;
-                    })
-                    .catch(async (error) => {
-                        reject("Error: ", error);
-                    });
-            } else {
-                await this.amzScrap.startBrowser()
-                    .then(async (browser) => {
-                        this.browser = browser;
-                    })
-                    .catch(async (error) => {
-                        reject("Error: ", error);
-                    });
+            if (inventory.length == 0) {
+                if (boolean) {
+                    await this.amzScrap.startPuppeter()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                } else {
+                    await this.amzScrap.startBrowser()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                }
+
+                inventory = await this.amzScrap.scrapeSellerInventory(this.browser);
             }
 
-            let inventory = await this.amzScrap.scrapeSellerInventory(this.browser);
-
             for (let gris = 0; gris < inventory.length; gris++) {
-                
-                if(!await this.wooMod.existsProduct(inventory[gris].asin)){
+
+                if (!await this.wooMod.existsProduct(inventory[gris].asin)) {
                     await this.wooMod.getProduct(inventory[gris].asin)
-                    .then(async(res)=>{
-                        await this.wooMod.updateProduct(res.id,{stock_quantity: inventory[gris].totalQuantity})
-                        .then(async(res)=>{
-                            console.log("Respuesta: ", res);
+                        .then(async (res) => {
+                            await this.wooMod.updateProduct(res.id, {
+                                    stock_quantity: inventory[gris].totalQuantity
+                                })
+                                .then(async (res) => {
+                                    console.log("Respuesta: ", res);
+                                })
+                                .catch(async (error) => {
+                                    console.log("Error: ", error);
+                                    reject(error)
+                                })
+
                         })
-                        .catch(async(error)=>{
+                        .catch(async (error) => {
                             console.log("Error: ", error);
-                            reject(error)
                         })
-                        
-                    })
-                    .catch(async(error)=>{
-                        console.log("Error: ", error);
-                    })
                 }
-                
+
             }
 
             resolve('Stock de productos actualizados.')
@@ -567,7 +651,7 @@ class AllController {
             let update_woo = []
             for (let i = 0; i < dataProduct.length; i++) {
                 for (let k = 0; k < dataProduct[i].meta_data.length; i++) {
-                    if(dataProduct[i].meta_data[k].key == '_marketsync_category_code'){
+                    if (dataProduct[i].meta_data[k].key == '_marketsync_category_code') {
                         update_woo.push({
                             id: dataProduct[i].id,
                             meta_data: [{
@@ -648,15 +732,144 @@ class AllController {
         return await this.mlMod.connect(mlCode);
     }
 
-    async getDataProductML(key_word = "", product_identifier) {
+    async updateStockPriceMercadolibre(boolean = true, inventory = []) {
         return new Promise(async (resolve, reject) => {
-            await this.mlMod.searchProducts_mkt(key_word, product_identifier)
-                .then(async (res) => {
-                    resolve(res);
-                })
-                .catch(async (error) => {
-                    reject(error);
-                })
+            if (inventory.length == 0) {
+                if (boolean) {
+                    await this.amzScrap.startPuppeter()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                } else {
+                    await this.amzScrap.startBrowser()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                }
+
+                inventory = await this.amzScrap.scrapeSellerInventory(this.browser);
+            }
+            for (let i = 0; i < inventory.length; i++) {
+                let id;
+                console.log(`Buscando ASIN ${inventory[i].asin} en Mercadolibre.`)
+                await this.mlMod.getIDProduct(inventory[i].asin)
+                    .then(async (res) => {
+                        id = res;
+                        console.log("Id de Mercadolibre: ", id);
+                    })
+                    .catch(async (error) => {
+                        reject(error)
+                    });
+
+                let data = {
+                    "available_quantity": inventory[i].totalQuantity,
+                    "price": Math.round(Number.parseInt(inventory[i].price) * 1.30)
+                }
+
+                await this.mlMod.updateProduct(id, data)
+                    .then(async (res) => {
+                        console.log(`Producto con ASIN ${inventory[i].asin}, con ID de Mercadolibre ${res.data.id} actualizado correctamnte.`);
+                    })
+                    .catch(async (error) => {
+                        console.log("Error: ", error.response.data);
+                    });
+            }
+            resolve('Productos en Mercadolibre actualizados con éxito.')
+        });
+    }
+
+    //*Sección Claroshop
+    async copyWoocommerceToClaroshop(boolean = true, inventory = []) {
+        return new Promise(async (resolve, reject) => {
+            console.log('Tamaño inventario: ', inventory.length)
+            if (inventory.length === 0) {
+                if (boolean) {
+                    await this.amzScrap.startPuppeter()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                } else {
+                    await this.amzScrap.startBrowser()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                }
+
+                await this.amzScrap.scrapeSellerInventory(this.browser)
+                    .then(async (res) => {
+                        inventory.push(res);
+                    });
+            }
+
+            for (let cwc = 0; cwc < inventory.length; cwc++) {
+
+                if (!await this.wooMod.existsProduct(inventory[cwc].asin)) {
+                    await this.wooMod.getProduct(inventory[cwc].asin)
+                    .then(async(res)=>{
+                        await this.claroMod.createProducto(await this.claroMod.getSignature(), res)
+                    })
+                    .catch(async(error)=>{
+                        this.error_log += `Error en catch getProduct de copyWoocommerceToClaroShop: ${error}`
+                        console.log("Error en catch getProduct de copyWoocommerceToClaroShop: ", error);
+                    });
+                
+                } else {
+                    this.error_log += `No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`;
+                    console.log(`No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`);
+                }
+            }
+            resolve('Articulos copiados con éxito.')
+        });
+    }
+
+    async updateClaroshopCategoryOnWoocommerce(inventory = []) {
+        return new Promise(async (resolve, reject) => {
+            for (let uccw = 0; uccw < inventory.length; uccw++) {
+                await this.wooMod.getProduct(inventory[uccw].asin)
+                    .then(async (res) => {
+                        //console.log(res.meta_data);
+                        let id_product = res.id;
+                        await this.claroMod.getClaroCategory(await this.claroMod.getMercadolibreCategoryCode(res))
+                            .then(async (res) => {
+                                let data = {
+                                    meta_data: [{
+                                        key: "_claroshop_category_code",
+                                        value: res
+                                    }]
+                                }
+                                await this.wooMod.updateProduct(id_product, data)
+                                    .then(async (res) => {
+                                        console.log("Respuesta: ", res.data.meta_data);
+                                        resolve(res.data.meta_data)
+                                    })
+                                    .catch(async (error) => {
+                                        console.log("Error: ", error);
+                                        reject(error)
+                                    })
+
+                            })
+                            .catch(async (error) => {
+                                this.error_log += `${error} Articulo con ASIN: ${inventory[uccw].asin}.\n`;
+                                console.log(error, ' Articulo con ASIN: ', inventory[uccw].asin)
+                            });
+
+                    })
+                    .catch(async (error) => {
+                        console.log("Error: ", error);
+                    });
+            }
         });
     }
 
@@ -675,6 +888,10 @@ class AllController {
 
     async getWoocommerceApiModel() {
         return this.wooMod;
+    }
+
+    async getInventory(){
+        return this.inventory   
     }
 
 }

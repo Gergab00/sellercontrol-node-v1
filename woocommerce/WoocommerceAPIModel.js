@@ -57,8 +57,8 @@ class WoocommerceAPIModel {
                     resolve(res)
                 })
                 .catch(async (error) => {
-                    console.log("Response putProducts Status:", error.response.status);
-                    console.log("Response putProducts Headers:", error.response.headers);
+                    //console.log("Response putProducts Status:", error.response.status);
+                    //console.log("Response putProducts Headers:", error.response.headers);
                     console.log("Response putProducts Data:", error.response.data);
                     reject(error.response.data)
                 });
@@ -78,12 +78,13 @@ class WoocommerceAPIModel {
                     } else {
                         ret = true;
                     } //Si existe el producto regresa true, si no existe regresa false
-                    //console.log(`Resultado de existsProducts ${ret}`)
+                    console.log(`Resultado de existsProducts ${ret}`)
                     resolve(ret);
                 }).catch((error) => {
                     // Invalid request, for 4xx and 5xx statuses
-                    //console.log("Response Error:", error);
-                    reject(`Response Error: ${error.response.data}`)
+                    console.log("Response Error:", error);
+                    //reject(`Response Error: ${error.response.data}`)
+                    reject(`Response Error: ${error.response}`)
                 });
         });
     }
@@ -99,7 +100,7 @@ class WoocommerceAPIModel {
                     resolve(response.data[0]);
                 })
                 .catch(async (error) => {
-                    reject(error.response.data)
+                    reject(error.response)
                 });
         });
     }

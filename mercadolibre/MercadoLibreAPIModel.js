@@ -434,7 +434,7 @@ class MercadoLibreAPIModel {
      * 
      * @param {String} seller_sku Sku que se buscara en Mercadolibre para ver si existe.
      * @param {String} access_token Access token obtenido anteriormente.
-     * @returns {!Promise<boolean>} Devulve una promesa, si no se cumple la promesa devuelve un mensaje de error. Si se cumple regresa un booleano, si es verdadero el producto existe, si es falso no existe.
+     * @returns {!Promise<boolean>} Devuelve una promesa, si no se cumple la promesa devuelve un mensaje de error. Si se cumple regresa un booleano, si es verdadero el producto existe, si es falso no existe.
      */
     async existsProduct(seller_sku, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
@@ -458,6 +458,26 @@ class MercadoLibreAPIModel {
         });
     }
 
+    async getIDProduct(seller_sku, access_token = this.access_token) {
+        return new Promise(async (resolve, reject) => {
+            let options = {
+                method: 'get',
+                baseURL: `https://api.mercadolibre.com/users/${process.env.USER_ID}/items/search?seller_sku=${seller_sku}`,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            };
+
+            await axios(options)
+                .then(async (res) => {
+                    resolve(res.data.results[0])
+                })
+                .catch(async (error) => {
+                    reject(error)
+                });
+        });
+    }
+
     async searchProducts(key_word,product_identifier, access_token = this.access_token){
         return new Promise(async (resolve, reject) => {
             let baseURL;
@@ -473,6 +493,27 @@ class MercadoLibreAPIModel {
             await axios(options)
                 .then(async (res) => {
                     console.log('Respuesta de searchProducts obtenida con exito.');
+                    resolve(res)
+                })
+                .catch(async (error) => {
+                    reject(error)
+                });
+        });
+    }
+
+    async updateProduct(item_id, data, access_token = this.access_token){
+        return new Promise(async (resolve, reject) => {
+            let options = {
+                method: 'put',
+                baseURL: `https://api.mercadolibre.com/items/${item_id}`,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                },
+                data: data
+            }
+            
+            await axios(options)
+                .then(async (res) => {
                     resolve(res)
                 })
                 .catch(async (error) => {

@@ -66,6 +66,10 @@ const dataProduct = {
         {
             key: "_marketsync_category_code",
             value: ""
+        },
+        {
+            key: "_claroshop_category_code",
+            value: ""
         }
     ],
 }

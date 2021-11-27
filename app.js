@@ -9,43 +9,29 @@ const AllController = require('./controller/AllController');
     const Controller = new AllController();
     //const MktSyncMod = new MarketsyncModel();
 
-    await Controller.connectWoo()
+    await Controller.connectAll()
         .then(async (res) => {
             console.log("Respuesta de connectWoo: ", res);
         })
         .catch(async (error) => {
             console.log("Error de connectWoo: ", error);
         });
-
-        const browser = await Controller.startBrowser(false);
-
-        //*Actualizar stock de productos en woocommerce
- await Controller.updateWoocommerceStock(false)
- .then(async(res)=>{
-     console.log("Respuesta de updateWoocommerceStock: ", res);
- })
- .catch(async(error)=>{
-     console.log("Error de updateWoocommerceStock: ", error);
- });
-
-
-    //*Copiar productos de Woocommerce en Marketsync
-let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-let inventory = await JSON.parse(rawdata);
-console.log('Tamaño inventario: ', inventory.length);
-for (let cwm = 0; cwm < inventory.length; cwm++) {
-    const element = inventory[cwm].asin;
-    //console.log('Element: ', element);
-
-    await Controller.copyWoocommerceToMarketsync(element)
-        .then(async (res) => {
-            console.log("Respuesta: ", res);
+    
+        await Controller.copyAmazonToWoocommerce(false)
+        .then(async(res)=>{
+            console.log("Respuesta de copyAmazonToWoocommerce: ", res);
         })
-        .catch(async (error) => {
-            console.log("Error: ", error);
+        .catch(async(error)=>{
+            console.log("Error de copyAmazonToWoocommerce: ", error);
         });
-}
 
+        await Controller.updateClaroshopCategoryOnWoocommerce(await Controller.getInventory())
+        .then(async(res)=>{
+            console.log("Respuesta de updateClaroshopCategoryOnWoocommerce: ", res);
+        })
+        .catch(async(error)=>{
+            console.log("Error de updateClaroshopCategoryOnWoocommerce: ", error);
+        })
 })();
 
 //*Actualizar stock de productos en woocommerce
@@ -56,28 +42,6 @@ for (let cwm = 0; cwm < inventory.length; cwm++) {
 //  .catch(async(error)=>{
 //      console.log("Error de updateWoocommerceStock: ", error);
 //  });
-//*Copiar productos de Woocommerce en Marketsync
-// for (let cwm = 0; cwm < inventory.length; cwm++) {
-//     const element = inventory[cwm].asin;
-//     console.log('Element: ', element);
-
-
-//     await Controller.copyWoocommerceToMarketsync(element)
-//         .then(async (res) => {
-//             console.log("Respuesta: ", res);
-//         })
-//         .catch(async (error) => {
-//             console.log("Error: ", error);
-//         });
-// }
-//*Escrapear categorias de marketsync y actualizar en woocommerce
-//    await Controller.updateMarketsyncCategoriesOnWoocommerce()
-//    .then(async(res)=>{
-//        console.log("Respuesta de scrapeCategoriesOnMarketsync: ", res);
-//    })
-//    .catch(async(error)=>{
-//        console.log("Error de scrapeCategoriesOnMarketsync: ", error);
-//    });
 
 //*Mercadolibre obtener atributos del producto
 //await Controller.mlConnect()
@@ -94,24 +58,6 @@ for (let cwm = 0; cwm < inventory.length; cwm++) {
 // })
 // .catch(async(error)=>{
 //     console.log("Error: ", error);
-// });
-
-//*Actualizar la garantía del producto en Marketsync
-// await Controller.updateWarratyOnMarktsync()
-// .then(async(res)=>{
-//     console.log("Respuesta de updateWarratyOnMarktsync: Producto actualizado correctamente; ", res);
-// })
-// .catch(async(error)=>{
-//     console.log("Error de updateWarratyOnMarktsync: ", error);
-// });
-
-//*Eliminar TODOS los productos de Marketsync
-// await Controller.deleteAllofMarketsync()
-// .then(async(res)=>{
-//     console.log("Respuesta de deleteAllofMarketsync: ", res);
-// })
-// .catch(async(error)=>{
-//     console.log("Error de deleteAllofMarketsync: ", error);
 // });
 
 //*Copiar productos de Amazon a Woocommerce
@@ -140,15 +86,6 @@ for (let cwm = 0; cwm < inventory.length; cwm++) {
 
 // await Controller.stopBrowser(browser);
 
-//*Actualizar precios e inventario de Woocommer y Marketsync
-// await Controller.updateWooMarketWithAmazonData()
-// .then(async(res)=>{
-//     console.log("Respuesta de updateWooMarketWithAmazonData: ", res);
-// })
-// .catch(async(error)=>{
-//     console.log("Error de updateWooMarketWithAmazonData: ", error);
-// });
-
 //*Copiar productos de Woocommerce a Mercadolibre
 // let inventory = await Controller.getAmazonSellerInventory()
 //     .then(async (res) => {
@@ -171,12 +108,3 @@ for (let cwm = 0; cwm < inventory.length; cwm++) {
 //             console.log("Error de copyWoocommerceToMercadoLibre: ", error);
 //         });
 // }
-
-//*Actualizar categorias Woocommerce individualmente
-//    await Controller.updateCategoriesOnWoocommerce(false)
-//    .then(async(res)=>{
-//        console.log("Respuesta de scrapeCategoriesOnMarketsync: ", res);
-//    })
-//    .catch(async(error)=>{
-//        console.log("Error de scrapeCategoriesOnMarketsync: ", error);
-//    });

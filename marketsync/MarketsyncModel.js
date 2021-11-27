@@ -178,7 +178,7 @@ class MarketsyncModel {
                             }
                         }
                     }
-                    console.log('Atributos obtenidas exitosamente: ', atributos);
+                    //console.log('Atributos obtenidas exitosamente', atributos );
                     resolve(atributos);
                 })
                 .catch((error) => {
@@ -264,7 +264,7 @@ class MarketsyncModel {
         });
     }
 
-    async createProducts(dataProduct) {
+    async createProducts(dataProduct, boolean = false) {
         return new Promise(async (resolve, reject) => {
             let newProduct;
             try {
@@ -287,14 +287,17 @@ class MarketsyncModel {
                     {
                         atributo: 'MODEL',
                         valor: await this.getModelNumber(dataProduct)
-                    },
-                    // {
-                    //      atributo: 'ALPHANUMERIC_MODEL',
-                    //      valor: await this.getModelNumber(dataProduct)
-                    // }
+                    }
                 ];
+                if (boolean) {
+                    a.push({
+                        atributo: 'ALPHANUMERIC_MODEL',
+                        valor: await this.getModelNumber(dataProduct)
+                    });
+                }
                 let b = await this.getAtributosFilter(await this.getMarketsycCategoryCode(dataProduct), await this.getManufacturer(dataProduct));
                 let c = a.concat(b);
+                console.log('Atributos obtenidas exitosamente', c );
                 newProduct = {
                     nombre: dataProduct.name,
                     descripcion: dataProduct.description,
@@ -305,7 +308,7 @@ class MarketsyncModel {
                     peso: Number.parseInt(dataProduct.weight),
                     sku: dataProduct.sku,
                     dias_embarque: 2,
-                    categoria_id: await this.getMarketsycCategoryCode(dataProduct),
+                    categoria_id: await this.getMarketsycCategoryCode(dataProduct).catch(async(error)=>{reject(error)}),
                     filtro_id: "",
                     marca: await this.getManufacturer(dataProduct),
                     etiquetas: dataProduct.name.replace(" ", ", "),
@@ -338,12 +341,32 @@ class MarketsyncModel {
 
             axios(options)
                 .then((res) => {
-                    console.log(`Producto creado con exito`, dataProduct.sku); //id path res.data.answer.ids
-                    resolve(res);
+                    console.log('Res: ', res.data.answer);
+                    if (!res.data.answer.hasOwnProperty('result')) {
+                        console.log(`Producto creado con exito`, dataProduct.sku); //id path res.data.answer.ids
+                        resolve(res)
+                    } else if (new RegExp('duplicated', "gi").test(res.data.answer.result)) {
+                        //let reg = new RegExp('duplicated', "gi");
+                        //console.log('Reg: ',reg);
+                        //console.log(reg.test(res.data.answer.result));
+                        reject(`Producto ${dataProduct.sku} ya existe en la base de datos.`)
+                    } else if (new RegExp('ALPHANUMERIC_MODEL', "gi").test(res.data.answer.result)) {
+                        (async () => {
+                        await this.createProducts(dataProduct, true)
+                        .then(async(res)=>{
+                            resolve(res)
+                        })
+                        .catch(async(error)=>{
+                            reject(error)
+                        });
+                    })();
+                    }else if (new RegExp('EAN', "gi").test(res.data.answer.result)) {
+                        reject(`Error en código EAN, revisar manualmente: ${res.data.answer.result}`)
+                    }
                 })
                 .catch((error) => {
                     //console.log(`Error en createProduct: ${error.response.statusText}`);
-                    reject(`Error en createProduct: ${error.response.statusText}`);
+                    reject(`Error en createProduct: ${error}`);
                 });
         });
     }
@@ -372,15 +395,15 @@ class MarketsyncModel {
                 imagen4: (dataProduct.images.length > 5) ? dataProduct.images[3].src : "",
                 imagen5: (dataProduct.images.length > 6) ? dataProduct.images[4].src : "",
                 imagen6: (dataProduct.images.length > 7) ? dataProduct.images[5].src : "",
-                bullet1: (dataProduct.short_description.split('.').length > 2) ? dataProduct.short_description.split('.')[0] : "Un gran juguete de novedad.",
-                bullet2: (dataProduct.short_description.split('.').length > 3) ? dataProduct.short_description.split('.')[1] : "Para diversión de niños y grandes.",
-                bullet3: (dataProduct.short_description.split('.').length > 4) ? dataProduct.short_description.split('.')[2] : "Juguetes divertidos para toda la familia.",
-                bullet4: (dataProduct.short_description.split('.').length > 5) ? dataProduct.short_description.split('.')[3] : "Juguetes originales y nuevos.",
-                bullet5: (dataProduct.short_description.split('.').length > 6) ? dataProduct.short_description.split('.')[4] : "Juguetes con garantía de satisfacción.",
-                bullet6: (dataProduct.short_description.split('.').length > 7) ? dataProduct.short_description.split('.')[5] : "Entre los mejores juguets para dar esta temporada.",
+                bullet1: (dataProduct.short_description.split('.').length > 2) ? dataProduct.short_description.split('.')[0].slice(0,249) : "Un gran juguete de novedad.",
+                bullet2: (dataProduct.short_description.split('.').length > 3) ? dataProduct.short_description.split('.')[1].slice(0,249) : "Para diversión de niños y grandes.",
+                bullet3: (dataProduct.short_description.split('.').length > 4) ? dataProduct.short_description.split('.')[2].slice(0,249) : "Juguetes divertidos para toda la familia.",
+                bullet4: (dataProduct.short_description.split('.').length > 5) ? dataProduct.short_description.split('.')[3].slice(0,249) : "Juguetes originales y nuevos.",
+                bullet5: (dataProduct.short_description.split('.').length > 6) ? dataProduct.short_description.split('.')[4].slice(0,249) : "Juguetes con garantía de satisfacción.",
+                bullet6: (dataProduct.short_description.split('.').length > 7) ? dataProduct.short_description.split('.')[5].slice(0,249) : "Entre los mejores juguets para dar esta temporada.",
                 atributos: c
             }
-            
+
             let data = [];
             data.push(varProduct);
             console.log('Data varation: ', data[0]);
@@ -442,7 +465,7 @@ class MarketsyncModel {
             };
             axios(options)
                 .then(async (res) => {
-                    console.log(`Precios creados con exito `/* , res.data.answer, res.data.answer[0].precios */);
+                    console.log(`Precios creados con exito ` /* , res.data.answer, res.data.answer[0].precios */ );
                     resolve(res)
                 })
                 .catch(async (error) => {
@@ -484,7 +507,7 @@ class MarketsyncModel {
 
             axios(options)
                 .then(async (res) => {
-                    console.log(`Productos publicados con exito `/* , res.data.answer */);
+                    console.log(`Productos publicados con exito ` /* , res.data.answer */ );
                     resolve(res)
                 })
                 .catch(async (error) => {
@@ -540,22 +563,24 @@ class MarketsyncModel {
         });
     }
 
-    async updateStockCut(){
+    async updateStockCut() {
         return new Promise(async (resolve, reject) => {
             let hoy = new Date();
             let options = {
                 method: 'post',
                 baseURL: await this.getURL('stock'),
-                data: {update_stock: await this.formatoFecha(hoy)},
+                data: {
+                    update_stock: await this.formatoFecha(hoy)
+                },
             }
             axios(options)
-                        .then((res) => {
-                            resolve(res);
-                        })
-                        .catch((error) => {
-                            console.log(error.response.data);
-                            reject(error);
-                        });
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((error) => {
+                    console.log(error.response.data);
+                    reject(error);
+                });
         });
     }
 
@@ -580,55 +605,59 @@ class MarketsyncModel {
     }
     //*Getters
 
-    async getEAN(dataProduct){
+    async getEAN(dataProduct) {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
-                if(dataProduct.meta_data[i].key == '_ean'){
-                   resolve(dataProduct.meta_data[i].value)
+                if (dataProduct.meta_data[i].key == '_ean') {
+                    resolve(dataProduct.meta_data[i].value)
                 }
             }
             resolve("");
         });
     }
 
-    async getBrand(dataProduct){
+    async getBrand(dataProduct) {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
-                if(dataProduct.meta_data[i].key == '_brand_name'){
-                   resolve(dataProduct.meta_data[i].value)
+                if (dataProduct.meta_data[i].key == '_brand_name') {
+                    resolve(dataProduct.meta_data[i].value)
                 }
             }
             resolve("");
         });
     }
 
-    async getManufacturer(dataProduct){
+    async getManufacturer(dataProduct) {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
-                if(dataProduct.meta_data[i].key == '_manufacturer'){
-                   resolve(dataProduct.meta_data[i].value)
+                if (dataProduct.meta_data[i].key == '_manufacturer') {
+                    resolve(dataProduct.meta_data[i].value)
                 }
             }
             resolve("");
         });
     }
 
-    async getModelNumber(dataProduct){
+    async getModelNumber(dataProduct) {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
-                if(dataProduct.meta_data[i].key == '_model_number'){
-                   resolve(dataProduct.meta_data[i].value)
+                if (dataProduct.meta_data[i].key == '_model_number') {
+                    resolve(dataProduct.meta_data[i].value)
                 }
             }
             resolve("");
         });
     }
 
-    async getMarketsycCategoryCode(dataProduct){
-        return new Promise(async (resolve) => {
+    async getMarketsycCategoryCode(dataProduct) {
+        return new Promise(async (resolve, reject) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
-                if(dataProduct.meta_data[i].key == '_marketsync_category_code'){
-                   resolve(dataProduct.meta_data[i].value)
+                if (dataProduct.meta_data[i].key == '_marketsync_category_code') {
+                    if (new RegExp('manualmente', "gi").test(dataProduct.meta_data[i].value)) {
+                        reject(dataProduct.meta_data[i].value)
+                    }else{
+                        resolve(dataProduct.meta_data[i].value)
+                    }
                 }
             }
             resolve("");
