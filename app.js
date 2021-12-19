@@ -5,33 +5,137 @@ const AllController = require('./controller/AllController');
 
 (async () => {
 
-
     const Controller = new AllController();
-    //const MktSyncMod = new MarketsyncModel();
 
-    await Controller.connectAll()
-        .then(async (res) => {
-            console.log("Respuesta de connectWoo: ", res);
-        })
-        .catch(async (error) => {
-            console.log("Error de connectWoo: ", error);
-        });
-    
-        await Controller.copyAmazonToWoocommerce(false)
-        .then(async(res)=>{
-            console.log("Respuesta de copyAmazonToWoocommerce: ", res);
-        })
-        .catch(async(error)=>{
-            console.log("Error de copyAmazonToWoocommerce: ", error);
-        });
+        let key = 3;
 
-        await Controller.updateClaroshopCategoryOnWoocommerce(await Controller.getInventory())
-        .then(async(res)=>{
-            console.log("Respuesta de updateClaroshopCategoryOnWoocommerce: ", res);
-        })
-        .catch(async(error)=>{
-            console.log("Error de updateClaroshopCategoryOnWoocommerce: ", error);
-        })
+    switch (key) {
+        case 1://Doc Actualizar stock Mercadolibre
+            await Controller.connectAll()
+            .then(async(res)=>{
+                console.log("Respuesta de connectAll: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectAll: ", error);
+            });
+            await Controller.updateStockPriceMercadolibre(false)
+            .then(async(res)=>{
+                console.log("Respuesta de updateStockPriceMercadolibre: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de updateStockPriceMercadolibre: ", error);
+            });
+            
+            break;
+        case 2://Doc Copiar productos de Amazon a Woocommerce
+            await Controller.connectAll()
+            .then(async(res)=>{
+                console.log("Respuesta de connectAll: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectAll: ", error);
+            });
+            await Controller.copyAmazonToWoocommerce(false)
+            .then(async(res)=>{
+                console.log("Respuesta de copyAmazonToWoocommerce: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de copyAmazonToWoocommerce: ", error);
+            })
+            break;
+        case 3://Doc Copiar productos a Mercadolibre
+            await Controller.connectAll()
+            .then(async(res)=>{
+                console.log("Respuesta de connectAll: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectAll: ", error);
+            });
+
+            let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+            let inventory = await JSON.parse(rawdata);
+
+
+            for (let cwm = 0; cwm < inventory.length; cwm++) {
+                await Controller.copyWoocommerceToMercadoLibre(inventory[cwm])
+                    .then(async (res) => {
+                        console.log("Respuesta de copyWoocommerceToMercadoLibre: ", res);
+                    })
+                    .catch(async (error) => {
+                        console.log("Error de copyWoocommerceToMercadoLibre: ", error);
+                    });
+            }
+            break;
+
+        case 4://doc Actualizar imagenes en Woocommerce
+            await Controller.connectAll()
+            .then(async(res)=>{
+                console.log("Respuesta de connectAll: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectAll: ", error);
+            });
+
+            await Controller.updateWoocommerceImages(false)
+            .then(async(res)=>{
+                console.log("Respuesta de updateWoocommerceImages: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de updateWoocommerceImages: ", error);
+            });
+
+            break;
+        case 5://Doc Copiar productos de woocommerce a Claroshop
+            await Controller.connectWoo()
+            .then(async(res)=>{
+                console.log("Respuesta de connectWoo: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectWoo: ", error);
+            });
+
+            await Controller.copyWoocommerceToClaroshop(false)
+            .then(async(res)=>{
+                console.log("Respuesta de copyWoocommerceToClaroshop: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de copyWoocommerceToClaroshop: ", error);
+            })
+            break;
+        case 6://Doc Actualizar precio y stock en Woocommerce
+            await Controller.connectWoo()
+            .then(async(res)=>{
+                console.log("Respuesta de connectWoo: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectWoo: ", error);
+            });
+
+            await Controller.updateWoocommerceStock(false)
+            .then(async(res)=>{
+                console.log("Respuesta de updateWoocommerceStock: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de updateWoocommerceStock: ", error);
+            })
+            break;
+        case 7: //Doc Elimina Productos de Claroshop
+            await Controller.eliminarTodosLosProductosClaroshop()
+            .then(async(res)=>{
+                console.log("Respuesta de eliminarTodosLosProductosClaroshop: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de eliminarTodosLosProductosClaroshop: ", error);
+            })
+            break;
+        case 8:
+            
+        default:
+            break;
+    }
+
+    await Controller.createLogFile();
+
 })();
 
 //*Actualizar stock de productos en woocommerce

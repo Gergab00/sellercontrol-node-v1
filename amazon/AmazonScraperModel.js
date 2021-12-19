@@ -61,6 +61,12 @@ class AmazonScraperModel {
         });
     }
 
+    /**
+     * @description Función que resive un Objeto browser, y un String ASIN para extraer la información de la pagina de Amazon
+     * 
+     * @version 2021.12.09
+     * 
+     * */
     async pageScraper(browser, asin) {
         return new Promise(async (resolve, reject) => {
 
@@ -68,10 +74,46 @@ class AmazonScraperModel {
             let newPage = await browser.newPage();
             await newPage.setDefaultNavigationTimeout(60000);
             await newPage.goto(url + asin)
-            .then(async()=>{console.log("Navegando a: ", url, asin);});
+                .then(async () => {
+                    console.log("Navegando a: ", url, asin);
+                });
             await newPage.waitForTimeout(3000)
-            .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
+                .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
             let lastPosition = await scrollPageToBottom(newPage, 500, 50);
+
+            //*Get images URL -#ivLargeImage > img
+            let formattedImg = [];
+            await newPage.click('#landingImage')
+            .then(async()=>{
+
+                let imageTemp = await newPage.$$('.ivThumbImage');
+
+                console.log(imageTemp.length);
+    
+                for (let it = 0; it < imageTemp.length; it++) {
+                    await newPage.click(`#ivImage_${it}`).then(async () => {
+    
+                        await newPage.waitForTimeout(3000)
+                            .then(() => console.log('Espere un segundo se sta obteniendo la imagen...'));
+    
+                        let bigImg = await newPage.$eval("#ivLargeImage > img", (e) => e.src);
+    
+                        console.log('Enlace obtenido: ', bigImg);
+                        formattedImg.push(bigImg);
+    
+                    }).catch(async ()=> console.log('No hay imagenes en el nodo.'));
+    
+                }
+
+            })
+            .catch(async ()=> {
+                await newPage.click('#imgThumbs > span > a');
+                let bigImg = await newPage.$eval('#igImage', (e) => e.src);
+                console.log('Enlace obtenido: ', bigImg);
+                formattedImg.push(bigImg);
+            });
+           
+
             //console.log(`Finish Scroll at: ${lastPosition}`);
             await newPage.click(`a[title="Ver opciones de compra"]`)
                 .catch(async () => {
@@ -87,6 +129,8 @@ class AmazonScraperModel {
                                 });
                         });
                 });
+            await newPage.waitForTimeout(3000)
+                .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
 
             //*Get description
             let description = await newPage.$('#productDescription') == null ? "No se encontro descripción del producto." : await newPage.$eval('#productDescription', (e) => e.innerText);
@@ -97,33 +141,7 @@ class AmazonScraperModel {
                     return "No se encontro descripción corta del producto."
                 });
 
-            //*Get images URL
-            let formattedImg = await newPage.click('#landingImage')
-                .then(async () => {
-                    return await newPage.$$eval('#altImages img', (imageTemp) => {
-                        let formattedImg = [];
-                        for (let i = 1; i < imageTemp.length; i++) {
-                            if (imageTemp[i].src.includes("AC_US40")) {
-                                formattedImg.push(imageTemp[i].src.replace("_AC_US40_", "_AC_SL1500_"));
-                            }
-                        }
-                        return formattedImg;
-                    });
-                })
-                .catch(async () => {
-                    await newPage.click('#imgThumbs > span > a');
-                    return await newPage.$$eval('#igImage', (imageTemp) => {
-                        let formattedImg = [];
-                        for (let i = 1; i < imageTemp.length; i++) {
-                            if (imageTemp[i].src.includes("AC_US40")) {
-                                formattedImg.push(imageTemp[i].src.replace("_AC_US40_", "_AC_SL1500_"));
-                            }
-                        }
-                        return formattedImg;
-                    });
-                });
-
-            //a-expander-content a-expander-partial-collapse-content
+            //*Get long description
             let longDescription = await newPage.$eval('#aplus > div', (e) => {
                     let elementOuter = "";
                     //let elementText = [];
@@ -158,9 +176,11 @@ class AmazonScraperModel {
 
             //#productDetails_techSpec_section_1 > tbody > tr:nth-child(6) > td
             //* Get dimension
-            let dimension = await newPage.$eval('#productDetails_techSpec_section_1 > tbody > tr:nth-child(6) > td', (e) =>{
+            let dimension = await newPage.$eval('#productDetails_techSpec_section_1 > tbody > tr:nth-child(6) > td', (e) => {
                 return e.innerHTML
-            }).catch(async() => {return '15'});
+            }).catch(async () => {
+                return '15'
+            });
 
             let res = [];
             res['description'] = description;
@@ -172,12 +192,13 @@ class AmazonScraperModel {
             await newPage.close();
             //await browser.close().then(async () => console.log("The page was close!")).catch(async () => console.log("The page was close!"));
             this.item = res;
+            console.log(res);
             resolve(this.item)
         });
     }
 
-    async getDimension(item = this.item){
-        return new Promise(async(resolve, reject)=>{
+    async getDimension(item = this.item) {
+        return new Promise(async (resolve, reject) => {
             try {
                 resolve(item.dimension);
             } catch (e) {
@@ -223,7 +244,6 @@ class AmazonScraperModel {
             try {
                 let img = [];
                 for (let i = 0; i < item.formattedImg.length; i++) {
-                    const element = item.formattedImg[i];
                     let a = {
                         "src": item.formattedImg[i],
                     };
@@ -282,21 +302,21 @@ class AmazonScraperModel {
 
             // Write cookies
             await this.writeCookies(page, cookiesFilePath);
-            
+
 
             // When all the data on this page is done, click the next button and start the scraping of the next page
             // You are going to check if this button exist first, so you know if there really is a next page.
             let nextButtonExist = false;
             let data = [];
 
-            do {    
-                    await page.waitForTimeout(5000);               
-                    await this.obtenerDatos(page, data);
+            do {
+                await page.waitForTimeout(5000);
+                await this.obtenerDatos(page, data);
 
-                    await page.waitForTimeout(5000);
-                    nextButtonExist = await this.nextBut(page);
-                    console.log('Boton: ', nextButtonExist); 
-               
+                await page.waitForTimeout(5000);
+                nextButtonExist = await this.nextBut(page);
+                console.log('Boton: ', nextButtonExist);
+
 
                 if (nextButtonExist) {
                     await page.click('#myitable-pagination > ul > li.a-last');
@@ -317,7 +337,7 @@ class AmazonScraperModel {
                     );
                     resolve(data)
                 }
-          
+
             } while (nextButtonExist === true);
         });
     }
@@ -358,21 +378,21 @@ class AmazonScraperModel {
         });
     }
 
-    async obtenerDatos(page,data = []) {
+    async obtenerDatos(page, data = []) {
         return new Promise(async (resolve, reject) => {
 
-            let a =[];
+            let a = [];
             let asinArray = [];
             let priceArray = [];
             let quantityArray = [];
             //await page.waitForSelector('#td[data-column="upcOrEan"] span.mt-text-content');
-                console.log('Waited a second!\n The page area loading...');
-                await page.waitForTimeout(5000)
-                .then(async()=>{
+            console.log('Waited a second!\n The page area loading...');
+            await page.waitForTimeout(5000)
+                .then(async () => {
                     const lastPosition = await scrollPageToBottom(page, 500, 50);
                     console.log(`Finish Scroll at: ${lastPosition}`);
                 });
-                
+
             // Obtenga el asin de todos los productos
             asinArray = await page.$$eval('td[data-column="upcOrEan"] span.mt-text-content', tds => {
                 // Extract the asin from the data
@@ -388,20 +408,20 @@ class AmazonScraperModel {
             }).catch(async (error) => {
                 reject("Error: ", error);
             });
-            quantityArray = await page.$$eval('td[data-column="quantity"]',e =>{
+            quantityArray = await page.$$eval('td[data-column="quantity"]', e => {
                 let ret = [];
                 for (let i = 0; i < e.length; i++) {
                     const element = e[i];
-                    if(element.querySelector('div > span > input')!= null){
+                    if (element.querySelector('div > span > input') != null) {
                         ret.push(element.querySelector('div > span > input.mt-input-text').value);
-                    }else{
+                    } else {
                         ret.push(element.querySelector('div > span').innerText);
                     }
-                    
+
                 }
                 return ret;
-            }); 
-            console.log(quantityArray);    
+            });
+            console.log(quantityArray);
 
             for (let i = 0; i < asinArray.length; i++) {
                 a = {
@@ -421,17 +441,49 @@ class AmazonScraperModel {
             let ret = await page.$eval('#myitable-pagination > ul > li.a-last', a => {
                 //* Revisa si el boton esta activo o inactivo.
                 if ('a-disabled a-last' != a.className) {
-                  console.log('Class name: ', a.className);
-                  return true;
+                    console.log('Class name: ', a.className);
+                    return true;
                 } else {
-                  console.log('Class name: ', a.className);
-                  return false;
+                    console.log('Class name: ', a.className);
+                    return false;
                 }
-              });
-              resolve(ret);
+            });
+            resolve(ret);
         });
     }
 
 }
 
 module.exports = AmazonScraperModel;
+/* 
+let formattedImg = await newPage.click('#landingImage')
+                .then(async () => {
+                    return await newPage.$$eval('.imageThumbnail', async (imageTemp) => {
+                        console.log('Tamaño array: ',imageTemp.length);
+                        let formattedImg = [];
+                        for (let i = 0; i < imageTemp.length; i++) {
+                             await newPage.click(`#ivImage_${i}`);
+                             formattedImg.push(`click_${i}`);
+                            //  await newPage.$eval('#ivLargeImage > img', (e) => {
+                            //     formattedImg.push(e.src);
+                            //  });
+                            // if (imageTemp[i].src.includes("AC_US40")) {
+                            //     formattedImg.push(imageTemp[i].src.replace("_AC_US40_", "_AC_SL1500_"));
+                            // }
+                        }
+                        return formattedImg;
+                    }); 
+                })
+                .catch(async () => {
+                    await newPage.click('#imgThumbs > span > a');
+                    return await newPage.$$eval('#igImage', (imageTemp) => {
+                        let formattedImg = [];
+                        for (let i = 1; i < imageTemp.length; i++) {
+                            if (imageTemp[i].src.includes("AC_US40")) {
+                                formattedImg.push(imageTemp[i].src.replace("_AC_US40_", "_AC_SL1500_"));
+                            }
+                        }
+                        return formattedImg;
+                    });
+                });
+                */

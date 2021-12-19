@@ -6,7 +6,7 @@ const axios = require("axios");
 const colors = require('colors');
 const crypto = require("crypto-js");
 
-class ClaroshopModel{
+class ClaroshopModel {
 
     CS_PUBLIC;
     CS_PRIVATE;
@@ -19,79 +19,80 @@ class ClaroshopModel{
     /**
      * @returns String - Devuelve un string que es el code para poder hacer las llamadas a la API
      */
-    async getSignature(){
-        return new Promise(async (resolve)=>{
+    async getSignature() {
+        return new Promise(async (resolve) => {
             let hoy = new Date();
             let fecha = await this.formatoFecha(hoy);
             let pub = this.CS_PUBLIC;
             let priv = this.CS_PRIVATE;
-            let hash = crypto.SHA256(pub+fecha+priv);
+            let hash = crypto.SHA256(pub + fecha + priv);
             resolve(`${pub}/${hash.toString()}/${fecha}`);
         });
     }
 
- /*    async postProducto(code,dataProduct,category_id){
-        return new Promise((resolve, reject) =>{
-            let data = {
-                nombre:dataProduct.name,
-                descripcion: dataProduct.description.slice(0,100),
-                especificacionestecnicas: dataProduct.short_description,
-                alto: Number.parseInt(dataProduct.dimensions.height),
-                ancho: Number.parseInt(dataProduct.dimensions.width),
-                profundidad: Number.parseInt(dataProduct.dimensions.length),
-                peso: Number.parseInt(dataProduct.weight),
-                preciopublicobase: Math.round(Number.parseInt(dataProduct.regular_price) * 1.30),
-                preciopublicooferta: Math.round(Number.parseInt(dataProduct.regular_price) * 1.15),
-                cantidad: dataProduct.stock_quantity,
-                skupadre: dataProduct.sku,
-                ean: await this.getEAN(dataProduct),
-                estatus: "activo",
-                embarque: 3,
-                categoria: category_id,
-                fotos: await this.normalizePictures(dataProduct.images),
-                marca: await getManufacturer(dataProduct),
-                tag: dataProduct.name.replace(" ", ", ")
-            };
-            let options = {
-                method : 'post',
-                baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto`,
-                headers: {
-                    'content-type': 'application/json'
-                },
-                data: data
-            };
+    /*    async postProducto(code,dataProduct,category_id){
+           return new Promise((resolve, reject) =>{
+               let data = {
+                   nombre:dataProduct.name,
+                   descripcion: dataProduct.description.slice(0,100),
+                   especificacionestecnicas: dataProduct.short_description,
+                   alto: Number.parseInt(dataProduct.dimensions.height),
+                   ancho: Number.parseInt(dataProduct.dimensions.width),
+                   profundidad: Number.parseInt(dataProduct.dimensions.length),
+                   peso: Number.parseInt(dataProduct.weight),
+                   preciopublicobase: Math.round(Number.parseInt(dataProduct.regular_price) * 1.30),
+                   preciopublicooferta: Math.round(Number.parseInt(dataProduct.regular_price) * 1.15),
+                   cantidad: dataProduct.stock_quantity,
+                   skupadre: dataProduct.sku,
+                   ean: await this.getEAN(dataProduct),
+                   estatus: "activo",
+                   embarque: 3,
+                   categoria: category_id,
+                   fotos: await this.normalizePictures(dataProduct.images),
+                   marca: await getManufacturer(dataProduct),
+                   tag: dataProduct.name.replace(" ", ", ")
+               };
+               let options = {
+                   method : 'post',
+                   baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto`,
+                   headers: {
+                       'content-type': 'application/json'
+                   },
+                   data: data
+               };
 
-            axios(options)
-            .then((res)=>{
-                console.log("Res: ",res);
-                console.log(res.data);
-                resolve();
-            })
-            .catch((error) => {
-                console.log(error.message.red);
-                console.log(colors.yellow(error.response));
-                reject(error);
-            });
-        });
-    } */
+               axios(options)
+               .then((res)=>{
+                   console.log("Res: ",res);
+                   console.log(res.data);
+                   resolve();
+               })
+               .catch((error) => {
+                   console.log(error.message.red);
+                   console.log(colors.yellow(error.response));
+                   reject(error);
+               });
+           });
+       } */
 
-    async createProducto(code, dataProduct){
+    async createProducto(code, dataProduct) {
         return new Promise(async (resolve, reject) => {
-            //console.log('dataProduct: ', dataProduct);
+            console.log('Creando producto: ', dataProduct.sku);
+            console.log(dataProduct.name.slice(0, 119).replace(/^[a-zA-Z0-9äÄëËïÏöÖüÜáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ&$,\.'"-.:%;=#!_¡\/?´¨`|¿*+~@()[\\]{]+$/));
             let options = {
-                method : 'post',
+                method: 'post',
                 baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto`,
                 headers: {
                     'content-type': 'application/json'
                 },
                 data: {
-                    nombre:dataProduct.name,
-                    descripcion: dataProduct.description.slice(0,100),
+                    nombre: dataProduct.name.slice(0, 119).replace(/[^a-zA-Z0-9]/g, ' '),
+                    descripcion: dataProduct.description + '\n Garantía de 20 días con nosotros.\n' + dataProduct.short_description,
                     especificacionestecnicas: dataProduct.short_description,
                     alto: Number.parseInt(dataProduct.dimensions.height),
                     ancho: Number.parseInt(dataProduct.dimensions.width),
                     profundidad: Number.parseInt(dataProduct.dimensions.length),
-                    peso: Number.parseInt(dataProduct.weight),
+                    peso: (Number.parseInt(dataProduct.weight) > 1) ? Number.parseInt(dataProduct.weight) : 1,
                     preciopublicobase: Number.parseInt(dataProduct.regular_price) * 1.72,
                     preciopublicooferta: Number.parseInt(dataProduct.regular_price),
                     cantidad: dataProduct.stock_quantity,
@@ -100,31 +101,109 @@ class ClaroshopModel{
                     estatus: "activo",
                     embarque: 3,
                     categoria: await this.getClaroshopCategoryCode(dataProduct),
-                    fotos: await this.normalizePictures(dataProduct),
-                    marca: await this.getManufacturer(dataProduct),
-                    tag: dataProduct.name.replace(" ", ", ")
-                
+                    fotos: await this.normalizePictures(dataProduct).catch(async () => {
+                        return {
+                            "url": "https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg",
+                            "orden": 1
+                        }
+                    }),
+                    marca: await this.getManufacturer(dataProduct).then(async (res) => {
+                        return res.toUpperCase()
+                    }),
+                    agregarmarca: await this.getManufacturer(dataProduct).then(async (res) => {
+                        return res.toUpperCase()
+                    }),
+                    tag: dataProduct.name.replace(" ", ", "),
+                    garantia: {
+                        "warranty": [{
+
+                            "seller": {
+                                "time": "20 Día(s)"
+                            },
+                            "manufacturer": {
+                                "time": "50 Mes(es)"
+                            }
+                        }]
+                    },
                 }
             };
             axios(options)
-            .then(async(res)=>{
-                //console.log("Respuesta: ", res);
-                resolve(res.data)
-            })
-            .catch(async(error)=>{
-                console.log("Error: ", error);
-                reject(error)
-            });
-            
+                .then(async (res) => {
+                    //Doc Se revisa si hubo algún error aunque el código de estatus 200.
+                    if (new RegExp('error', "gi").test(res.data.estatus)) {
+                        //Doc si existe algún error se revisa si fue por marca para iniciar de nuevo el registro pero con el cambio de campo de agregar marca
+                        if (res.data.mensaje.hasOwnProperty('marca')) {
+                            console.log('Se entra en el if de marca.')
+                            let options_2 = {
+                                method: 'post',
+                                baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto`,
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                data: {
+                                    nombre: dataProduct.name.slice(0, 119).replace(/[^a-zA-Z0-9]/g, ' '),
+                                    descripcion: dataProduct.description + '\n Garantía de 20 días con nosotros.\n' + dataProduct.short_description,
+                                    especificacionestecnicas: dataProduct.short_description,
+                                    alto: Number.parseInt(dataProduct.dimensions.height),
+                                    ancho: Number.parseInt(dataProduct.dimensions.width),
+                                    profundidad: Number.parseInt(dataProduct.dimensions.length),
+                                    peso: (Number.parseInt(dataProduct.weight) > 1) ? Number.parseInt(dataProduct.weight) : 1,
+                                    preciopublicobase: Number.parseInt(dataProduct.regular_price) * 1.72,
+                                    preciopublicooferta: Number.parseInt(dataProduct.regular_price),
+                                    cantidad: dataProduct.stock_quantity,
+                                    skupadre: dataProduct.sku,
+                                    ean: await this.getEAN(dataProduct),
+                                    estatus: "activo",
+                                    embarque: 3,
+                                    categoria: await this.getClaroshopCategoryCode(dataProduct),
+                                    fotos: await this.normalizePictures(dataProduct),
+                                    marca: "",
+                                    agregarmarca: await this.getManufacturer(dataProduct).then(async (res) => {
+                                        return res.slice(0, 59)
+                                    }),
+                                    tag: dataProduct.name.replace(" ", ", "),
+                                    garantia: {
+                                        "warranty": [{
+
+                                            "seller": {
+                                                "time": "20 Día(s)"
+                                            },
+                                            "manufacturer": {
+                                                "time": "50 Mes(es)"
+                                            }
+                                        }]
+                                    },
+                                }
+                            };
+
+                            axios(options_2)
+                                .then(async (res) => {
+                                    resolve(res.data)
+                                })
+                                .catch(async (error) => {
+                                    console.log("Error: ", error);
+                                    reject(error)
+                                });
+
+                        }
+
+                    }
+                    resolve(res.data)
+                })
+                .catch(async (error) => {
+                    console.log("Error: ", error);
+                    reject(error)
+                });
+
             //resolve(`data: ${JSON.stringify(options.data)}`)
         });
     }
 
 
-    async getCategorias(code){
-        return new Promise((resolve, reject) =>{
+    async getCategorias(code) {
+        return new Promise((resolve, reject) => {
             let options = {
-                method : 'get',
+                method: 'get',
                 baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/categorias`,
                 headers: {
                     'content-type': 'application/json'
@@ -132,26 +211,26 @@ class ClaroshopModel{
             }
 
             axios(options)
-            .then((res)=>{
-                fs.writeFile(
-                    './json/claroshop_cat.json',
-                    JSON.stringify(res.data, null, 2),
-                    (err) => {
-                        if (err) console.log(err)
-                        else {
-                            console.log('\nFile data written successfully\n'.green);
-                            //console.log('The written has the following contents:')
-                            console.log(fs.readFileSync('./json/claroshop_cat.json', 'utf8').blue);
-                        }
-                    },
-                );
-                resolve('Categorias obtenidas exitosamente.');
-            })
-            .catch((error) => {
-                console.log(error.message);
-                //console.log(error.response);
-                reject(error.message);
-            });
+                .then((res) => {
+                    fs.writeFile(
+                        './json/claroshop_cat.json',
+                        JSON.stringify(res.data, null, 2),
+                        (err) => {
+                            if (err) console.log(err)
+                            else {
+                                console.log('\nFile data written successfully\n'.green);
+                                //console.log('The written has the following contents:')
+                                console.log(fs.readFileSync('./json/claroshop_cat.json', 'utf8').blue);
+                            }
+                        },
+                    );
+                    resolve('Categorias obtenidas exitosamente.');
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                    //console.log(error.response);
+                    reject(error.message);
+                });
         });
     }
 
@@ -163,10 +242,10 @@ class ClaroshopModel{
      * @param {date} fecha 
      * @returns  {Promise}
      */
-    async getProductos(code){
-        return new Promise((resolve, reject) =>{
+    async getProductos(code) {
+        return new Promise((resolve, reject) => {
             let options = {
-                method : 'get',
+                method: 'get',
                 baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto`,
                 headers: {
                     'content-type': 'application/json'
@@ -174,20 +253,20 @@ class ClaroshopModel{
             }
 
             axios(options)
-            .then((res)=>{
-                console.log(res.data);
-                resolve(res.data);
-            })
-            .catch((error) => {
-                console.log(error.message);
-                reject(error.message);
-            });
+                .then((res) => {
+                    console.log(res.data);
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                    reject(error.message);
+                });
         });
     }
 
-    async getClaroCategory(mlCode){
-        return new Promise(async(resolve, reject)=>{
-            
+    async getClaroCategory(mlCode) {
+        return new Promise(async (resolve, reject) => {
+
             switch (mlCode) {
                 case 'MLM189529':
                     resolve('20136')
@@ -195,10 +274,10 @@ class ClaroshopModel{
                 case 'MLM159228':
                 case 'MLM1610':
                 case 'MLM30075':
-                    resolve('20251')//Blancos
+                    resolve('20251') //Blancos
                     break;
                 case 'MLM119999':
-                    resolve('20282')//Electrodomesticos
+                    resolve('20282') //Electrodomesticos
                     break;
                 case 'MLM191844':
                     resolve('21208')
@@ -214,18 +293,18 @@ class ClaroshopModel{
                 case 'MLM437278':
                 case 'MLM455509':
                 case 'MLM422405':
-                    resolve('21211');//Figuras y muñecos
-                        break;
+                    resolve('21211'); //Figuras y muñecos
+                    break;
                 case 'MLM189401':
-                    resolve('21213')//Instrumentos de juguete
+                    resolve('21213') //Instrumentos de juguete
                 case 'MLM194667':
                 case 'MLM431919':
-                    resolve('21214')//Playmobil
+                    resolve('21214') //Playmobil
                     break;
                 case 'MLM422407':
                 case 'MLM352342':
                 case 'MLM454736':
-                    resolve('21216')//Trenes de juguetes
+                    resolve('21216') //Trenes de juguetes
                     break;
                 case 'MLM433685':
                 case 'MLM189205':
@@ -237,12 +316,12 @@ class ClaroshopModel{
                 case 'MLM3530':
                 case 'MLM418349':
                 case 'MLM29883':
-                    resolve('21217')//Otros Juguetes
+                    resolve('21217') //Otros Juguetes
                     break;
                 case 'MLM82301':
                 case 'MLM27814':
                 case 'MLM423153':
-                    resolve('21219')//Gimnasios y Tapetes
+                    resolve('21219') //Gimnasios y Tapetes
                     break;
                 case 'MLM7809':
                 case 'MLM1858':
@@ -252,7 +331,7 @@ class ClaroshopModel{
                 case 'MLM429329':
                 case 'MLM1196':
                 case 'MLM32230':
-                    resolve('21221')//Aprendizaje
+                    resolve('21221') //Aprendizaje
                     break;
                 case 'MLM437329':
                 case 'MLM119997':
@@ -273,38 +352,38 @@ class ClaroshopModel{
                 case 'MLM185698':
                 case 'MLM185696':
                 case 'MLM4772':
-                    resolve('21222')//Didacticos
+                    resolve('21222') //Didacticos
                     break;
                 case 'MLM2968':
-                    resolve('21227')//Muñecas
+                    resolve('21227') //Muñecas
                     break;
                 case 'MLM432149':
-                    resolve('21236')//Juguetes exterior
+                    resolve('21236') //Juguetes exterior
                     break;
                 case 'MLM429249':
-                    resolve('21244')//Juguetes electronicos
+                    resolve('21244') //Juguetes electronicos
                     break;
                 case 'MLM430481':
                 case 'MLM1161':
-                    resolve('21249')//Juegos de mesa infantiles
+                    resolve('21249') //Juegos de mesa infantiles
                     break;
                 case 'MLM191712':
-                    resolve('21251')//Lego
+                    resolve('21251') //Lego
                     break;
                 case 'MLM1166':
-                    resolve('21270')//Peluches
+                    resolve('21270') //Peluches
                     break;
                 case 'MLM431573':
                 case 'MLM194743':
-                    resolve('21301')//Juguetes Novedosos
+                    resolve('21301') //Juguetes Novedosos
                     break;
                 case 'MLM191692':
                 case 'MLM168075':
                 case 'MLM189205':
-                    resolve('22032')//Higiene bucal
+                    resolve('22032') //Higiene bucal
                     break;
                 case 'MLM6585':
-                    resolve('22173')//Calzado deportivo
+                    resolve('22173') //Calzado deportivo
                     break;
                 default:
                     reject(`No hay categoria registrada para ${mlCode}.`)
@@ -313,10 +392,10 @@ class ClaroshopModel{
         });
     }
 
-    async updateProduct(code, ean){
+    async updateProduct(code, ean) {
         return new Promise(async (resolve, reject) => {
             let options = {
-                method : 'put',
+                method: 'put',
                 baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/eanoperations/ean-${ean}`,
                 headers: {
                     'content-type': 'application/json'
@@ -324,15 +403,59 @@ class ClaroshopModel{
             }
 
             axios(options)
-            .then((res)=>{
-                console.log(res.data);
-                resolve(res.data);
-            })
-            .catch((error) => {
-                console.log(error.message);
-                reject(error.message);
-            });
-            
+                .then((res) => {
+                    console.log(res.data);
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                    reject(error.message);
+                });
+
+        });
+    }
+
+    async getProductos(code, params) {
+        return new Promise(async (resolve, reject) => {
+            let options = {
+                method: 'get',
+                baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto${params}`,
+                headers: {
+                    'content-type': 'application/json'
+                },
+            }
+
+            axios(options)
+                .then((res) => {
+                    console.log(res.data);
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                    reject(error.message);
+                });
+        });
+    }
+
+    async deleteProducto(code, transacionId) {
+        return new Promise(async (resolve, reject) => {
+            let options = {
+                method: 'delete',
+                baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto/${transacionId}`,
+                headers: {
+                    'content-type': 'application/json'
+                },
+            }
+
+            axios(options)
+                .then((res) => {
+                    console.log(res.data);
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                    reject(error.message);
+                });
         });
     }
 
@@ -412,21 +535,21 @@ class ClaroshopModel{
      * @returns {String} De la fecha con el formato necesario.
      */
     async formatoFecha(fecha) {
-        return new Promise(resolve=>{
+        return new Promise(resolve => {
             const map = {
-                dd: ('0'+fecha.getDate()).slice(-2),
-                mon: ('0'+(fecha.getUTCMonth()+1)).slice(-2),
+                dd: ('0' + fecha.getDate()).slice(-2),
+                mon: ('0' + (fecha.getUTCMonth() + 1)).slice(-2),
                 yyyy: fecha.getFullYear(),
-                hh: ('0'+fecha.getHours()).slice(-2),
-                min: ('0'+fecha.getMinutes()).slice(-2),
-                ss: ('0'+fecha.getSeconds()).slice(-2)
+                hh: ('0' + fecha.getHours()).slice(-2),
+                min: ('0' + fecha.getMinutes()).slice(-2),
+                ss: ('0' + fecha.getSeconds()).slice(-2)
             }
 
             let formattedDate = `${map.yyyy}-${map.mon}-${map.dd}T${map.hh}:${map.min}:${map.ss}`
             resolve(formattedDate);
         });
     }
-    
+
     /**
      * Funcion que aumenta el precio segun el valor que se le de en porcentaje mayor a 1, por ejemplo 1.2 para aumentar en 20%
      * 
@@ -434,9 +557,9 @@ class ClaroshopModel{
      * @param {float} aumento 
      * @returns El valor del precio aumentado en el porcentaje indicado
      */
-    async aumentarPrecio(price, aumento){
-        let pricef = Number.parseFloat(price.replace(",",""));
-        let p = pricef*aumento;
+    async aumentarPrecio(price, aumento) {
+        let pricef = Number.parseFloat(price.replace(",", ""));
+        let p = pricef * aumento;
         return p.toFixed(2);
     }
 
@@ -454,7 +577,7 @@ class ClaroshopModel{
                 for (let j = 0; j < pics.images.length; j++) {
                     let a = {
                         "url": pics.images[j].src,
-                        "orden": j+1
+                        "orden": j + 1
                     }
                     pictures.push(a);
                 }
@@ -463,6 +586,28 @@ class ClaroshopModel{
                 reject("Error en normalizePictures.");
             }
 
+        });
+    }
+
+    async normalize(str) {
+        return new Promise(async resolve => {
+            let from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+                to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+                mapping = {};
+
+            for (let i = 0, j = from.length; i < j; i++)
+                mapping[from.charAt(i)] = to.charAt(i);
+
+            let ret = [];
+            for (let i = 0, j = str.length; i < j; i++) {
+                let c = str.charAt(i);
+                if (mapping.hasOwnProperty(str.charAt(i)))
+                    ret.push(mapping[c]);
+                else
+                    ret.push(c);
+            }
+
+            resolve(ret.toString());
         });
     }
 
