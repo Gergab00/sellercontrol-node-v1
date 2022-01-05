@@ -7,7 +7,9 @@ const AllController = require('./controller/AllController');
 
     const Controller = new AllController();
 
-        let key = 3;
+        let key = 9;
+        let b = true;
+        let inventory = []
 
     switch (key) {
         case 1://Doc Actualizar stock Mercadolibre
@@ -35,7 +37,11 @@ const AllController = require('./controller/AllController');
             .catch(async(error)=>{
                 console.log("Error de connectAll: ", error);
             });
-            await Controller.copyAmazonToWoocommerce(false)
+            if(b){
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
+            await Controller.copyAmazonToWoocommerce(false, inventory)
             .then(async(res)=>{
                 console.log("Respuesta de copyAmazonToWoocommerce: ", res);
             })
@@ -52,9 +58,10 @@ const AllController = require('./controller/AllController');
                 console.log("Error de connectAll: ", error);
             });
 
-            let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-            let inventory = await JSON.parse(rawdata);
-
+            if(b){
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
 
             for (let cwm = 0; cwm < inventory.length; cwm++) {
                 await Controller.copyWoocommerceToMercadoLibre(inventory[cwm])
@@ -129,7 +136,39 @@ const AllController = require('./controller/AllController');
             })
             break;
         case 8:
+            await Controller.connectAll()
+            .then(async(res)=>{
+                console.log("Respuesta de connectAll: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectAll: ", error);
+            });
+
+            await Controller.getMercadolibreCategories();
+            break;
+        case 9:
+            await Controller.connectWoo()
+            .then(async(res)=>{
+                console.log("Respuesta de connectWoo: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de connectWoo: ", error);
+            });
+
+            if(b){
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
             
+
+            await Controller.updateClaroPriceInventory(false, inventory)
+            .then(async(res)=>{
+                console.log("Respuesta de updateClaroPriceInventory: ", res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de updateClaroPriceInventory: ", error);
+            })
+            break;
         default:
             break;
     }

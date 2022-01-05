@@ -30,6 +30,7 @@ class WoocommerceAPIModel {
 
     async createProduct(dataProduct, api = this.api) {
         return new Promise(async (resolve, reject) => {
+            console.log('dataProduct: ',dataProduct)
             api.post("products", dataProduct)
                 .then(async (res) => {
                     resolve(res)

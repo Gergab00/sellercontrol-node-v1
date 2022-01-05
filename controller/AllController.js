@@ -204,7 +204,7 @@ class AllController {
                             this.amzScrap.pageScraper(this.browser, inventory[grey].asin)
                         ])
                         .then(async (res) => {
-                            console.log("Respuesta de PromiseAll: ", res);
+                            console.log("Respuesta de PromiseAll: ", res, res[0][0].images[0].images);
 
                             let dataProduct = {
 
@@ -229,7 +229,7 @@ class AllController {
                                         return '15'
                                     }),
                                 },
-                                images: await this.amzScrap.getImages(),
+                                images: await this.amzScrap.getImages().catch(async () => { return await this.amzMod.getImages()}),
                                 meta_data: [{
                                         key: "_ean",
                                         value: await this.amzMod.getEAN().catch(async () => {
@@ -273,16 +273,21 @@ class AllController {
                                     {
                                         key: "_claroshop_category_code",
                                         value: await this.claroMod.getClaroCategory(await this.mlMod.getProductCategory(await this.amzMod.getItemName()))
+                                        .catch(async (error) => {
+                                            this.error_log += `Error en getClaroCategory de copyAmazonToWoocommerce: ${error}`
+                                            console.log(`Error en getClaroCategory de copyAmazonToWoocommerce: ${error}`);
+                                            return ''
+                                        }),
                                     }
                                 ]
                             }
-
+                            
                             await this.wooMod.createProduct(dataProduct)
                                 .then(async (res) => {
-                                    console.log(`Producto ${dataProduct.name} creado con éxito.`);
+                                    console.log(`Producto ${dataProduct.name} creado con éxito. Response: ${res.toString()}`);
                                 })
                                 .catch(async (error) => {
-                                    this.error_log += `Error en createProduct de copyAmazonToWoocommerce: ${error}`
+                                    this.error_log += `Error en createProduct de copyAmazonToWoocommerce: ${error.toString()}`
                                     console.log("Error: ", error);
                                 });
                         })
@@ -466,8 +471,8 @@ class AllController {
                                         resolve(`Producto creado exitosamente. SKU: ${element.asin}`)
                                     })
                                     .catch(async (error) => {
-                                        this.error_log += `Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error}`;
-                                        reject(`Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error}`)
+                                        this.error_log += `Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error.toString()}`;
+                                        reject(`Error en copyWoocommerceToMercadoLibre en catch de mlMod.createDescription(): ${error.toString()}`)
                                     })
                             })
                             .catch(async (error) => {
@@ -866,11 +871,25 @@ class AllController {
                         console.log(`Producto con ASIN ${inventory[i].asin}, con ID de Mercadolibre ${res.data.id} actualizado correctamnte.`);
                     })
                     .catch(async (error) => {
-                        this.error_log += `Error en updatestockPriceMercadolibre en getIDProduct, producto ${inventory[i].asin}: ${error.response.data}.\n`
+                        this.error_log += `Error en updatestockPriceMercadolibre en getIDProduct, producto ${inventory[i].asin}: ${error.response.data.toString()}.\n`
                         console.log("Error: ", error.response.data);
                     });
             }
             resolve('Productos en Mercadolibre actualizados con éxito.')
+        });
+    }
+
+    async getMercadolibreCategories(){
+        return new Promise(async (resolve, reject) => {
+            await this.mlMod.getCategorias()
+            .then(async(res)=>{
+                console.log("Respuesta de getMercadolibreCategories: ", res);
+                resolve(res);
+            })
+            .catch(async(error)=>{
+                console.log("Error de getMercadolibreCategories: ", error);
+                reject(error);
+            })
         });
     }
 
@@ -928,6 +947,104 @@ class AllController {
                 }
             }
             resolve('Articulos copiados con éxito.')
+        });
+    }
+
+    async updateClaroPriceInventory(boolean = true, inventory = []) {
+        return new Promise(async (resolve, reject) => {
+            if (inventory.length === 0) {
+                if (boolean) {
+                    await this.amzScrap.startPuppeter()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                } else {
+                    await this.amzScrap.startBrowser()
+                        .then(async (browser) => {
+                            this.browser = browser;
+                        })
+                        .catch(async (error) => {
+                            reject("Error: ", error);
+                        });
+                }
+
+                await this.amzScrap.scrapeSellerInventory(this.browser)
+                    .then(async (res) => {
+                        inventory = res;
+                    });
+            }
+
+            //!---
+
+            await this.claroMod.getProductos(await this.claroMod.getSignature(), '')
+                .then(async (res) => {
+                    for (let epc = 0; epc < res.totalpaginas; epc++) {
+                        await this.claroMod.getProductos(await this.claroMod.getSignature(), `?page=${epc+1}`)
+                            .then(async (res) => {
+                                console.log("Respuesta: ", res);
+                                for (let gp = 0; gp < res.productos.length; gp++) {
+
+                                    console.log("Respuesta individual: " , res.productos[gp]);
+
+                                }
+                            })
+                            .catch(async (error) => {
+                                reject(error)
+                            });
+                    }
+                    resolve('Productos eliminados.')
+                })
+                .catch(async (error) => {
+                    reject(error)
+                })
+
+            //!-----
+            console.log('Tamaño inventario: ', inventory.length)
+            for (let cwc = 0; cwc < inventory.length; cwc++) {
+
+                if (!await this.wooMod.existsProduct(inventory[cwc].asin)) {
+                    await this.wooMod.getProduct(inventory[cwc].asin)
+                        .then(async (res) => {
+                            console.log('Respuesta getEAN', await this.claroMod.getEAN(res))
+                            let data = {
+                                preciopublicobase: Number.parseInt(inventory[cwc].price) * 1.72,
+                                preciopublicooferta: Number.parseInt(inventory[cwc].price),
+                                cantidad: inventory[cwc].totalQuantity,
+                                garantia: {
+                                    "warranty": [{
+
+                                        "seller": {
+                                            "time": "20 Día(s)"
+                                        },
+                                        "manufacturer": {
+                                            "time": "3 Mes(es)"
+                                        }
+                                    }]
+                                },
+                            }
+                            await this.claroMod.updateProduct(await this.claroMod.getSignature(), await this.claroMod.getEAN(res), data)
+                                .then(async (res) => {
+
+                                    console.log("Respuesta de updateProduct en updateClaroPriceInvntory: ", res);
+                                })
+                                .catch(async (error) => {
+                                    console.log("Error de updateProduct en updateClaroPriceInvntory: ", error);
+                                })
+                        })
+                        .catch(async (error) => {
+                            this.error_log += `Error en catch getProduct de updateClaroPriceInvntory: ${error}`
+                            console.log("Error en catch getProduct de updateClaroPriceInvntory: ", error);
+                        });
+
+                } else {
+                    this.error_log += `No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`;
+                    console.log(`No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`);
+                }
+            }
+            resolve('Articulos actuaizados con éxito.')
         });
     }
 

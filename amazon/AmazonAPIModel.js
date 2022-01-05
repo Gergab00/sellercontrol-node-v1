@@ -101,7 +101,7 @@ class AmazonAPIModel {
         return new Promise(async(resolve, reject) => {
             try{
                 let res = item[1].AttributeSets[0].PackageDimensions.Height.value*2.54
-                console.log(`Debug getHeight: res[${res}] item[${item[1]}]`);
+                //console.log(`Debug getHeight: res[${res}] item[${item[1]}]`);
                 resolve(res.toString())
             }catch(e){
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getHeight`)
@@ -205,6 +205,21 @@ class AmazonAPIModel {
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getModelNumber`)
             }
+        });
+    }
+
+    async getImages(item = this.item) {
+        return new Promise(async (resolve) => {
+            //item[0][0].images[0].images
+            let img = [];
+                
+                for (let i = 0; i < item[0].images[0].images.length; i++) {
+                    let a = {
+                        "src": item[0].images[0].images[i].link,
+                    };
+                    img.push(a);
+                }
+                resolve(img)
         });
     }
 

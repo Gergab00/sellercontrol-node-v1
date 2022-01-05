@@ -248,7 +248,7 @@ class MercadoLibreAPIModel {
             };
             await axios(options)
                 .then((res) => {
-                    //console.log("Categoria obtenida exitosamente: ".green,colors.green(res.data));
+                    console.log("Categoria obtenida: ", res.data);
                     //console.log(res.data[0].category_id);
                     (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
                     
@@ -352,15 +352,15 @@ class MercadoLibreAPIModel {
                     "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
                     "attributes": [{
                             "id": "MANUFACTURER",
-                            "value_name": `${dataProduct.meta_data[2].value}`
+                            "value_name": `${await this.getManufacturer(dataProduct)}`
                         },
                         {
                             "id": "BRAND",
-                            "value_name": `${dataProduct.meta_data[1].value}`
+                            "value_name": `${await this.getBrand(dataProduct)}`
                         },
                         {
                             "id": "EAN",
-                            "value_name": `${dataProduct.meta_data[0].value}`
+                            "value_name": `${await this.getEAN(dataProduct)}`
                         },
                         {
                             "id": "SELLER_SKU",
@@ -384,7 +384,7 @@ class MercadoLibreAPIModel {
                         },
                         {
                             "id": "MODEL",
-                            "value_name": `${dataProduct.meta_data[3].value}`
+                            "value_name": `${await this.getModelNumber(dataProduct)}`
                         }
 
                     ]
@@ -395,7 +395,7 @@ class MercadoLibreAPIModel {
 
             await axios(options)
                 .then((res) => {
-                    console.log(`Producto creado exitosamente en Mercadolibre con SKU ${res.data}`)
+                    console.log(`Producto creado exitosamente en Mercadolibre con SKU `, res.data)
                     resolve(res.data);
                 }).catch((error) => {
 
@@ -419,7 +419,7 @@ class MercadoLibreAPIModel {
             }
             await axios(options)
                 .then((res) => {
-                    console.log("Descripción creada exitosamente");
+                    console.log("Descripción creada exitosamente.", res);
                     resolve(res);
                 }).catch((error) => {
                     console.log("Error en createDescription: ", error.message);
@@ -478,6 +478,38 @@ class MercadoLibreAPIModel {
         });
     }
 
+    async getCategorias(access_token = this.access_token) {
+        return new Promise(async (resolve, reject) => {
+            let options = {
+                method: 'get',
+                baseURL: `https://api.mercadolibre.com/sites/MLM/categories/all > categoriesMLM.gz`,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            };
+
+            await axios(options)
+                .then(async (res) => {
+                    fs.writeFile(
+                        './json/cat_ML.json',
+                        JSON.stringify(res.data, null, 2),
+                        (err) => {
+                            if (err) console.log(err)
+                            else {
+                                console.log('File ASIN written successfully');
+                                //console.log('The written has the following contents:')
+                                //console.log(fs.readFileSync('/json/simple_data.json', 'utf8'))
+                            }
+                        },
+                    );
+                    resolve(res)
+                })
+                .catch(async (error) => {
+                    reject(error)
+                });
+        });
+    }
+
     async searchProducts(key_word,product_identifier, access_token = this.access_token){
         return new Promise(async (resolve, reject) => {
             let baseURL;
@@ -519,6 +551,52 @@ class MercadoLibreAPIModel {
                 .catch(async (error) => {
                     reject(error)
                 });
+        });
+    }
+
+    //*Getters
+
+    async getEAN(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_ean') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
+        });
+    }
+
+    async getBrand(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_brand_name') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
+        });
+    }
+
+    async getManufacturer(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_manufacturer') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
+        });
+    }
+
+    async getModelNumber(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_model_number') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
         });
     }
 

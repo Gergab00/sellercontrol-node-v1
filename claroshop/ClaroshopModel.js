@@ -142,7 +142,7 @@ class ClaroshopModel {
                                 },
                                 data: {
                                     nombre: dataProduct.name.slice(0, 119).replace(/[^a-zA-Z0-9]/g, ' '),
-                                    descripcion: dataProduct.description + '\n Garantía de 20 días con nosotros.\n' + dataProduct.short_description,
+                                    descripcion: dataProduct.description.slice(0, 1500) + '\n Garantía de 20 días con nosotros.\n' + dataProduct.short_description,
                                     especificacionestecnicas: dataProduct.short_description,
                                     alto: Number.parseInt(dataProduct.dimensions.height),
                                     ancho: Number.parseInt(dataProduct.dimensions.width),
@@ -169,7 +169,7 @@ class ClaroshopModel {
                                                 "time": "20 Día(s)"
                                             },
                                             "manufacturer": {
-                                                "time": "50 Mes(es)"
+                                                "time": "3 Mes(es)"
                                             }
                                         }]
                                     },
@@ -316,6 +316,7 @@ class ClaroshopModel {
                 case 'MLM3530':
                 case 'MLM418349':
                 case 'MLM29883':
+                case 'MLM1843':
                     resolve('21217') //Otros Juguetes
                     break;
                 case 'MLM82301':
@@ -352,6 +353,7 @@ class ClaroshopModel {
                 case 'MLM185698':
                 case 'MLM185696':
                 case 'MLM4772':
+                case 'MLM186862':
                     resolve('21222') //Didacticos
                     break;
                 case 'MLM2968':
@@ -361,6 +363,8 @@ class ClaroshopModel {
                     resolve('21236') //Juguetes exterior
                     break;
                 case 'MLM429249':
+                case 'MLM189110':
+                case 'MLM2961':
                     resolve('21244') //Juguetes electronicos
                     break;
                 case 'MLM430481':
@@ -385,6 +389,9 @@ class ClaroshopModel {
                 case 'MLM6585':
                     resolve('22173') //Calzado deportivo
                     break;
+                case 'MLM178496':
+                    resolve('22158')//Guantes desechables
+                    break;
                 default:
                     reject(`No hay categoria registrada para ${mlCode}.`)
                     break;
@@ -392,7 +399,7 @@ class ClaroshopModel {
         });
     }
 
-    async updateProduct(code, ean) {
+    async updateProduct(code, ean, data) {
         return new Promise(async (resolve, reject) => {
             let options = {
                 method: 'put',
@@ -400,6 +407,7 @@ class ClaroshopModel {
                 headers: {
                     'content-type': 'application/json'
                 },
+                data: data
             }
 
             axios(options)

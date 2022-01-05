@@ -75,7 +75,7 @@ class AmazonScraperModel {
             await newPage.setDefaultNavigationTimeout(60000);
             await newPage.goto(url + asin)
                 .then(async () => {
-                    console.log("Navegando a: ", url, asin);
+                    console.log("Navegando a: ", url,asin);
                 });
             await newPage.waitForTimeout(3000)
                 .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
@@ -133,12 +133,12 @@ class AmazonScraperModel {
                 .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
 
             //*Get description
-            let description = await newPage.$('#productDescription') == null ? "No se encontro descripción del producto." : await newPage.$eval('#productDescription', (e) => e.innerText);
+            let description = await newPage.$('#productDescription') == null ? "\n" : await newPage.$eval('#productDescription', (e) => e.innerText);
 
             //*Get short description
             let shortDescription = await newPage.$eval('#feature-bullets', (e) => e.innerText)
                 .catch(async (error) => {
-                    return "No se encontro descripción corta del producto."
+                    return "\n"
                 });
 
             //*Get long description
@@ -165,34 +165,40 @@ class AmazonScraperModel {
                         elementOuter += "<p>" + p[i].innerText + "</p>";
                     }
 
-                    console.log("elementOuter: ", elementOuter);
+                    //console.log("elementOuter: ", elementOuter);
                     return elementOuter;
                     //return e.innerHTML
                 })
                 .catch(async () => {
-                    return "No se encontro descripción larga del producto."
+                    return "\n"
                 });
             //let longDescription = list.replace(/(\r\n|\n|\r)/gm, "");//TODO Eliminar replace, modificar el newPAge.$eval de arriba para darle estructura  a la longDescription
 
             //#productDetails_techSpec_section_1 > tbody > tr:nth-child(6) > td
             //* Get dimension
-            let dimension = await newPage.$eval('#productDetails_techSpec_section_1 > tbody > tr:nth-child(6) > td', (e) => {
-                return e.innerHTML
-            }).catch(async () => {
-                return '15'
-            });
-
+            let dimension = [];
+            for (let grs = 0; grs < 10; grs++) {
+                dimension.push( await newPage.$eval(`#productDetails_techSpec_section_1 > tbody > tr:nth-child(${grs+1}) > td`, (e) => {
+                    return e.innerHTML
+                }).catch(async () => {
+                    return '15'
+                })
+                );
+                //console.log(dimension)
+                              
+            }
+            
             let res = [];
             res['description'] = description;
             res['shortDescription'] = shortDescription;
             res['formattedImg'] = formattedImg;
             res['longDescription'] = longDescription;
-            res['dimension'] = dimension;
+            //res['dimension'] = dimension;
 
             await newPage.close();
             //await browser.close().then(async () => console.log("The page was close!")).catch(async () => console.log("The page was close!"));
             this.item = res;
-            console.log(res);
+            //console.log(res);
             resolve(this.item)
         });
     }
@@ -202,7 +208,7 @@ class AmazonScraperModel {
             try {
                 resolve(item.dimension);
             } catch (e) {
-                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getLongDescription`)
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getDimension`)
             }
         })
     }
@@ -243,6 +249,7 @@ class AmazonScraperModel {
         return new Promise(async (resolve, reject) => {
             try {
                 let img = [];
+                if(0 == item.formattedImg.length) reject('Array de imagenes vacia.');
                 for (let i = 0; i < item.formattedImg.length; i++) {
                     let a = {
                         "src": item.formattedImg[i],
