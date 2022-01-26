@@ -400,8 +400,8 @@ class AmazonScraperModel {
                     console.log(`Finish Scroll at: ${lastPosition}`);
                 });
 
-            // Obtenga el asin de todos los productos
-            asinArray = await page.$$eval('td[data-column="upcOrEan"] span.mt-text-content', tds => {
+            // Obtenga el asin de todos los productos #TW9sZGVNMjBDb3Jhem9uR2Fqb3M_e-title-asin > div > span
+            asinArray = await page.$$eval('div[data-column="asin"] span', tds => {
                 // Extract the asin from the data
                 tds = tds.map(el => el.innerText);
                 return tds;
@@ -462,35 +462,3 @@ class AmazonScraperModel {
 }
 
 module.exports = AmazonScraperModel;
-/* 
-let formattedImg = await newPage.click('#landingImage')
-                .then(async () => {
-                    return await newPage.$$eval('.imageThumbnail', async (imageTemp) => {
-                        console.log('Tamaño array: ',imageTemp.length);
-                        let formattedImg = [];
-                        for (let i = 0; i < imageTemp.length; i++) {
-                             await newPage.click(`#ivImage_${i}`);
-                             formattedImg.push(`click_${i}`);
-                            //  await newPage.$eval('#ivLargeImage > img', (e) => {
-                            //     formattedImg.push(e.src);
-                            //  });
-                            // if (imageTemp[i].src.includes("AC_US40")) {
-                            //     formattedImg.push(imageTemp[i].src.replace("_AC_US40_", "_AC_SL1500_"));
-                            // }
-                        }
-                        return formattedImg;
-                    }); 
-                })
-                .catch(async () => {
-                    await newPage.click('#imgThumbs > span > a');
-                    return await newPage.$$eval('#igImage', (imageTemp) => {
-                        let formattedImg = [];
-                        for (let i = 1; i < imageTemp.length; i++) {
-                            if (imageTemp[i].src.includes("AC_US40")) {
-                                formattedImg.push(imageTemp[i].src.replace("_AC_US40_", "_AC_SL1500_"));
-                            }
-                        }
-                        return formattedImg;
-                    });
-                });
-                */
