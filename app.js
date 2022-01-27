@@ -1,13 +1,12 @@
 //require('dotenv').config();
 const fs = require('fs');
-const MarketsyncModel = require('./marketsync/MarketsyncModel');
 const AllController = require('./controller/AllController');
 
 (async () => {
 
     const Controller = new AllController();
 
-        let key = 9;
+        let key = 5;
         let b = true;
         let inventory = []
 
@@ -101,7 +100,12 @@ const AllController = require('./controller/AllController');
                 console.log("Error de connectWoo: ", error);
             });
 
-            await Controller.copyWoocommerceToClaroshop(false)
+            if(b){
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
+
+            await Controller.copyWoocommerceToClaroshop(false, inventory)
             .then(async(res)=>{
                 console.log("Respuesta de copyWoocommerceToClaroshop: ", res);
             })
@@ -110,7 +114,7 @@ const AllController = require('./controller/AllController');
             })
             break;
         case 6://Doc Actualizar precio y stock en Woocommerce
-            await Controller.connectWoo()
+            await Controller.connectAll()
             .then(async(res)=>{
                 console.log("Respuesta de connectWoo: ", res);
             })
