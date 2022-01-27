@@ -248,7 +248,7 @@ class MercadoLibreAPIModel {
             };
             await axios(options)
                 .then((res) => {
-                    console.log("Categoria obtenida: ", res.data);
+                    console.log("Categoria obtenida: ", res.data, res.data[0].attributes);
                     //console.log(res.data[0].category_id);
                     (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
                     
@@ -298,7 +298,7 @@ class MercadoLibreAPIModel {
     //NOTE se esta probando, ya funciono una vez se esta mejorando, ya se logro que acepte los articulos, se procede a mandar el json para hacerlo dinamico.
     async createProduct(dataProduct, category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
-
+            
             let options = {
                 method: 'post',
                 baseURL: 'https://api.mercadolibre.com/items',
@@ -362,11 +362,14 @@ class MercadoLibreAPIModel {
                             "id": "EAN",
                             "value_name": `${await this.getEAN(dataProduct)}`
                         },
+                        {   "id": "GTIN",
+                        "value_name": `${await this.getEAN(dataProduct)}`
+                        },
                         {
                             "id": "SELLER_SKU",
                             "value_name": `${dataProduct.sku}`
                         },
-                        {
+                        /* {
                             "id": "PACKAGE_HEIGHT",
                             "value_name": `${dataProduct.dimensions.height}`
                         },
@@ -381,7 +384,7 @@ class MercadoLibreAPIModel {
                         {
                             "id": "PACKAGE_WEIGHT",
                             "value_name": `${await this.aumentarPrecio(dataProduct.weight,1000)}`
-                        },
+                        }, */
                         {
                             "id": "MODEL",
                             "value_name": `${await this.getModelNumber(dataProduct)}`
@@ -399,7 +402,8 @@ class MercadoLibreAPIModel {
                     resolve(res.data);
                 }).catch((error) => {
 
-                    reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
+                    //reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
+                    reject(error)
                     
                 });
         });
@@ -571,7 +575,11 @@ class MercadoLibreAPIModel {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
                 if (dataProduct.meta_data[i].key == '_brand_name') {
-                    resolve(dataProduct.meta_data[i].value)
+                    if(dataProduct.meta_data[i].key == '') resolve("Generico");
+                    let str = dataProduct.meta_data[i].value;
+                    str = str.toLowerCase();
+                    let res = await this.capitalizarPrimeraLetra(str);
+                    resolve(res)
                 }
             }
             resolve("");
@@ -582,10 +590,12 @@ class MercadoLibreAPIModel {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
                 if (dataProduct.meta_data[i].key == '_manufacturer') {
+                    if(dataProduct.meta_data[i].key == '') resolve("Generico");
+                    if("L'Oreal Paris" == dataProduct.meta_data[i].value) resolve("L'Oréal Paris");
                     resolve(dataProduct.meta_data[i].value)
                 }
             }
-            resolve("");
+            resolve("")
         });
     }
 
@@ -631,11 +641,12 @@ class MercadoLibreAPIModel {
 
             let pictures = [];
             if (0 != pics.images.length) {
-                for (let j = 0; j < pics.images.length; j++) {
+                for (let greyriv = 0; greyriv < pics.images.length; greyriv++) {
                     let a = {
-                        "source": pics.images[j].src
+                        "source": pics.images[greyriv].src
                     }
                     pictures.push(a);
+                    if(9 == greyriv)resolve(pictures)
                 }
                 resolve(pictures);
             } else {
@@ -680,6 +691,10 @@ class MercadoLibreAPIModel {
         let p = pricef * aumento;
         return p.toFixed(2);
     }
+
+    async capitalizarPrimeraLetra(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
 
 }
 
