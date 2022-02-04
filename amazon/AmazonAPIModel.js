@@ -97,6 +97,9 @@ class AmazonAPIModel {
         });
     }
 
+    /**
+     * @version 2021.02.03
+     */
     async getSize(item = this.item){
         return new Promise(async (resolve, reject) => {
             try {
