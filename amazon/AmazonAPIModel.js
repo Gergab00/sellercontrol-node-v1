@@ -97,6 +97,18 @@ class AmazonAPIModel {
         });
     }
 
+    async getSize(item = this.item){
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = item[1].AttributeSets[0].Size
+
+                resolve(res)
+            } catch (e) {
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getMaterial`)
+            }
+        });
+    }
+
     async getMaterial(item = this.item){
         return new Promise(async (resolve, reject) => {
             try {
@@ -198,7 +210,7 @@ class AmazonAPIModel {
                 //console.log('Debug: ',item[0].identifiers[0].identifiers, " Length Object: ", item[0].identifiers[0].identifiers.length)
                 for (let i = 0; i < item[0].identifiers[0].identifiers.length; i++) {
                     const element = item[0].identifiers[0].identifiers[i].identifierType;
-                    console.log('Debug getEAN: ', element);
+                    //console.log('Debug getEAN: ', element);
                     if (element.includes('EAN')) {
                         res = item[0].identifiers[0].identifiers[i].identifier;
                         //console.log('Debug: ', res);
