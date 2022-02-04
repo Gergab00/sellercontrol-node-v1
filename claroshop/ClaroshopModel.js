@@ -158,7 +158,6 @@ class ClaroshopModel {
                                                 agregarmarca: await this.getManufacturer(dataProduct).then(async (res) => {
                                                     return res.slice(0, 59)
                                                 }),
-                                                atributos: JSON.stringify(att),
                                                 tag: dataProduct.name.replace(" ", ", "),
                                                 garantia: "{\"warranty\":[{\"seller\":{\"time\":\"20 Día(s)\"},\"manufacturer\":{\"time\":\"3 Mes(es)\"}}]}",
                                             }
@@ -275,6 +274,9 @@ class ClaroshopModel {
                 case 'MLM119999':
                     resolve('20282') //Electrodomesticos
                     break;
+                case 'MLM1271':
+                    resolve('21078')//Perfumes y Fragancias
+                    break;
                 case 'MLM4597':
                     resolve('21104') //Cuidado del cabello
                     break;
@@ -379,6 +381,9 @@ class ClaroshopModel {
                 case 'MLM1166':
                     resolve('21270') //Peluches
                     break;
+                case 'MLM1196':
+                    resolve('21287')//Libors y Revistas
+                    break;
                 case 'MLM431573':
                 case 'MLM194743':
                     resolve('21301') //Juguetes Novedosos
@@ -391,6 +396,7 @@ class ClaroshopModel {
                 case 'MLM189205':
                     resolve('22032') //Higiene bucal
                     break;
+                case 'MLM29907':
                 case 'MLM172359':
                 case 'MLM29883':
                 case 'MLM172335':
