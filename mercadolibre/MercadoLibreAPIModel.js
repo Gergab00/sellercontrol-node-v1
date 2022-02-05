@@ -218,6 +218,7 @@ class MercadoLibreAPIModel {
                 .then((res) => {
                     //console.log("Categoria obtenida exitosamente: ");
                     //console.log(res);
+                    //Note Revisar la parte de undefined, para ponerlo en otros.
                     (res.data.length == 0) ? this.category_id = 'undefined' : this.category_id = res.data[0].category_id;
                     resolve(this.category_id);
                 })
@@ -250,6 +251,7 @@ class MercadoLibreAPIModel {
                 .then((res) => {
                     console.log("Categoria obtenida: ", res.data, res.data[0].attributes);
                     //console.log(res.data[0].category_id);
+                    //Note Revisar la parte de undefined, para ponerlo en otros.
                     (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
                     
                     resolve(this.category_name);
@@ -265,16 +267,15 @@ class MercadoLibreAPIModel {
      /**
      * 
      * @param {String} access_token 
-     * @param {String} product 
+     * @param {String} category_id Id de la categoria a buscar.
      * @returns {!Promise<String>} That if are resolve return a Array with the category att
      */
-      async getProductCategoryAtt(product, access_token = this.access_token) {
+      async getProductCategoryAtt(category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
-            let sanProduct = await this.normalize(product);
-            //console.log('Producto Sanitizado: ', sanProduct);
+            
             let options = {
                 method: 'get',
-                baseURL: `https://api.mercadolibre.com/sites/MLM/domain_discovery/search?limit=1&q=${sanProduct}`,
+                baseURL: `https://api.mercadolibre.com/categories/${category_id}/attributes`,
                 headers: {
                     'Authorization': `bearer ${access_token}`
                 }
@@ -285,113 +286,201 @@ class MercadoLibreAPIModel {
                     //console.log(res.data[0].category_id);
                     //(res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
                     
-                    resolve(res.data[0]);
+                    resolve(res.data);
                 })
                 .catch((error) => {
                     //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
                     //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
-                    reject(`Error en getProductCategory: ${error.message}`);
+                    reject(`Error en getProductCategoryAtt: ${error.message}`);
                 });
         });
     }
 
-    //NOTE se esta probando, ya funciono una vez se esta mejorando, ya se logro que acepte los articulos, se procede a mandar el json para hacerlo dinamico.
+    //NOTE Se procede a mandar el json para hacerlo dinamico.
     async createProduct(dataProduct, category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
             
-            let options = {
-                method: 'post',
-                baseURL: 'https://api.mercadolibre.com/items',
-                headers: {
-                    'Authorization': `Bearer ${access_token}`
-                },
-                data: {
-                    "title": `${dataProduct.name.slice(0,60)}`,
-                    "category_id": `${category_id}`,
-                    "price": await this.aumentarPrecio(dataProduct.regular_price, 1.2),
-                    "currency_id": "MXN",
-                    "available_quantity": dataProduct.stock_quantity,
-                    "buying_mode": "buy_it_now",
-                    "condition": "new",
-                    "listing_type_id": "gold_special",
-                    /*"description": {
-                        "plain_text": ""
-                    },*/
-                    "video_id": "",
-                    "sale_terms": [{
-                            "id": "WARRANTY_TYPE",
-                            "name": "Tipo de garantía",
-                            "value_id": "2230280",
-                            "value_name": "Garantía del vendedor",
-                            "value_struct": null,
-                            "values": [{
-                                "id": "2230280",
-                                "name": "Garantía del vendedor",
-                                "struct": null
-                            }]
-                        },
-                        {
-                            "id": "WARRANTY_TIME",
-                            "name": "Tiempo de garantía",
-                            "value_id": null,
-                            "value_name": "90 dias",
-                            "value_struct": {
-                                "number": 90,
-                                "unit": "días"
+            let options;
+
+            if(category_id.includes('MLM159228') || category_id.includes('MLM1610')) { //
+
+                options = {
+                    method: 'post',
+                    baseURL: 'https://api.mercadolibre.com/items',
+                    headers: {
+                        'Authorization': `Bearer ${access_token}`
+                    },
+                    data: {
+                        "title": `${dataProduct.name.slice(0,60)}`,
+                        "category_id": `${category_id}`,
+                        "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
+                        "currency_id": "MXN",
+                        "available_quantity": dataProduct.stock_quantity,
+                        "buying_mode": "buy_it_now",
+                        "condition": "new",
+                        "listing_type_id": "gold_pro",
+                        "video_id": "",
+                        "sale_terms": [{
+                                "id": "WARRANTY_TYPE",
+                                "name": "Tipo de garantía",
+                                "value_id": "2230280",
+                                "value_name": "Garantía del vendedor",
+                                "value_struct": null,
+                                "values": [{
+                                    "id": "2230280",
+                                    "name": "Garantía del vendedor",
+                                    "struct": null
+                                }]
                             },
-                            "values": [{
-                                "id": null,
-                                "name": "90 dias",
-                                "struct": {
+                            {
+                                "id": "WARRANTY_TIME",
+                                "name": "Tiempo de garantía",
+                                "value_id": null,
+                                "value_name": "90 dias",
+                                "value_struct": {
                                     "number": 90,
                                     "unit": "días"
-                                }
-                            }]
-                        }
-                    ],
-                    "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
-                    "attributes": [{
-                            "id": "MANUFACTURER",
-                            "value_name": `${await this.getManufacturer(dataProduct)}`
-                        },
-                        {
-                            "id": "BRAND",
-                            "value_name": `${await this.getBrand(dataProduct)}`
-                        },
-                        {
-                            "id": "EAN",
-                            "value_name": `${await this.getEAN(dataProduct)}`
-                        },
-                        {   "id": "GTIN",
-                        "value_name": `${await this.getEAN(dataProduct)}`
-                        },
-                        {
-                            "id": "SELLER_SKU",
-                            "value_name": `${dataProduct.sku}`
-                        },
-                        /* {
-                            "id": "PACKAGE_HEIGHT",
-                            "value_name": `${dataProduct.dimensions.height}`
-                        },
-                        {
-                            "id": "PACKAGE_WIDTH",
-                            "value_name": `${dataProduct.dimensions.width}`
-                        },
-                        {
-                            "id": "PACKAGE_LENGTH",
-                            "value_name": `${dataProduct.dimensions.length}`
-                        },
-                        {
-                            "id": "PACKAGE_WEIGHT",
-                            "value_name": `${await this.aumentarPrecio(dataProduct.weight,1000)}`
-                        }, */
-                        {
-                            "id": "MODEL",
-                            "value_name": `${await this.getModelNumber(dataProduct)}`
-                        }
-
-                    ]
+                                },
+                                "values": [{
+                                    "id": null,
+                                    "name": "90 dias",
+                                    "struct": {
+                                        "number": 90,
+                                        "unit": "días"
+                                    }
+                                }]
+                            },
+                            {
+                                "id": "MANUFACTURING_TIME",
+                                "value_name": "5 días"
+                            }
+                        ],
+                        "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
+                        "attributes": [{
+                                "id": "MANUFACTURER",
+                                "value_name": `${await this.getManufacturer(dataProduct)}`
+                            },
+                            {
+                                "id": "BRAND",
+                                "value_name": `${await this.getBrand(dataProduct)}`
+                            },
+                            {
+                                "id": "EAN",
+                                "value_name": `${await this.getEAN(dataProduct)}`
+                            },
+                            {   "id": "GTIN",
+                                "value_name": `${await this.getEAN(dataProduct)}`
+                            },
+                            {
+                                "id": "SELLER_SKU",
+                                "value_name": `${dataProduct.sku}`
+                            },
+                            {
+                                "id": "QUILT_AND_COVERLET_SIZE",
+                                "value_name": `${await this.getSize(dataProduct)}`
+                            },
+                            {
+                                "id": "MODEL",
+                                "value_name": `${await this.getModelNumber(dataProduct)}`
+                            },
+                            {
+                                "id": "COLOR",
+                                "value_name": `${await this.getColor(dataProduct)}`
+                            }
+    
+                        ]
+                    }
                 }
+                
+            }else{
+
+                options = {
+                    method: 'post',
+                    baseURL: 'https://api.mercadolibre.com/items',
+                    headers: {
+                        'Authorization': `Bearer ${access_token}`
+                    },
+                    data: {
+                        "title": `${dataProduct.name.slice(0,60)}`,
+                        "category_id": `${category_id}`,
+                        "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
+                        "currency_id": "MXN",
+                        "available_quantity": dataProduct.stock_quantity,
+                        "buying_mode": "buy_it_now",
+                        "condition": "new",
+                        "listing_type_id": "gold_pro",
+                        /*"description": {
+                            "plain_text": ""
+                        },*/
+                        "video_id": "",
+                        "sale_terms": [{
+                                "id": "WARRANTY_TYPE",
+                                "name": "Tipo de garantía",
+                                "value_id": "2230280",
+                                "value_name": "Garantía del vendedor",
+                                "value_struct": null,
+                                "values": [{
+                                    "id": "2230280",
+                                    "name": "Garantía del vendedor",
+                                    "struct": null
+                                }]
+                            },
+                            {
+                                "id": "WARRANTY_TIME",
+                                "name": "Tiempo de garantía",
+                                "value_id": null,
+                                "value_name": "90 dias",
+                                "value_struct": {
+                                    "number": 90,
+                                    "unit": "días"
+                                },
+                                "values": [{
+                                    "id": null,
+                                    "name": "90 dias",
+                                    "struct": {
+                                        "number": 90,
+                                        "unit": "días"
+                                    }
+                                }]
+                            },
+                        ],
+                        "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
+                        "attributes": [{
+                                "id": "MANUFACTURER",
+                                "value_name": `${await this.getManufacturer(dataProduct)}`
+                            },
+                            {
+                                "id": "BRAND",
+                                "value_name": `${await this.getBrand(dataProduct)}`
+                            },
+                            {
+                                "id": "EAN",
+                                "value_name": `${await this.getEAN(dataProduct)}`
+                            },
+                            {   "id": "GTIN",
+                            "value_name": `${await this.getEAN(dataProduct)}`
+                            },
+                            {
+                                "id": "SELLER_SKU",
+                                "value_name": `${dataProduct.sku}`
+                            },
+                            {
+                                "id": "QUILT_AND_COVERLET_SIZE",
+                                "value_name": `${await this.getSize(dataProduct)}`
+                            },
+                            {
+                                "id": "UNIT_VOLUME",
+                                "value_name": `${await this.getVolumen(dataProduct)} L`
+                            },
+                            {
+                                "id": "COLOR",
+                                "value_name": `${await this.getColor(dataProduct)}`
+                            }
+    
+                        ]
+                    }
+                }
+
             }
 
             this.description = dataProduct.description + dataProduct.short_description;
@@ -560,6 +649,51 @@ class MercadoLibreAPIModel {
 
     //*Getters
 
+    /**
+     * @version 2022.02.03
+     */
+    async getColor(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_color') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
+        });
+    }
+
+    /**
+     * @version 2022.02.03
+     */
+    async getVolumen(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_volumen') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
+        });
+    }
+
+    /**
+     * @version 2022.02.03
+     */
+    async getSize(dataProduct) {
+        return new Promise(async (resolve) => {
+            for (let i = 0; i < dataProduct.meta_data.length; i++) {
+                if (dataProduct.meta_data[i].key == '_size') {
+                    resolve(dataProduct.meta_data[i].value)
+                }
+            }
+            resolve("");
+        });
+    }
+
+    /**
+     * @version 2022.02.03
+     */
     async getEAN(dataProduct) {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
@@ -693,7 +827,7 @@ class MercadoLibreAPIModel {
     }
 
     async capitalizarPrimeraLetra(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        return str.replace(/\b\w/g, function(l){ return l.toUpperCase() })
       }
 
 }
