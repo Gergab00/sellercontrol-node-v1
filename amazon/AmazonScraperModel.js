@@ -267,6 +267,7 @@ class AmazonScraperModel {
         return new Promise(async (resolve) => {
             const url = 'https://sellercentral.amazon.com.mx/home';
             const page = await browser.newPage();
+            page.waitForTimeout(5000);
             await page.setDefaultNavigationTimeout(0);
             let cookiesFilePath = './json/amazon_cookies.json';
             const previousSession = fs.existsSync(cookiesFilePath);
@@ -275,7 +276,7 @@ class AmazonScraperModel {
                 await this.readCookies(page, cookiesFilePath);
             }
 
-            await page.goto(url);
+            await page.goto(url).then(async () => await page.bringToFront());
             //Sentencia que revisa si no hay una sesion activa, si nos manda al login pone el usuario y contraseña
             if (!previousSession) {
                 // Set the HTTP Basic Authentication credential
@@ -392,6 +393,7 @@ class AmazonScraperModel {
             let asinArray = [];
             let priceArray = [];
             let quantityArray = [];
+            let titleArray = [];
             //await page.waitForSelector('#td[data-column="upcOrEan"] span.mt-text-content');
             console.log('Waited a second!\n The page area loading...');
             await page.waitForTimeout(5000)
@@ -428,13 +430,21 @@ class AmazonScraperModel {
                 }
                 return ret;
             });
-            console.log(quantityArray);
+            //#TW9sZGVSb3NjYUNvcmF6b25lc00xMzE_e-title-title > div > a
+            titleArray = await page.$$eval('td[data-column="title"] div > a', tds => {
+                tds = tds.map(el => el.innerText);
+                return tds
+            }).catch(async (error) => {
+                reject("Error: ", error);
+            });
+            
 
             for (let i = 0; i < asinArray.length; i++) {
                 a = {
                     asin: asinArray[i],
                     price: priceArray[i],
-                    totalQuantity: Number.parseInt(quantityArray[i])
+                    totalQuantity: Number.parseInt(quantityArray[i]),
+                    title: titleArray[i]
                 };
                 console.log(`Array información: ${a.asin}, ${a.totalQuantity}`);
                 data.push(a);
