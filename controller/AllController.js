@@ -331,6 +331,14 @@ class AllController {
                                             console.log(`Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`);
                                             return ''
                                         }),
+                                    },
+                                    {
+                                        key: "_size",
+                                        value: await this.amzMod.getSize().catch(async (error) => {
+                                            this.error_log += `Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`
+                                            console.log(`Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`);
+                                            return ''
+                                        }),
                                     }
                                 ]
                             }
@@ -393,6 +401,14 @@ class AllController {
                         }
                         console.log('wooMod.getProduct: ', res);
                         if(0 == res.stock_quantity) reject('Inventario 0')
+                        await this.mlMod.getProductCategoryAtt(cat)                        
+                        .then(async(res)=>{
+                            console.log("Respuesta de getProductCategoryAtt: ", res);
+                        })
+                        .catch(async(error)=>{
+                            console.log("Error de getProductCategoryAtt: ", error);
+                        })
+
                         await this.mlMod.createProduct(res, cat)
                             .then(async (res) => {
                                 
@@ -487,7 +503,7 @@ class AllController {
     //*Note Revisar la parte de la actualización para automatizarla.
     async updateWoocommerce(boolean = true, inventory = []) {
         return new Promise(async (resolve, reject) => {
-            if (inventory.length == 0) {
+            
                 if (boolean) {
                     await this.amzScrap.startPuppeter()
                         .then(async (browser) => {
@@ -505,7 +521,8 @@ class AllController {
                             reject("Error: ", error);
                         });
                 }
-
+            
+            if (inventory.length == 0) {
                 inventory = await this.amzScrap.scrapeSellerInventory(this.browser);
             }
 
@@ -522,12 +539,22 @@ class AllController {
                             ])
                             .then(async (res) => {
 
+                                console.log('Respuesta de PromiseAll: ', res[0][1])
+
                                 await this.wooMod.updateProduct(id, {
                                     stock_quantity: inventory[gris].totalQuantity,
                                     price: inventory[gris].price,
                                     regular_price: inventory[gris].price,
                                     sale_price: inventory[gris].price,
                                      meta_data: [
+                                        {
+                                            key: "_size",
+                                            value: await this.amzMod.getSize().catch(async (error) => {
+                                                this.error_log += `Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`
+                                                console.log(`Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`);
+                                                return ''
+                                            }),
+                                        },
                                         {
                                             key: "_material",
                                             value: await this.amzMod.getMaterial().catch(async (error) => {
@@ -563,10 +590,10 @@ class AllController {
                                      ]
                                 })
                                 .then(async (res) => {
-                                    console.log("Respuesta: ", res);
+                                    console.log("Respuesta de wooMod.updateProduct: ", res.data);
                                 })
                                 .catch(async (error) => {
-                                    console.log("Error: ", error);
+                                    console.log("Error de wooMod.updateProduct: ", error);
                                     reject(error)
                                 });
 
@@ -600,7 +627,7 @@ class AllController {
                             this.browser = browser;
                         })
                         .catch(async (error) => {
-                            this.error_log += `Error en updatestockPriceMercadolibre en startPuppeter: ${error}.\n`
+                            this.error_log += `Error en updatestockPriceMercadolibre en startPuppeter: ${error.toString()}.\n`
                             reject("Error: ", error);
                         });
                 } else {
@@ -609,7 +636,7 @@ class AllController {
                             this.browser = browser;
                         })
                         .catch(async (error) => {
-                            this.error_log += `Error en updatestockPriceMercadolibre en startBrowser: ${error}.\n`
+                            this.error_log += `Error en updatestockPriceMercadolibre en startBrowser: ${error.toString()}.\n`
                             reject("Error: ", error);
                         });
                 }
@@ -622,10 +649,10 @@ class AllController {
                 await this.mlMod.getIDProduct(inventory[i].asin)
                     .then(async (res) => {
                         id = res;
-                        console.log("Id de Mercadolibre: ", id);
+                        console.log("Id de Mercadolibre: ", id);                        
                     })
                     .catch(async (error) => {
-                        this.error_log += `Error en updatestockPriceMercadolibre en getIDProduct, producto ${inventory[i].asin}: ${error}.\n`
+                        this.error_log += `Error en updatestockPriceMercadolibre en getIDProduct, producto ${inventory[i].asin}: ${error.toString()}.\n`
                     });
 
                 let data = {
@@ -637,12 +664,67 @@ class AllController {
                         console.log(`Producto con ASIN ${inventory[i].asin}, con ID de Mercadolibre ${res.data.id} actualizado correctamnte.`);
                     })
                     .catch(async (error) => {
-                        this.error_log += `Error en updatestockPriceMercadolibre en getIDProduct, producto ${inventory[i].asin}: ${error.response.data}.\n`
+                        this.error_log += `Error en updatestockPriceMercadolibre en getIDProduct, producto ${inventory[i].asin}: ${error.response.data.toString()}.\n`
                         console.log("Error: ", error.response.data);
                     });
 
-                let data_2 = {
-                    "price": Math.round(Number.parseInt(inventory[i].price) * 1.30)
+                let data_2;
+
+                if(inventory[i].title.includes('Molde')){
+                    if(199 == inventory[i].price){
+                        console.log("Molde-199");
+                        data_2 = {
+                            "price": 99 * 1.1,
+                            "sale_terms": [
+                                {
+                                "id": "MANUFACTURING_TIME",
+                                "value_id": null,
+                                "value_name": null
+                                }
+                            ]
+                        }
+                    }else if(149 == inventory[i].price){
+                        console.log("Molde-149");
+                        data_2 = {
+                            "price": 89 * 1.1,
+                            "sale_terms": [
+                                {
+                                "id": "MANUFACTURING_TIME",
+                                "value_id": null,
+                                "value_name": null
+                                }
+                            ]
+                        }
+                    }else if(99 == inventory[i].totalQuantity){
+                        if(159 == inventory[i].price){
+                            console.log("Molde-159-seller");
+                            data_2 = {
+                                "price": 99 * 1.1,
+                                "sale_terms": [
+                                {
+                                    "id": "MANUFACTURING_TIME",
+                                    "value_name": "5 días"
+                                }
+                            ]
+                            }
+                        }else if(109 == inventory[i].price){
+                            console.log("Molde-109-seller");
+                            data_2 = {
+                                "price": 89 * 1.1,
+                                "sale_terms": [
+                                    {
+                                        "id": "MANUFACTURING_TIME",
+                                        "value_name": "5 días"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }else{
+                    console.log("Else")
+                    data_2 = {
+                        "price": Math.round(Number.parseInt(inventory[i].price) * 1.05)
+                    }
                 }
 
                 await this.mlMod.updateProduct(id, data_2)
