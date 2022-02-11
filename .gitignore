@@ -110,3 +110,4 @@ dist
 .json
 json/AuthCode.json
 json/amazon_cookies.json
+json/simple_data.json

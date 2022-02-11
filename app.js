@@ -1,12 +1,14 @@
 //require('dotenv').config();
+//requiere('colors');
 const fs = require('fs');
 const AllController = require('./controller/AllController');
+
 
 (async () => {
 
     const Controller = new AllController();
 
-        let key = 5;
+        let key = 1;
         let b = true;
         let inventory = []
 
@@ -19,7 +21,11 @@ const AllController = require('./controller/AllController');
             .catch(async(error)=>{
                 console.log("Error de connectAll: ", error);
             });
-            await Controller.updateStockPriceMercadolibre(false)
+            if(b){
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
+            await Controller.updateStockPriceMercadolibre(false, inventory)
             .then(async(res)=>{
                 console.log("Respuesta de updateStockPriceMercadolibre: ", res);
             })
@@ -73,7 +79,7 @@ const AllController = require('./controller/AllController');
             }
             break;
 
-        case 4://doc Actualizar imagenes en Woocommerce
+        case 4://doc Actualizar Woocommerce con Amazon
             await Controller.connectAll()
             .then(async(res)=>{
                 console.log("Respuesta de connectAll: ", res);
@@ -82,12 +88,17 @@ const AllController = require('./controller/AllController');
                 console.log("Error de connectAll: ", error);
             });
 
-            await Controller.updateWoocommerceImages(false)
+            if(b){
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
+
+            await Controller.updateWoocommerce(false, inventory)
             .then(async(res)=>{
-                console.log("Respuesta de updateWoocommerceImages: ", res);
+                console.log("Respuesta de updateWoocommerce: ", res);
             })
             .catch(async(error)=>{
-                console.log("Error de updateWoocommerceImages: ", error);
+                console.log("Error de updateWoocommerce: ", error);
             });
 
             break;
