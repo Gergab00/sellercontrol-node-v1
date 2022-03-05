@@ -394,6 +394,7 @@ class AmazonScraperModel {
             let priceArray = [];
             let quantityArray = [];
             let titleArray = [];
+            let shipArray = [];
             //await page.waitForSelector('#td[data-column="upcOrEan"] span.mt-text-content');
             console.log('Waited a second!\n The page area loading...');
             await page.waitForTimeout(5000)
@@ -437,17 +438,30 @@ class AmazonScraperModel {
             }).catch(async (error) => {
                 reject("Error: ", error);
             });
-            
+            //#QjA3OUs1NEhHRg_e_e-price-shipping > div > span
+            shipArray = await page.$$eval('div[data-column="shipping"] span', tds => {
+                tds = tds.map(el => el.innerText);
+                return tds
+            }).catch(async (error) => {
+                reject("Error: ", error);
+            });
 
             for (let i = 0; i < asinArray.length; i++) {
-                a = {
-                    asin: asinArray[i],
-                    price: priceArray[i],
-                    totalQuantity: Number.parseInt(quantityArray[i]),
-                    title: titleArray[i]
-                };
-                console.log(`Array información: ${a.asin}, ${a.totalQuantity}`);
-                data.push(a);
+                let repetido = true;
+                for (let grix = 0; grix < data.length; grix++) {
+                    if(asinArray[i] === data[grix].asin) repetido = false;   
+                }
+                if(repetido){
+                    a = {
+                        asin: asinArray[i],
+                        price: Number.parseInt(priceArray[i].replace(',','')),
+                        totalQuantity: Number.parseInt(quantityArray[i]),
+                        title: titleArray[i],
+                        ship: Number.parseInt(shipArray[i].replace('+ MXN$',''))
+                    };
+                    console.log(`Array información: ${a.asin}, ${a.totalQuantity}, ${a.ship}`);
+                    data.push(a);
+                }else{console.log(`Asin ${asinArray[i]} Repetido.`)}
             }
             resolve(data)
         });
