@@ -1,9 +1,11 @@
 require('dotenv').config();
 const fs = require('fs');
 const axios = require('axios');
+const Tools = require('../global/Tools')
 
 class MercadoLibreAPIModel {
 
+    tools = new Tools();
     access_token;
     category_name;
     category_id;
@@ -225,7 +227,7 @@ class MercadoLibreAPIModel {
                 .catch((error) => {
                     //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
                     //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
-                    reject(`Error en getProductCategory: ${error.message}`);
+                    reject(`Error en MercadoLibreAPIMdel.getProductCategory: ${error.message}`);
                 });
         });
     }
@@ -249,7 +251,7 @@ class MercadoLibreAPIModel {
             };
             await axios(options)
                 .then((res) => {
-                    console.log("Categoria obtenida: ", res.data, res.data[0].attributes);
+                    console.log("Categoria obtenida: ", res.data);
                     //console.log(res.data[0].category_id);
                     //Note Revisar la parte de undefined, para ponerlo en otros.
                     (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
@@ -259,7 +261,7 @@ class MercadoLibreAPIModel {
                 .catch((error) => {
                     //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
                     //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
-                    reject(`Error en getProductCategory: ${error.message}`);
+                    reject(`Error en MercadoLibreAPIModel.getProductCategoryName: ${error.message}`);
                 });
         });
     }
@@ -301,8 +303,13 @@ class MercadoLibreAPIModel {
         return new Promise(async (resolve, reject) => {
             
             let options;
-
-            if(category_id.includes('MLM159228') || category_id.includes('MLM1610')) { //
+            let ship = {
+                "mode": "not_specified",
+                "local_pick_up": false,
+                "free_shipping": false,
+                "methods": [],
+                "costs": []
+            };
 
                 options = {
                     method: 'post',
@@ -313,7 +320,8 @@ class MercadoLibreAPIModel {
                     data: {
                         "title": `${dataProduct.name.slice(0,60)}`,
                         "category_id": `${category_id}`,
-                        "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
+                        //"price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
+                        "price": 1000,
                         "currency_id": "MXN",
                         "available_quantity": dataProduct.stock_quantity,
                         "buying_mode": "buy_it_now",
@@ -386,103 +394,15 @@ class MercadoLibreAPIModel {
                             {
                                 "id": "COLOR",
                                 "value_name": `${await this.getColor(dataProduct)}`
-                            }
-    
-                        ]
-                    }
-                }
-                
-            }else{
-
-                options = {
-                    method: 'post',
-                    baseURL: 'https://api.mercadolibre.com/items',
-                    headers: {
-                        'Authorization': `Bearer ${access_token}`
-                    },
-                    data: {
-                        "title": `${dataProduct.name.slice(0,60)}`,
-                        "category_id": `${category_id}`,
-                        "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
-                        "currency_id": "MXN",
-                        "available_quantity": dataProduct.stock_quantity,
-                        "buying_mode": "buy_it_now",
-                        "condition": "new",
-                        "listing_type_id": "gold_pro",
-                        /*"description": {
-                            "plain_text": ""
-                        },*/
-                        "video_id": "",
-                        "sale_terms": [{
-                                "id": "WARRANTY_TYPE",
-                                "name": "Tipo de garantía",
-                                "value_id": "2230280",
-                                "value_name": "Garantía del vendedor",
-                                "value_struct": null,
-                                "values": [{
-                                    "id": "2230280",
-                                    "name": "Garantía del vendedor",
-                                    "struct": null
-                                }]
-                            },
-                            {
-                                "id": "WARRANTY_TIME",
-                                "name": "Tiempo de garantía",
-                                "value_id": null,
-                                "value_name": "90 dias",
-                                "value_struct": {
-                                    "number": 90,
-                                    "unit": "días"
-                                },
-                                "values": [{
-                                    "id": null,
-                                    "name": "90 dias",
-                                    "struct": {
-                                        "number": 90,
-                                        "unit": "días"
-                                    }
-                                }]
-                            },
-                        ],
-                        "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
-                        "attributes": [{
-                                "id": "MANUFACTURER",
-                                "value_name": `${await this.getManufacturer(dataProduct)}`
-                            },
-                            {
-                                "id": "BRAND",
-                                "value_name": `${await this.getBrand(dataProduct)}`
-                            },
-                            {
-                                "id": "EAN",
-                                "value_name": `${await this.getEAN(dataProduct)}`
-                            },
-                            {   "id": "GTIN",
-                            "value_name": `${await this.getEAN(dataProduct)}`
-                            },
-                            {
-                                "id": "SELLER_SKU",
-                                "value_name": `${dataProduct.sku}`
-                            },
-                            {
-                                "id": "QUILT_AND_COVERLET_SIZE",
-                                "value_name": `${await this.getSize(dataProduct)}`
                             },
                             {
                                 "id": "UNIT_VOLUME",
                                 "value_name": `${await this.getVolumen(dataProduct)} L`
                             },
-                            {
-                                "id": "COLOR",
-                                "value_name": `${await this.getColor(dataProduct)}`
-                            }
-    
                         ]
                     }
                 }
-
-            }
-
+                
             this.description = dataProduct.description + dataProduct.short_description;
 
             await axios(options)
@@ -500,6 +420,14 @@ class MercadoLibreAPIModel {
 
     async createDescription(item_id, description = this.description, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
+
+            description = await this.tools.eliminarURLTexto(description)
+                .catch((error) => {
+                console.log("Error en createDescription: ", error.message);
+                console.log(error.response.data /*,colors.magenta(error.response)*/ );
+                reject(error);
+            });
+
             let options = {
                 method: 'post',
                 baseURL: `https://api.mercadolibre.com/items/${item_id}/description`,

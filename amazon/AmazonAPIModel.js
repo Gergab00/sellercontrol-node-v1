@@ -217,9 +217,20 @@ class AmazonAPIModel {
                     if (element.includes('EAN')) {
                         res = item[0].identifiers[0].identifiers[i].identifier;
                         //console.log('Debug: ', res);
+                        resolve(res)
+                    }
+                    if (element.includes('GTIN')) {
+                        res = item[0].identifiers[0].identifiers[i].identifier;
+                        //console.log('Debug: ', res);
+                        resolve(res)
+                    }
+                    if (element.includes('UPC')) {
+                        res = item[0].identifiers[0].identifiers[i].identifier;
+                        //console.log('Debug: ', res);
+                        resolve(res)
                     }
                 }
-                resolve(res)
+                
 
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getEAN`)

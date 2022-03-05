@@ -79,7 +79,7 @@ class WoocommerceAPIModel {
                     } else {
                         ret = true;
                     } //Si existe el producto regresa true, si no existe regresa false
-                    console.log(`Resultado de existsProducts ${ret}`)
+                    console.log(`Resultado de existsProducts ${!ret}`)
                     resolve(ret);
                 }).catch((error) => {
                     // Invalid request, for 4xx and 5xx statuses

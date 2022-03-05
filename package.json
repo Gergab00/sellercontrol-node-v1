@@ -1,6 +1,6 @@
 {
   "name": "sellercontrol-node-v1",
-  "version": "1.0.0",
+  "version": "2022.03.04",
   "description": "Software para control del seller, conexión con Amazon, Mercadolibre y claroshop.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[D\u001b[D, Woocommerce y Claroshop.",
   "main": "app.js",
   "scripts": {
@@ -34,11 +34,14 @@
     "colors": "^1.4.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
+    "flattie": "^1.1.0",
     "gergab-toolbox": "^1.0.1",
     "puppeteer": "^10.4.0",
     "puppeteer-autoscroll-down": "^0.1.7",
     "puppeteer-core": "^10.4.0",
+    "re2": "^1.17.4",
     "request": "^2.88.2",
+    "url-regex-safe": "^3.0.0",
     "yargs": "^17.3.1"
   }
 }
