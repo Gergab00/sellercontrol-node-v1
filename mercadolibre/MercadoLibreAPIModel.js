@@ -225,7 +225,7 @@ class MercadoLibreAPIModel {
                     resolve(this.category_id);
                 })
                 .catch((error) => {
-                    //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
+                    //console.log(`Error en MercadoLibreAPIMdel.getProductCategory: ${error.message}`);
                     //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
                     reject(`Error en MercadoLibreAPIMdel.getProductCategory: ${error.message}`);
                 });
@@ -259,7 +259,7 @@ class MercadoLibreAPIModel {
                     resolve(this.category_name);
                 })
                 .catch((error) => {
-                    //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
+                    //console.log(`Error en MercadoLibreAPIModel.getProductCategoryName: ${error.message}`);
                     //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
                     reject(`Error en MercadoLibreAPIModel.getProductCategoryName: ${error.message}`);
                 });
@@ -450,6 +450,43 @@ class MercadoLibreAPIModel {
         });
     }
 
+    async getProducto(seller_sku, access_token = this.access_token){
+        return new Promise(async (resolve, reject) => {
+            let options = {
+                method: 'get',
+                baseURL: `https://api.mercadolibre.com/users/${process.env.USER_ID}/items/search?seller_sku=${seller_sku}`,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            };
+
+            await axios(options)
+            .then(async(res)=>{
+                //console.log("Respuesta: ", res);
+                let options_2 = {
+                    method: 'get',
+                    baseURL: `https://api.mercadolibre.com/items/${res.data.results[0]}`,
+                    headers: {
+                        'Authorization': `Bearer ${access_token}`
+                    }
+                };
+                
+                await axios(options_2)
+                .then(async(res)=>{
+                    resolve(res)
+                })
+                .catch(async(error)=>{
+                    //console.log("Error: ", error);
+                    reject(error)
+                })
+            })
+            .catch(async(error)=>{
+                //console.log("Error: ", error);
+                reject(error)
+            })
+        });
+    }
+
     /**
      * @description Funcion que revisa si el producto existe o no.
      * 
@@ -491,6 +528,7 @@ class MercadoLibreAPIModel {
 
             await axios(options)
                 .then(async (res) => {
+                    //console.log(res.data.results[0])
                     resolve(res.data.results[0])
                 })
                 .catch(async (error) => {
