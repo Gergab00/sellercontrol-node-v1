@@ -16,7 +16,7 @@ class WoocommerceAPIModel {
                 url: this.url,
                 consumerKey: process.env.WC_CONSUMER_KEY,
                 consumerSecret: process.env.WC_CONSUMER_SECRET,
-                version: "wc/v3"
+                version: "wc/v3",
             });
 
             if (this.api != null) {
@@ -98,6 +98,7 @@ class WoocommerceAPIModel {
                 .then((response) => {
                     // Successful requess
                     //console.log('Resultado de WoocommerceAPIModel.getProduct', response.data[0]);
+                    if(response.data[0].length === 0) reject('El objeto no existe.')
                     resolve(response.data[0]);
                 })
                 .catch(async (error) => {
