@@ -2,6 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 const axios = require('axios');
 const Tools = require('../global/Tools')
+const { convert } = require('html-to-text');
 
 class MercadoLibreAPIModel {
 
@@ -303,13 +304,6 @@ class MercadoLibreAPIModel {
         return new Promise(async (resolve, reject) => {
             
             let options;
-            let ship = {
-                "mode": "not_specified",
-                "local_pick_up": false,
-                "free_shipping": false,
-                "methods": [],
-                "costs": []
-            };
 
                 options = {
                     method: 'post',
@@ -320,8 +314,8 @@ class MercadoLibreAPIModel {
                     data: {
                         "title": `${dataProduct.name.slice(0,60)}`,
                         "category_id": `${category_id}`,
-                        //"price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
-                        "price": 1000,
+                        "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
+                        //"price": 1000,
                         "currency_id": "MXN",
                         "available_quantity": dataProduct.stock_quantity,
                         "buying_mode": "buy_it_now",
@@ -404,10 +398,11 @@ class MercadoLibreAPIModel {
                 }
                 
             this.description = dataProduct.description + dataProduct.short_description;
+            this.description = convert(this.description);
 
             await axios(options)
                 .then((res) => {
-                    console.log(`Producto creado exitosamente en Mercadolibre con SKU `, res.data)
+                    console.log("Producto creado exitosamente en Mercadolibre con SKU:" + res.data)
                     resolve(res.data);
                 }).catch((error) => {
 
@@ -423,7 +418,7 @@ class MercadoLibreAPIModel {
 
             description = await this.tools.eliminarURLTexto(description)
                 .catch((error) => {
-                console.log("Error en createDescription: ", error.message);
+                console.log("Error en createDescription -> eliminarURL: ", error.message);
                 console.log(error.response.data /*,colors.magenta(error.response)*/ );
                 reject(error);
             });
@@ -435,9 +430,11 @@ class MercadoLibreAPIModel {
                     'Authorization': `Bearer ${access_token}`
                 },
                 data: {
-                    "plain_text": `${description.replace(/(<([^>]+)>)/ig, '')}`
+                    "plain_text": description
                 }
             }
+
+            //console.log('Descripcion: '+ description)
             await axios(options)
                 .then((res) => {
                     console.log("Descripción creada exitosamente.", res);

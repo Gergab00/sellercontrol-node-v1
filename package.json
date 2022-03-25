@@ -36,6 +36,7 @@
     "dotenv": "^10.0.0",
     "flattie": "^1.1.0",
     "gergab-toolbox": "^1.0.1",
+    "html-to-text": "^8.1.0",
     "puppeteer": "^10.4.0",
     "puppeteer-autoscroll-down": "^0.1.7",
     "puppeteer-core": "^10.4.0",
