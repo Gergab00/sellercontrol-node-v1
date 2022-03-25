@@ -386,6 +386,7 @@ class ClaroshopModel {
                     break;
                 case 'MLM431573':
                 case 'MLM194743':
+                case 'MLM1132':
                     resolve('21301') //Juguetes Novedosos
                     break;
                 case 'MLM1077':
