@@ -81,7 +81,7 @@ class AmazonScraperModel {
                 .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
             let lastPosition = await scrollPageToBottom(newPage, 500, 50);
 
-            //*Get images URL -#ivLargeImage > img
+            //*Get images URL #ivLargeImage > img
             let formattedImg = [];
             await newPage.click('#landingImage')
             .then(async()=>{
@@ -183,10 +183,23 @@ class AmazonScraperModel {
                 }).catch(async () => {
                     return '15'
                 })
-                );
-                //console.log(dimension)
-                              
+                );           
             }
+
+            //* Get Volumen
+            let volumen;
+            if(null !== await newPage.$('tr.a-spacing-small.po-volume_capacity_name > td.a-span9 > span') ){
+                volumen =  await newPage.$eval('tr.a-spacing-small.po-volume_capacity_name > td.a-span9 > span', (e) => e.innerText)
+            .catch(async () => {
+                return ""
+            });
+            }else if(null !== await newPage.$('tr.a-spacing-small.po-item_volume > td.a-span9 > span')){
+                volumen = await newPage.$eval('tr.a-spacing-small.po-item_volume > td.a-span9 > span', (e) => e.innerText)
+                .catch(async () => {
+                    return ""
+                });
+            }
+            
             
             let res = [];
             res['description'] = description;
@@ -194,6 +207,7 @@ class AmazonScraperModel {
             res['formattedImg'] = formattedImg;
             res['longDescription'] = longDescription;
             //res['dimension'] = dimension;
+            res['volumen'] = volumen; 
 
             await newPage.close();
             //await browser.close().then(async () => console.log("The page was close!")).catch(async () => console.log("The page was close!"));
@@ -203,6 +217,27 @@ class AmazonScraperModel {
         });
     }
 
+    async getVolumen(item = this.item){
+        return new Promise(async (resolve, reject) => {                
+            if(item.volumen !== undefined){
+                let v = item.volumen;
+                let m = item.volumen;
+                v = v.match(/(\d+)/g);
+                v = Number.parseInt(v[0]);
+                if(m.includes('Liters')){
+                    console.log('Litros');
+                    resolve(v/1000)
+                }else if(m.includes('Mililitros')){
+                    console.log('Militros');
+                    resolve(v)
+                }else if(m.includes('Galones')){
+                    console.log('Galones');
+                    resolve(v*3785)
+                }
+            }
+            reject('El objeto esta vacío, o no existe el valor. Error en la función getVolumen.')
+        });
+    }
     async getDimension(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
