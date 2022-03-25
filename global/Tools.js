@@ -31,7 +31,6 @@ class Tools{
         console.log(texto)
         }
     
-
         return texto
     }
 
@@ -48,6 +47,20 @@ class Tools{
                 }
             }
             reject()
+        });
+    }
+
+    async pausa(){
+        return new Promise(async (resolve) => {
+            const readline = require('readline').createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
+
+            readline.question('Revise el error. Presione ENTER para continuar.', (opt) =>{
+                readline.close();
+                resolve()
+            });
         });
     }
 
