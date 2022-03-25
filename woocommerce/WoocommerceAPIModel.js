@@ -98,7 +98,8 @@ class WoocommerceAPIModel {
                 .then((response) => {
                     // Successful requess
                     //console.log('Resultado de WoocommerceAPIModel.getProduct', response.data[0]);
-                    if(response.data[0].length === 0) reject('El objeto no existe.')
+                    if(response.data[0] === undefined) reject('El objeto no existe.');
+                    if(response.data[0].length === 0) reject('El objeto no existe.');
                     resolve(response.data[0]);
                 })
                 .catch(async (error) => {
