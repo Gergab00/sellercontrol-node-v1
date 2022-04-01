@@ -37,16 +37,17 @@ class Tools{
     async getMetadata(data, value){
         return new Promise(async (resolve, reject) => {
             
-            if(data.meta_data === 'undefined') reject();
+            if(data.meta_data === undefined) reject('Error en getMetadata, en key - ' + value + ' - el valor es undefined.');
 
             for (let i = 0; i < data.meta_data.length; i++) {
                 if (data.meta_data[i].key == value) {
                     //if(dataProduct.meta_data[i].key == '') resolve("Generico");
+                    if('' === data.meta_data[i].value) reject('Error en getMetadata, en key - ' + value + ' - el valor está vacío.');
                     if("L'Oreal Paris" == data.meta_data[i].value) resolve("L'Oréal Paris");
                     resolve(data.meta_data[i].value)
                 }
             }
-            reject()
+            reject('Error en getMetadata, no se encontro ningun valor a la clave ' + value + '.')
         });
     }
 
