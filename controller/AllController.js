@@ -6,6 +6,7 @@ const ClaroshopModel = require('../claroshop/ClaroshopModel.js');
 const flattie = require('flattie');
 const Tools = require('../global/Tools.js')
 const fs = require('fs');
+const { convert } = require('html-to-text');
 
 class AllController {
 
@@ -976,15 +977,15 @@ class AllController {
         });
     }
 
-    async getMercadolibreCategories() {
+    async getMercadolibreCategories(category_id) {
         return new Promise(async (resolve, reject) => {
-            await this.mlMod.getCategorias()
+            await this.mlMod.getProductCategoryAtt(category_id)
                 .then(async (res) => {
-                    console.log("Respuesta de getMercadolibreCategories: ", res);
-                    resolve(res);
+                    //console.log("Respuesta de getMercadolibreCategories: ", res);
+                    resolve(flattie.flattie(res,".", true))
                 })
                 .catch(async (error) => {
-                    console.log("Error de getMercadolibreCategories: ", error);
+                    //console.log("Error de getMercadolibreCategories: ", error);
                     reject(error);
                 })
         });
@@ -1020,33 +1021,118 @@ class AllController {
             //console.log('Tamaño inventario: ', inventory.length)
             for (let cwc = 0; cwc < inventory.length; cwc++) {
 
+                let warehouse = 'off';
+                let en_canal = 'off';
+                let condition = true;
+                let data;
+                
                 if (!await this.wooMod.existsProduct(inventory[cwc].asin)) {
                     await this.wooMod.getProduct(inventory[cwc].asin)
                         .then(async (res) => {
-                            //console.log('Respuesta wooMod.getProduct', res)
-                            await this.claroMod.createProducto(await this.claroMod.getSignature(), res)
+                            //console.log('Respuesta wooMod.getProduct', res);
+                            warehouse = await this.tools.getMetadata(res, '_in_warehouse').catch(async () => {
+                                return 'off'
+                            });
+                            en_canal = await this.tools.getMetadata(res, '_in_claroshop').catch(async () => {
+                                return 'off'
+                            });
+
+                            if (0 == res.stock_quantity) {
+                                console.log('Inventario 0');
+                            } else if (en_canal.includes('off')) {
+                                console.log('No disponible para la venta en Claroshop.');
+                            } else {
+
+                                let description;
+
+                                description = res.description.slice(0, 1300) + '\n Garantía de 20 días con nosotros.\n' + res.short_description.slice(0, 300);
+                                description = convert(description);
+
+                                data = {
+                                    nombre: res.name.slice(0,119).replace(/^[a-zA-Z0-9äÄëËïÏöÖüÜáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ&$,\.'"-.:%;=#!_¡\/?´¨`|¿*+~@()[\\]{]+$/),
+                                    descripcion: description,
+                                    especificacionestecnicas: convert(description),
+                                    alto: Number.parseInt(res.dimensions.height),
+                                    ancho: Number.parseInt(res.dimensions.width),
+                                    profundidad: Number.parseInt(res.dimensions.length),
+                                    peso: (Number.parseInt(res.weight) > 1) ? Number.parseInt(res.weight) : 1,
+                                    preciopublicobase: Number.parseInt(res.regular_price) * 1.72,
+                                    preciopublicooferta: Number.parseInt(res.regular_price),
+                                    cantidad: res.stock_quantity,
+                                    skupadre: res.sku,
+                                    ean: await this.tools.getMetadata(res, '_ean').catch(async () => res.sku),
+                                    estatus: "activo",
+                                    categoria: await this.tools.getMetadata(res, '_claroshop_category_code'),
+                                    fotos: await this.claroMod.normalizePictures(res),
+                                    marca: await this.tools.getMetadata(res, '_brand_name').then(async (res) => {
+                                        return res.toUpperCase()
+                                    }),
+                                    atributos: {},
+                                    tag: res.name.replace(" ", ", "),
+                                    garantia: "{\"warranty\":[{\"seller\":{\"time\":\"20 Día(s)\"},\"manufacturer\":{\"time\":\"3 Mes(es)\"}}]}",
+                                }; 
+
+                                let atributos = {
+                                    "Otra Información": "Material: " + await this.tools.getMetadata(res, '_material').catch(async () => "Varios") + " Tamaño: " + await this.tools.getMetadata(res, "_size").catch( async () => "Mediano"),
+                                    "Color": await this.tools.getMetadata(res, '_color').catch(async () => "Multicolor."),
+                                }
+
+                                //data['atributos'] = '{"Otra Información": "Material - '+ await this.tools.getMetadata(res, '_material').catch(async () => "Varios") +' Tamaño - '+ await this.tools.getMetadata(res, "_size").catch( async () => "Mediano") +'", "Color - '+ await this.tools.getMetadata(res, '_color').catch(async () => "Multicolor.") +',"}';
+                                data['atributos'] = JSON.stringify(atributos);
+
+                                if(warehouse.includes('on')){
+                                    data['embarque'] = 3;
+                                } else {
+                                    data['embarque'] = 5;
+                                }
+
+                                while (condition) {
+                                    await this.claroMod.crearProducto(await this.claroMod.getSignature(), data)
                                 .then(async (res) => {
 
-                                    console.log("Respuesta de createProducto en copyWoocommerceToClaroshop: ", res.mensaje);
+                                    console.log("Respuesta de createProducto en copyWoocommerceToClaroshop: ", res);
+                                    condition = false;
 
                                 })
                                 .catch(async (error) => {
 
-                                    this.error_log += `Error en catch getProduct de copyWoocommerceToClaroShop: ${error}`;
-                                    console.log("Error de createProducto en copyWoocommerceToClaroshop: ", error);
+                                    console.log("Error de crearProducto en copyWoocommerceToClaroshop: ", error);
+                                    //await this.tools.pausa();
+                                    if(error.includes('marca')){
+                                        data['marca'] = "";
+                                        data['agregarmarca'] = await this.tools.getMetadata(res, '_brand_name').then(async (res) => {
+                                            return res.toUpperCase()
+                                        }).catch( async () => {
+                                            console.log("No hay marca disponible.");
+                                            return "Generico"
+                                        });
+                                    }else if(error.includes('categoria')){
+                                        data['atributos'] = "";
+                                    }else{
+                                        this.error_log += `Error en catch getProduct de copyWoocommerceToClaroShop: ${error}`;
+                                        console.log("Error de createProducto en copyWoocommerceToClaroshop: ", error);
+                                        condition = false;
+                                        await this.tools.pausa();
+                                    }
 
-                                })
+                                });
+                                }
+      
+                            }
+
                         })
                         .catch(async (error) => {
 
                             this.error_log += `Error en catch getProduct de copyWoocommerceToClaroShop: ${error}`;
                             console.log("Error en catch getProduct de copyWoocommerceToClaroShop: ", error);
+                            await this.tools.pausa();
 
                         });
 
                 } else {
                     this.error_log += `No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`;
                     console.log(`No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`);
+                    await this.tools.pausa();
                 }
             }
             resolve('Articulos copiados con éxito.')
@@ -1217,6 +1303,20 @@ class AllController {
                 .catch(async (error) => {
                     reject(error)
                 })
+        });
+    }
+
+    async getAtributosCategoriaClaro(category_id){
+        return new Promise(async (resolve, reject) => {
+            await this.claroMod.getAtributosCat(await this.claroMod.getSignature(), category_id)            
+            .then(async(res)=>{
+                //console.log("Respuesta: ", res);
+                resolve(res)
+            })
+            .catch(async(error)=>{
+                //console.log("Error: ", error);
+                reject(error)
+            })
         });
     }
 

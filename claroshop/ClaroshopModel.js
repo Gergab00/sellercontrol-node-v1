@@ -3,8 +3,8 @@
 require('dotenv').config();
 const fs = require('fs');
 const axios = require("axios");
-const colors = require('colors');
 const crypto = require("crypto-js");
+const moment = require('moment');
 
 class ClaroshopModel {
 
@@ -21,8 +21,8 @@ class ClaroshopModel {
      */
     async getSignature() {
         return new Promise(async (resolve) => {
-            let hoy = new Date();
-            let fecha = await this.formatoFecha(hoy);
+            //let hoy = new Date();
+            let fecha = await moment().utcOffset(-6).format("YYYY-MM-DDTHH:mm:ss");
             let pub = this.CS_PUBLIC;
             let priv = this.CS_PRIVATE;
             let hash = crypto.SHA256(pub + fecha + priv);
@@ -30,10 +30,58 @@ class ClaroshopModel {
         });
     }
 
+
+    /**
+     * @version 2022.03.29
+     */
+    async crearProducto(code, data){
+        return new Promise(async (resolve, reject) => {
+            console.log('Creando producto: ', data.skupadre);
+
+            let options = {
+                method: 'post',
+                baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/producto`,
+                headers: {
+                    'content-type': 'application/json'
+                },
+                data:data,
+            }
+
+            axios(options)
+            .then(async(res)=>{
+                //console.log("Respuesta de ClaroshopModel.crearProducto: ", res);
+                //Doc Se revisa si hubo algún error aunque el código de estatus 200.
+                if (new RegExp('error', "gi").test(res.data.estatus)) {
+                    console.log(res.data.mensaje);
+                    if (res.data.mensaje.hasOwnProperty('marca')) {
+                        reject('La marca no se encuentra en la base, favor de agregarla.')
+                    }
+                    if (res.data.mensaje.hasOwnProperty('atributos')) {
+                        reject("Se tienen que adjuntar atributos")
+                    }
+                    if(typeof res.data.mensaje === 'string'){
+                        if(res.data.mensaje.includes('categoria')) reject('La categoria actual no contiene atributos.')
+                        console.log(res.data)
+                        reject(res.data.mensaje)
+                    }
+                    reject("Error en ClaroshopModel.crearProducto - then - estatus error: " + JSON.stringify(res.data))
+                }
+                resolve(res.data)
+            })
+            .catch(async(error)=>{
+                //console.log("Error: ", error);
+                reject(error.response.data.mensaje)
+            })
+        });
+    }
+    
+    /**
+     * @deprecated
+     */
     async createProducto(code, dataProduct) {
         return new Promise(async (resolve, reject) => {
             console.log('Creando producto: ', dataProduct.sku);
-            console.log(dataProduct.name.slice(0, 119).replace(/^[a-zA-Z0-9äÄëËïÏöÖüÜáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ&$,\.'"-.:%;=#!_¡\/?´¨`|¿*+~@()[\\]{]+$/));
+            //console.log(dataProduct.name.slice(0, 119).replace(/^[a-zA-Z0-9äÄëËïÏöÖüÜáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ&$,\.'"-.:%;=#!_¡\/?´¨`|¿*+~@()[\\]{]+$/));
             let att = {
 
                 'Otra Información': `Material - ${await this.getMaterial(dataProduct)}`,
@@ -274,9 +322,22 @@ class ClaroshopModel {
                 case 'MLM119999':
                     resolve('20282') //Electrodomesticos
                     break;
+                case 'MLM118811':
+                case 'MLM437447':
+                    resolve('20318') //Para cocinar
+                    break;
+                case 'MLM31535':
+                    resolve('20708')//Desarmadores
+                    break;
+                case 'MLM157914':
+                case 'MLM430166':
+                    resolve('20733') //Accesorios jardineria.
+                    break;
                 case 'MLM1271':
                     resolve('21078')//Perfumes y Fragancias
                     break;
+                case 'MLM192034':
+                    resolve('21064')//Dermatológicos
                 case 'MLM4597':
                     resolve('21104') //Cuidado del cabello
                     break;
@@ -382,19 +443,26 @@ class ClaroshopModel {
                     resolve('21270') //Peluches
                     break;
                 case 'MLM1196':
-                    resolve('21287')//Libors y Revistas
+                    resolve('21287')//Libros y Revistas
                     break;
                 case 'MLM431573':
                 case 'MLM194743':
                 case 'MLM1132':
                     resolve('21301') //Juguetes Novedosos
                     break;
+                case 'MLM412348':
+                    resolve('21810') //Mochilas individuales
                 case 'MLM1077':
                     resolve('21852') //Alimentos y Premios
+                    break;
+                case 'MLM178705':
+                case 'MLM179203':
+                    resolve('22027') //Cuidado facial
                     break;
                 case 'MLM191692':
                 case 'MLM168075':
                 case 'MLM189205':
+                case 'MLM189301':
                     resolve('22032') //Higiene bucal
                     break;
                 case 'MLM29907':
@@ -408,6 +476,7 @@ class ClaroshopModel {
                 case 'MLM176144':
                 case 'MLM172386':
                 case 'MLM29901':
+                case 'MLM1251':
                     resolve('22140') //Maquillaje
                     break;
                 case 'MLM6585':
@@ -427,7 +496,7 @@ class ClaroshopModel {
     async getAtributosCat(code, cat) {
         return new Promise(async (resolve, reject) => {
             let options = {
-                method: 'put',
+                method: 'get',
                 baseURL: `https://selfservice.claroshop.com/apicm/v1/${code}/categorias/${cat}`,
                 headers: {
                     'content-type': 'application/json'
@@ -436,11 +505,11 @@ class ClaroshopModel {
 
             axios(options)
                 .then((res) => {
-                    console.log(res.data);
+                    //console.log(res);
                     resolve(res.data);
                 })
                 .catch((error) => {
-                    console.log(error.message);
+                    //console.log(error.message);
                     reject(error.message);
                 });
 
