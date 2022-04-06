@@ -51,6 +51,19 @@ class Tools{
         });
     }
 
+    async getAttributesML(data, value){
+        return new Promise(async (resolve, reject) => {
+            for (let i = 0; i < data.attributes.length; i++) {
+                if (data.attributes[i].id == value) {
+                    if('' === data.attributes[i].value_name) reject('Error en getAttributesML, en id - ' + value + ' - el valor está vacío.');
+                    if(value === 'VOLUME_CAPACITY') resolve(data.attributes[i].value_struct.number)
+                    resolve(data.attributes[i].value_name)
+                }
+            }
+            reject('Error en getAttributesML, en id - ' + value + ' - el valor está vacío.');                    
+        });
+    }
+
     async pausa(){
         return new Promise(async (resolve) => {
             const readline = require('readline').createInterface({
