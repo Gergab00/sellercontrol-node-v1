@@ -22,7 +22,7 @@ class ClaroshopModel {
     async getSignature() {
         return new Promise(async (resolve) => {
             //let hoy = new Date();
-            let fecha = await moment().utcOffset(-6).format("YYYY-MM-DDTHH:mm:ss");
+            let fecha = await moment().utcOffset(-5).format("YYYY-MM-DDTHH:mm:ss");
             let pub = this.CS_PUBLIC;
             let priv = this.CS_PRIVATE;
             let hash = crypto.SHA256(pub + fecha + priv);
@@ -61,7 +61,8 @@ class ClaroshopModel {
                     }
                     if(typeof res.data.mensaje === 'string'){
                         if(res.data.mensaje.includes('categoria')) reject('La categoria actual no contiene atributos.')
-                        console.log(res.data)
+                        if(res.data.mensaje.includes('skupadre')) reject('El skupadre ya existe en la tienda.')
+                        //console.log(res.data)
                         reject(res.data.mensaje)
                     }
                     reject("Error en ClaroshopModel.crearProducto - then - estatus error: " + JSON.stringify(res.data))
@@ -311,7 +312,6 @@ class ClaroshopModel {
                     resolve('20136') //Muebles
                     break;
                 case 'MLM167538':
-                case 'MLM167538':
                     resolve('20231') //Cocina
                     break;
                 case 'MLM159228':
@@ -465,6 +465,9 @@ class ClaroshopModel {
                 case 'MLM189301':
                     resolve('22032') //Higiene bucal
                     break;
+                case 'MLM178755':
+                    resolve('22029') //Ciudado corporal
+                    break;
                 case 'MLM29907':
                 case 'MLM172359':
                 case 'MLM29883':
@@ -509,7 +512,7 @@ class ClaroshopModel {
                     resolve(res.data);
                 })
                 .catch((error) => {
-                    //console.log(error.message);
+                    console.log(error);
                     reject(error.message);
                 });
 
