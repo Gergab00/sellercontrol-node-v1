@@ -1,5 +1,6 @@
 require('dotenv').config();
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+const flattie = require('flattie');
 
 class WoocommerceAPIModel {
 
@@ -79,7 +80,8 @@ class WoocommerceAPIModel {
                     } else {
                         ret = true;
                     } //Si existe el producto regresa true, si no existe regresa false
-                    console.log(`Resultado de existsProducts ${!ret}`)
+                    console.log(`Resultado para ${sku} de existsProducts: ${!ret}`);
+                   // console.log("Response: ", flattie.flattie(response, '.', true))
                     resolve(ret);
                 }).catch((error) => {
                     // Invalid request, for 4xx and 5xx statuses
@@ -103,7 +105,7 @@ class WoocommerceAPIModel {
                     resolve(response.data[0]);
                 })
                 .catch(async (error) => {
-                    reject(error.response)
+                    reject("Error en WoocommerceAPIModel.getProduct: " + error.response)
                 });
         });
     }
