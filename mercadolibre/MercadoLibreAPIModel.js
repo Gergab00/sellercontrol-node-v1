@@ -393,6 +393,35 @@ class MercadoLibreAPIModel {
                                 "id": "UNIT_VOLUME",
                                 "value_name": `${await this.getVolumen(dataProduct)} L`
                             },
+                            {
+                                "id": "VOLUME_CAPACITY",
+                                "value_name": `${await this.getVolumen(dataProduct)} L`
+                            },
+                            {
+                                "id": "NAME",
+                                "value_name": `${await this.getBrand(dataProduct)}`
+                            },
+                            {
+                                "id": "SHAPE",
+                                "value_name": `${await this.tools.getMetadata(dataProduct,'_forma').catch(async () =>'')}` 
+                            },
+                            {
+                                "id": "LENGTH",
+                                "value_name": parseInt(dataProduct.dimensions.length).toFixed(0) + " cm"
+                            },
+                            {
+                                "id": "WIDTH",
+                                "value_name": parseInt(dataProduct.dimensions.width).toFixed(0) + " cm"
+                            },
+                            {
+                                "id": "HEIGHT",
+                                "value_name": parseInt(dataProduct.dimensions.height).toFixed(0) + " cm"
+                            },
+                            {
+                                "id": "CHARACTER",
+                                "value_name": `${await this.tools.getMetadata(dataProduct,'_personaje').catch(async () =>'')}` 
+                            }
+
                         ]
                     }
                 }
@@ -459,7 +488,10 @@ class MercadoLibreAPIModel {
 
             await axios(options)
             .then(async(res)=>{
-                //console.log("Respuesta: ", res);
+                //console.log("Respuesta de MercadolibreAPIModel.getProducto - options 1: ", res.data);
+
+                if(res.data.results.length === 0) reject("No existe el producto en Mercadolibre.")
+
                 let options_2 = {
                     method: 'get',
                     baseURL: `https://api.mercadolibre.com/items/${res.data.results[0]}`,
