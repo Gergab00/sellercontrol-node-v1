@@ -10,7 +10,9 @@ const AllController = require('./controller/AllController');
 
     let key = 3;
     let b = true;
-    let inventory = []
+    let inventory = [];
+    let asin = 'B09TY9W7WV';
+    let ml_cat = 'MLM167538';
 
     switch (key) {
         case 1: //Doc Actualizar stock Mercadolibre
@@ -148,7 +150,7 @@ const AllController = require('./controller/AllController');
                     console.log("Error de eliminarTodosLosProductosClaroshop: ", error);
                 })
             break;
-        case 8:
+        case 8: //Doc Obtener Atributos de la categoria de mercadolibre.
             await Controller.connectAll()
                 .then(async (res) => {
                     console.log("Respuesta de connectAll: ", res);
@@ -157,9 +159,15 @@ const AllController = require('./controller/AllController');
                     console.log("Error de connectAll: ", error);
                 });
 
-            await Controller.getMercadolibreCategories();
+            await Controller.getMercadolibreCategories(ml_cat)
+            .then(async (res) => {
+                console.log("Respuesta de getMercadolibreCategories: ", res);
+            })
+            .catch(async (error) => {
+                console.log("Error de getMercadolibreCategories: ", error);
+            });
             break;
-        case 9:
+        case 9: //Doc Actualizar inventario y precio de Claroshop
             await Controller.connectWoo()
                 .then(async (res) => {
                     console.log("Respuesta de connectWoo: ", res);
@@ -173,7 +181,6 @@ const AllController = require('./controller/AllController');
                 inventory = await JSON.parse(rawdata);
             }
 
-
             await Controller.updateClaroPriceInventory(false, inventory)
                 .then(async (res) => {
                     console.log("Respuesta de updateClaroPriceInventory: ", res);
@@ -183,7 +190,7 @@ const AllController = require('./controller/AllController');
                 })
             break;
 
-        case 10: //Doc Obtener información de un producto
+        case 10: //Doc Obtener información de un producto de Amazon
             await Controller.connectAll()
                 .then(async (res) => {
                     console.log("Respuesta de connectWoo: ", res);
@@ -192,7 +199,7 @@ const AllController = require('./controller/AllController');
                     console.log("Error de connectWoo: ", error);
                 });
 
-            await Controller.getAmazonProducto(false, 'B01LWNWWOU')
+            await Controller.getAmazonProducto(false, asin)
                 .then(async (res) => {
                     console.log("Respuesta de getAmazonProducto: ", res);
                 })
@@ -201,7 +208,7 @@ const AllController = require('./controller/AllController');
                 });
             
             break;
-            case 11: //Doc Obtener información de un producto
+            case 11: //Doc Obtener información de un producto de Woocomerce
             await Controller.connectAll()
                 .then(async (res) => {
                     console.log("Respuesta de connectWoo: ", res);
@@ -210,7 +217,7 @@ const AllController = require('./controller/AllController');
                     console.log("Error de connectWoo: ", error);
                 });
 
-            await Controller.getWoocommerceProducto( 'B01LWNWWOU')
+            await Controller.getWoocommerceProducto(asin)
                 .then(async (res) => {
                     console.log("Respuesta de getWoocommerceProducto: ", res);
                 })
@@ -219,7 +226,7 @@ const AllController = require('./controller/AllController');
                 });
             
             break;
-            case 12: //Doc Obtener información de un producto
+            case 12: //Doc Obtener información de un producto de Mercadolibre
             await Controller.connectAll()
                 .then(async (res) => {
                     console.log("Respuesta de connectWoo: ", res);
@@ -228,7 +235,7 @@ const AllController = require('./controller/AllController');
                     console.log("Error de connectWoo: ", error);
                 });
 
-            await Controller.getMercadolibreProducto( 'B01LWNWWOU')
+            await Controller.getMercadolibreProducto(asin)
                 .then(async (res) => {
                     console.log("Respuesta de getMercadolibreProducto: ", res.response.data);
                 })
@@ -236,6 +243,41 @@ const AllController = require('./controller/AllController');
                     console.log("Error de getMercadolibreProducto: ", error);
                 });
             
+            break;
+        
+            case 14: //Doc Obtener información de un producto de Claroshop
+                console.log("No hay acciones programadas")
+            break;
+            case 15://Doc Obtener atributos de categoria de Claroshop
+                await Controller.getAtributosCategoriaClaro('20231')
+                .then(async (res) => {
+                    console.log("Respuesta de getAtributosCategoriaClaro: ", res);
+                })
+                .catch(async (error) => {
+                    console.log("Error de getAtributosCategoriaClaro: ", error);
+                });
+                break;
+            case 16://Doc Actualizar Woocommerce con información de Mercadolibre
+            await Controller.connectAll()
+                .then(async (res) => {
+                    console.log("Respuesta de connectAll: ", res);
+                })
+                .catch(async (error) => {
+                    console.log("Error de connectAll: ", error);
+                });
+
+            if (b) {
+                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
+                inventory = await JSON.parse(rawdata);
+            }
+
+            await Controller.updateWoocommerceWithMercadoLibre(false, inventory)
+                .then(async (res) => {
+                    console.log("Respuesta de updateWoocommerceWithMercadoLibre: ", res);
+                })
+                .catch(async (error) => {
+                    console.log("Error de updateWoocommerceWithMercadoLibre: ", error);
+                });
             break;
         default:
             break;
