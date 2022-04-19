@@ -357,6 +357,10 @@ class AllController {
                                         }),
                                     },
                                     {
+                                        key: "_tipo",
+                                        value: await this.amzMod.getType().catch(async () => ''),
+                                    },
+                                    {
                                         key: "_in_warehouse",
                                         value: 'off',
                                     },
@@ -379,7 +383,7 @@ class AllController {
                                     {
                                         key: "_personaje",
                                         value: ""
-                                    }
+                                    },
                                 ]
                             }
 
@@ -505,6 +509,10 @@ class AllController {
                                         value: await this.tools.getAttributesML(res.data, 'SHAPE').catch(async (error) => {
                                             return ''
                                         })
+                                    },
+                                    {
+                                        key: "_tipo",
+                                        value: await this.amzMod.getType().catch(async () => ''),
                                     },
                                 ]
                             }
@@ -770,6 +778,7 @@ class AllController {
                     await this.wooMod.getProduct(inventory[gris].asin)
                         .then(async (res) => {
                             let id = res.id;
+                            let dataProduct = res;
 
                             await Promise.all([
                                     this.amzMod.getAsinData(inventory[gris].asin),
@@ -785,45 +794,10 @@ class AllController {
                                         sale_price: inventory[gris].price.toString(),
                                         description: await this.amzScrap.getDescription() + " " + await this.amzScrap.getLongDescription(),
                                         short_description: await this.amzScrap.getShortDescription(),
-                                        meta_data: [{
-                                                key: "_ean",
-                                                value: await this.amzMod.getEAN().catch(async () => {
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_brand_name",
-                                                value: await this.amzMod.getBrandName().catch(async () => {
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_manufacturer",
-                                                value: await this.amzMod.getManufacturer().catch(async () => {
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_model_number",
-                                                value: await this.amzMod.getModelNumber().catch(async () => {
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_amazon_category",
-                                                value: await this.amzMod.getCategory(inventory[gris].asin)
-                                            },
+                                        meta_data: [    
                                             {
                                                 key: "_competitive_pricing",
                                                 value: await this.amzMod.getCompetitivePricing(inventory[gris].asin),
-                                            },
-                                            {
-                                                key: "_mercadolibre_category_code",
-                                                value: await this.mlMod.getProductCategory(await this.amzMod.getItemName())
-                                            },
-                                            {
-                                                key: "_mercadolibre_category_name",
-                                                value: await this.mlMod.getProductCategoryName(await this.amzMod.getItemName())
                                             },
                                             {
                                                 key: "_claroshop_category_code",
@@ -834,61 +808,85 @@ class AllController {
                                                         return ''
                                                     }),
                                             },
-                                            {
-                                                key: "_material",
-                                                value: await this.amzMod.getMaterial().catch(async (error) => {
-                                                    this.error_log += `Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`
-                                                    console.log(`Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`);
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_color",
-                                                value: await this.amzMod.getColor().catch(async (error) => {
-                                                    this.error_log += `Error en getColor de copyAmazonToWoocommerce: ${error.toString()}`
-                                                    console.log(`Error en getColor de copyAmazonToWoocommerce: ${error.toString()}`);
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_max_age",
-                                                value: await this.amzMod.getMaxAge().catch(async (error) => {
-                                                    this.error_log += `Error en getMaxAge de copyAmazonToWoocommerce: ${error.toString()}`
-                                                    console.log(`Error en getMaxAge de copyAmazonToWoocommerce: ${error.toString()}`);
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_min_age",
-                                                value: await this.amzMod.getMinAge().catch(async (error) => {
-                                                    this.error_log += `Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`
-                                                    console.log(`Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`);
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_size",
-                                                value: await this.amzMod.getSize().catch(async (error) => {
-                                                    this.error_log += `Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`
-                                                    console.log(`Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`);
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_volumen",
-                                                value: await this.amzMod.getSize().catch(async (error) => {
-                                                    this.error_log += `Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`
-                                                    console.log(`Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`);
-                                                    return ''
-                                                }),
-                                            },
-                                            {
-                                                key: "_in_warehouse",
-                                                value: 'off',
-                                            },
-
                                         ]
                                     };
+
+                                    await this.amzMod.getManufacturer().then(async (manufacturer) => {
+                                        data['meta_data'].push({
+                                            key: "_manufacturer",
+                                            value: manufacturer,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getBrandName().then(async (brand) => {
+                                        data['meta_data'].push({
+                                            key: "_brand_name",
+                                            value: brand,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getEAN().then(async (ean) =>{
+                                        data['meta_data'].push({
+                                            key: "_ean",
+                                            value: ean,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getModelNumber().then(async (model) => {
+                                        data['meta_data'].push({
+                                            key: "_model_number",
+                                            value: model,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getMaterial().then(async (material) => {
+                                        data['meta_data'].push({
+                                            key: "_material",
+                                            value: material,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getColor().then(async (color) => {
+                                        data['meta_data'].push({
+                                            key: "_color",
+                                            value: color,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getMaxAge().then(async (max_age) => {
+                                        data['meta_data'].push({
+                                            key: "_max_age",
+                                            value: max_age,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getMinAge().then(async (min_age) => {
+                                        data['meta_data'].push({
+                                            key: "_min_age",
+                                            value: min_age,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getSize().then(async (size) =>{
+                                        data['meta_data'].push({
+                                            key: "_size",
+                                            value: size,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzScrap.getVolumen().then(async (volumen)=>{
+                                        data['meta_data'].push({
+                                            key: "_volumen",
+                                            value: volumen,
+                                        });
+                                    }).catch(async (e) => console.log(e));
+
+                                    await this.amzMod.getType().then(async (tipo)=>{
+                                        data['meta_data'].push({
+                                            key: "_tipo",
+                                            value: tipo,
+                                        });
+                                    }).catch(async (e) => console.log(e));
 
                                     console.log('Respuesta de Data: ', flattie.flattie(data, '.', false));
 
@@ -1094,6 +1092,10 @@ class AllController {
                             {
                                 "id": "HEIGHT",
                                 "value_name": (undefined === dataProduct.dimensions) ? "15" : parseInt(dataProduct.dimensions.height).toFixed(0)  + " cm"
+                            },
+                            {
+                                "id":"MATERIALS",
+                                "value_name": `${await this.tools.getMetadata(dataProduct,'_material').catch(async () =>'')}`
                             }
                         ];
                         await this.tools.getMetadata(dataProduct, '_forma').then(async (shape) => {
@@ -1206,8 +1208,8 @@ class AllController {
                                     ancho: Number.parseInt(res.dimensions.width),
                                     profundidad: Number.parseInt(res.dimensions.length),
                                     peso: (Number.parseInt(res.weight) > 1) ? Number.parseInt(res.weight) : 1,
-                                    preciopublicobase: (Number.parseInt(res.regular_price) + 75) * 1.72,
-                                    preciopublicooferta: Number.parseInt(res.regular_price) + 75,
+                                    preciopublicobase: 0,
+                                    preciopublicooferta:  0,
                                     cantidad: res.stock_quantity,
                                     skupadre: res.sku,
                                     ean: await this.tools.getMetadata(res, '_ean').catch(async () => res.sku),
@@ -1221,6 +1223,14 @@ class AllController {
                                     tag: res.name.replace(" ", ", "),
                                     garantia: "{\"warranty\":[{\"seller\":{\"time\":\"20 Día(s)\"},\"manufacturer\":{\"time\":\"3 Mes(es)\"}}]}",
                                 };
+
+                                if(Number.parseInt(res.regular_price) < 299){
+                                    data['preciopublicobase'] = (Number.parseInt(res.regular_price)) * 1.72;
+                                    data['preciopublicooferta'] = Number.parseInt(res.regular_price);
+                                } else {
+                                    data['preciopublicobase']= (Number.parseInt(res.regular_price) + 75) * 1.72;
+                                    data['preciopublicooferta'] = Number.parseInt(res.regular_price) + 75;
+                                }
 
                                 //data['atributos'] = '{"Otra Información": "Material - '+ await this.tools.getMetadata(res, '_material').catch(async () => "Varios") +' Tamaño - '+ await this.tools.getMetadata(res, "_size").catch( async () => "Mediano") +'", "Color - '+ await this.tools.getMetadata(res, '_color').catch(async () => "Multicolor.") +',"}';
                                 data['atributos'] = await this.setAtributosClaroPorCategoria(await this.tools.getMetadata(res, '_claroshop_category_code'), res).catch(async () => condition = false);
@@ -1274,14 +1284,14 @@ class AllController {
 
                             this.error_log += `Error en catch getProduct de copyWoocommerceToClaroShop: ${error}`;
                             console.log("Error en catch getProduct de copyWoocommerceToClaroShop: ", error);
-                            await this.tools.pausa();
+                            //await this.tools.pausa();
 
                         });
 
                 } else {
                     this.error_log += `No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`;
                     console.log(`No se pudo crear el producto con SKU ${inventory[cwc].asin}. El proucto ya existe.`);
-                    await this.tools.pausa();
+                    //await this.tools.pausa();
                 }
             }
             resolve('Articulos copiados con éxito.')
@@ -1295,20 +1305,55 @@ class AllController {
                 case '20231':
                     atributos = {
                         'Características': "Fabricado por: " + await this.tools.getMetadata(dataProduct, '_manufacturer').catch(async () => "Generico.") + ". De color: " + await this.tools.getMetadata(dataProduct, '_color').catch(async () => 'Multicolor'),
-                        'Cantidad': "1",
-                        'Capacidad (ml)': await this.tools.getMetadata(dataProduct, "_volumen").then(async (v) => v*1000).catch(async () => ''),
+                        'Certificaciones': "N/A",
                         'Forma': await this.tools.getMetadata(dataProduct, '_forma').catch(async () => "Rectangular"),
+                        'Tipo de Vajilla': "N/A",
+                        'Cantidad': "1",
                         'Instrucciones de Cuidado y Limpieza': "Lavado a mano con esponja suave y agua tibia.",
-                        'Temperatura Maxima': "90 grados centigrados."
+                        'Cuidados o recomendaciones': "No exponer a temperaturas mayores a las indicadas, lavar como se indica.",
+                        'Detalles': "N/A",
+                        'Temperatura Maxima': "90 grados centigrados.",
+                        'Temperatura Mínima': "N/A",
+                        'Instalación': "N/A",
+                        'Potencia (W)': "N/A",
+                        'Temperatura del agua': "N/A",
+                        'Capacidad (ml)': await this.tools.getMetadata(dataProduct, "_volumen").then(async (v) => v*1000).catch(async () => ''),
+                        'Grupo de Edad': "N/A",
+                        'alfanumerico' : "N/A",
+                        'Piezas que contiene': "1",
+                        'Con correa': "N/A",
+                        'Tipo de Vaso': "N/A",
+                        'Tipo de Cristal': "N/A",
+                        'Peso que soporta': "N/A",
+                        'Mango': "N/A",
+                        'Horno de Microondas': "N/A",
                     }
 
                     resolve(JSON.stringify(atributos))
                     break;
                 case '20251':
                     atributos = {
-                        "Material": await this.eliminarTodosLosProductosClaroshop.getMetadata(dataProduct, '_material'),
+                        "Material": await this.tools.getMetadata(dataProduct, '_material').catch(async () => "N/A"),
                         "Otra Información": "Fabricado por: " + await this.tools.getMetadata(dataProduct, '_manufacturer'),
                         "Peso": dataProduct.weight,
+                        'Tipo': await this.tools.getMetadata(dataProduct, '_tipo').catch(async () => "N/A"),
+                        'Otra Información': convert(dataProduct.short_description.slice(0, 300)),
+                        'Detalles': "Tamaño: " + await this.tools.getMetadata(dataProduct, '_material').catch(async () => "Unitalla"),
+                        'Peso': Number.parseInt(dataProduct.weight),
+                        'Uso': "N/A",
+                        'Incluye': "N/A",
+                        'Patrón': "N/A",
+                        'Material de Relleno': await this.tools.getMetadata(dataProduct, '_material').catch(async () => "N/A"),
+                        'Hilos': "N/A",
+                        'Hipoalergénico': "N/A",
+                        'Peso Max': "N/A",
+                        'Tamaño Colchon': await this.tools.getMetadata(dataProduct, '_material').catch(async () => "Estandar"),
+                        'Modo de inflado': "N/A",
+                        'Relleno': "N/A",
+                        'Forma de Abrir': "N/A",
+                        'Material de Tejido': await this.tools.getMetadata(dataProduct, '_material').catch(async () => "N/A"),
+                        'Instrucciones Cuidado  y Lmpieza': "Lavar en seco, o con ciclo delicado.",
+                        'Grosor': "N/A",
                     }
                     resolve(JSON.stringify(atributos))
                     break;

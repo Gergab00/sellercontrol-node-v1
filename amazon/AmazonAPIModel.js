@@ -98,6 +98,20 @@ class AmazonAPIModel {
     }
 
     /**
+     * @version 2022.04.07 
+     */
+    async getType(item = this.item){
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(item[0].salesRanks[0].ranks[1].title);
+            } catch (e) {
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getType`)
+            }
+        
+        });
+    }
+
+    /**
      * @version 2021.02.03
      */
     async getSize(item = this.item){
