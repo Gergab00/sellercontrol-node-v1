@@ -195,6 +195,268 @@ class AllController {
         });
     }
 
+    async copyAmazonPrimeToWooyML(boolean = true){
+        return new Promise(async (resolve, reject) => {
+            //*Se inicia el browser, ya sea con el chrome launcher o sin cabeceras
+            if (boolean) {
+                await this.amzScrap.startPuppeter()
+                    .then(async (browser) => {
+                        this.browser = browser;
+                    })
+                    .catch(async (error) => {
+                        reject("Error: ", error);
+                    });
+            } else {
+                await this.amzScrap.startBrowser()
+                    .then(async (browser) => {
+                        this.browser = browser;
+                    })
+                    .catch(async (error) => {
+                        reject("Error: ", error);
+                    });
+            }
+
+            let conciliar = [];
+            let page = 1;
+            let condicion = true;
+            const stop = false;
+
+            //* Obtiene el inventario de los productos externos (Que vende Amazon) 
+            //* que estan en la base de datos, para su posterior conciliacion
+            do{
+
+                await this.wooMod.getInventorySummaries("external", page)
+                    .then(async (res) => {
+                        for (let r = 0; r < res.length; r++) { 
+                            let obj ={
+                                asin: res[r].sku,
+                                id: res[r].id
+                            }                           
+                            conciliar.push(obj);                            
+                        }
+                        if(100 !== res.length) condicion = false;
+                        page++;
+                    })
+                    .catch(async (error) => {
+                        condicion = false
+                        console.log(error);
+                        reject("Error en Woo getInventorySummaries.");
+                    });
+
+            }while(condicion)
+            
+            console.log("Inventarios: ", conciliar);
+            const urls = [//* Páginas de busqueda que seran escrapeadas.
+                'https://www.amazon.com.mx/s?i=toys&bbn=11260442011&rh=n%3A11260442011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_n_specials_match%3A21225665011%2Cp_90%3A11829015011&dc&qid=1650431363&rnid=11829013011&ref=sr_nr_p_90_1',
+                'https://www.amazon.com.mx/s?k=barbie&i=toys&rh=p_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2BS416Q7LIS86&qid=1650661275&rnid=9754433011&sprefix=barbie%2Ctoys%2C296&ref=sr_nr_p_6_1',
+                'https://www.amazon.com.mx/s?k=hot+wheels&i=toys&rh=p_85%3A9841545011%2Cp_90%3A11829015011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1HK2VDHOOEX8J&qid=1650661368&rnid=9754433011&sprefix=hotwheels%2Ctoys%2C234&ref=sr_nr_p_6_1',
+                'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic&i=toys&rh=p_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2XKT2T516FVKJ&qid=1650753094&rnid=9754434011&sprefix=figuras+de+accion+jurass%2Ctoys%2C188&ref=a9_sc_1',
+                'https://www.amazon.com.mx/s?k=fisher+price&i=toys&rh=n%3A11260442011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1650830540&rnid=11829013011&ref=sr_nr_p_90_1',
+                'https://www.amazon.com.mx/s?k=playmobil&i=toys&rh=p_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2VNXAHARHCET&qid=1650858135&rnid=11829013011&sprefix=p%2Ctoys%2C2049&ref=sr_nr_p_90_1',
+                'https://www.amazon.com.mx/s?k=mi+alegria&i=toys&rh=n%3A11260442011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1650917550&rnid=9754433011&ref=sr_nr_p_6_1',
+                'https://www.amazon.com.mx/s?i=toys&bbn=23707055011&rh=n%3A23707055011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011&dc&qid=1651156037&rnid=9754434011&ref=sr_nr_p_85_1',
+                'https://www.amazon.com.mx/s?k=rompecabezas&i=toys&rh=p_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011%2Cp_90%3A11829015011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=18XCYOEOFQSY0&qid=1651156147&rnid=11829013011&sprefix=rompecabezas%2Ctoys%2C372&ref=sr_nr_p_90_1',
+            ];
+            //* Obtiene los productos del sitio de amazon (ASIN, titulo, precio), segun la url enviada.
+            await this.amzScrap.scrapeAmazonProducts(this.browser, urls, 2).then(async (inventory)=>{
+                console.log("Total de articulos escaneados: ", inventory.length);
+                //*Se inicia el for para reccorrer el array con la información que arroja la función anterior
+                for (let grey = 0; grey < inventory.length; grey++) {
+                    
+                    let dataProduct;//* Variable que contendra los datos de los productos
+                    //* Revisa si el producto ya existe en la base de datos
+                    if (await this.wooMod.existsProduct(inventory[grey].asin).catch(async () => false)) {
+                        //* Si no existe se procede a crearlo
+                        console.log("Creando producto ", inventory[grey].asin)
+                        //* Obtieene la inforamción de cada producto 
+                        await Promise.all([
+                            this.amzMod.getAsinData(inventory[grey].asin), //* Información de la API
+                            this.amzScrap.pageScraper(this.browser, inventory[grey].asin) //* Información de la Página
+                        ])
+                        .then(async (res) => {
+                            //console.log('Respuesta de PromiseAll: ', res[0], res[1]);
+                            //* Transforma la información obtenida en un objeto JSON como lo pide la documentación de Woocommerce
+                            dataProduct = await this.crearDataWoocommerce(inventory[grey], true);
+                            //console.log(dataProduct);
+                            //* Se crea el producto
+                            await this.wooMod.createProduct(dataProduct)
+                            .then(async (res) => {
+                                console.log(`Producto ${dataProduct.name} creado en Woocommerce con éxito. Response: ${JSON.stringify(res.data)}`);
+                                //*Se crea el objeto JSON para crear el producto en Mercadolibre
+                                dataProduct = await this.crearDataMercadolibre(res.data, true);
+                                //console.log("Datos del producto: ", dataProduct);
+                            })
+                            .catch(async (error) => {
+                                this.error_log += "Error en Woo createProduct de copyAmazonToWoocommerce: " + error;
+                                console.log("Error en Woo createProduct de copyAmazonToWoocommerce: ", error);
+                                if(stop) await this.tools.pausa();
+                            });                            
+                        //* Se crear el producto en Mercadolibre        
+                            await this.mlMod.crearProducto(dataProduct)
+                            .then(async (res) => {
+                                console.log(`Producto ${dataProduct.title} creado en Mercadolibre con éxito. Response: ${JSON.stringify(res.data)}`);
+                            })
+                            .catch(async (error) => {
+                                this.error_log += "Error en ML crearProducto de copyAmazonPrimeToWooyML: " + error;
+                                console.log("Error en ML crearProducto de copyAmazonPrimeToWooyML: ", error);
+                                if(stop) await this.tools.pausa();
+                            });
+
+                        })
+                        .catch(async (error) => {
+                            this.error_log += "Error en getAsinData o pageScraper de copyAmazonPrimeToWooyML: " + error;
+                            console.log("Error en getAsinData o pageScraper de copyAmazonPrimeToWooyML: ", error);
+                            if(stop) await this.tools.pausa();
+                        });
+
+                    }else{ //* Si existe el producto en woocommerce se actualiza y se ve si esta en Mercadolibre.
+                        console.log("Actualizando el producto ", inventory[grey].asin);
+                        //* Si el ASIN se encuentra en el array de conciliar lo elimina.
+                        conciliar = conciliar.filter((item) => item.asin !== inventory[grey].asin);
+                        console.log("Conciliación: ", conciliar.length);
+                        //* Se obtiene los datos de woocommerce para obtener el ID
+                        await this.wooMod.getProduct(inventory[grey].asin)
+                        .then(async (res) => {
+                            let id = res.id;
+                            //* Crea el objeto JSON para actualizar los datos en Mercadolibre
+                            dataProduct = await this.crearDataMercadolibre(res, true);
+
+                            await this.wooMod.updateProduct(id, {
+                                    regular_price: inventory[grey].price.toString(),
+                                    manage_stock: false,
+                                    type: "external",
+                                    external_url: `https://www.amazon.com.mx/dp/${inventory.asin}?&linkCode=ll1&tag=tecnologias36-20&language=es_MX&ref_=as_li_ss_tl`,
+                                    button_text: 'Compra en Amazon',
+                                    meta_data: [
+                                        {
+                                            key: "_amazonPrime",
+                                            value: 'on',
+                                        },
+                                        {
+                                            key: "_in_mercadolibre",
+                                            value: 'on',
+                                        }
+                                    ]
+                                })
+                                .then(async (res) => {
+                                    let noExiste = true; //* Variable que cambia según si existe (true) o no existe(false) el producto.
+                                    //console.log("Respuesta: ", res.data.);
+                                    console.log("Producto actualizado en Woocommerce con exito. ASIN ", inventory[grey].asin)
+                                    //* Se obtiene el ID de Mercadolibre para vr si existe, si no existe lo crea, si existe lo actualiza
+                                    await this.mlMod.getIDProduct(inventory[grey].asin)
+                                        .then(async (res) => {
+                                            id = res;
+                                            if (typeof res === 'undefined') {
+                                                noExiste = false; //* Cambia el estado de la variable a false por que no existe el producto
+                                                console.log("El producto no exite en ML.");
+                                            } else {console.log("Id de Mercadolibre: ", res);}
+                                            
+                                        })
+                                        .catch(async (error) => {
+                                            this.error_log += "Error en getIDProduct, producto " + inventory[grey].asin + ": " + error;
+                                            console.log("Error en getIDProduct, producto " + inventory[grey].asin + ": " + error)
+                                            if(stop) await this.tools.pausa();
+                                        });
+                                        
+                                        if(!noExiste){ //* Si no existe el producto en Mercadolibre se crea
+                                            await this.mlMod.crearProducto(dataProduct)
+                                                .then(async (res) => {
+                                                    console.log(`Producto ${dataProduct.title} creado en Mercadolibre con éxito.`);
+                                                })
+                                                .catch(async (error) => {
+                                                    this.error_log += "Error en crearProducto: " + error;
+                                                    console.log("Error en crearProducto de actualizar producto existente en AP: ", error);
+                                                    if(stop) await this.tools.pausa();
+                                                });
+                                        } else { //* Si existe el producto se actualiza.
+                                            //* Se elimina los atributos no necesarios del objeto JSON dataProduct
+                                            delete dataProduct.title;
+                                            delete dataProduct.category_id;
+                                            delete dataProduct.buying_mode;
+                                            delete dataProduct.condition;
+                                            delete dataProduct.listing_type_id;
+                                            delete dataProduct.video_id;
+                                            delete dataProduct.sale_terms;
+                                            delete dataProduct.pictures;
+                                            delete dataProduct.attributes;
+                                            delete dataProduct.plain_text;
+
+                                            await this.mlMod.updateProduct(id, dataProduct)
+                                                .then(async (res) => {
+                                                    console.log(`Producto con ASIN ${inventory[grey].asin}, con ID de Mercadolibre ${res.id} actualizado correctamente.`);
+                                                })
+                                                .catch(async (error) => {
+                                                    this.error_log += `Error en ML updateProduct en actualizar produto de conciliacion, producto ${inventory[grey].asin}: ${error.toString()}.\n`
+                                                    console.log("Error en ML updateProduct en actualizar produto de conciliacion: ", error);
+                                                    if(stop) await this.tools.pausa();
+                                                });
+                                        }//Fin if-else
+
+                                })
+                                .catch(async (error) => {
+                                    console.log("Error en Woo update de conciliar: ", error);
+                                    if(stop) await this.tools.pausa();
+                                    reject("Error en Woo update de conciliar: " + error)
+                                });//Fin Woo update conciliar
+
+                        })// Fin then Woocommerce getProducto
+                        .catch(async (error) => {
+                            console.log("Error en Woo getproducto de conciliar: ", error);
+                            if(stop) await this.tools.pausa();
+                        });
+                    }//Fin else existe el producto.
+                }//Fin for de productos obtenidos de amazon.
+
+                //* Se crea un for para recorrer los productos que se encuentrar en conciliar
+                //* Para actualizarlos en Woocommerce y Mercadolibre
+                for (let greys = 0; greys < conciliar.length; greys++) {
+                    const element = conciliar[greys];
+                    console.log("Elemento a conciliar: ", element.asin);
+                    await this.wooMod.updateProduct(element.id, {
+                        type: "simple",
+                        meta_data: [
+                            {
+                                key: "_amazonPrime",
+                                value: 'off',
+                            },
+                        ]
+                    })
+                    .then(async (res) => {
+                        console.log("Producto con ASIN ", res.data.sku, " actualizado en Woocommerce correctamente.");
+                        await this.mlMod.getIDProduct(element.asin)
+                            .then(async (res) => {
+                                let mlid = res;
+                                console.log("Id de Mercadolibre: ", mlid);
+                                await this.mlMod.updateProduct(mlid, {
+                                    "available_quantity": 0
+                                })
+                                    .then(async (res) => {
+                                        console.log(`Producto con ASIN ${element.sku}, con ID de Mercadolibre ${res.data.id} actualizado correctamente.`);
+                                    })
+                                    .catch(async (error) => {
+                                        this.error_log += `Error en ML updateProduct en conciliar, producto ${element.asin}: ${error.toString()}.\n`
+                                        console.log("Error en ML updateProduct en conciliar: ", error);
+                                        if(stop) await this.tools.pausa();
+                                    });
+                            }).catch(async () => {
+                                this.error_log += `Error en ML getIDProduct en conciliar, producto ${element.asin}: ${error.toString()}.\n`
+                                console.log("Error en ML getIDProduct en conciliar: ", error);
+                                if(stop) await this.tools.pausa();
+                            });
+
+                    })
+                    .catch(async (error) => {
+                        this.error_log += `Error en Woo updateProduct en conciliar, producto ${element.asin}: ${error.toString()}.\n`
+                        console.log("Error en Woo updateProduct en conciliar: ", error);
+                        if(stop) await this.tools.pausa();
+                    });
+                    
+                }
+            });
+            resolve("Trabajo de copyAmazonPrimeToWooML terminado con éxito.")
+        });//Fin de promise        
+    }
+
     //NOTE Modificar la función como la demás.
     /**
      * @version 2021.12.10
@@ -233,161 +495,7 @@ class AllController {
                         .then(async (res) => {
                             //console.log('Respuesta de PromiseAll: ', flattie.flattie(res, '.', false));
 
-                            let dataProduct = {
-
-                                sku: inventory[grey].asin, //ASIN
-                                name: await this.amzMod.getItemName(),
-                                regular_price: inventory[grey].price.toString(), //Amazon Price
-                                description: await this.amzScrap.getDescription() + " " + await this.amzScrap.getLongDescription(),
-                                short_description: await this.amzScrap.getShortDescription(),
-                                manage_stock: true,
-                                stock_quantity: inventory[grey].totalQuantity,
-                                weight: await this.amzMod.getWeight().catch(async () => {
-                                    return '15'
-                                }),
-                                dimensions: {
-                                    length: await this.amzMod.getLength().catch(async () => {
-                                        return '15'
-                                    }),
-                                    width: await this.amzMod.getWidth().catch(async () => {
-                                        return '15'
-                                    }),
-                                    height: await this.amzMod.getHeight().catch(async () => {
-                                        return '15'
-                                    }),
-                                },
-                                images: await this.amzScrap.getImages().catch(async () => {
-                                    return await this.amzMod.getImages()
-                                }),
-                                meta_data: [{
-                                        key: "_ean",
-                                        value: await this.amzMod.getEAN().catch(async () => {
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_brand_name",
-                                        value: await this.amzMod.getBrandName().catch(async () => {
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_manufacturer",
-                                        value: await this.amzMod.getManufacturer().catch(async () => {
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_model_number",
-                                        value: await this.amzMod.getModelNumber().catch(async () => {
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_amazon_category",
-                                        value: await this.amzMod.getCategory(inventory[grey].asin)
-                                    },
-                                    {
-                                        key: "_competitive_pricing",
-                                        value: await this.amzMod.getCompetitivePricing(inventory[grey].asin),
-                                    },
-                                    {
-                                        key: "_mercadolibre_category_code",
-                                        value: await this.mlMod.getProductCategory(await this.amzMod.getItemName())
-                                    },
-                                    {
-                                        key: "_mercadolibre_category_name",
-                                        value: await this.mlMod.getProductCategoryName(await this.amzMod.getItemName())
-                                    },
-                                    {
-                                        key: "_claroshop_category_code",
-                                        value: await this.claroMod.getClaroCategory(await this.mlMod.getProductCategory(await this.amzMod.getItemName()))
-                                            .catch(async (error) => {
-                                                this.error_log += `Error en getClaroCategory de copyAmazonToWoocommerce: ${error}`
-                                                console.log(`Error en getClaroCategory de copyAmazonToWoocommerce: ${error}`);
-                                                return ''
-                                            }),
-                                    },
-                                    {
-                                        key: "_material",
-                                        value: await this.amzMod.getMaterial().catch(async (error) => {
-                                            this.error_log += `Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`
-                                            console.log(`Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`);
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_color",
-                                        value: await this.amzMod.getColor().catch(async (error) => {
-                                            this.error_log += `Error en getColor de copyAmazonToWoocommerce: ${error.toString()}`
-                                            console.log(`Error en getColor de copyAmazonToWoocommerce: ${error.toString()}`);
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_max_age",
-                                        value: await this.amzMod.getMaxAge().catch(async (error) => {
-                                            this.error_log += `Error en getMaxAge de copyAmazonToWoocommerce: ${error.toString()}`
-                                            console.log(`Error en getMaxAge de copyAmazonToWoocommerce: ${error.toString()}`);
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_min_age",
-                                        value: await this.amzMod.getMinAge().catch(async (error) => {
-                                            this.error_log += `Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`
-                                            console.log(`Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`);
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_size",
-                                        value: await this.amzMod.getSize().catch(async (error) => {
-                                            this.error_log += `Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`
-                                            console.log(`Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`);
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_volumen",
-                                        value: await this.amzScrap.getVolumen().catch(async (error) => {
-                                            this.error_log += 'Error en getVolumen de copyAmazonToWoocommerce: ' + error;
-                                            console.log('Error en getVolumen de copyAmazonToWoocommerce: ' + error);
-                                            return ''
-                                        }),
-                                    },
-                                    {
-                                        key: "_tipo",
-                                        value: await this.amzMod.getType().catch(async () => ''),
-                                    },
-                                    {
-                                        key: "_in_warehouse",
-                                        value: 'off',
-                                    },
-                                    {
-                                        key: "_in_mercadolibre",
-                                        value: 'off',
-                                    },
-                                    {
-                                        key: "_in_claroshop",
-                                        value: 'off',
-                                    },
-                                    {
-                                        key: "_ship",
-                                        value: inventory[grey].ship,
-                                    },
-                                    {
-                                        key: "_forma",
-                                        value: ""
-                                    },
-                                    {
-                                        key: "_personaje",
-                                        value: ""
-                                    },
-                                ]
-                            }
-
-                            //console.log('Respuesta de Data: ', flattie.flattie(dataProduct, '.', false));
+                            let dataProduct = await this.crearDataWoocommerce(inventory[grey]);
 
                             await this.wooMod.createProduct(dataProduct)
                                 .then(async (res) => {
@@ -419,6 +527,9 @@ class AllController {
         return await this.wooMod.connect()
     }
 
+    /**
+     * @author Gerardo Gonzalez
+     */
     async updateWoocommerceWithMercadoLibre(boolean = true, inventory = []) {
         return new Promise(async (resolve, reject) => {
             if (boolean) {
@@ -632,8 +743,11 @@ class AllController {
                                             }
 
                                         } else {
+
+                                            let ship = inventory[i].ship;
+                                            if(ship === 0) ship = 150;
                                             data = {
-                                                "price": inventory[grey].price + inventory[grey].ship + 100,
+                                                "price": inventory[grey].price + ship,
                                                 "sale_terms": [{
                                                     "id": "MANUFACTURING_TIME",
                                                     "value_name": "5 días"
@@ -1023,8 +1137,10 @@ class AllController {
                             }
                             //if(inventory[i].title.includes("Molde")) data.price = inventory[i].price - 75;
                         } else {
+                            let ship = inventory[i].ship;
+                            if(ship === 0) ship = 150;
                             data = {
-                                "price": inventory[i].price + inventory[i].ship,
+                                "price": inventory[i].price + ship,
                                 "available_quantity": inventory[i].stock_quantity,
                                 "sale_terms": [{
                                     "id": "MANUFACTURING_TIME",
@@ -1080,7 +1196,6 @@ class AllController {
                                 "id": "VOLUME_CAPACITY",
                                 "value_name": `${await this.tools.getMetadata(dataProduct,'_volumen').catch(async () =>'')} L`
                             },
-
                             {
                                 "id": "LENGTH",
                                 "value_name": (undefined === dataProduct.dimensions) ? "15" : parseInt(dataProduct.dimensions.length).toFixed(0)  + " cm"
@@ -1096,7 +1211,8 @@ class AllController {
                             {
                                 "id":"MATERIALS",
                                 "value_name": `${await this.tools.getMetadata(dataProduct,'_material').catch(async () =>'')}`
-                            }
+                            },
+                            
                         ];
                         await this.tools.getMetadata(dataProduct, '_forma').then(async (shape) => {
                             data['attributes'][13] = {
@@ -1551,7 +1667,379 @@ class AllController {
         });
     }
 
-    //* Getters
+    //* Crear objetoDatos
+    /**
+     * @version 2022.04.20
+     * @author Gerardo Gonzalez
+     * @param inventory Array con información de ASIN, price, stock_quantity
+     * @param onAP boolean Indica si la funcion se usa para crear un producto de venta propia o en Amazon Prime a Mercadolibre
+     * @param amzMod Objeto AmazonAPIModel
+     * @param amzScrap Objeto AmazonScraperModel
+     * @param mlMod Objeto MercadoLibreAPIModel
+     * @return data Objeto con la información para crear o actualizar un producto en woocommerce
+     * 
+     */
+    async crearDataWoocommerce(inventory, onAP = false, amzMod = this.amzMod, amzScrap = this.amzScrap, mlMod = this.mlMod, claroMod = this.claroMod){
+
+        let dataProduct = {
+
+            sku: inventory.asin, //ASIN
+            name: await amzMod.getItemName().catch(async () => inventory.title),
+            type: "simple",
+            regular_price: inventory.price.toString(), //Amazon Price
+            description: await amzScrap.getDescription() + " " + await this.amzScrap.getLongDescription(),
+            short_description: await amzScrap.getShortDescription(),
+            external_url: 'https://www.amazon.com.mx/dp/'+inventory.asin+'?&linkCode=ll1&tag=tecnologias36-20&language=es_MX&ref_=as_li_ss_tl',
+            button_text: 'Compra en Amazon',
+            weight: await amzMod.getWeight().catch(async () => {
+                return '15'
+            }),
+            dimensions: {
+                length: await amzMod.getLength().catch(async () => {
+                    return '15'
+                }),
+                width: await amzMod.getWidth().catch(async () => {
+                    return '15'
+                }),
+                height: await amzMod.getHeight().catch(async () => {
+                    return '15'
+                }),
+            },
+            images: await amzScrap.getImages().catch(async () => {
+                return await amzMod.getImages()
+            }),
+            meta_data: [{
+                    key: "_ean",
+                    value: await amzMod.getEAN().catch(async () => {
+                        return ''
+                    }),
+                },
+                {
+                    key: "_brand_name",
+                    value: await amzMod.getBrandName().catch(async () => {
+                        return ''
+                    }),
+                },
+                {
+                    key: "_manufacturer",
+                    value: await amzMod.getManufacturer().catch(async () => {
+                        return ''
+                    }),
+                },
+                {
+                    key: "_model_number",
+                    value: await amzMod.getModelNumber().catch(async () => {
+                        return ''
+                    }),
+                },
+                {
+                    key: "_amazon_category",
+                    value: await amzMod.getCategory(inventory.asin)
+                },
+                {
+                    key: "_competitive_pricing",
+                    value: await amzMod.getCompetitivePricing(inventory.asin),
+                },
+                {
+                    key: "_mercadolibre_category_code",
+                    value: await mlMod.getProductCategory(await amzMod.getItemName())
+                },
+                {
+                    key: "_mercadolibre_category_name",
+                    value: await mlMod.getProductCategoryName(await amzMod.getItemName())
+                },
+                {
+                    key: "_claroshop_category_code",
+                    value: await claroMod.getClaroCategory(await mlMod.getProductCategory(await this.amzMod.getItemName()))
+                        .catch(async (error) => {
+                            this.error_log += `Error en getClaroCategory de copyAmazonToWoocommerce: ${error}`
+                            console.log(`Error en getClaroCategory de copyAmazonToWoocommerce: ${error}`);
+                            return ''
+                        }),
+                },
+                {
+                    key: "_material",
+                    value: await this.amzMod.getMaterial().catch(async (error) => {
+                        this.error_log += `Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`
+                        console.log(`Error en getMaterial de copyAmazonToWoocommerce: ${error.toString()}`);
+                        return ''
+                    }),
+                },
+                {
+                    key: "_color",
+                    value: await this.amzMod.getColor().catch(async (error) => {
+                        this.error_log += `Error en getColor de copyAmazonToWoocommerce: ${error.toString()}`
+                        console.log(`Error en getColor de copyAmazonToWoocommerce: ${error.toString()}`);
+                        return ''
+                    }),
+                },
+                {
+                    key: "_max_age",
+                    value: await this.amzMod.getMaxAge().catch(async (error) => {
+                        this.error_log += `Error en getMaxAge de copyAmazonToWoocommerce: ${error.toString()}`
+                        console.log(`Error en getMaxAge de copyAmazonToWoocommerce: ${error.toString()}`);
+                        return ''
+                    }),
+                },
+                {
+                    key: "_min_age",
+                    value: await this.amzMod.getMinAge().catch(async (error) => {
+                        this.error_log += `Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`
+                        console.log(`Error en getMinAge de copyAmazonToWoocommerce: ${error.toString()}`);
+                        return ''
+                    }),
+                },
+                {
+                    key: "_size",
+                    value: await this.amzMod.getSize().catch(async (error) => {
+                        this.error_log += `Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`
+                        console.log(`Error en getSize de copyAmazonToWoocommerce: ${error.toString()}`);
+                        return ''
+                    }),
+                },
+                {
+                    key: "_volumen",
+                    value: await this.amzScrap.getVolumen().catch(async (error) => {
+                        this.error_log += 'Error en getVolumen de copyAmazonToWoocommerce: ' + error;
+                        console.log('Error en getVolumen de copyAmazonToWoocommerce: ' + error);
+                        return ''
+                    }),
+                },
+                {
+                    key: "_tipo",
+                    value: await this.amzMod.getType().catch(async () => ''),
+                },
+                {
+                    key: "_in_warehouse",
+                    value: 'off',
+                },
+                {
+                    key: "_in_claroshop",
+                    value: 'off',
+                },
+                {
+                    key: "_ship",
+                    value: inventory.ship,
+                },
+                {
+                    key: "_forma",
+                    value: ""
+                },
+                {
+                    key: "_personaje",
+                    value: ""
+                },
+                {
+                    key: "_seller",
+                    value: await this.amzScrap.getSeller(),
+                },
+                {
+                    key: "_escala",
+                    value: "1:1"
+                }
+
+            ]
+        }
+
+        if(onAP){
+            dataProduct['type'] = "external";
+            dataProduct['meta_data'].push({
+                key: "_amazonPrime",
+                value: 'on',
+            });
+            dataProduct['meta_data'].push({
+                key: "_in_mercadolibre",
+                value: 'on',
+            });
+        } else {
+            dataProduct['manage_stock'] = true;
+            dataProduct['stock_quantity'] = inventory.totalQuantity;
+            dataProduct['meta_data'].push({
+                key: "_amazonPrime",
+                value: 'off',
+            });
+            dataProduct['meta_data'].push({
+                key: "_in_mercadolibre",
+                value: 'off',
+            });
+        }
+
+        return dataProduct
+
+    }
+
+    async crearDataMercadolibre(inventory, onAP = false){
+
+        let warehouse = await this.tools.getMetadata(inventory, '_in_warehouse').catch(async () => {
+            return 'off'
+        });
+
+        let dataProduct = {
+            "title": `${inventory.name.slice(0,60)}`,
+            "category_id": await this.tools.getMetadata(inventory, '_mercadolibre_category_code'),
+            //"price": 1000,
+            "currency_id": "MXN",
+            "buying_mode": "buy_it_now",
+            "condition": "new",
+            "listing_type_id": "gold_pro",
+            "video_id": "",
+            "sale_terms": [{
+                    "id": "WARRANTY_TYPE",
+                    "name": "Tipo de garantía",
+                    "value_id": "2230280",
+                    "value_name": "Garantía del vendedor",
+                    "value_struct": null,
+                    "values": [{
+                        "id": "2230280",
+                        "name": "Garantía del vendedor",
+                        "struct": null
+                    }]
+                },
+                {
+                    "id": "WARRANTY_TIME",
+                    "name": "Tiempo de garantía",
+                    "value_id": null,
+                    "value_name": "90 dias",
+                    "value_struct": {
+                        "number": 90,
+                        "unit": "días"
+                    },
+                    "values": [{
+                        "id": null,
+                        "name": "90 dias",
+                        "struct": {
+                            "number": 90,
+                            "unit": "días"
+                        }
+                    }]
+                },                
+            ],
+            "pictures": await this.mlMod.normalizePictures(inventory).catch(async ()=>{return []}),
+            "attributes": [{
+                    "id": "MANUFACTURER",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_manufacturer').catch(async () =>'')}`
+                },
+                {
+                    "id": "BRAND",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_brand_name').catch(async () =>'')}`
+                },
+                {
+                    "id": "EAN",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_ean').catch(async () =>'')}`
+                },
+                {   "id": "GTIN",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_ean').catch(async () =>'')}`
+                },
+                {
+                    "id": "SELLER_SKU",
+                    "value_name": `${inventory.sku}`
+                },
+                {
+                    "id": "QUILT_AND_COVERLET_SIZE",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_size').catch(async () =>'')}`
+                },
+                {
+                    "id": "MODEL",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_model_number').catch(async () =>'')}`
+                },
+                {
+                    "id": "COLOR",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_color').catch(async () =>'')}`
+                },
+                {
+                    "id": "UNIT_VOLUME",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_volumen').catch(async () =>'')} L`
+                },
+                {
+                    "id": "VOLUME_CAPACITY",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_volumen').catch(async () =>'')} L`
+                },
+                {
+                    "id": "NAME",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_brand_name').catch(async () =>'')}`
+                },
+                {
+                    "id": "SHAPE",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_forma').catch(async () =>'')}` 
+                },
+                {
+                    "id": "LENGTH",
+                    "value_name": parseInt(inventory.dimensions.length).toFixed(0) + " cm"
+                },
+                {
+                    "id": "WIDTH",
+                    "value_name": parseInt(inventory.dimensions.width).toFixed(0) + " cm"
+                },
+                {
+                    "id": "HEIGHT",
+                    "value_name": parseInt(inventory.dimensions.height).toFixed(0) + " cm"
+                },
+                {
+                    "id": "CHARACTER",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_personaje').catch(async () =>'')}` 
+                },
+                {
+                    "id":"MATERIALS",
+                    "value_name": `${await this.tools.getMetadata(inventory,'_material').catch(async () =>'')}`
+                },
+                {
+                    "id":"SCALE",
+                    "value_name": `${await this.tools.getMetadata(inventory, '_escala').catch(async () => '')}` 
+                },
+            ]
+        }
+
+        if(onAP){
+            dataProduct["price"] = await this.tools.aumentarPrecio(inventory.regular_price, 1.65);
+            dataProduct["available_quantity"] = 1;
+        } else {
+            dataProduct["price"] = await this.tools.aumentarPrecio(inventory.regular_price, 1.10);
+            dataProduct["available_quantity"] = inventory.stock_quantity;
+        }
+
+        if (dataProduct["price"] < 297) {
+            
+                dataProduct["shipping"] = {
+                    "mode": "me2",
+                    "local_pick_up": false,
+                    "free_shipping": false,
+                    "methods": [],
+                    "costs": []
+                };
+            
+        } else {
+            //let ship = inventory.ship;
+            //if(ship === 0) ship = 150;
+            dataProduct["price"] = Number.parseFloat(dataProduct["price"]) + 150;
+            dataProduct["shipping"] = {
+                "mode": "me2",
+                "local_pick_up": false,
+                "free_shipping": true,
+                "methods": [],
+                "costs": []
+            };
+        }
+
+        if (warehouse.includes('on') || !onAP) {
+            let man = {
+                "id": "MANUFACTURING_TIME",
+                "value_name": "1 días"
+            }
+            dataProduct['sale_terms'].push(man);
+        } else {
+            let man = {
+                "id": "MANUFACTURING_TIME",
+                "value_name": "5 días"
+            }
+            dataProduct['sale_terms'].push(man);
+        }
+
+        dataProduct["plain_text"] = await this.tools.eliminarURLTexto(inventory.description + inventory.short_description);
+
+        return dataProduct
+    }
+
+    //* Getters Productos
     async getWoocommerceProducto(asin) {
         return new Promise(async (resolve, reject) => {
             await this.wooMod.getProduct(asin)

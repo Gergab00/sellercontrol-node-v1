@@ -75,7 +75,7 @@ class AmazonScraperModel {
             await newPage.setDefaultNavigationTimeout(60000);
             await newPage.goto(url + asin)
                 .then(async () => {
-                    console.log("Navegando a: ", url,asin);
+                    console.log("Navegando a: ", url, asin);
                 });
             await newPage.waitForTimeout(3000)
                 .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
@@ -84,35 +84,36 @@ class AmazonScraperModel {
             //*Get images URL #ivLargeImage > img
             let formattedImg = [];
             await newPage.click('#landingImage')
-            .then(async()=>{
+                .then(async () => {
 
-                let imageTemp = await newPage.$$('.ivThumbImage');
+                    let imageTemp = await newPage.$$('.ivThumbImage');
 
-                console.log(imageTemp.length);
-    
-                for (let it = 0; it < imageTemp.length; it++) {
-                    await newPage.click(`#ivImage_${it}`).then(async () => {
-    
-                        await newPage.waitForTimeout(3000)
-                            .then(() => console.log('Espere un segundo se sta obteniendo la imagen...'));
-    
-                        let bigImg = await newPage.$eval("#ivLargeImage > img", (e) => e.src);
-    
-                        console.log('Enlace obtenido: ', bigImg);
-                        formattedImg.push(bigImg);
-    
-                    }).catch(async ()=> console.log('No hay imagenes en el nodo.'));
-    
-                }
+                    console.log(imageTemp.length);
 
-            })
-            .catch(async ()=> {
-                await newPage.click('#imgThumbs > span > a');
-                let bigImg = await newPage.$eval('#igImage', (e) => e.src);
-                console.log('Enlace obtenido: ', bigImg);
-                formattedImg.push(bigImg);
-            });
-           
+                    for (let it = 0; it < imageTemp.length; it++) {
+                        await newPage.click(`#ivImage_${it}`).then(async () => {
+
+                            await newPage.waitForTimeout(3000)
+                                .then(() => console.log('Espere un segundo se sta obteniendo la imagen...'));
+
+                            let bigImg = await newPage.$eval("#ivLargeImage > img", (e) => e.src);
+
+                            console.log('Enlace obtenido: ', bigImg);
+                            formattedImg.push(bigImg);
+
+                        }).catch(async () => console.log('No hay imagenes en el nodo.'));
+
+                    }
+
+                })
+                .catch(async () => {
+
+                    await newPage.click('#imgThumbs > span > a');
+                    let bigImg = await newPage.$eval('#igImage', (e) => e.src);
+                    console.log('Enlace obtenido: ', bigImg);
+                    formattedImg.push(bigImg);
+                });
+
 
             //console.log(`Finish Scroll at: ${lastPosition}`);
             await newPage.click(`a[title="Ver opciones de compra"]`)
@@ -178,36 +179,42 @@ class AmazonScraperModel {
             //* Get dimension
             let dimension = [];
             for (let grs = 0; grs < 10; grs++) {
-                dimension.push( await newPage.$eval(`#productDetails_techSpec_section_1 > tbody > tr:nth-child(${grs+1}) > td`, (e) => {
+                dimension.push(await newPage.$eval(`#productDetails_techSpec_section_1 > tbody > tr:nth-child(${grs+1}) > td`, (e) => {
                     return e.innerHTML
                 }).catch(async () => {
                     return '15'
-                })
-                );           
+                }));
             }
 
             //* Get Volumen
             let volumen;
-            if(null !== await newPage.$('tr.a-spacing-small.po-volume_capacity_name > td.a-span9 > span') ){
-                volumen =  await newPage.$eval('tr.a-spacing-small.po-volume_capacity_name > td.a-span9 > span', (e) => e.innerText)
-            .catch(async () => {
-                return ""
-            });
-            }else if(null !== await newPage.$('tr.a-spacing-small.po-item_volume > td.a-span9 > span')){
+            if (null !== await newPage.$('tr.a-spacing-small.po-volume_capacity_name > td.a-span9 > span')) {
+                volumen = await newPage.$eval('tr.a-spacing-small.po-volume_capacity_name > td.a-span9 > span', (e) => e.innerText)
+                    .catch(async () => {
+                        return ""
+                    });
+            } else if (null !== await newPage.$('tr.a-spacing-small.po-item_volume > td.a-span9 > span')) {
                 volumen = await newPage.$eval('tr.a-spacing-small.po-item_volume > td.a-span9 > span', (e) => e.innerText)
-                .catch(async () => {
-                    return ""
-                });
+                    .catch(async () => {
+                        return ""
+                    });
             }
-            
-            
+
+            //*Get Sellers 
+            let seller = await newPage.$eval('#tabular-buybox > div.tabular-buybox-container > div:nth-child(4) > div > span', (e) => e.innerText)
+                .catch(async (error) => {
+                    reject("No disponible para la venta.")
+                });
+
+
             let res = [];
             res['description'] = description;
             res['shortDescription'] = shortDescription;
             res['formattedImg'] = formattedImg;
             res['longDescription'] = longDescription;
             //res['dimension'] = dimension;
-            res['volumen'] = volumen; 
+            res['volumen'] = volumen;
+            res['seller'] = seller;
 
             await newPage.close();
             //await browser.close().then(async () => console.log("The page was close!")).catch(async () => console.log("The page was close!"));
@@ -217,27 +224,38 @@ class AmazonScraperModel {
         });
     }
 
-    async getVolumen(item = this.item){
-        return new Promise(async (resolve, reject) => {                
-            if(item.volumen !== undefined){
+    async getVolumen(item = this.item) {
+        return new Promise(async (resolve, reject) => {
+            if (item.volumen !== undefined) {
                 let v = item.volumen;
                 let m = item.volumen;
                 v = v.match(/(\d+)/g);
                 v = Number.parseInt(v[0]);
-                if(m.includes('Liters')){
+                if (m.includes('Liters')) {
                     console.log('Litros');
-                    resolve(v/1000)
-                }else if(m.includes('Mililitros')){
+                    resolve(v / 1000)
+                } else if (m.includes('Mililitros')) {
                     console.log('Militros');
                     resolve(v)
-                }else if(m.includes('Galones')){
+                } else if (m.includes('Galones')) {
                     console.log('Galones');
-                    resolve(v*3785)
+                    resolve(v * 3785)
                 }
             }
             reject('El objeto esta vacío, o no existe el valor. Error en la función getVolumen.')
         });
     }
+
+    async getSeller(item = this.item) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(item.seller);
+            } catch (e) {
+                reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getDimension`)
+            }
+        });
+    }
+
     async getDimension(item = this.item) {
         return new Promise(async (resolve, reject) => {
             try {
@@ -245,7 +263,7 @@ class AmazonScraperModel {
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getDimension`)
             }
-        })
+        });
     }
 
     async getDescription(item = this.item) {
@@ -284,7 +302,7 @@ class AmazonScraperModel {
         return new Promise(async (resolve, reject) => {
             try {
                 let img = [];
-                if(0 == item.formattedImg.length) reject('Array de imagenes vacia.');
+                if (0 == item.formattedImg.length) reject('Array de imagenes vacia.');
                 for (let i = 0; i < item.formattedImg.length; i++) {
                     let a = {
                         "src": item.formattedImg[i],
@@ -295,6 +313,90 @@ class AmazonScraperModel {
             } catch (e) {
                 reject(`El objeto esta vacío, o no existe el valor. Error: ${e}. Error en la función getImages`)
             }
+        });
+    }
+
+    /**
+     * @author Gerardo Gonzalez
+     * @version 2022.04.22
+     * @param {Object} browser objeto para poder abrir las páginas
+     * @param {String[]} urlArray de strings con las url de busqueda a escrapear
+     * @param {number} p Número entero de paginas a avanzar en la busqueda
+     */
+    async scrapeAmazonProducts(browser, urlArray = [], p = 1) {
+        return new Promise(async (resolve, reject) => {
+            const url = urlArray;
+            const pages = p;
+            const page = await browser.newPage(); //Se crea la nueva pesataña
+            await page.setDefaultNavigationTimeout(0);
+            let data = []; //Se inicializa el array que contendra los datos.
+
+            for (let gi = 0; gi < url.length; gi++) { //Se va iterar en el array de URL
+                const u = url[gi];
+                await page.goto(u).then(async () => await page.bringToFront());//Se navega la pagina de busqueda
+                let condition = true;
+                let loop = 0;
+
+                do {
+                    await page.waitForTimeout(5000);
+                    await scrollPageToBottom(page, 500, 50);
+                    let asinArray = await page.$$eval('div[data-component-type="s-search-result"]', tds => {
+                        // Extract the asin from the data
+                        tds = tds.map(el => el.dataset.asin);
+                        return tds;
+                    }).catch(async (error) => {
+                        reject("Error: ", error);
+                    });
+                    // span.a-price-whole
+                    let priceArray = await page.$$eval('span.a-price-whole', tds => {
+                        // Extract the data from the page
+                        tds = tds.map(el => el.innerText);
+                        return tds;
+                    }).catch(async (error) => {
+                        reject("Error: ", error);
+                    });
+                    //div.s-title-instructions-style > h2 > a > span
+                    let titleArray = await page.$$eval('div.s-title-instructions-style > h2 > a > span', tds => {
+                        // Extract the data from the page
+                        tds = tds.map(el => el.innerText);
+                        return tds;
+                    }).catch(async (error) => {
+                        reject("Error: ", error);
+                    });
+
+                    await page.click('a.s-pagination-item.s-pagination-next.s-pagination-button.s-pagination-separator').catch(async () => condition = false);
+
+                    if (loop === pages) condition = false;
+
+                    for (let i = 0; i < asinArray.length; i++) {
+                        let repetido = true;
+                        let a = [];
+                        for (let grix = 0; grix < data.length; grix++) {
+                            if (asinArray[i] === data[grix].asin) repetido = false;
+                        }
+                        if (repetido) {
+                            a = {
+                                asin: asinArray[i],
+                                price: Number.parseInt(priceArray[i].replace(',', '')),
+                                totalQuantity: 2,
+                                title: titleArray[i],
+                                ship: 125
+                            };
+                            console.log(`Array información: ${a.asin}, ${a.totalQuantity}, ${a.ship}`);
+                            data.push(a);
+                        } else {
+                            console.log(`Asin ${asinArray[i]} Repetido.`)
+                        }
+                    }
+                    await page.waitForTimeout(5000);
+
+                    loop++;
+
+                } while (condition);
+
+            }
+
+            resolve(data)
         });
     }
 
@@ -364,6 +466,7 @@ class AmazonScraperModel {
                 if (nextButtonExist) {
                     await page.click('#myitable-pagination > ul > li.a-last');
                     //return scrapeCurrentPage(); // Call this function recursively
+                    a.s - pagination - item.s - pagination - next.s - pagination - button.s - pagination - separator
                 } else {
 
                     fs.writeFile(
@@ -484,19 +587,21 @@ class AmazonScraperModel {
             for (let i = 0; i < asinArray.length; i++) {
                 let repetido = true;
                 for (let grix = 0; grix < data.length; grix++) {
-                    if(asinArray[i] === data[grix].asin) repetido = false;   
+                    if (asinArray[i] === data[grix].asin) repetido = false;
                 }
-                if(repetido){
+                if (repetido) {
                     a = {
                         asin: asinArray[i],
-                        price: Number.parseInt(priceArray[i].replace(',','')),
+                        price: Number.parseInt(priceArray[i].replace(',', '')),
                         totalQuantity: Number.parseInt(quantityArray[i]),
                         title: titleArray[i],
-                        ship: Number.parseInt(shipArray[i].replace('+ MXN$',''))
+                        ship: Number.parseInt(shipArray[i].replace('+ MXN$', ''))
                     };
                     console.log(`Array información: ${a.asin}, ${a.totalQuantity}, ${a.ship}`);
                     data.push(a);
-                }else{console.log(`Asin ${asinArray[i]} Repetido.`)}
+                } else {
+                    console.log(`Asin ${asinArray[i]} Repetido.`)
+                }
             }
             resolve(data)
         });

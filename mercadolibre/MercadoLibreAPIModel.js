@@ -252,7 +252,7 @@ class MercadoLibreAPIModel {
             };
             await axios(options)
                 .then((res) => {
-                    console.log("Categoria obtenida: ", res.data);
+                    //console.log("Categoria obtenida: ", res.data);
                     //console.log(res.data[0].category_id);
                     //Note Revisar la parte de undefined, para ponerlo en otros.
                     (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
@@ -299,7 +299,64 @@ class MercadoLibreAPIModel {
         });
     }
 
+    /**
+     * @author Gerardo Gonzalez
+     * @version 2022.04.21
+     * @param {object} data Objeto con las propiedades necesarias
+     */
+    async crearProducto(data, access_token = this.access_token){
+        return new Promise(async (resolve, reject) => {
+            let description = data.plain_text;
+            delete data.plain_text;
+            //data = data.filter((item) => item.attributes.id !== 'Largo' );
+            let options = {
+                method: 'post',
+                baseURL: 'https://api.mercadolibre.com/items',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                },
+                data:data
+            }
+
+            //console.log("Options: ", options);
+
+            await axios(options)
+                .then(async (res) => {
+                    console.log("Producto creado exitosamente en Mercadolibre con SKU:", res.data.id)
+                    //resolve(res.data);
+                    options = {
+                        method: 'post',
+                        baseURL: `https://api.mercadolibre.com/items/${res.data.id}/description`,
+                        headers: {
+                            'Authorization': `Bearer ${access_token}`
+                        },
+                        data: {
+                            "plain_text": description,
+                        }
+                    }
+
+                    await axios(options)
+                        .then((res) => {
+                            //console.log("Producto creado exitosamente en Mercadolibre con SKU:" + res.data)
+                            resolve(res.data);                            
+                        }).catch((error) => {
+                            //reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
+                            console.log('Error en crearProducto-descripcion ', error.message,'. Code: ', error.response);
+                            reject(error)      
+                        });
+                }).catch((error) => {
+                    //reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
+                    console.log('Error en crearProducto ', error.message,'. Code: ', error.response.data);
+                    reject("Error en función crearProducto al crear el producto en ML.")      
+                });
+
+        });
+    }
+
     //NOTE Se procede a mandar el json para hacerlo dinamico.
+    /**
+     * @deprecated
+     */
     async createProduct(dataProduct, category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
             
@@ -557,7 +614,7 @@ class MercadoLibreAPIModel {
 
             await axios(options)
                 .then(async (res) => {
-                    //console.log(res.data.results[0])
+                    console.log(res.data.results[0])
                     resolve(res.data.results[0])
                 })
                 .catch(async (error) => {
@@ -621,6 +678,10 @@ class MercadoLibreAPIModel {
         });
     }
 
+    /**
+     * @version 2022.04.27
+     * @author Gerardo Gonzalez
+     */
     async updateProduct(item_id, data, access_token = this.access_token){
         return new Promise(async (resolve, reject) => {
             let options = {
@@ -633,11 +694,36 @@ class MercadoLibreAPIModel {
             }
             
             await axios(options)
-                .then(async (res) => {
-                    resolve(res)
+                .then(async (response) => {
+                    // Successful request
+                    //console.log(response.data);
+                    //console.log(response.status);
+                    //console.log(response.statusText);
+                    //console.log(response.headers);
+                    //console.log(response.config);
+                    resolve(response.data)
                 })
                 .catch(async (error) => {
-                    reject(error)
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        //console.log(error.response.data);
+                        //console.log(error.response.status);
+                        //console.log(error.response.headers);
+                        reject(error.response.data)
+                      } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        //console.log(error.request);
+                        reject(error.request)
+                      } else {
+                        // Something happened in setting up the request that triggered an Error
+                        //console.log('Error', error.message);
+                        reject(error.message)
+                      }
+                      //console.log(error.config);
+                    reject(error.config)
                 });
         });
     }

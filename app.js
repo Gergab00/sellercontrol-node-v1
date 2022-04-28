@@ -8,11 +8,12 @@ const AllController = require('./controller/AllController');
 
     const Controller = new AllController();
 
-    let key = 3;
-    let b = true;
+    let key = 17;
+    let b = false;
     let inventory = [];
-    let asin = 'B09TY9W7WV';
-    let ml_cat = 'MLM167538';
+    let asin = 'B08SRB1PTX';
+    let ml_cat = 'MLM1610';
+    let cl_cat = '20251';
 
     switch (key) {
         case 1: //Doc Actualizar stock Mercadolibre
@@ -249,7 +250,7 @@ const AllController = require('./controller/AllController');
                 console.log("No hay acciones programadas")
             break;
             case 15://Doc Obtener atributos de categoria de Claroshop
-                await Controller.getAtributosCategoriaClaro('20231')
+                await Controller.getAtributosCategoriaClaro(cl_cat)
                 .then(async (res) => {
                     console.log("Respuesta de getAtributosCategoriaClaro: ", res);
                 })
@@ -277,6 +278,23 @@ const AllController = require('./controller/AllController');
                 })
                 .catch(async (error) => {
                     console.log("Error de updateWoocommerceWithMercadoLibre: ", error);
+                });
+            break;
+            case 17://Doc Copiar productos de Amazon Prime a Woocommerce y ML
+            await Controller.connectAll()
+                .then(async (res) => {
+                    console.log("Respuesta de connectAll: ", res);
+                })
+                .catch(async (error) => {
+                    console.log("Error de connectAll: ", error);
+                });
+                    
+            await Controller.copyAmazonPrimeToWooyML(false)
+                .then(async (res) => {
+                    console.log("Respuesta de copyAmazonPrimeToWooyML: ", res);
+                })
+                .catch(async (error) => {
+                    console.log("Error de copyAmazonPrimeToWooyML: ", error);
                 });
             break;
         default:

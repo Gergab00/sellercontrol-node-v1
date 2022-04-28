@@ -1,4 +1,6 @@
 const urlRegexSafe = require('url-regex-safe');
+const { convert } = require('html-to-text');
+const jimp = require('jimp');
 
 /**
  * @version 2021.03.03
@@ -9,10 +11,25 @@ class Tools{
     constructor(){}
 
     /**
+     * @version 2022.04.19
+     * @author Gerardo Gonzalez
+     */
+    async ponerMargenAlaImagen(src_img){
+        const image = await jimp.read(src_img);
+        const parrot = await jimp.read('/img/white_background.jpg');
+        const height = image.height + 100;
+        const width  = image.width + 100;
+        
+        parrot.resize(width, height);
+
+        image.blit(parrot);
+    }
+
+    /**
      * @version 2021.03.03
      * @author Gerardo Gonzalez
      */
-    isObject(input) {
+    async isObject(input) {
         return typeof input === "object" && input !== null
     }
 
@@ -21,6 +38,9 @@ class Tools{
      * @author Gerardo Gonzalez
      */
     async eliminarURLTexto(texto){
+        
+        texto = convert(texto);
+
         const matches = texto.match(urlRegexSafe());
         
         if(matches === null) return texto;
@@ -76,6 +96,20 @@ class Tools{
                 resolve()
             });
         });
+    }
+
+    /**
+     * Funcion que aumenta el precio segun el valor que se le de en porcentaje mayor a 1, por ejemplo 1.2 para aumentar en 20%
+     * @version 2022.04.21
+     * @author Gerardo Gonzalez
+     * @param {number} price 
+     * @param {float} aumento 
+     * @returns {float} El valor del precio aumentado en el porcentaje indicado
+     */
+     async aumentarPrecio(price, aumento) {
+        let pricef = Number.parseFloat(price.replace(",", ""));
+        let p = (pricef * aumento)/0.75;
+        return p.toFixed(2);
     }
 
 }

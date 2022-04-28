@@ -224,7 +224,7 @@ class AmazonAPIModel {
         return new Promise(async (resolve, reject) => {
             try {
                 let res = "";
-                console.log('Debug: ',item[0].identifiers[0].identifiers, " Length Object: ", item[0].identifiers[0].identifiers.length);
+                //console.log('Debug: ',item[0].identifiers[0].identifiers, " Length Object: ", item[0].identifiers[0].identifiers.length);
 
                 if(item[0].identifiers[0].identifiers.length === 0) reject(`El objeto esta vacío, o no existe el valor. Error: No existe el valor. Error en la función getEAN`)
 
