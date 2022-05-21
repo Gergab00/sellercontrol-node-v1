@@ -64,6 +64,7 @@ class Tools{
                     //if(dataProduct.meta_data[i].key == '') resolve("Generico");
                     if('' === data.meta_data[i].value) reject('Error en getMetadata, en key - ' + value + ' - el valor está vacío.');
                     if("L'Oreal Paris" == data.meta_data[i].value) resolve("L'Oréal Paris");
+                    console.log('Tools getMetadata: ', data.meta_data[i].value);
                     resolve(data.meta_data[i].value)
                 }
             }
@@ -84,14 +85,14 @@ class Tools{
         });
     }
 
-    async pausa(){
+    async pausa(mensaje = 'Revise el error. Presione ENTER para continuar.'){
         return new Promise(async (resolve) => {
             const readline = require('readline').createInterface({
                 input: process.stdin,
                 output: process.stdout
             });
 
-            readline.question('Revise el error. Presione ENTER para continuar.', (opt) =>{
+            readline.question(mensaje, (opt) =>{
                 readline.close();
                 resolve()
             });

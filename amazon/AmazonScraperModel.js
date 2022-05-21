@@ -94,7 +94,7 @@ class AmazonScraperModel {
                         await newPage.click(`#ivImage_${it}`).then(async () => {
 
                             await newPage.waitForTimeout(3000)
-                                .then(() => console.log('Espere un segundo se sta obteniendo la imagen...'));
+                                .then(() => console.log('Espere un segundo se esta obteniendo la imagen...'));
 
                             let bigImg = await newPage.$eval("#ivLargeImage > img", (e) => e.src);
 
@@ -134,11 +134,12 @@ class AmazonScraperModel {
                 .then(() => console.log('Waited a second! The page are loading...\n¡Espera un segundo! La página se está cargando ...'));
 
             //*Get description
-            let description = await newPage.$('#productDescription') == null ? "\n" : await newPage.$eval('#productDescription', (e) => e.innerText);
+            let description = await newPage.$('#productDescription').catch(async () => { return null }) == null ? "\n" : await newPage.$eval('#productDescription', (e) => e.innerText).catch(async (e) => { console.log(e); return "\n" });
 
             //*Get short description
             let shortDescription = await newPage.$eval('#feature-bullets', (e) => e.innerText)
                 .catch(async (error) => {
+                    console.log(e);
                     return "\n"
                 });
 
@@ -206,6 +207,8 @@ class AmazonScraperModel {
                     reject("No disponible para la venta.")
                 });
 
+            //Note const variaciones = await this.getVariaciones(newPage)
+
 
             let res = [];
             res['description'] = description;
@@ -226,7 +229,7 @@ class AmazonScraperModel {
 
     async getVolumen(item = this.item) {
         return new Promise(async (resolve, reject) => {
-            if (item.volumen !== undefined) {
+            if (typeof item.volumen !== 'undefined') {
                 let v = item.volumen;
                 let m = item.volumen;
                 v = v.match(/(\d+)/g);
@@ -373,8 +376,9 @@ class AmazonScraperModel {
                         let a = [];
                         for (let grix = 0; grix < data.length; grix++) {
                             if (asinArray[i] === data[grix].asin) repetido = false;
+                            if (typeof priceArray[i] === 'undefined') repetido = false;
                         }
-                        if (repetido) {
+                        if (repetido) {        
                             a = {
                                 asin: asinArray[i],
                                 price: Number.parseInt(priceArray[i].replace(',', '')),
@@ -382,7 +386,7 @@ class AmazonScraperModel {
                                 title: titleArray[i],
                                 ship: 125
                             };
-                            console.log(`Array información: ${a.asin}, ${a.totalQuantity}, ${a.ship}`);
+                            console.log(`Array información: ${a.asin}, ${a.title}`);
                             data.push(a);
                         } else {
                             console.log(`Asin ${asinArray[i]} Repetido.`)
