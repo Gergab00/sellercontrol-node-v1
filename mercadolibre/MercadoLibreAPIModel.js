@@ -2,12 +2,15 @@ require('dotenv').config();
 const fs = require('fs');
 const axios = require('axios');
 const Tools = require('../global/Tools')
-const { convert } = require('html-to-text');
+const {
+    convert
+} = require('html-to-text');
 
 class MercadoLibreAPIModel {
 
     tools = new Tools();
     access_token;
+    user_id;
     category_name;
     category_id;
     description;
@@ -15,6 +18,7 @@ class MercadoLibreAPIModel {
     async connect(code) {
         return new Promise(async (resolve, reject) => {
             let options;
+            let condition = true;
             if (fs.existsSync('./json/AuthCode.json')) {
                 let rawdata = fs.readFileSync("./json/AuthCode.json", 'utf8');
                 let retJSON = await JSON.parse(rawdata);
@@ -38,7 +42,10 @@ class MercadoLibreAPIModel {
                     }
 
                 } else {
+                    
                     await this.setAccessToken(retJSON.access_token);
+                    await this.setUserID(retJSON.user_id);
+                    condition = false;
                     resolve(`Access Token válido.`)
                 }
             } else {
@@ -59,15 +66,18 @@ class MercadoLibreAPIModel {
                 }
             }
 
-            await axios(options)
+            if (condition) {
+                await axios(options)
                 .then(async (res) => {
                     let fecha = new Date();
                     let data = {
                         date: fecha,
                         access_token: res.data.access_token,
-                        refresh_token: res.data.refresh_token
+                        refresh_token: res.data.refresh_token,
+                        user_id: res.data.user_id
                     }
                     this.access_token = res.data.access_token;
+                    this.user_id = res.data.user_id;
                     fs.writeFile(
                         './json/AuthCode.json',
                         JSON.stringify(data, null, 2),
@@ -84,12 +94,31 @@ class MercadoLibreAPIModel {
                     );
 
                 })
-                .catch((error) => {
-                    //console.log("Error en getAuthCode:".bgRed.black," ",error.message.red);
-                    //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
-                    reject(`Error en connect: ${error.message}`);
+                .catch(async (error) => {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log(error.response.data);
+                        //console.log(error.response.status);
+                        //console.log(error.response.headers);
+                        reject(error.response.data)
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                        reject(error.request)
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log("Error en MercadolibreAPIModel.connect: ", error.message);
+                        reject(error.message)
+                    }
+                    console.log(error.config);
+                    reject(error.config)
                 });
 
+            }
+            
         });
     }
     /**
@@ -222,7 +251,7 @@ class MercadoLibreAPIModel {
                     //console.log("Categoria obtenida exitosamente: ");
                     //console.log(res);
                     //Note Revisar la parte de undefined, para ponerlo en otros.
-                    (res.data.length == 0) ? this.category_id = 'undefined' : this.category_id = res.data[0].category_id;
+                    (res.data.length == 0) ? this.category_id = 'undefined': this.category_id = res.data[0].category_id;
                     resolve(this.category_id);
                 })
                 .catch((error) => {
@@ -255,8 +284,8 @@ class MercadoLibreAPIModel {
                     //console.log("Categoria obtenida: ", res.data);
                     //console.log(res.data[0].category_id);
                     //Note Revisar la parte de undefined, para ponerlo en otros.
-                    (res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
-                    
+                    (res.data.length == 0) ? this.category_name = 'undefined': this.category_name = res.data[0].category_name;
+
                     resolve(this.category_name);
                 })
                 .catch((error) => {
@@ -267,34 +296,53 @@ class MercadoLibreAPIModel {
         });
     }
 
-     /**
+    /**
      * 
      * @param {String} access_token 
      * @param {String} category_id Id de la categoria a buscar.
      * @returns {!Promise<String>} That if are resolve return a Array with the category att
      */
-      async getProductCategoryAtt(category_id = this.category_id, access_token = this.access_token) {
+    async getProductCategoryAtt(category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
-            
+
             let options = {
                 method: 'get',
-                baseURL: `https://api.mercadolibre.com/categories/${category_id}/attributes`,
+                baseURL: `https://api.mercadolibre.com/categories/${category_id}`,
                 headers: {
                     'Authorization': `bearer ${access_token}`
                 }
             };
             await axios(options)
-                .then((res) => {
-                    //console.log("Categoria obtenida exitosamente: ".green,colors.green(res.data));
-                    //console.log(res.data[0].category_id);
-                    //(res.data.length == 0) ? this.category_name = 'undefined' : this.category_name = res.data[0].category_name;
-                    
-                    resolve(res.data);
+                .then(async (response) => {
+                    // Successful request
+                    console.log(response.data);
+                    //console.log(response.status);
+                    //console.log(response.statusText);
+                    //console.log(response.headers);
+                    //console.log(response.config);
+                    resolve(response.data)
                 })
-                .catch((error) => {
-                    //console.log("Error en getProductCategory:".bgRed.black," ",error.message.red);
-                    //console.log(colors.yellow(error.response.data),colors.yellow(error.response.config));
-                    reject(`Error en getProductCategoryAtt: ${error.message}`);
+                .catch(async (error) => {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log(error.response.data);
+                        //console.log(error.response.status);
+                        //console.log(error.response.headers);
+                        reject(error.response.data)
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                        reject(error.request)
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
+                        reject(error.message)
+                    }
+                    console.log(error.config);
+                    reject(error.config)
                 });
         });
     }
@@ -304,7 +352,7 @@ class MercadoLibreAPIModel {
      * @version 2022.04.21
      * @param {object} data Objeto con las propiedades necesarias
      */
-    async crearProducto(data, access_token = this.access_token){
+    async crearProducto(data, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
             let description = data.plain_text;
             delete data.plain_text;
@@ -315,13 +363,19 @@ class MercadoLibreAPIModel {
                 headers: {
                     'Authorization': `Bearer ${access_token}`
                 },
-                data:data
+                data: data
             }
 
             //console.log("Options: ", options);
 
             await axios(options)
                 .then(async (res) => {
+                    // Successful request
+                    //console.log(response.data);
+                    //console.log(response.status);
+                    //console.log(response.statusText);
+                    //console.log(response.headers);
+                    //console.log(response.config);
                     console.log("Producto creado exitosamente en Mercadolibre con SKU:", res.data.id)
                     //resolve(res.data);
                     options = {
@@ -338,16 +392,61 @@ class MercadoLibreAPIModel {
                     await axios(options)
                         .then((res) => {
                             //console.log("Producto creado exitosamente en Mercadolibre con SKU:" + res.data)
-                            resolve(res.data);                            
+                            resolve(res.data);
                         }).catch((error) => {
                             //reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
-                            console.log('Error en crearProducto-descripcion ', error.message,'. Code: ', error.response);
-                            reject(error)      
+                            console.log('Error en crearProducto-descripcion ', error.message, '. Code: ', error.response);
+                            if (error.response) {
+                                // The request was made and the server responded with a status code
+                                // that falls out of the range of 2xx
+                                //console.log(error.response.data);
+                                //console.log(error.response.status);
+                                //console.log(error.response.headers);
+                                if (error.response.data.message.includes('Invalid token') || error.response.data.message.includes('expired_token')) {
+                                    reject("Invalid token.")
+                                }
+                                reject(error.response.data)
+                            } else if (error.request) {
+                                // The request was made but no response was received
+                                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                                // http.ClientRequest in node.js
+                                //console.log(error.request);
+                                reject(error.request)
+                            } else {
+                                // Something happened in setting up the request that triggered an Error
+                                //console.log('Error', error.message);
+                                reject(error.message)
+                            }
+                            //console.log(error.config);
+                            reject(error.config)
                         });
                 }).catch((error) => {
-                    //reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
-                    console.log('Error en crearProducto ', error.message,'. Code: ', error.response.data);
-                    reject("Error en función crearProducto al crear el producto en ML.")      
+
+                    //console.log('Error en función crearProducto al crear el producto en ML. ', error.message, '. Code: ', error.response.data);
+                    //Note poner función para reconectar al recibir el mensaje Invalid token
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        //console.log(error.response.data);
+                        //console.log(error.response.status);
+                        //console.log(error.response.headers);
+                        if (error.response.data.message.includes('Invalid token') || error.response.data.message.includes('expired_token')) {
+                            reject("Invalid token.")
+                        }
+                        reject(error.response.data)
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        //console.log(error.request);
+                        reject(error.request)
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        //console.log('Error', error.message);
+                        reject(error.message)
+                    }
+                    //console.log(error.config);
+                    reject(error.config)
                 });
 
         });
@@ -359,130 +458,133 @@ class MercadoLibreAPIModel {
      */
     async createProduct(dataProduct, category_id = this.category_id, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
-            
+
             let options;
 
-                options = {
-                    method: 'post',
-                    baseURL: 'https://api.mercadolibre.com/items',
-                    headers: {
-                        'Authorization': `Bearer ${access_token}`
-                    },
-                    data: {
-                        "title": `${dataProduct.name.slice(0,60)}`,
-                        "category_id": `${category_id}`,
-                        "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
-                        //"price": 1000,
-                        "currency_id": "MXN",
-                        "available_quantity": dataProduct.stock_quantity,
-                        "buying_mode": "buy_it_now",
-                        "condition": "new",
-                        "listing_type_id": "gold_pro",
-                        "video_id": "",
-                        "sale_terms": [{
-                                "id": "WARRANTY_TYPE",
-                                "name": "Tipo de garantía",
-                                "value_id": "2230280",
-                                "value_name": "Garantía del vendedor",
-                                "value_struct": null,
-                                "values": [{
-                                    "id": "2230280",
-                                    "name": "Garantía del vendedor",
-                                    "struct": null
-                                }]
+            options = {
+                method: 'post',
+                baseURL: 'https://api.mercadolibre.com/items',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                },
+                data: {
+                    "title": `${dataProduct.name.slice(0,60)}`,
+                    "category_id": `${category_id}`,
+                    "price": await this.aumentarPrecio(dataProduct.regular_price, 1.25),
+                    //"price": 1000,
+                    "currency_id": "MXN",
+                    "available_quantity": dataProduct.stock_quantity,
+                    "buying_mode": "buy_it_now",
+                    "condition": "new",
+                    "listing_type_id": "gold_pro",
+                    "video_id": "",
+                    "sale_terms": [{
+                            "id": "WARRANTY_TYPE",
+                            "name": "Tipo de garantía",
+                            "value_id": "2230280",
+                            "value_name": "Garantía del vendedor",
+                            "value_struct": null,
+                            "values": [{
+                                "id": "2230280",
+                                "name": "Garantía del vendedor",
+                                "struct": null
+                            }]
+                        },
+                        {
+                            "id": "WARRANTY_TIME",
+                            "name": "Tiempo de garantía",
+                            "value_id": null,
+                            "value_name": "90 dias",
+                            "value_struct": {
+                                "number": 90,
+                                "unit": "días"
                             },
-                            {
-                                "id": "WARRANTY_TIME",
-                                "name": "Tiempo de garantía",
-                                "value_id": null,
-                                "value_name": "90 dias",
-                                "value_struct": {
+                            "values": [{
+                                "id": null,
+                                "name": "90 dias",
+                                "struct": {
                                     "number": 90,
                                     "unit": "días"
-                                },
-                                "values": [{
-                                    "id": null,
-                                    "name": "90 dias",
-                                    "struct": {
-                                        "number": 90,
-                                        "unit": "días"
-                                    }
-                                }]
-                            },
-                            {
-                                "id": "MANUFACTURING_TIME",
-                                "value_name": "5 días"
-                            }
-                        ],
-                        "pictures": await this.normalizePictures(dataProduct).catch(async ()=>{return []}),
-                        "attributes": [{
-                                "id": "MANUFACTURER",
-                                "value_name": `${await this.getManufacturer(dataProduct)}`
-                            },
-                            {
-                                "id": "BRAND",
-                                "value_name": `${await this.getBrand(dataProduct)}`
-                            },
-                            {
-                                "id": "EAN",
-                                "value_name": `${await this.getEAN(dataProduct)}`
-                            },
-                            {   "id": "GTIN",
-                                "value_name": `${await this.getEAN(dataProduct)}`
-                            },
-                            {
-                                "id": "SELLER_SKU",
-                                "value_name": `${dataProduct.sku}`
-                            },
-                            {
-                                "id": "QUILT_AND_COVERLET_SIZE",
-                                "value_name": `${await this.getSize(dataProduct)}`
-                            },
-                            {
-                                "id": "MODEL",
-                                "value_name": `${await this.getModelNumber(dataProduct)}`
-                            },
-                            {
-                                "id": "COLOR",
-                                "value_name": `${await this.getColor(dataProduct)}`
-                            },
-                            {
-                                "id": "UNIT_VOLUME",
-                                "value_name": `${await this.getVolumen(dataProduct)} L`
-                            },
-                            {
-                                "id": "VOLUME_CAPACITY",
-                                "value_name": `${await this.getVolumen(dataProduct)} L`
-                            },
-                            {
-                                "id": "NAME",
-                                "value_name": `${await this.getBrand(dataProduct)}`
-                            },
-                            {
-                                "id": "SHAPE",
-                                "value_name": `${await this.tools.getMetadata(dataProduct,'_forma').catch(async () =>'')}` 
-                            },
-                            {
-                                "id": "LENGTH",
-                                "value_name": parseInt(dataProduct.dimensions.length).toFixed(0) + " cm"
-                            },
-                            {
-                                "id": "WIDTH",
-                                "value_name": parseInt(dataProduct.dimensions.width).toFixed(0) + " cm"
-                            },
-                            {
-                                "id": "HEIGHT",
-                                "value_name": parseInt(dataProduct.dimensions.height).toFixed(0) + " cm"
-                            },
-                            {
-                                "id": "CHARACTER",
-                                "value_name": `${await this.tools.getMetadata(dataProduct,'_personaje').catch(async () =>'')}` 
-                            }
+                                }
+                            }]
+                        },
+                        {
+                            "id": "MANUFACTURING_TIME",
+                            "value_name": "5 días"
+                        }
+                    ],
+                    "pictures": await this.normalizePictures(dataProduct).catch(async () => {
+                        return []
+                    }),
+                    "attributes": [{
+                            "id": "MANUFACTURER",
+                            "value_name": `${await this.getManufacturer(dataProduct)}`
+                        },
+                        {
+                            "id": "BRAND",
+                            "value_name": `${await this.getBrand(dataProduct)}`
+                        },
+                        {
+                            "id": "EAN",
+                            "value_name": `${await this.getEAN(dataProduct)}`
+                        },
+                        {
+                            "id": "GTIN",
+                            "value_name": `${await this.getEAN(dataProduct)}`
+                        },
+                        {
+                            "id": "SELLER_SKU",
+                            "value_name": `${dataProduct.sku}`
+                        },
+                        {
+                            "id": "QUILT_AND_COVERLET_SIZE",
+                            "value_name": `${await this.getSize(dataProduct)}`
+                        },
+                        {
+                            "id": "MODEL",
+                            "value_name": `${await this.getModelNumber(dataProduct)}`
+                        },
+                        {
+                            "id": "COLOR",
+                            "value_name": `${await this.getColor(dataProduct)}`
+                        },
+                        {
+                            "id": "UNIT_VOLUME",
+                            "value_name": `${await this.getVolumen(dataProduct)} L`
+                        },
+                        {
+                            "id": "VOLUME_CAPACITY",
+                            "value_name": `${await this.getVolumen(dataProduct)} L`
+                        },
+                        {
+                            "id": "NAME",
+                            "value_name": `${await this.getBrand(dataProduct)}`
+                        },
+                        {
+                            "id": "SHAPE",
+                            "value_name": `${await this.tools.getMetadata(dataProduct,'_forma').catch(async () =>'')}`
+                        },
+                        {
+                            "id": "LENGTH",
+                            "value_name": parseInt(dataProduct.dimensions.length).toFixed(0) + " cm"
+                        },
+                        {
+                            "id": "WIDTH",
+                            "value_name": parseInt(dataProduct.dimensions.width).toFixed(0) + " cm"
+                        },
+                        {
+                            "id": "HEIGHT",
+                            "value_name": parseInt(dataProduct.dimensions.height).toFixed(0) + " cm"
+                        },
+                        {
+                            "id": "CHARACTER",
+                            "value_name": `${await this.tools.getMetadata(dataProduct,'_personaje').catch(async () =>'')}`
+                        }
 
-                        ]
-                    }
+                    ]
                 }
-                
+            }
+
             this.description = dataProduct.description + dataProduct.short_description;
             this.description = convert(this.description);
 
@@ -494,7 +596,7 @@ class MercadoLibreAPIModel {
 
                     //reject(`Error en createProduct: ${error.message}. Code: ${error.response.toString()}`);
                     reject(error)
-                    
+
                 });
         });
     }
@@ -504,10 +606,10 @@ class MercadoLibreAPIModel {
 
             description = await this.tools.eliminarURLTexto(description)
                 .catch((error) => {
-                console.log("Error en createDescription -> eliminarURL: ", error.message);
-                console.log(error.response.data /*,colors.magenta(error.response)*/ );
-                reject(error);
-            });
+                    console.log("Error en createDescription -> eliminarURL: ", error.message);
+                    console.log(error.response.data /*,colors.magenta(error.response)*/ );
+                    reject(error);
+                });
 
             let options = {
                 method: 'post',
@@ -533,43 +635,43 @@ class MercadoLibreAPIModel {
         });
     }
 
-    async getProducto(seller_sku, access_token = this.access_token){
+    async getProducto(seller_sku, access_token = this.access_token, user_id = this.user_id) {
         return new Promise(async (resolve, reject) => {
             let options = {
                 method: 'get',
-                baseURL: `https://api.mercadolibre.com/users/${process.env.USER_ID}/items/search?seller_sku=${seller_sku}`,
+                baseURL: `https://api.mercadolibre.com/users/${user_id}/items/search?seller_sku=${seller_sku}`,
                 headers: {
                     'Authorization': `Bearer ${access_token}`
                 }
             };
 
             await axios(options)
-            .then(async(res)=>{
-                //console.log("Respuesta de MercadolibreAPIModel.getProducto - options 1: ", res.data);
+                .then(async (res) => {
+                    //console.log("Respuesta de MercadolibreAPIModel.getProducto - options 1: ", res.data);
 
-                if(res.data.results.length === 0) reject("No existe el producto en Mercadolibre.")
+                    if (res.data.results.length === 0) reject("No existe el producto en Mercadolibre.")
 
-                let options_2 = {
-                    method: 'get',
-                    baseURL: `https://api.mercadolibre.com/items/${res.data.results[0]}`,
-                    headers: {
-                        'Authorization': `Bearer ${access_token}`
-                    }
-                };
-                
-                await axios(options_2)
-                .then(async(res)=>{
-                    resolve(res)
+                    let options_2 = {
+                        method: 'get',
+                        baseURL: `https://api.mercadolibre.com/items/${res.data.results[0]}`,
+                        headers: {
+                            'Authorization': `Bearer ${access_token}`
+                        }
+                    };
+
+                    await axios(options_2)
+                        .then(async (res) => {
+                            resolve(res)
+                        })
+                        .catch(async (error) => {
+                            //console.log("Error: ", error);
+                            reject(error)
+                        })
                 })
-                .catch(async(error)=>{
+                .catch(async (error) => {
                     //console.log("Error: ", error);
                     reject(error)
                 })
-            })
-            .catch(async(error)=>{
-                //console.log("Error: ", error);
-                reject(error)
-            })
         });
     }
 
@@ -580,11 +682,11 @@ class MercadoLibreAPIModel {
      * @param {String} access_token Access token obtenido anteriormente.
      * @returns {!Promise<boolean>} Devuelve una promesa, si no se cumple la promesa devuelve un mensaje de error. Si se cumple regresa un booleano, si es verdadero el producto existe, si es falso no existe.
      */
-    async existsProduct(seller_sku, access_token = this.access_token) {
+    async existsProduct(seller_sku, access_token = this.access_token, user_id = this.user_id) {
         return new Promise(async (resolve, reject) => {
             let options = {
                 method: 'get',
-                baseURL: `https://api.mercadolibre.com/users/${process.env.USER_ID}/items/search?seller_sku=${seller_sku}`,
+                baseURL: `https://api.mercadolibre.com/users/${user_id}/items/search?seller_sku=${seller_sku}`,
                 headers: {
                     'Authorization': `Bearer ${access_token}`
                 }
@@ -602,11 +704,11 @@ class MercadoLibreAPIModel {
         });
     }
 
-    async getIDProduct(seller_sku, access_token = this.access_token) {
+    async getIDProduct(seller_sku, access_token = this.access_token, user_id = this.user_id) {
         return new Promise(async (resolve, reject) => {
             let options = {
                 method: 'get',
-                baseURL: `https://api.mercadolibre.com/users/${process.env.USER_ID}/items/search?seller_sku=${seller_sku}`,
+                baseURL: `https://api.mercadolibre.com/users/${user_id}/items/search?seller_sku=${seller_sku}`,
                 headers: {
                     'Authorization': `Bearer ${access_token}`
                 }
@@ -655,10 +757,10 @@ class MercadoLibreAPIModel {
         });
     }
 
-    async searchProducts(key_word,product_identifier, access_token = this.access_token){
+    async searchProducts(key_word, product_identifier, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
             let baseURL;
-            (key_word != "") ? baseURL = `https://api.mercadolibre.com/products/search?status=inactive&site_id=MLM&q=${encodeURIComponent(key_word)}` : baseURL=`https://api.mercadolibre.com/products/search?status=inactive&site_id=MLM&product_identifier=${product_identifier}`
+            (key_word != "") ? baseURL = `https://api.mercadolibre.com/products/search?status=inactive&site_id=MLM&q=${encodeURIComponent(key_word)}`: baseURL = `https://api.mercadolibre.com/products/search?status=inactive&site_id=MLM&product_identifier=${product_identifier}`
             let options = {
                 method: 'get',
                 baseURL: baseURL,
@@ -682,7 +784,7 @@ class MercadoLibreAPIModel {
      * @version 2022.04.27
      * @author Gerardo Gonzalez
      */
-    async updateProduct(item_id, data, access_token = this.access_token){
+    async updateProduct(item_id, data, access_token = this.access_token) {
         return new Promise(async (resolve, reject) => {
             let options = {
                 method: 'put',
@@ -692,7 +794,7 @@ class MercadoLibreAPIModel {
                 },
                 data: data
             }
-            
+
             await axios(options)
                 .then(async (response) => {
                     // Successful request
@@ -711,18 +813,18 @@ class MercadoLibreAPIModel {
                         //console.log(error.response.status);
                         //console.log(error.response.headers);
                         reject(error.response.data)
-                      } else if (error.request) {
+                    } else if (error.request) {
                         // The request was made but no response was received
                         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                         // http.ClientRequest in node.js
                         //console.log(error.request);
                         reject(error.request)
-                      } else {
+                    } else {
                         // Something happened in setting up the request that triggered an Error
                         //console.log('Error', error.message);
                         reject(error.message)
-                      }
-                      //console.log(error.config);
+                    }
+                    //console.log(error.config);
                     reject(error.config)
                 });
         });
@@ -790,7 +892,7 @@ class MercadoLibreAPIModel {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
                 if (dataProduct.meta_data[i].key == '_brand_name') {
-                    if(dataProduct.meta_data[i].key == '') resolve("Generico");
+                    if (dataProduct.meta_data[i].key == '') resolve("Generico");
                     let str = dataProduct.meta_data[i].value;
                     str = str.toLowerCase();
                     let res = await this.capitalizarPrimeraLetra(str);
@@ -805,8 +907,8 @@ class MercadoLibreAPIModel {
         return new Promise(async (resolve) => {
             for (let i = 0; i < dataProduct.meta_data.length; i++) {
                 if (dataProduct.meta_data[i].key == '_manufacturer') {
-                    if(dataProduct.meta_data[i].key == '') resolve("Generico");
-                    if("L'Oreal Paris" == dataProduct.meta_data[i].value) resolve("L'Oréal Paris");
+                    if (dataProduct.meta_data[i].key == '') resolve("Generico");
+                    if ("L'Oreal Paris" == dataProduct.meta_data[i].value) resolve("L'Oréal Paris");
                     resolve(dataProduct.meta_data[i].value)
                 }
             }
@@ -828,6 +930,10 @@ class MercadoLibreAPIModel {
     //* Otras funciones
     async setAccessToken(access_token) {
         this.access_token = access_token;
+    }
+
+    async setUserID(user_id){
+        this.user_id = user_id;
     }
     /**
      * Función que da formato a la fecha con la composición YYYY-MM-DDTHH:MM:SS
@@ -861,7 +967,7 @@ class MercadoLibreAPIModel {
                         "source": pics.images[greyriv].src
                     }
                     pictures.push(a);
-                    if(9 == greyriv)resolve(pictures)
+                    if (9 == greyriv) resolve(pictures)
                 }
                 resolve(pictures);
             } else {
@@ -908,8 +1014,10 @@ class MercadoLibreAPIModel {
     }
 
     async capitalizarPrimeraLetra(str) {
-        return str.replace(/\b\w/g, function(l){ return l.toUpperCase() })
-      }
+        return str.replace(/\b\w/g, function (l) {
+            return l.toUpperCase()
+        })
+    }
 
 }
 
