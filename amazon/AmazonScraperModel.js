@@ -367,6 +367,20 @@ class AmazonScraperModel {
                         reject("Error: ", error);
                     });
 
+                    let shipArray = await page.$$eval('div.a-section.a-spacing-micro.s-padding-left-small.s-padding-right-small', tds => { //.s-result-list.s-search-results > span.a-color-secondary.s-light-weight-text
+                        tds = tds.map(el => {
+                           
+                            if(`${el.innerText}`.includes('Recíbelo')){
+                                return "a"
+                            } else {
+                                return "b"
+                            }
+                            //return `${el.innerText}`
+                        });
+                        console.log("Entrega: ", tds);
+                        return tds;
+                    });//#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.sg-row > div.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span:nth-child(4) > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(23) > div > div > div > div > 
+
                     await page.click('a.s-pagination-item.s-pagination-next.s-pagination-button.s-pagination-separator').catch(async () => condition = false);
 
                     if (loop === pages) condition = false;
@@ -378,15 +392,17 @@ class AmazonScraperModel {
                             if (asinArray[i] === data[grix].asin) repetido = false;
                             if (typeof priceArray[i] === 'undefined') repetido = false;
                         }
-                        if (repetido) {        
+                        if (repetido) {      
                             a = {
                                 asin: asinArray[i],
                                 price: Number.parseInt(priceArray[i].replace(',', '')),
                                 totalQuantity: 2,
                                 title: titleArray[i],
-                                ship: 125
+                                ship: 125,
+                                shipTime: shipArray[i] == 'a' ? true : false
                             };
-                            console.log(`Array información: ${a.asin}, ${a.title}`);
+                            //console.log(`Array información: ${a.asin}, ${a.title}`);
+                            console.log(`Array información: ${a.shipTime}`);
                             data.push(a);
                         } else {
                             console.log(`Asin ${asinArray[i]} Repetido.`)

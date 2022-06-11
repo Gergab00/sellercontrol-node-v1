@@ -1,87 +1,367 @@
 [
   {
+    "asin": "B09KP1FV67",
+    "price": 849,
+    "totalQuantity": 1,
+    "title": "Edredón Neo Andrómeda Ligero King Size Poliéster Concord",
+    "ship": 0
+  },
+  {
+    "asin": "B09KNYDW6F",
+    "price": 599,
+    "totalQuantity": 2,
+    "title": "Colchas Concord Edredón Neo Andrómeda Ligero Individual Poliéster",
+    "ship": 0
+  },
+  {
+    "asin": "B09KP1GFLQ",
+    "price": 615,
+    "totalQuantity": 1,
+    "title": "Colchas Concord Edredón Neo Andrómeda Ligero Matrimonial Poliéster",
+    "ship": 0
+  },
+  {
+    "asin": "B09KP2F7VX",
+    "price": 699,
+    "totalQuantity": 4,
+    "title": "Colchas Concord Edredón Neo Bloom Gris Ligero Matrimonial Poliéster",
+    "ship": 0
+  },
+  {
+    "asin": "B08H3JPYX3",
+    "price": 999,
+    "totalQuantity": 2,
+    "title": "Colchas Concord Edredón Lavable en casa Ónix",
+    "ship": 0
+  },
+  {
+    "asin": "B087YM87GX",
+    "price": 499,
+    "totalQuantity": 1,
+    "title": "Mi Alegria Robotica Solar 4 en 1",
+    "ship": 0
+  },
+  {
+    "asin": "B0825KT4MD",
+    "price": 699,
+    "totalQuantity": 1,
+    "title": "Mi Alegria Rollos de Helado",
+    "ship": 0
+  },
+  {
+    "asin": "B08HFVTF4M",
+    "price": 599,
+    "totalQuantity": 1,
+    "title": "Barbie Estate Lancha con muñeca Muñeca para niñas de 3 años en adelante",
+    "ship": 0
+  },
+  {
+    "asin": "B01C303FG0",
+    "price": 449,
+    "totalQuantity": 1,
+    "title": "Rossy&Nancy 24inch Human and Synthetic Mixed Hair Cosmetology Training Mannequin Head Golden Brown Color by Rossy&Nancy",
+    "ship": 0
+  },
+  {
+    "asin": "B07SXDFBBJ",
+    "price": 529,
+    "totalQuantity": 1,
+    "title": "Playskool Señor Cara de Papa Parlanchín Toy Figure",
+    "ship": 0
+  },
+  {
+    "asin": "B08KHY4Q4L",
+    "price": 275,
+    "totalQuantity": 1,
+    "title": "Vaporera Acero Inoxidable, Medidas D 27 x 6 cm, No incluye Olla",
+    "ship": 39
+  },
+  {
+    "asin": "B08ZLG52RK",
+    "price": 275,
+    "totalQuantity": 2,
+    "title": "Multi Desarmador, Electrónico (Baterías AAA No Incluidas), ABS Y Poliestireno, Medidas 3 x 4 x 4 cm, 1 Pieza",
+    "ship": 39
+  },
+  {
+    "asin": "B08CZCZMBV",
+    "price": 529,
+    "totalQuantity": 2,
+    "title": "Betterware Guarda Cepillos Dispensador Elegante, Capacidad 5 Cepillos y 1 Pasta Dental, Color Blanco",
+    "ship": 0
+  },
+  {
+    "asin": "B08CZJWYK2",
+    "price": 525,
+    "totalQuantity": 2,
+    "title": "Maxi Lonchera Betterware. Color Gris. Tela Oxford Con Interior Térmico. Soporte 3 Kg.",
+    "ship": 0
+  },
+  {
+    "asin": "B08R5DN7ST",
+    "price": 391,
+    "totalQuantity": 2,
+    "title": "Gira Chopper, Tritura Y Bate, Polipropileno, Poliestireno Y Acero Inoxidable, Capacidad 400 ml, Medidas D 12 x 9 cm, Incluye Navaja Y Batidor, 1 Pieza",
+    "ship": 0
+  },
+  {
+    "asin": "B08GYC7ZL8",
+    "price": 196,
+    "totalQuantity": 2,
+    "title": "Organizador para Manguera Vintage, Acero, Soporta 3 kg, Medidas 10 x 9 x 12 cm",
+    "ship": 39
+  },
+  {
+    "asin": "B08GH99BXB",
+    "price": 549,
+    "totalQuantity": 1,
+    "title": "Manguera Espiral Con Aspersor, Con 7 Tipo De Chorros",
+    "ship": 0
+  },
+  {
+    "asin": "B08TKF9CM5",
+    "price": 225,
+    "totalQuantity": 1,
+    "title": "Marvel Spidey and His Amazing Friends - Miles Morales",
+    "ship": 39
+  },
+  {
+    "asin": "B01DVEHNLA",
+    "price": 329,
+    "totalQuantity": 1,
+    "title": "Cardinal Juego de Mesa Rummy - O Basico",
+    "ship": 0
+  },
+  {
+    "asin": "B0769TZDGS",
+    "price": 419,
+    "totalQuantity": 0,
+    "title": "Disney Figura de Acción Coco Figura Alebrije",
+    "ship": null
+  },
+  {
+    "asin": "B08P3VVL31",
+    "price": 1399,
+    "totalQuantity": 1,
+    "title": "PAW Patrol, Tapete de Juego True Metal Película",
+    "ship": 0
+  },
+  {
+    "asin": "B08HKT4B1V",
+    "price": 499,
+    "totalQuantity": 1,
+    "title": "Bandai México Kindi Kids Scooter Fun Delivery",
+    "ship": 0
+  },
+  {
+    "asin": "B07XF98T7L",
+    "price": 599,
+    "totalQuantity": 1,
+    "title": "Muñeca Barbie Careers Pediatra 2 Bebés rubia",
+    "ship": 0
+  },
+  {
+    "asin": "B09C19GJT7",
+    "price": 850,
+    "totalQuantity": 1,
+    "title": "Barbie It Takes Two, Daisy Paseo en Kayak Día de Campamento, Muñeca para niñas de 3 años en adelante",
+    "ship": 0
+  },
+  {
+    "asin": "B09BW4MBNT",
+    "price": 869,
+    "totalQuantity": 1,
+    "title": "Hot Wheels City, Pista Épica de Dragón, Pista de Juguete para niños de 5 años en adelante Compatible con Otros Sets",
+    "ship": 0
+  },
+  {
+    "asin": "B09BW44GBG",
+    "price": 629,
+    "totalQuantity": 1,
+    "title": "Barbie Estate, Coche Convertible, Set de Juego para niñas de 3 años en adelante",
+    "ship": 0
+  },
+  {
+    "asin": "B00GUO26PC",
+    "price": 549,
+    "totalQuantity": 9,
+    "title": "Kin Fluor Kin - pasta dental de calcio (75 ml)",
+    "ship": 0
+  },
+  {
+    "asin": "B07BFPXDH9",
+    "price": 799,
+    "totalQuantity": 1,
+    "title": "Hot Wheels City, Autolavado, Pista de Juguete para niños de 4 años en adelante",
+    "ship": 0
+  },
+  {
+    "asin": "B07F28VLSH",
+    "price": 549,
+    "totalQuantity": 1,
+    "title": "POLLY POCKET! LIMUSINA DE LUJO",
+    "ship": 0
+  },
+  {
+    "asin": "B08KBW5VX7",
+    "price": 499,
+    "totalQuantity": 1,
+    "title": "Barbie Fashionista, Muñeca Articulaciones Rosa, Muñeca para niñas de 3 años en adelante con 22 puntos de articulación",
+    "ship": 0
+  },
+  {
+    "asin": "B07V7JHNNK",
+    "price": 449,
+    "totalQuantity": 1,
+    "title": "Polly Pocket! Stand De Smoothies, Stand De Piña, Kiosko Parque De Piña, Nueva Polly, Edades 4+ Años",
+    "ship": 0
+  },
+  {
+    "asin": "B084BYK72Q",
+    "price": 1100,
+    "totalQuantity": 1,
+    "title": "Little People DC Super Friends Batimóvil Transformable Vehículo de Juguete para bebés de 18 Meses en adelante",
+    "ship": 0
+  },
+  {
+    "asin": "B08R61BMSB",
+    "price": 569,
+    "totalQuantity": 1,
+    "title": "Pista de Juguete Hot Wheels City Ataque Tóxico del Lagarto",
+    "ship": 0
+  },
+  {
+    "asin": "B016DVQNO6",
+    "price": 199,
+    "totalQuantity": 1,
+    "title": "Linha Ekos Natura - Creme para Pentear Murumuru 150 Ml - (Natura Ekos Collection - Murumuru Combing Cream 5.07 Fl Oz) by Natura",
+    "ship": 39
+  },
+  {
+    "asin": "B08KP7TLJP",
+    "price": 295,
+    "totalQuantity": 1,
+    "title": "Una - Base Matte FPS 15 - Castaño 2 (30ml)",
+    "ship": 39
+  },
+  {
+    "asin": "B01ES3SWNG",
+    "price": 310,
+    "totalQuantity": 0,
+    "title": "Linha Una Natura - Blur Efeito InstantÃneo 30 Ml - (Natura Una Collection - Instant Blur Effect 1.01 Fl Oz)",
+    "ship": null
+  },
+  {
+    "asin": "B08NZ946P3",
+    "price": 240,
+    "totalQuantity": 1,
+    "title": "Lapiz Kajal de Ojos Color Café",
+    "ship": 39
+  },
+  {
+    "asin": "B07BP9CBTH",
+    "price": 340,
+    "totalQuantity": 1,
+    "title": "NATURA CHRONOS Agua micelar purificante 150ml para todo tipo de piel",
+    "ship": 82
+  },
+  {
+    "asin": "B08KP6G9JZ",
+    "price": 140,
+    "totalQuantity": 1,
+    "title": "Una - Lápiz Kajal Para Ojos - Negro (1,14g)",
+    "ship": 39
+  },
+  {
+    "asin": "B07Y7GNYY8",
+    "price": 160,
+    "totalQuantity": 1,
+    "title": "Natura - Una Collection - Máscara de pestañas a prueba de agua de color negro llamativo volumen 0.3 Fl Oz",
+    "ship": 39
+  },
+  {
     "asin": "B09TY9W7WV",
     "price": 109,
     "totalQuantity": 99,
     "title": "Molde para Chocolate, Huevo de Pascua con Flores, Moldes Intermex, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B01H3LNIZM",
     "price": 149,
     "totalQuantity": 3,
     "title": "Playskool Cara de Papa Star Wars R2D2",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B08S752FTT",
     "price": 299,
     "totalQuantity": 1,
     "title": "Imaginext Jurassic World, Dinosaurio Bebé Apatosaurus, Figura de acción para niños de 3 años en adelante",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B09TTTWW5Q",
     "price": 109,
     "totalQuantity": 99,
     "title": "Molde para Chocolate, Huevo de Pascua,, Moldes Intermex, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B09TQTQMQ5",
     "price": 109,
     "totalQuantity": 99,
     "title": "Molde para Chocolate, Huevo de Pascua con Moño, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B07CB16YG8",
     "price": 999,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Baby Alive Muñeca Bebé Va al Baño, Rubia",
-    "ship": 109
+    "ship": null
   },
   {
     "asin": "B09TQF9338",
     "price": 109,
     "totalQuantity": 99,
     "title": "Molde para Chocolate, Huevo de Pascua con Franjas, Molde con 4 Huevos, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B084T9TKQJ",
-    "price": 120,
-    "totalQuantity": 1,
+    "price": 116,
+    "totalQuantity": 0,
     "title": "Tododia Desodorante Anti Manchas Roll On Leche De Algodón 75 Ml.",
-    "ship": 84
+    "ship": null
   },
   {
     "asin": "B08PMR75Q8",
     "price": 150,
     "totalQuantity": 1,
     "title": "Desodorante Antitranspirante en Crema Invisible Vegano Sin Olor Duración hasta 48 hrs",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B01LYXWE0S",
     "price": 109,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Linha Ekos (Murumuru) Natura - Pasta Pre Shampoo 100 Gr - (Natura Ekos (Murumuru) Collection - Pre-Shampoo Paste Net 3.53 Oz)",
-    "ship": 82
+    "ship": null
   },
   {
     "asin": "B07BP9KH2R",
     "price": 110,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Linha Todo Dia (Aclarar) Natura - Desodorante Antitranspirante Roll-on 70 Ml - (Natura Every Day (Whitening) Collection - Antiperspirant Roll-on Deodorant 2.36 Fl Oz)",
-    "ship": 81
+    "ship": null
   },
   {
     "asin": "B092NG92FH",
     "price": 250,
     "totalQuantity": 1,
     "title": "Exfoliante para Cuerpo con azúcar orgánico de Nuez Pecan y Cacao TodoDia Natura",
-    "ship": 85
+    "ship": 39
   },
   {
     "asin": "B01G790T6W",
@@ -92,7 +372,7 @@
   },
   {
     "asin": "B08C4X5BG6",
-    "price": 400,
+    "price": 409,
     "totalQuantity": 0,
     "title": "Natura EKOS Crema para Manos de Castaña Kit de 3 Piezas de 75 gr.",
     "ship": null
@@ -102,7 +382,7 @@
     "price": 139,
     "totalQuantity": 1,
     "title": "Mi Alegria CUBETA DE Playa Pirata",
-    "ship": 83
+    "ship": 39
   },
   {
     "asin": "B08NC27ZGY",
@@ -116,42 +396,42 @@
     "price": 485,
     "totalQuantity": 1,
     "title": "Mega Construx Hot Wheels, Set Remolque Twinduction, Juguete de Construcción para niños de 5 años en adelante",
-    "ship": 92
+    "ship": 0
   },
   {
     "asin": "B08T5Z782T",
     "price": 1099,
     "totalQuantity": 1,
     "title": "Orb ACK OrbeezChallenge NTL",
-    "ship": 108
+    "ship": 0
   },
   {
     "asin": "B08HG25QYR",
     "price": 799,
     "totalQuantity": 1,
     "title": "Orb ACK Color Meez Kit NBL",
-    "ship": 92
+    "ship": 0
   },
   {
     "asin": "B0968LRX66",
     "price": 509,
     "totalQuantity": 1,
     "title": "Pinypon Action Dinosaurs Pack",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B09TJQMK9C",
     "price": 119,
-    "totalQuantity": 99,
+    "totalQuantity": 98,
     "title": "Molde para Gelatina, Canasta de Pascua, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B091DH3H25",
     "price": 160,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Crema para manos Hidratante - Natura - Maracuya",
-    "ship": 82
+    "ship": null
   },
   {
     "asin": "B01LWNWWOU",
@@ -162,297 +442,290 @@
   },
   {
     "asin": "B076NZ81TQ",
-    "price": 277,
-    "totalQuantity": 1,
+    "price": 299,
+    "totalQuantity": 0,
     "title": "Linha Ekos (Pataua) Natura - Tonico Capilar Crescimento e Fortalecimento dos Fios 30 Ml - (Natura Ekos (Pataua) Collection - Growth and Hair Strenghtening Tonic 1.01 Fl Oz)",
-    "ship": 81
+    "ship": null
   },
   {
     "asin": "B07YLTSRRV",
     "price": 160,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Natura Ekos, Manteca Hidratante para Manos, Ucuuba - 75 g",
-    "ship": 82
+    "ship": null
   },
   {
     "asin": "B079W5YND3",
     "price": 160,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Linha Ekos (Pitanga) Natura - Polpa Hidratante Para As Maos 75 Gr - (Natura Ekos (Brazilian Cherry) Collection - Hand Moisturizing Pulp Net 2.64 Oz)",
-    "ship": 82
+    "ship": null
   },
   {
     "asin": "B07JFS45HP",
     "price": 199,
-    "totalQuantity": 2,
+    "totalQuantity": 1,
     "title": "Revlon Highlighting Electric Bolds, Glowed Up, 8 gr",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B09TFXRTWR",
     "price": 119,
     "totalQuantity": 99,
     "title": "Molde para Gelatina, Conejo de Pascua con Huevo de Pascua, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B09TD8V7JB",
     "price": 119,
     "totalQuantity": 99,
     "title": "Molde para Chocolate, Conejo de Pascua con Corazon en el Centro, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B0865RMDTH",
     "price": 199,
     "totalQuantity": 1,
     "title": "Fisher-price Chupon Con Clip Red Fp, Paquete De 1 Count",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09D9XN1F5",
     "price": 129,
     "totalQuantity": 3,
     "title": "Fisher-price Chupon Con Clip, Paquete De 1 Count",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09D9XVW78",
     "price": 199,
     "totalQuantity": 2,
     "title": "Fisher-price Biberon 4 Oz Regular Unisex, Paquete De 1 Count",
-    "ship": 99
+    "ship": 39
   },
   {
     "asin": "B09D9XPK2P",
     "price": 199,
     "totalQuantity": 1,
     "title": "Fisher-price Biberon 4 Oz Regular, Paquete De 1 Count",
-    "ship": 99
+    "ship": 39
   },
   {
     "asin": "B09D9YJ16Q",
     "price": 199,
     "totalQuantity": 1,
     "title": "Fisher-price Biberon 4 Oz Regular, Paquete De 1 Count",
-    "ship": 99
+    "ship": 39
   },
   {
     "asin": "B08R5L9893",
     "price": 249,
     "totalQuantity": 1,
     "title": "FP Little People, Batgirl™ & Batmobile™, Juguete para niños de 18 meses en adelante",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B08R5JRM88",
     "price": 249,
     "totalQuantity": 1,
     "title": "FP Little People, Batman™ & Batmobile™, Juguete para niños de 18 meses en adelante",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B07GBGSFJ2",
     "price": 799,
     "totalQuantity": 1,
     "title": "Fisher-Price Little People, Tren Pasajeros Amigables, Juguete para bebés para niños de 1 año en adelante",
-    "ship": 97
+    "ship": 0
   },
   {
     "asin": "B088XWMBBW",
     "price": 1099,
     "totalQuantity": 1,
     "title": "Nenuco Baby Shark",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B07FDHL4QR",
     "price": 499,
-    "totalQuantity": 1,
+    "totalQuantity": 2,
     "title": "Playskool Figura Spider-Man Mega Mighties Heroes Action Figure",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B08V8LVXC5",
     "price": 599,
     "totalQuantity": 1,
     "title": "Imaginext DC Super Friends, Multipaquete Bat-Tech Sorpresa, Figura de Acción para niños de 3 años en adelante",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B08R5YJ4RV",
     "price": 249,
     "totalQuantity": 1,
     "title": "FP Little People, The Joker™ & Jokermobile, Juguete para niños de 18 meses en adelante",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B09CFY42V3",
     "price": 999,
     "totalQuantity": 1,
     "title": "Jurassic World Toys Human, Dino Pack Sammy, Velociraptor y 2 Figuras de acción coleccionables de Cretácico, articulaciones móviles y Escultura auténtica, Regalo a Partir de 4 años",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B09CGH7836",
     "price": 999,
-    "totalQuantity": 1,
+    "totalQuantity": 2,
     "title": "Jurassic World, Brooklyn y Monolophosaurus, Juguete para niños de 4 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B08QH8Q6S6",
     "price": 519,
     "totalQuantity": 1,
     "title": "Mi Alegria Piano Musical Rosa",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B08J4GTP7B",
     "price": 399,
     "totalQuantity": 1,
     "title": "Hot Wheels Monster Trucks Lanza Y Aplasta Vehículo de Juguete para niños de 4 años en adelante",
-    "ship": 90
+    "ship": 0
   },
   {
     "asin": "B08R5PLKQS",
     "price": 999,
     "totalQuantity": 1,
     "title": "Little People Fisher-Price, DC Super Friends Surtido De Vehículos C/ Personaje, Juguete para niños de 18 Meses en adelante",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B08V77JN2P",
     "price": 599,
     "totalQuantity": 1,
     "title": "DC Super Friends Fisher-Price Imaginext Deluxe Bat-Tech Batman XL, Figura de 10 Pulgadas con Luces, Sonidos y Frases de Personajes",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B01N8TURNC",
     "price": 3500,
     "totalQuantity": 1,
     "title": "Fisher Price Moisés de Lujo",
-    "ship": 209
+    "ship": 0
   },
   {
     "asin": "B08J4HPH6K",
     "price": 1199,
     "totalQuantity": 1,
     "title": "Mega Bloks Peek A Blocks™ Construccion Juego de Construcción de 30 Piezas para niños de 1 año en adelante",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B07WLQYLTX",
     "price": 3999,
     "totalQuantity": 1,
     "title": "Fisher-Price Cachorro Salta Y Aprende Montable para niños de 12 meses en adelante",
-    "ship": 188
+    "ship": 0
   },
   {
     "asin": "B07M7XJSKD",
     "price": 799,
     "totalQuantity": 2,
     "title": "Fisher-Price Ps Learning Juegos De Rol Preescolares  Set De Doctor Opera Y Aprende 3-8 Años GGT61",
-    "ship": 94
+    "ship": 0
   },
   {
     "asin": "B01CNIVXJI",
     "price": 4900,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Fisher Price DKY79 Ríe y Aprende Silla Saltarina Aprende Conmigo",
-    "ship": 272
+    "ship": null
   },
   {
     "asin": "B0797JM49W",
     "price": 799,
     "totalQuantity": 2,
     "title": "Fisher Price Ríe y Aprende Perrito Botiquín Médico",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B07Y9CQHC9",
     "price": 400,
     "totalQuantity": 2,
     "title": "Surtido de Animalitos Deliciosos, Gris",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B08LHH2GLB",
     "price": 420,
     "totalQuantity": 2,
     "title": "Mattel Tic TAC Tony, Juego de Mesa para niños, de 2-4 Jugadores",
-    "ship": 90
+    "ship": 0
   },
   {
     "asin": "B079DCFQN4",
-    "price": 679,
+    "price": 675,
     "totalQuantity": 2,
     "title": "Barbie, Barbie Dreamtopia Unicornio Peinados Y Accesorios Mágicos+3 Años",
-    "ship": 93
+    "ship": 0
   },
   {
     "asin": "B07NQF1VDL",
-    "price": 1099,
+    "price": 1041,
     "totalQuantity": 2,
     "title": "Barbie Fashion Muñeca Crayola Colorea Tu Estilo Marcadores Con Olor Apto Para +5 Años",
-    "ship": 86
-  },
-  {
-    "asin": "B0769TZDGS",
-    "price": 349,
-    "totalQuantity": 2,
-    "title": "Disney Figura de Acción Coco Figura Alebrije",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B08SKVPSRH",
-    "price": 1349,
-    "totalQuantity": 2,
+    "price": 1429,
+    "totalQuantity": 1,
     "title": "Cositas y Cositas Figura Woody Parlante Toy Story Disney",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B07P81NNTG",
     "price": 535,
     "totalQuantity": 1,
     "title": "Paw Patrol Paw Patrol Nuevo Vehículo Básico Chase Vehicle",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07VSHL9J3",
     "price": 499,
     "totalQuantity": 1,
     "title": "Super Hero Adventures Sha Mega Mighties Gorra Marvel",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B01M08UDH5",
-    "price": 304,
+    "price": 307,
     "totalQuantity": 1,
     "title": "Linha Ekos Natura - Sabonetes em Barra Puro Vegetal Sortidos Cremosos (Andiroba, Castanha, Maracuja e Ucuuba) 4 x 100 gr - Jabones surtidos de barras de verduras cremosas y puras: 4 x red 3.5 oz)",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B079K54HGF",
-    "price": 505,
-    "totalQuantity": 2,
+    "price": 566,
+    "totalQuantity": 1,
     "title": "Muñeca Barbie Sisters & Pets Play Babysitter",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B01MYBJZJS",
     "price": 549,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Playskool Figura de Acción, Señor Cara de Papa Star Wars Contenedor",
-    "ship": 92
+    "ship": null
   },
   {
     "asin": "B01M0YW9NW",
     "price": 499,
     "totalQuantity": 1,
     "title": "Maybelline Paleta de Sombras, The 24K Nudes, 9 ml",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B08M38FM7B",
@@ -464,65 +737,65 @@
   {
     "asin": "B095M7N6HN",
     "price": 160,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Natura Ekos Tukuma Polpa Para As Maos Tukuma Pulpa Manos para las Manos 75 g",
-    "ship": 80
+    "ship": null
   },
   {
     "asin": "B07Y95HPGC",
     "price": 551,
     "totalQuantity": 1,
     "title": "Pista de Juguete Hot Wheels Monster Trucks Lanzador Bone Shaker",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B09RSQ6GFN",
     "price": 109,
-    "totalQuantity": 99,
+    "totalQuantity": 95,
     "title": "Molde para Bomba de Chocolate, Esfera Mediana 12 cm Diametro, ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B010NUXBO8",
     "price": 148,
     "totalQuantity": 1,
     "title": "Revlon Powder Blush Oh Baby!, Pink",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09RY6K2B9",
     "price": 109,
     "totalQuantity": 99,
     "title": "Molde para Chocolate, Corazón 2 Pisos Chico, 11 Espacios, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B00M75EKAW",
     "price": 296,
     "totalQuantity": 4,
     "title": "Kin Gingival Pasta 75ml, Pack of 1",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08J59PQBL",
     "price": 721,
     "totalQuantity": 2,
     "title": "Figura de Accion Jurassic World Mordida Masiva Stegosaurus",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B09RYWF48X",
     "price": 109,
     "totalQuantity": 2,
     "title": "Molde para Chocolate, Huella de perro, 8 Espacios, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B01LQM8IWC",
-    "price": 599,
+    "price": 679,
     "totalQuantity": 1,
     "title": "Linha Chronos Natura - Serum Intensivo Pro Firmeza 30 Ml - (Natura Chronos Collection)",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B094V6WRRF",
@@ -536,14 +809,14 @@
     "price": 505,
     "totalQuantity": 1,
     "title": "Hot Wheels Track Builder, Paquete Lanzador de Curvas, Complemento para Pistas para niños de 6 años en adelante, conectividad con otros sets de Hot Wheels",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B07VRF2M7T",
-    "price": 1040,
+    "price": 911,
     "totalQuantity": 2,
     "title": "Sesame Street Brushy Brush Elmo - Peluche de 12 Pulgadas, Canta la canción de Cepillo Cepillado, Juguete para niños a Partir de 18 Meses",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "6078031619",
@@ -556,43 +829,43 @@
     "asin": "B07NJR7K7N",
     "price": 577,
     "totalQuantity": 2,
-    "title": "PAW Patrol, Rocky's - Vehículo de camión de Reciclaje con Figura Coleccionable, para niños de 3 años en adelante",
-    "ship": 85
+    "title": "PAW Patrol, Rocky's - Vehículo de camión de Reciclaje con Figura Coleccionable, para niños a Partir de 3 años",
+    "ship": 0
   },
   {
     "asin": "B004ZWVVP2",
-    "price": 457,
-    "totalQuantity": 5,
+    "price": 476,
+    "totalQuantity": 4,
     "title": "Fisher Price Baby Doll Brilliant Basics Mi Primera Muñeca",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B0169YY45C",
-    "price": 219,
+    "price": 544,
     "totalQuantity": 2,
     "title": "Maybelline Paleta de Sombras para Ojos, The Rock Nudes, 10 gr",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B016MTYWXI",
     "price": 594,
     "totalQuantity": 5,
     "title": "Fisher-Price Rie y Aprende Animales de la Granja Rompecabeza Sonido, versión en lengua española",
-    "ship": 92
+    "ship": 0
   },
   {
     "asin": "B08V45CVP8",
     "price": 550,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Jurassic World Figuras de Acción, Dilophosaurus, Fuerza Salvaje , Dinosaurio de Juguete para niños de 4 años en adelante",
-    "ship": 81
+    "ship": null
   },
   {
     "asin": "B07MZD27ZX",
     "price": 424,
     "totalQuantity": 1,
     "title": "Barbie Dreamtopia Surtido de Hadas Mágicas Muñeca para niñas de 3 años en adelante",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B017J01UH0",
@@ -606,56 +879,56 @@
     "price": 509,
     "totalQuantity": 1,
     "title": "Playskool Figura Hulk Mega Mighties Heroes Action Figure",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B07K3MR8CG",
     "price": 906,
     "totalQuantity": 2,
-    "title": "-",
-    "ship": null
+    "title": "L'Oreal Paris Mascara de Pestanas Unlimited a Prueba de Agua, 8.48 ml",
+    "ship": 0
   },
   {
     "asin": "B0849FV7Y2",
-    "price": 499,
+    "price": 534,
     "totalQuantity": 2,
     "title": "Hasbro Gaming Monopoly Speed Juego de Mesa",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07RFB11PH",
     "price": 1148,
     "totalQuantity": 2,
     "title": "Toy Story Juguete Película Figuras Parlantes, Bo Peep",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B09RSG1YSB",
     "price": 119,
-    "totalQuantity": 1,
+    "totalQuantity": 2,
     "title": "Molde para Gelatina, Rosca Rayada, ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B084BVCWBR",
-    "price": 407,
+    "price": 489,
     "totalQuantity": 1,
     "title": "FurReal Peealots Lil Wags - Husky",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B07NQ93214",
-    "price": 899,
+    "price": 900,
     "totalQuantity": 4,
     "title": "DC Super Hero Girls, Supergirl con accesorios, Muñeca para niñas de 6 años en adelante",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B015TNAXTA",
-    "price": 759,
+    "price": 845,
     "totalQuantity": 1,
     "title": "MiAlegria Chocolatería Gourmet",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07NC732ZW",
@@ -667,51 +940,51 @@
   {
     "asin": "B06XFSDJZN",
     "price": 999,
-    "totalQuantity": 1,
-    "title": "-",
+    "totalQuantity": 0,
+    "title": "L'Oreal Make Up Designer Mascara Miss Baby Roll Waterproof, 9.1ml",
     "ship": null
   },
   {
     "asin": "B08DFVZPQR",
     "price": 230,
     "totalQuantity": 0,
-    "title": "Vestido de perro para mascotas, tutú para cachorros, gatos, lindo chaleco de malla a rayas, vestido de princesa con lazo para perritos chihuahua pomerania, raza pequeña, falda, cachorros, suministros de ropa (rosa mezclilla, L)",
+    "title": "Vestido para mascotas, cachorros, gatos, tutú, elegante, lindo, chaleco de malla a rayas, vestido de princesa para perrito, chihuahua, pomerania, raza pequeña, faldas, cachorros, suministros de ropa (rosa vaquero, L)",
     "ship": null
   },
   {
     "asin": "B09SDCY5KK",
     "price": 119,
-    "totalQuantity": 1,
+    "totalQuantity": 2,
     "title": "Molde para Gelatina, Rectangular con Ondas, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07LFP2VPH",
     "price": 449,
     "totalQuantity": 2,
     "title": "Super Wings Jett's Moon Rover",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B01G3SVGF0",
     "price": 594,
     "totalQuantity": 1,
     "title": "Fisher Price Libro Abc de Perrito Ríe y Aprende",
-    "ship": 95
+    "ship": 0
   },
   {
     "asin": "B08V1FKB2N",
     "price": 849,
     "totalQuantity": 1,
     "title": "Barbie Big City Big Dreams Backstage Malibu, Muñeca para niñas de 3 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B0817677BV",
-    "price": 2215,
+    "price": 2617,
     "totalQuantity": 1,
     "title": "Playmobil Bastión",
-    "ship": 106
+    "ship": 0
   },
   {
     "asin": "B0876JPTSJ",
@@ -725,203 +998,203 @@
     "price": 119,
     "totalQuantity": 3,
     "title": "Molde Para Gelatina Corazon Con Rosas 10 De Mayo Amor Mamá de 2.5 Litros de Capacidad",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B07XD6F52L",
-    "price": 960,
+    "price": 1245,
     "totalQuantity": 2,
     "title": "Barbie Set Gimnasta",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B07P9TCT78",
-    "price": 835,
+    "price": 893,
     "totalQuantity": 2,
     "title": "Playmobil Dentista.",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B07KBLB98Y",
-    "price": 299,
-    "totalQuantity": 2,
+    "price": 568,
+    "totalQuantity": 1,
     "title": "Nyx Professional Makeup Off Tropic Shadow Palette, Shifting Sand, 0.03 Ounce",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B01ASVCZBC",
-    "price": 599,
+    "price": 673,
     "totalQuantity": 2,
     "title": "Fisher Price Imaginext Cocodrilo y Pirata Garfio",
-    "ship": 94
+    "ship": 0
   },
   {
     "asin": "B07575SGLS",
     "price": 810,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "DC Super Heroe Girls Muñeca Cheetah",
-    "ship": 84
+    "ship": null
   },
   {
     "asin": "B07DKRB28G",
-    "price": 1223,
+    "price": 1335,
     "totalQuantity": 2,
     "title": "Fisher Price Ríe y Aprende Carriola Camina Conmigo",
-    "ship": 127
+    "ship": 0
   },
   {
     "asin": "B017J01V5G",
-    "price": 519,
+    "price": 524,
     "totalQuantity": 5,
     "title": "Fabrica De Chocolates Tv",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07WYGCKKM",
-    "price": 361,
+    "price": 420,
     "totalQuantity": 4,
     "title": "Mi Alegria Fabrica de Slime Fomy Game",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B09C17JVK7",
-    "price": 1104,
+    "price": 1050,
     "totalQuantity": 2,
-    "title": "Barbie Muñeca científica (12 Pulgadas), Cabello Azul, Vestido de Bloque de Color, Abrigo de Laboratorio y Zapatos Planos, Accesorio de microscopio, Gran Regalo para Edades de 3 años en adelante",
-    "ship": 81
+    "title": "Barbie Muñeca científica (12 Pulgadas), Cabello Azul, Vestido de Bloque de Color, Abrigo de Laboratorio y Planos, Accesorio de microscopio, Gran Regalo para Edades de 3 años en adelante",
+    "ship": 0
   },
   {
     "asin": "B08V89XLTH",
-    "price": 408,
+    "price": 405,
     "totalQuantity": 2,
     "title": "Jurassic World, Dracorex, Rugido Salvaje, Dinosaurio de Juguete para niños de 3 años en adelante",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07RX813JT",
-    "price": 756,
+    "price": 975,
     "totalQuantity": 2,
     "title": "FP Little People, Figuras Rex, Buzz, Jessie & Forky, Figuras de colección para niños de 18 meses en adelante",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "6078458906",
     "price": 150,
     "totalQuantity": 1,
-    "title": "Flashcards Primeras Palabras Bilingües, Plaza Sésamo-Novelty",
-    "ship": 86
+    "title": "Flashcards Primeras Palabras Bilingües de Plaza Sésamo - Novelty",
+    "ship": 39
   },
   {
     "asin": "B08S6P7RJ4",
     "price": 348,
     "totalQuantity": 4,
     "title": "Imaginext Jurassic World, Dinosaurio Bebé Ankylosaurus, Figura de acción para niños de 3 años en adelante",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B07MCRZKZM",
-    "price": 614,
+    "price": 697,
     "totalQuantity": 3,
     "title": "Pizza Planet Truck con Buzz Lightyear Toy Story Imaginext cifras de 2.5 pulgadas",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B07PB9L58X",
-    "price": 339,
-    "totalQuantity": 4,
+    "price": 299,
+    "totalQuantity": 3,
     "title": "Hatchimals Hatchimals Coleccionables 2 Figuras + Nido Temporada 6 Toy",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B009MZVUIU",
-    "price": 541,
-    "totalQuantity": 1,
+    "price": 568,
+    "totalQuantity": 0,
     "title": "Linha NaturÃ Natura - Creme para Pentear Cabelos Cacheados Toin Oin Oin 200 Ml - (Natura NaturÃ Collection - Toin Oin Oin Curly Hair Combing Cream 6.76 Fl Oz)",
-    "ship": 81
+    "ship": null
   },
   {
     "asin": "B094V3RK1R",
     "price": 185,
     "totalQuantity": 1,
     "title": "Tuimiyisou Vestido del tutú del Verano del Perro Trajes para Perros Mascotas Vestir Vestidos del Bowknot Dulce del Perrito Lindo Perrito para los pequeños Perros Pomerania Chihuahua",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07VF74SC3",
     "price": 143,
     "totalQuantity": 1,
     "title": "SpinMaster Cuatro en Línea Board Game",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B07XD6DXBW",
-    "price": 360,
+    "price": 371,
     "totalQuantity": 1,
     "title": "Barbie Careers, Set de Muñeca entrenadora de futbol, Muñeca para niñas de 3 años en adelante",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B07BMXV2CP",
-    "price": 550,
+    "price": 646,
     "totalQuantity": 2,
     "title": "L'Oréal Paris Paradise Enchanted Scented Eyeshadow Palette, 0.25 fl. oz.",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B00PPWMKJC",
     "price": 1149,
     "totalQuantity": 2,
     "title": "Fotorama Súper Wings Willy El Submarino",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B07XB3J6PW",
     "price": 549,
     "totalQuantity": 4,
     "title": "Barbie Stacie Dreamhouse Adventures",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07F4L9VHR",
-    "price": 1140,
+    "price": 1176,
     "totalQuantity": 1,
     "title": "My Little Pony Muñeca con Pony, Pinkie Pie",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B09SVP73VR",
     "price": 119,
-    "totalQuantity": 5,
+    "totalQuantity": 4,
     "title": "Molde para Gelatina, Corazón Pop It, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B016ATLCN8",
-    "price": 599,
-    "totalQuantity": 0,
+    "price": 679,
+    "totalQuantity": 1,
     "title": "Urban Decay Naked Skin Weightless Complete Coverage Concealer, Medium Light Neutral, 0.16 Ounce",
-    "ship": null
+    "ship": 0
   },
   {
     "asin": "B01LZ9K7RP",
     "price": 165,
-    "totalQuantity": 3,
+    "totalQuantity": 0,
     "title": "Linha Ekos (Maracuja) Natura - Nectar Hidratante Para Maos 75 Gr - (Natura Ekos (Passion Fruit) Collection - Hands Moisturizing Nectar Net 2.65 Oz)",
-    "ship": 80
+    "ship": null
   },
   {
     "asin": "B01MRVTH43",
     "price": 191,
     "totalQuantity": 2,
     "title": "Cardinal Pop Up Licencias Paw Patrol",
-    "ship": 87
+    "ship": 39
   },
   {
     "asin": "B075KCZYB5",
     "price": 339,
     "totalQuantity": 1,
     "title": "Novelty Juego de Mesa Drinkopoly",
-    "ship": 95
+    "ship": 0
   },
   {
     "asin": "B076DGN423",
@@ -940,107 +1213,107 @@
   {
     "asin": "B09RQJKW52",
     "price": 119,
-    "totalQuantity": 4,
-    "title": "Molde para Gelatina, Corazoón Liso, 2.5 Litros de Capacidad",
-    "ship": 80
+    "totalQuantity": 3,
+    "title": "Molde para Gelatina, Corazón Liso, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
+    "ship": 39
   },
   {
     "asin": "B07FDLZJ84",
-    "price": 313,
+    "price": 369,
     "totalQuantity": 1,
     "title": "Playskool Figura Bumblebee Mega Mighties Transformers Toy Figure",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B09RFGF7FS",
     "price": 119,
     "totalQuantity": 1,
     "title": "Molde para Gelatina Mediano, Rosca con Esferas de 2.5 litros de capacidad",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B09RVJR872",
     "price": 109,
     "totalQuantity": 3,
     "title": "Molde Para Chocolate, Cepillo Dental, 8 Espacios para chocolates, Molde para gelatina en forma variada una capacidad de 0.5 litros Medidas: 28 cm de largo, 18 cm de ancho y 8 cm de altura.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08R5541TT",
-    "price": 594,
+    "price": 505,
     "totalQuantity": 5,
     "title": "Disney Pixar Toy Story, Chunk, Juguete para niños de 3 años en adelante, estilo icónico y escala real",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B09B2LVBTN",
-    "price": 399,
+    "price": 396,
     "totalQuantity": 1,
     "title": "Jurassic World, Dilophsaurus, Juguete para niños de 3 años en adelante",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B09RYN5ZNY",
     "price": 109,
     "totalQuantity": 1,
     "title": "Molde para Chocolate, Corazón con relieve Chico, 9 Espacios, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07Y94HMFG",
     "price": 999,
     "totalQuantity": 1,
     "title": "Disney Pixar Figura de Acción Toy Story Forky y Karen",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07573SWMB",
     "price": 509,
     "totalQuantity": 1,
     "title": "Juguete de aprendizaje Fisher Price Bright Beats Juniors Beatbo",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B0797J6HNC",
-    "price": 999,
+    "price": 1083,
     "totalQuantity": 1,
     "title": "Little People See 'N Say Emociones y Sentimientos",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B09RSVL6RD",
     "price": 109,
     "totalQuantity": 1,
-    "title": "Molde para gelatina, & Corazones con rizo, ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 81
+    "title": "Molde para gelatina, 6 Corazones con rizo, ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
+    "ship": 39
   },
   {
     "asin": "B00PPWMFUG",
     "price": 499,
     "totalQuantity": 2,
     "title": "Fotorama Figuras Súper Wings Mini Jett Deslizador",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B09B2MK3MY",
-    "price": 399,
+    "price": 397,
     "totalQuantity": 1,
     "title": "Jurassic World, Raptor, Juguete para niños de 3 años en adelante",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B09S3VSCDH",
     "price": 109,
     "totalQuantity": 2,
     "title": "Molde para Gelatina, Hueso chico con 5 Espacios, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07FWMHLV1",
-    "price": 1182,
+    "price": 1512,
     "totalQuantity": 2,
     "title": "Toy Story Lanzador de Discos",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B07VN2C1WL",
@@ -1054,56 +1327,56 @@
     "price": 249,
     "totalQuantity": 1,
     "title": "PAW Patrol Vehículos True Metal JTR, Chase",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B01B1N5Q9Y",
     "price": 1019,
     "totalQuantity": 2,
     "title": "Mi Alegria Proyector Dinosaurio",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B079KGSSK3",
-    "price": 1018,
+    "price": 1100,
     "totalQuantity": 1,
     "title": "Barbie Skipper Babysitter Doll, Brunette",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B07MZHGWKZ",
     "price": 577,
     "totalQuantity": 1,
     "title": "Barbie, Stacie Deportes Extremos, Juguete para niñas de 3 años en adelante",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B09RVKRLKY",
     "price": 109,
     "totalQuantity": 3,
     "title": "Molde para Chocolate, Muela con Espacio para Palito de Paleta, capacidad de 0.5 Litros, Molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07JBCLF2V",
-    "price": 765,
-    "totalQuantity": 0,
+    "price": 799,
+    "totalQuantity": 1,
     "title": "Toy Story Forky - Figura de acción parlante",
-    "ship": null
+    "ship": 0
   },
   {
     "asin": "B09R4XST6K",
     "price": 119,
-    "totalQuantity": 5,
+    "totalQuantity": 4,
     "title": "Molde Para Gelatina En Forma De Rosca 5 Corazones de 2.5 Litros",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07MM2R5DP",
     "price": 424,
     "totalQuantity": 1,
     "title": "Frozen 2 Personajes Clásicos Anna",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B09RGJCCK5",
@@ -1117,165 +1390,165 @@
     "price": 195,
     "totalQuantity": 1,
     "title": "Tuimiyisou Vestido del tutú del Verano del Perro Trajes para Perros Mascotas Vestir Vestidos del Bowknot Dulce del Perrito Lindo Perrito para los pequeños Perros Pomerania Chihuahua",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09RTDJNM9",
     "price": 399,
     "totalQuantity": 1,
     "title": "Grey's Pets Collections Botas Antiderrapantes para Perros, 4 Protectores de Patas para Perros con cordón Ajustable, Protector de Patas cómodo Impermeable para Mascotas (Azul) (#3)",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B094V5DCPK",
     "price": 187,
     "totalQuantity": 1,
     "title": "Tuimiyisou Vestido del tutú del Verano del Perro Trajes para Perros Mascotas Vestir Vestidos del Bowknot Dulce del Perrito Lindo Perrito para los pequeños Perros Pomerania Chihuahua",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08F78P755",
     "price": 356,
     "totalQuantity": 2,
     "title": "PAW Patrol Vehículos True Metal JTR, Skye",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B00RGDYU5K",
     "price": 299,
     "totalQuantity": 1,
     "title": "Physicians Formula Super BB All-in-1 Cheek and Lip Beauty Balm, Berry Pink, 0.23 Ounce",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B016MTYZUS",
-    "price": 529,
+    "price": 613,
     "totalQuantity": 5,
     "title": "Fisher-Price Rie y Aprende Animales del Zoologico Rompecabeza Sonido, versión en lengua española",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B072KNWZNJ",
     "price": 649,
     "totalQuantity": 1,
     "title": "Hasbro Gaming Juego de Mesa Monopoly Clásico",
-    "ship": 97
+    "ship": 0
   },
   {
     "asin": "B07JKB2H59",
-    "price": 260,
+    "price": 225,
     "totalQuantity": 2,
     "title": "Mattel Games UNO Juegos de Mesa UNO Flip Nuevo Juego de Cartas +7 Años",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B08XYFJCZS",
-    "price": 149,
+    "price": 190,
     "totalQuantity": 1,
     "title": "Pulpa Exfoliante de Manos y Pies Castaña Ekos Natura",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08J4HF1L9",
-    "price": 1129,
+    "price": 1146,
     "totalQuantity": 1,
     "title": "Pista de Juguete Hot Wheels City Súper Despegue de Cohete",
-    "ship": 95
+    "ship": 0
   },
   {
     "asin": "B018OV0G14",
     "price": 129,
     "totalQuantity": 1,
     "title": "Revlon Volume + Length Magnified Mascara, Blackest Black, 0.28 Ounce (8.5 ml)",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09SCJ7PS7",
     "price": 119,
     "totalQuantity": 2,
     "title": "Molde para Gelatina, Rectangular Cojín, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B095PTGZRK",
     "price": 497,
     "totalQuantity": 2,
     "title": "Disney Pixar Luca, Alberto Criatura Marina, Figura de acción para niños de 3 años en adelante",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B088DL6PDJ",
     "price": 114,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Crema Corporal Cereza y Avellana Tododía Natura",
-    "ship": 81
+    "ship": null
   },
   {
     "asin": "B07JK9PQXM",
-    "price": 557,
+    "price": 661,
     "totalQuantity": 2,
     "title": "Barbie Familia Muñeca Cuidado de Cachorritos Baño Espuma apto para +3 Años",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B08ZYJB77B",
-    "price": 309,
+    "price": 296,
     "totalQuantity": 5,
     "title": "Synmax - Guantes de vinilo sintético, sin polvo, tamaño grande, 100 unidades",
-    "ship": 84
+    "ship": 39
   },
   {
     "asin": "B00RAX0LYA",
     "price": 300,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Physicians Formula Super CC Color-Correction and Care instant Blurring CC Eye Cream SPF 30, Light/Medium, 0.31 Fluid Ounce",
-    "ship": 80
+    "ship": null
   },
   {
     "asin": "B00PPWP5C6",
     "price": 552,
     "totalQuantity": 2,
     "title": "Súper Wings Figura Donnie Vehículo de acción",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B00PPWMDZI",
     "price": 699,
     "totalQuantity": 1,
     "title": "Fotorama Súper Wings Jett/ Donnie Vehículo de acción",
-    "ship": 100
+    "ship": 0
   },
   {
     "asin": "B00GY266VK",
     "price": 339,
-    "totalQuantity": 12,
+    "totalQuantity": 11,
     "title": "Sensi Kin Sensi Kin Gel Bucal 15 Ml, Pack of 1",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B09R6PYZ55",
     "price": 119,
     "totalQuantity": 4,
     "title": "Molde para Gelatina, Corazon con Borde, con capacidad de 2.5 Litros",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09RTPHSB6",
     "price": 109,
     "totalQuantity": 3,
     "title": "Molde para Chocolate, Pasta Dental, ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08GQCZWQH",
-    "price": 679,
+    "price": 784,
     "totalQuantity": 1,
     "title": "Monopoly: Star Wars El Niño - Juego de Mesa para la Familia y niños de 8 años en adelante - Versión El Niño, Personaje Que los Fans Llaman Bebé Yoda",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07WMJN392",
-    "price": 299,
+    "price": 329,
     "totalQuantity": 0,
     "title": "L'Oréal Paris Electric Nights Paleta de Sombras para Ojos Mate y Shine Multitono, 02 Electric,",
     "ship": null
@@ -1283,51 +1556,51 @@
   {
     "asin": "B07DKV9L7Y",
     "price": 489,
-    "totalQuantity": 8,
+    "totalQuantity": 7,
     "title": "Fisher Price Ríe y Aprende Control Juega y Aprende Conmigo",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "6078031597",
     "price": 150,
     "totalQuantity": 1,
     "title": "Novelty Card Vocabulario Princesa Sofía",
-    "ship": 86
+    "ship": 39
   },
   {
     "asin": "B07Y953XS1",
-    "price": 860,
+    "price": 1384,
     "totalQuantity": 3,
     "title": "Disney Pixar Figura de Acción Toy Story Zurg",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B08V83R6DZ",
     "price": 721,
     "totalQuantity": 1,
     "title": "Figura de Accion Jurassic World Mordida Masiva Carcharodontosaurus",
-    "ship": 122
+    "ship": 0
   },
   {
     "asin": "B09S5SBDXT",
     "price": 109,
     "totalQuantity": 2,
     "title": "Molde para Chocolate, Bombon de Chocolate y Corazon, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B081W46C9R",
     "price": 199,
     "totalQuantity": 1,
     "title": "BYS Cosmetics Mascara para pestanas volume & lengthening Black",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B079M2R89W",
     "price": 986,
     "totalQuantity": 2,
     "title": "Figura de Accion Imaginext Jurassic World Anquilosaurio",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B017J020YW",
@@ -1341,77 +1614,77 @@
     "price": 899,
     "totalQuantity": 2,
     "title": "Super Wings Radio Control Jett",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B017J01G7Y",
     "price": 675,
     "totalQuantity": 1,
     "title": "Little Mommy Muñecas Tierna como Yo Disfraz",
-    "ship": 90
+    "ship": 0
   },
   {
     "asin": "B07W6TY4SP",
     "price": 600,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Hot Wheels Pista de Juguete City Furia del Gorila Garage, Multicolor",
-    "ship": 91
+    "ship": null
   },
   {
     "asin": "B084BVXTLM",
-    "price": 296,
+    "price": 345,
     "totalQuantity": 1,
     "title": "FurReal Peealots Lil Wags - Beagle",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B09RVKMCNN",
     "price": 109,
     "totalQuantity": 1,
     "title": "Molde para Chocolate, Muela, 23 Espacios, Molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09R49PJVT",
     "price": 119,
-    "totalQuantity": 2,
+    "totalQuantity": 1,
     "title": "Molde para gelatina Corazón Diamante Mediano con capacidad de 2 litros.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08175PJ2C",
-    "price": 358,
+    "price": 419,
     "totalQuantity": 2,
     "title": "Playmobil 2 Figure Set Marty & Doc Brown",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B08NK8MZDQ",
     "price": 499,
     "totalQuantity": 1,
     "title": "La Paw Patrol 6059253 Spielzeug für Kinder ab 3 Jahren(verschiedenes Modell und sortierte Farbe)",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B019WA01ZM",
     "price": 188,
     "totalQuantity": 1,
     "title": "Maybelline Superstay 24 Lápiz Labial",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07MQP4M7K",
-    "price": 681,
+    "price": 798,
     "totalQuantity": 2,
     "title": "The Beatles Yellow Submarine by Little People",
-    "ship": 92
+    "ship": 0
   },
   {
     "asin": "B087YFXV1W",
     "price": 509,
     "totalQuantity": 2,
     "title": "Mis Brillos mágicos mi alegría",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B0082D6BEQ",
@@ -1425,91 +1698,91 @@
     "price": 466,
     "totalQuantity": 1,
     "title": "AblePet - Botas antideslizantes para perros y gatos, con correa ajustable y tira reflectante, protector de pata de primera calidad, solo apto para perros pequeños (4 unidades), color negro",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B086R7P2X8",
     "price": 249,
     "totalQuantity": 2,
     "title": "Paw Patrol 6053257 BJ Vehículos Die-Cast Súper Charged Marshall",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07FFKH4H7",
-    "price": 488,
+    "price": 928,
     "totalQuantity": 1,
     "title": "Barbie Profesiones Muñeca 60 Aniversario Periodista apto para +3 Años",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B0756376V9",
     "price": 749,
     "totalQuantity": 8,
     "title": "DC Super Hero Girls, Catwoman con accesorios, Muñeca para niñas de 6 años en adelante",
-    "ship": 116
+    "ship": 0
   },
   {
     "asin": "B07NQGCFNS",
-    "price": 682,
+    "price": 594,
     "totalQuantity": 1,
     "title": "DC Comic Muñeca DC Super Hero Girls Supergirl Transformación, GBY53, Multicolor",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B09S62L6T6",
     "price": 119,
     "totalQuantity": 4,
     "title": "Molde para Chocolate, Rosca de Corazones, molde ideal para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B082DGZ8N2",
     "price": 1019,
     "totalQuantity": 1,
     "title": "Mi Alegria FABRICA DE GOMITAS",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B07GB5Z5W6",
-    "price": 438,
+    "price": 540,
     "totalQuantity": 1,
     "title": "Hot Wheels Action, Campeón de las Alturas, Pista de Juguete para niños de 4 años en adelante, conectividad con otros sets de HW",
-    "ship": 93
+    "ship": 0
   },
   {
     "asin": "B017J01WAU",
-    "price": 806,
+    "price": 840,
     "totalQuantity": 1,
     "title": "Fábrica De Mini Donas Mi Alegría",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B08H5WDQPC",
-    "price": 396,
+    "price": 513,
     "totalQuantity": 1,
     "title": "Muñeca Barbie Careers Estilista",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B07Y947N5K",
     "price": 849,
     "totalQuantity": 2,
     "title": "Disney Pixar Toy Story, Muñeca Bo Peep Pastorcita, Muñeca para niños de 3 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B07XC3HPW5",
-    "price": 594,
+    "price": 505,
     "totalQuantity": 1,
     "title": "Barbie Dreamtopia, Sirena Azul, Muñeca para niñas de 3 años en adelante con accesorios fantásticos",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B007OWU4QW",
     "price": 200,
     "totalQuantity": 1,
     "title": "Maybelline Volume Express Colossal Mascara Lavable, color Glam Negro Glamoroso",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08MYKM1NP",
@@ -1523,14 +1796,14 @@
     "price": 200,
     "totalQuantity": 1,
     "title": "Desodorante Antitranspirante Roll On Cereza Y Avellana Tododía Natura",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B081K4S5SP",
     "price": 190,
     "totalQuantity": 1,
     "title": "Desodorante antitranspirante roll-on invisible Natura Erva Doce",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07PS512QN",
@@ -1544,7 +1817,7 @@
     "price": 230,
     "totalQuantity": 1,
     "title": "Oleo para masajes para el cuerpo Antiestres Cansancio Reequilibra tu piel Ideal para piernas y pies Natura",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B07DNJGL4K",
@@ -1555,17 +1828,17 @@
   },
   {
     "asin": "B073SZ3DPT",
-    "price": 320,
-    "totalQuantity": 1,
+    "price": 240,
+    "totalQuantity": 2,
     "title": "Linha Homem Natura - Gel de Limpeza Facial Cupuacu 115 Gr - (Natura Men Collection - Cupuacu Facial Cleansing Gel Net 4.05 Oz)",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B087YZPM3V",
     "price": 227,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Crema Hidratante Corporal Tododia Frutos Rojos Tododia Natura",
-    "ship": 80
+    "ship": null
   },
   {
     "asin": "B08N5KK999",
@@ -1579,98 +1852,98 @@
     "price": 300,
     "totalQuantity": 1,
     "title": "Nyx Professional Makeup Corrector Born To Glow Radiant Concealer, tono Neutral Tan",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B0845HPBKX",
     "price": 300,
     "totalQuantity": 1,
     "title": "NYX PROFESSIONAL MAKEUP Corrector Born to Glow Radiant Concealer Tono Golden Honey Golden Honey",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B092RP8CWJ",
     "price": 325,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Natura EKOS Kit Crema de manos Castaña, Pitanga y Ucuuba 40Gr cada una",
-    "ship": 83
+    "ship": null
   },
   {
     "asin": "B09GJQGGBX",
     "price": 300,
     "totalQuantity": 5,
     "title": "Intco 1 caja de 100 guantes desechables de vinilo Synmax negro PF de un solo uso, sin látex, sin energía, sin proteínas, no estériles (tamaño grande)",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B09RDVRKY4",
     "price": 109,
     "totalQuantity": 99,
     "title": "Molde para Gelatina Chico Con dos Corazones de 1 litro de capacidad",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09RQYNLQN",
     "price": 119,
-    "totalQuantity": 99,
+    "totalQuantity": 96,
     "title": "Molde para Gelatina, Rosca Piña, capacidad 2.5 Litros, para gelatina, jabón, chocolate, yeso o cualquier otro producto que no requiera ser horneado.",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09RD6WBJJ",
     "price": 119,
-    "totalQuantity": 99,
+    "totalQuantity": 96,
     "title": "Molde Para Gelatina En Forma De Corazón 3 Pisos Con Ondas de 2.5 litros de capacidad",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B09RGFV5VJ",
     "price": 119,
-    "totalQuantity": 99,
+    "totalQuantity": 97,
     "title": "Molde para Gelatina en forma de Corazón con Corazones adentro de 2.5 litros de Capacidad",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B09R44GVBT",
     "price": 119,
-    "totalQuantity": 99,
+    "totalQuantity": 97,
     "title": "Molde para Gelatina en forma de Corazon de Gajos de 2.5 Litros de Capacidad",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08M4FFG2G",
     "price": 989,
     "totalQuantity": 10,
     "title": "Colchas Concord Edredón Minions",
-    "ship": 116
+    "ship": 0
   },
   {
     "asin": "B08K1NRMTT",
     "price": 1051,
     "totalQuantity": 10,
     "title": "Colchas Concord Edredón Toy Story",
-    "ship": 116
+    "ship": 0
   },
   {
     "asin": "B08K1DVGTT",
     "price": 787,
     "totalQuantity": 10,
     "title": "Colchas Concord Cars",
-    "ship": 104
+    "ship": 0
   },
   {
     "asin": "B08K1M2G3H",
     "price": 1130,
     "totalQuantity": 10,
     "title": "Colchas Concord Edredón Cars 2 Vistas",
-    "ship": 116
+    "ship": 0
   },
   {
     "asin": "B08H4XNHVY",
     "price": 430,
     "totalQuantity": 10,
     "title": "Colchas Concord Par de Cojines Decorativos Buhos",
-    "ship": 101
+    "ship": 0
   },
   {
     "asin": "B01GR222D2",
@@ -1682,93 +1955,93 @@
   {
     "asin": "B08Y2LMVNC",
     "price": 699,
-    "totalQuantity": 10,
+    "totalQuantity": 9,
     "title": "Colchas Concord Par de Almohadas Mickey & Minnie",
-    "ship": 103
+    "ship": 0
   },
   {
     "asin": "B08Y2QX4WJ",
     "price": 1100,
     "totalQuantity": 10,
     "title": "Colchas Concord Edredón OZZY calientito Unicornio",
-    "ship": 125
+    "ship": 0
   },
   {
     "asin": "B008YZF472",
     "price": 1100,
     "totalQuantity": 10,
     "title": "Colchas Concord Artemisa Cobertor Borrega, Morado, King 2.40 X 2.20 Mts.",
-    "ship": 143
+    "ship": 0
   },
   {
     "asin": "B008YZF5DU",
     "price": 879,
     "totalQuantity": 10,
     "title": "Colchas Concord Artemisa Cobertor de Borrega, Morado, Matrimonial 1.80 X 2.20 Mts.",
-    "ship": 131
+    "ship": 0
   },
   {
     "asin": "B074JGMQW2",
     "price": 850,
     "totalQuantity": 10,
     "title": "Colchas Concord Andrómeda Cobertor de Borrega, Negro, Matrimonial 1.80 X 2.20 Mts.",
-    "ship": 132
+    "ship": 0
   },
   {
     "asin": "B06XHK9LRP",
     "price": 850,
     "totalQuantity": 10,
     "title": "Colchas Concord Poseidón Cobertor de Borrega, Azul, Matrimonial 1.80 X 2.20 Mts.",
-    "ship": 135
+    "ship": 0
   },
   {
     "asin": "B011YSBKSW",
     "price": 840,
     "totalQuantity": 8,
     "title": "Colchas Concord Argos Cobertor de Borrega, Gris, Matrimonial 1.80 X 2.20 Mts.",
-    "ship": 132
+    "ship": 0
   },
   {
     "asin": "B011YSEICM",
     "price": 1200,
     "totalQuantity": 10,
     "title": "Colchas Concord Argos Cobertor de Borrega, Gris, King 1.80 X 2.20 Mts.",
-    "ship": 143
+    "ship": 0
   },
   {
     "asin": "B06XHJR2NJ",
     "price": 1100,
     "totalQuantity": 10,
     "title": "Colchas Concord Poseidón Cobertor Borrega Poseidón King Size",
-    "ship": 147
+    "ship": 0
   },
   {
     "asin": "B07H621PRR",
     "price": 199,
-    "totalQuantity": 8,
+    "totalQuantity": 0,
     "title": "L'Oreal Paris Cosmetics Unlimited Lash Lifting and Lengthening - Máscara lavable, A prueba de agua, Blackest Black",
-    "ship": 80
+    "ship": null
   },
   {
     "asin": "B000WGUQ7Y",
     "price": 269,
     "totalQuantity": 1,
     "title": "Infant Friends Play Llavero de Actividades",
-    "ship": 85
+    "ship": 39
   },
   {
     "asin": "B00PFCSO1U",
     "price": 229,
     "totalQuantity": 1,
     "title": "Maybelline New York Fit Me Mate + maquillaje en polvo sin poros, Marfil clásico, 1 pieza",
-    "ship": 81
+    "ship": 39
   },
   {
     "asin": "B00PFCSQBS",
     "price": 199,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Maybelline New York Fit Me Mate + maquillaje en polvo sin poros, Buff Beige, 1 pieza",
-    "ship": 81
+    "ship": null
   },
   {
     "asin": "B01LZDWLMU",
@@ -1796,70 +2069,70 @@
     "price": 599,
     "totalQuantity": 1,
     "title": "Bandai México Ladybug Miraculous Marinette Figura Articulada de 4.7\"",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B07VTGTZ48",
-    "price": 341,
+    "price": 351,
     "totalQuantity": 2,
     "title": "Playskool Heroes Super Hero Adventures Mega Mighties Capitán América",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B08J4HYH3C",
     "price": 599,
     "totalQuantity": 1,
     "title": "Hot Wheels Action, Campeonato de Loop, Pista de Juguete para niños de 4 años en adelante, conectividad con otros sets de HW",
-    "ship": 95
+    "ship": 0
   },
   {
     "asin": "B00O0WRO08",
     "price": 899,
     "totalQuantity": 1,
     "title": "Conair - Secador de pelo (1875 W), color magenta",
-    "ship": 98
+    "ship": 0
   },
   {
     "asin": "B0751WB377",
     "price": 2564,
     "totalQuantity": 1,
     "title": "Imaginext Gran T-Rex",
-    "ship": 206
+    "ship": 0
   },
   {
     "asin": "B07X8Z1VWZ",
     "price": 1423,
     "totalQuantity": 2,
     "title": "Hot Wheels GJK90 Pista de Juguete City Hospital Murciélago, Multicolor",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B078F1C86N",
     "price": 246,
     "totalQuantity": 1,
     "title": "Nueva kitchellence negro – Afilador manual de 3 fases sistema para los mejores resultados, apto para Camping Caza cuchillos, piedra cerámica, carburo de tungsteno platos y varilla de diamante",
-    "ship": 83
+    "ship": 39
   },
   {
     "asin": "B07NVVLHZ5",
     "price": 529,
     "totalQuantity": 1,
     "title": "PAW Patrol Vehículo Básico Rubble",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B09K4PVLXG",
     "price": 349,
     "totalQuantity": 5,
     "title": "Guantes De Vinil Azul L Libre de Látex Sin Polvo desechable resistente antiadherente uso industrial alto rendimiento ideal para cocinar pack de 100 piezas",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B09K4PFXKS",
     "price": 349,
     "totalQuantity": 2,
     "title": "Guantes De Vinil Azul M Libre de Látex Sin Polvo desechable resistente antiadherente uso industrial alto rendimiento ideal para cocinar pack de 100 piezas",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B00YPULZ2I",
@@ -1873,56 +2146,56 @@
     "price": 1234,
     "totalQuantity": 2,
     "title": "Barbie Estate Tienda para Mascotas Accesorios para muñeca para niñas de 3 años en adelante",
-    "ship": 95
+    "ship": 0
   },
   {
     "asin": "B094R9MRZ1",
     "price": 1367,
     "totalQuantity": 1,
     "title": "Barbie Careers, Cast Clinic, Set de Juego con muñeca para niñas de 4 años en adelante",
-    "ship": 110
+    "ship": 0
   },
   {
     "asin": "B08R5R6BTJ",
     "price": 1044,
     "totalQuantity": 2,
     "title": "Disney Pixar Toy Story, Señor espinas, Juguete para niños de 3 años en adelante, estilo icónico y escala real",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B083241MCX",
     "price": 899,
     "totalQuantity": 2,
     "title": "Transformers Playskool Heroes Rescue Bots Academy Medix The Doc-BOT Robot de Juguete convertidor, 15,2 cm, Figura de acción Coleccionable, Juguete para niños de 3 años en adelante",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B09HZCRGPC",
-    "price": 308,
+    "price": 323,
     "totalQuantity": 2,
     "title": "Novelty Corp Rompecabezas de Colección Barbie 1000 Piezas",
-    "ship": 94
+    "ship": 0
   },
   {
     "asin": "B00V4Y2P1S",
     "price": 699,
     "totalQuantity": 3,
     "title": "Kin Gingival Kin Care Gel Bucal 15 Ml, Pack of 1",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07FSVFSKK",
-    "price": 466,
-    "totalQuantity": 2,
+    "price": 499,
+    "totalQuantity": 0,
     "title": "Kin Gingival Kin B5 Pasta Dentifrica 125 Ml, Pack of 1",
-    "ship": 83
+    "ship": null
   },
   {
     "asin": "B0839XYLCF",
     "price": 199,
     "totalQuantity": 3,
     "title": "Disney Pixar Mini Figura Mattel Paquete Sorpresa a Partir de 3 años en adelante",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08J2FC6Q7",
@@ -1936,14 +2209,14 @@
     "price": 999,
     "totalQuantity": 1,
     "title": "PAW Patrol Vehiculos Pelicula, Marshall",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B08561GDTK",
     "price": 680,
     "totalQuantity": 1,
     "title": "Mi Alegria Aqua Pixeles",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B015TNF29Q",
@@ -1971,70 +2244,70 @@
     "price": 449,
     "totalQuantity": 2,
     "title": "Colchas Concord Almohada Spider-Man",
-    "ship": 93
+    "ship": 0
   },
   {
     "asin": "B07F3FYG6D",
     "price": 289,
     "totalQuantity": 1,
     "title": "Marvel Guante Fotón FX Captain Toy",
-    "ship": 85
+    "ship": 39
   },
   {
     "asin": "B07FHHZ88V",
-    "price": 500,
+    "price": 599,
     "totalQuantity": 3,
     "title": "Baby Alive Mi Linda Sirenita Castaña Doll",
-    "ship": 93
+    "ship": 0
   },
   {
     "asin": "B07F39P3R3",
     "price": 594,
     "totalQuantity": 2,
     "title": "Baby Alive Mi Linda Sirenita Rubia Doll",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B07P91QXHR",
     "price": 594,
     "totalQuantity": 5,
     "title": "Baby Alive Mi Linda Sirena, Pelirroja Doll",
-    "ship": 93
+    "ship": 0
   },
   {
     "asin": "B08R5KSKPK",
     "price": 679,
     "totalQuantity": 2,
     "title": "Disney Pixar Onward, Ian con báculo y Brasita, Juguetes para niños de 3 años en adelante con detalles auténticos y varios puntos de articulación",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B08R589TGL",
     "price": 849,
     "totalQuantity": 4,
     "title": "Disney Pixar Onward, Barley Lightfoot, Juguete para niños de 3 años en adelante con detalles auténticos y varios puntos de articulación",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B07JLS3ZM7",
     "price": 662,
     "totalQuantity": 1,
     "title": "Pm Playmobil Sek Diving Operation Playset, Limited Edtion",
-    "ship": 90
+    "ship": 0
   },
   {
     "asin": "B08N6YJFZW",
     "price": 509,
     "totalQuantity": 1,
     "title": "PAW Patrol Motocicleta, Wildcat",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B08M14SNQ9",
     "price": 763,
     "totalQuantity": 2,
     "title": "Estuche de Cuentas para el Cabello Multicolor Con Gancho de Juguetes Mi Alegría",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B08LK2C5QD",
@@ -2048,84 +2321,84 @@
     "price": 509,
     "totalQuantity": 1,
     "title": "Pollito Apila y Descubre, Gris",
-    "ship": 94
+    "ship": 0
   },
   {
     "asin": "B08S6LFD5Y",
     "price": 849,
     "totalQuantity": 2,
     "title": "Figura de Accion Jurassic World Amber Collection Yaz Velociraptor Compys y Compass",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B01CIGN3TS",
     "price": 1887,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "LEGO Set de Construcción Encuentro en Jakku",
-    "ship": 94
+    "ship": null
   },
   {
     "asin": "B08442W5HS",
-    "price": 997,
+    "price": 1075,
     "totalQuantity": 1,
     "title": "Barbie Muñeca Estate Camioneta Viaje de Hermanas",
-    "ship": 120
+    "ship": 0
   },
   {
     "asin": "B07PB9Y8MR",
     "price": 339,
     "totalQuantity": 1,
     "title": "PAW Patrol Vehículo Básico, Aplanadora de Rubble",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B08V4B5PMZ",
     "price": 551,
     "totalQuantity": 2,
     "title": "Jurassic World Figuras de Acción, Velociraptor, Fuerza Salvaje , Dinosaurio de Juguete para niños de 4 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B08V8TYQJY",
     "price": 551,
     "totalQuantity": 3,
     "title": "Jurassic World Figuras de Acción, Masiakasaurus, Fuerza Salvaje , Dinosaurio de Juguete para niños de 4 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B08V8PXZSF",
     "price": 764,
     "totalQuantity": 2,
     "title": "Jurassic World Figuras de Acción, Ouranosaurus, Ruge y Ataca , Dinosaurio de Juguete para niños de 4Y+ en adelante",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B08J5RH5H7",
     "price": 899,
     "totalQuantity": 1,
     "title": "Figura de Accion Jurassic World Ruge y Ataca Baryonyx Limbo",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B08V8SBSVG",
     "price": 764,
     "totalQuantity": 2,
     "title": "Jurassic World Figuras de Acción, Baryonyx Chaos, Ruge y Ataca , Dinosaurio de Juguete para niños de 4 años en adelante",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B08KVXHBZ7",
     "price": 329,
     "totalQuantity": 2,
     "title": "Playmobil 70559 Playmo-Friends Royal Soldado, para niños a partir de 4 años",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B00FEACP9K",
     "price": 599,
     "totalQuantity": 9,
     "title": "Perio Kin Perio Kin Spray Encias 40 Ml, Pack of 1",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B09317RRPN",
@@ -2139,21 +2412,21 @@
     "price": 463,
     "totalQuantity": 1,
     "title": "Jurassic World, Zuniceratops, Rugido Salvaje, Dinosaurio de Juguete para niños de 3 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B095PWV83F",
     "price": 799,
     "totalQuantity": 1,
     "title": "Disney Pixar Luca, Figura Luca Criatura Marina, Figura de acción para niños de 3 años en adelante",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B08R58KQ76",
-    "price": 1292,
+    "price": 1551,
     "totalQuantity": 3,
     "title": "Pista de Juguete Hot Wheels City Invasión Serpiente Tóxica",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B07CH9JCFL",
@@ -2167,7 +2440,7 @@
     "price": 424,
     "totalQuantity": 1,
     "title": "Muñeca Barbie Careers Bombero",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B08ZG686X1",
@@ -2237,14 +2510,14 @@
     "price": 525,
     "totalQuantity": 2,
     "title": "Imaginext Jurassic World, , Juguetes para niños de 3 años en adelante",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B08L9MHX8P",
     "price": 774,
     "totalQuantity": 1,
     "title": "Imaginext Jurassic World, , Juguetes para niños de 3 años en adelante",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B01NCU9IQF",
@@ -2265,21 +2538,21 @@
     "price": 599,
     "totalQuantity": 1,
     "title": "Sandak Tenis Niño Hombre Araña Niño Blanco/Rojo 14-19 (Measurement_18_Point_0_Centimeters)",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B07Y952ZK1",
     "price": 768,
-    "totalQuantity": 2,
+    "totalQuantity": 1,
     "title": "Figura de Villano Zurg de Disney y Pixar Toy Story en tamaño Real para Jugar Cuentos, Regalo de cumpleaños para niños de 3 años en adelante, Multi (GPB56)",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B095ND4BLG",
     "price": 599,
     "totalQuantity": 1,
     "title": "Sandak Tenis Niño Hombre Araña Niño Blanco/Rojo 14-19 (Measurement_19_Point_0_Centimeters)",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B01CW6EL72",
@@ -2307,56 +2580,56 @@
     "price": 699,
     "totalQuantity": 2,
     "title": "Marvel Playskool Heroes Mega Mighties Super Hero Adventures - Thanos - Figura de acción Coleccionable de 25 cm - Edad: 3+",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B07VR8PDBH",
     "price": 699,
     "totalQuantity": 1,
     "title": "Mi Alegria Maquina de Coser",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B079N49Q3J",
     "price": 764,
     "totalQuantity": 1,
     "title": "Playmobil Bomberos con Bomba de Agua",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B079N1FTWL",
     "price": 424,
     "totalQuantity": 1,
     "title": "Playmobil Cañón de Agua de Fuego",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B076Q6731Z",
-    "price": 664,
-    "totalQuantity": 1,
+    "price": 685,
+    "totalQuantity": 0,
     "title": "Jurassic World, Máscara Básica de T-Rex, Juguete para niños de 4 años en adelante",
-    "ship": 85
+    "ship": null
   },
   {
     "asin": "B08P52HC3B",
     "price": 1185,
     "totalQuantity": 5,
     "title": "Colchas Concord Cobertor Pachicalientito Dante King Size",
-    "ship": 147
+    "ship": 0
   },
   {
     "asin": "B08S795MQB",
     "price": 995,
     "totalQuantity": 1,
     "title": "Muñeca Barbie Careers Pediatra",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B07NQF5BLK",
     "price": 999,
     "totalQuantity": 1,
     "title": "DC Super Hero Girls, Wonder Woman con accesorios, Muñeca para niñas de 6 años en adelante",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B08XMYMM7G",
@@ -2384,77 +2657,77 @@
     "price": 859,
     "totalQuantity": 2,
     "title": "Mi Alegria Fabrica de Pizza",
-    "ship": 100
+    "ship": 0
   },
   {
     "asin": "B07ZPP3QLV",
     "price": 424,
     "totalQuantity": 1,
     "title": "Jurassic World, Proceratosaurus, Dinosaurio de 12\", Dinosaurio de Juguete para niños de 3 años en adelante, con decoración auténtica",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B074JGMQW4",
     "price": 1163,
     "totalQuantity": 2,
     "title": "Colchas Concord Andrómeda Cobertor Borrega King Size, color Negro",
-    "ship": 141
+    "ship": 0
   },
   {
     "asin": "B08S6YGC1N",
     "price": 250,
-    "totalQuantity": 5,
+    "totalQuantity": 1,
     "title": "Imaginext Jurassic World, Dinosaurio Bebé Spinosaurus, Figura de acción para niños de 3 años en adelante",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08S752SV3",
     "price": 399,
     "totalQuantity": 3,
     "title": "Imaginext Jurassic World, Dinosaurio Bebé T.Rex, Figura de acción para niños de 3 años en adelante",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07ZQYLMPN",
     "price": 409,
     "totalQuantity": 1,
     "title": "Marvel Black Widow Titan Figura de 12 Pulgadas - Skull",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B0177SRNAC",
     "price": 1500,
     "totalQuantity": 1,
     "title": "Colchas Concord Malaga Edrecolcha con 2 Fundas, King Size, azul",
-    "ship": 122
+    "ship": 0
   },
   {
     "asin": "B0177SRMOY",
     "price": 1000,
     "totalQuantity": 1,
     "title": "Colchas Concord Malaga Edrecolcha con 2 Fundas, Matrimonial, azul",
-    "ship": 113
+    "ship": 0
   },
   {
     "asin": "B01CYL0DPO",
     "price": 949,
     "totalQuantity": 1,
     "title": "Colchas Concord Málaga Colcha con Fundas Málaga Individual",
-    "ship": 104
+    "ship": 0
   },
   {
     "asin": "B01JJ62M5Q",
     "price": 1099,
     "totalQuantity": 1,
     "title": "Colchas Concord París Love Cobertor Borrega, Blanco, Matrimonial - Individual: 1.80 X 2.20 Mts.",
-    "ship": 136
+    "ship": 0
   },
   {
     "asin": "B01JJ62M6A",
-    "price": 1399,
+    "price": 1499,
     "totalQuantity": 2,
     "title": "Colchas Concord París Love Cobertor de Borrega, Blanco, King 2.40 X 2.20 Mts.",
-    "ship": 145
+    "ship": 0
   },
   {
     "asin": "B083T7Q4C5",
@@ -2468,7 +2741,7 @@
     "price": 999,
     "totalQuantity": 1,
     "title": "Barbie Estate Jeep con Muñeca y Amiga Juguetes para niñas de 3 años en adelante",
-    "ship": 102
+    "ship": 0
   },
   {
     "asin": "B08442QBX2",
@@ -2482,7 +2755,7 @@
     "price": 761,
     "totalQuantity": 2,
     "title": "Hospital DE ANIMALITOS MI ALEGRÍA",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B00YPUM1GC",
@@ -2510,21 +2783,21 @@
     "price": 650,
     "totalQuantity": 1,
     "title": "Muñeca Barbie Dreamtopia Hada Rosa",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B07XF98T8B",
     "price": 815,
     "totalQuantity": 1,
     "title": "Barbie Dreamtopia, Sirena Amarilla, Muñeca para niñas de 3 años en adelante con accesorios fantásticos",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07PJYD3GM",
     "price": 450,
     "totalQuantity": 1,
     "title": "Frozen 2 Whisper & Glow Blister 3 Figuras",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B00000IZQP",
@@ -2536,9 +2809,9 @@
   {
     "asin": "B01N7QZG8B",
     "price": 249,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Fisher Price Primeros Bloques del Bebé",
-    "ship": 90
+    "ship": null
   },
   {
     "asin": "B07Y94QH56",
@@ -2549,66 +2822,59 @@
   },
   {
     "asin": "B07VG9JY5Q",
-    "price": 921,
-    "totalQuantity": 0,
+    "price": 899,
+    "totalQuantity": 1,
     "title": "Marvel Avengers Titan Hero Series Blast Gear Figura de 12 Pulgadas Capitán América",
-    "ship": null
+    "ship": 0
   },
   {
     "asin": "B07DDB5CR2",
     "price": 776,
     "totalQuantity": 1,
     "title": "Disney Girls Muñeca Ariel Royal Shimmer",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B07DD5MDPZ",
     "price": 899,
     "totalQuantity": 2,
     "title": "Disney Girls Muñeca Cenicienta Royal Shimmer",
-    "ship": 83
-  },
-  {
-    "asin": "B08J4GMJWK",
-    "price": 751,
-    "totalQuantity": 0,
-    "title": "Pista de Juguete Hot Wheels City Ataque Tóxico del Escorpión",
-    "ship": null
+    "ship": 0
   },
   {
     "asin": "B07VMHB6YK",
     "price": 355,
     "totalQuantity": 1,
     "title": "Cardinal Pop Up de Mickey Mouse",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B08R5RG1BL",
     "price": 499,
-    "totalQuantity": 4,
+    "totalQuantity": 3,
     "title": "Jurassic World, Pteranodon de 12 pulgadas, Dinosaurio de Juguete para niños de 3 años en adelante, con decoración auténtica",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B07VKXP52R",
     "price": 1120,
     "totalQuantity": 3,
     "title": "Marvel Avengers Power Moves Lanzador Lanza-Escudo de Capitán América",
-    "ship": 90
+    "ship": 0
   },
   {
     "asin": "B08RJ6Q7N8",
     "price": 1275,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Jurassic World Spinosaurus Mordida Extrema Figura de acción para niños de 4 años en adelante con decoración auténtica",
-    "ship": 91
+    "ship": null
   },
   {
     "asin": "B07XB3JZMR",
     "price": 717,
     "totalQuantity": 1,
     "title": "Jurassic World Dinosaurio Control Total, Sarcosuchus Figuras de Acción, Multicolor",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B01BYBUWOW",
@@ -2619,10 +2885,10 @@
   },
   {
     "asin": "B07DK5ZRD1",
-    "price": 721,
+    "price": 722,
     "totalQuantity": 2,
     "title": "Fisher-Price Juguete para Bebés Mattel Rompecabezas Animalitos de la Selva",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B07NQFWZM6",
@@ -2636,7 +2902,7 @@
     "price": 509,
     "totalQuantity": 4,
     "title": "Jurassic World, Spinosaurus de 12 pulgadas, Dinosaurio de Juguete para niños de 3 años en adelante, con decoración auténtica",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B078CYVB93",
@@ -2650,35 +2916,35 @@
     "price": 514,
     "totalQuantity": 2,
     "title": "Muñeco Little People Basico Doctor Nathan",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B01N6PVM65",
     "price": 771,
     "totalQuantity": 2,
     "title": "Muñeco Little People Basico Veterinaria Ella",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B01MS6EU43",
     "price": 514,
     "totalQuantity": 1,
     "title": "Little People Figuras Básicas, Dentist Audrey",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B076N1J5JN",
     "price": 1190,
     "totalQuantity": 1,
     "title": "Hot Wheels Mega Hauler, Mega Hauler Truck - 4 Cars",
-    "ship": 98
+    "ship": 0
   },
   {
     "asin": "B07FDJRNWC",
     "price": 509,
     "totalQuantity": 4,
-    "title": "X-Shot Water Warfare - Pistola de Agua a presión",
-    "ship": 97
+    "title": "XSHOT ZURU Water Warfare - Lanzador de Agua a presión",
+    "ship": 0
   },
   {
     "asin": "B01LYFS5CZ",
@@ -2692,7 +2958,7 @@
     "price": 319,
     "totalQuantity": 1,
     "title": "Uno Juego Gamesunostacko",
-    "ship": 91
+    "ship": 0
   },
   {
     "asin": "B07YVWY1XX",
@@ -2727,28 +2993,28 @@
     "price": 369,
     "totalQuantity": 2,
     "title": "Monster Jam 2019 Arena Favourites Alien Invasion 1:64 Scale Diecast with Figure by Spin Master",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B089KTFQ1R",
     "price": 369,
     "totalQuantity": 2,
     "title": "Monster Jam SpinMaster 2020 Mix11 Salvager - Escala 1:64",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B088NFD9PS",
     "price": 369,
-    "totalQuantity": 2,
+    "totalQuantity": 0,
     "title": "Monster Jam, Official Soldier Fortune Truck, Die-Cast Vehicle, Legacy Trucks Series, 1:64 Scale",
-    "ship": 82
+    "ship": null
   },
   {
     "asin": "B08J5SDNL2",
     "price": 849,
     "totalQuantity": 4,
     "title": "Figura de Accion Jurassic World Control Total Albertosaurus",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B084ZSWHLF",
@@ -2769,7 +3035,7 @@
     "price": 406,
     "totalQuantity": 2,
     "title": "Marvel Avengers: Endgame Titan Hero Series - Figura de superhéroe Captain America Action Figure",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07ZYCLXFP",
@@ -2783,7 +3049,7 @@
     "price": 659,
     "totalQuantity": 1,
     "title": "My Little Pony - Colección de Unicornios Brillantes - Set de 5 ponys con Cuernos de Unicornio Brillantes y 12 Accesorios Sorpresa",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B07BKLMXJV",
@@ -2804,21 +3070,21 @@
     "price": 183,
     "totalQuantity": 1,
     "title": "DieCast Hotwheels [Tanknator] 5/250 Blanco/Negro, Experimotors 1/10 [Envío en estuche protector]",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B08R6JG4P3",
     "price": 101,
     "totalQuantity": 2,
     "title": "DieCast Hotwheels Hyperfin, Pantalla Tiempo 1/10 [Fast & Furious Spy Racers]",
-    "ship": 80
+    "ship": 39
   },
   {
     "asin": "B08P2C78R9",
     "price": 148,
     "totalQuantity": 2,
     "title": "Hotwheels [Mattel Dream Mobile], Tooned 2/5",
-    "ship": 86
+    "ship": 39
   },
   {
     "asin": "B08FF4RT9Z",
@@ -2846,21 +3112,21 @@
     "price": 441,
     "totalQuantity": 1,
     "title": "Baby Alive Littles Chloe Equipo de Aventuras",
-    "ship": 87
+    "ship": 0
   },
   {
     "asin": "B07D8CSCQR",
     "price": 399,
     "totalQuantity": 1,
     "title": "Marvel Avengers: Endgame Titan Hero Thanos Action Figure",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B07KWTS1K9",
     "price": 1598,
     "totalQuantity": 2,
     "title": "Figura Minnie Mouse con Traje de Catrina Articulada con Accesorios",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B07Y15ZLLY",
@@ -2871,8 +3137,8 @@
   },
   {
     "asin": "B07X6VYVDB",
-    "price": 624,
-    "totalQuantity": 0,
+    "price": 420,
+    "totalQuantity": 2,
     "title": "Pista Tunel Explosivo, Multicolor",
     "ship": null
   },
@@ -2881,28 +3147,28 @@
     "price": 599,
     "totalQuantity": 2,
     "title": "Fotorama Figura Súper Wings Transformabot 4 Pack (Astra, Flip, Todd, Agente Chace)",
-    "ship": 82
+    "ship": 0
   },
   {
     "asin": "B00PPWP2X8",
     "price": 730,
     "totalQuantity": 1,
     "title": "Súper Wings Figura Jett Vehículo de acción",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B00PPWGNTA",
     "price": 599,
     "totalQuantity": 2,
     "title": "Super Wings Vehiculo con Figura Basica transformable",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B07Y954NY4",
     "price": 679,
     "totalQuantity": 3,
     "title": "Disney Pixar Toy Story, BoPeep con capa, Juguete para niños de 3 años en adelante, estilo icónico y escala real",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07MJLVF1T",
@@ -2915,22 +3181,22 @@
     "asin": "B06ZZNTZFC",
     "price": 526,
     "totalQuantity": 1,
-    "title": "Super Wings - Plataforma Robo de 7 pulgadas de Jett con 2 pulgadas Transform-A-Robot Jett Red Mini figura | Transformación de camión de juguete para vehículos | Divertido regalo de cumpleaños para niños y niñas de 3, 4, 5 años",
+    "title": "Super Wings - Jett's Robo Rig de 7 pulgadas con 2 pulgadas Transform-A-Robot Jett Red Mini figura | Transformación de juguete camión de avión | Divertidos regalos de cumpleaños para niños y niñas de 3, 4, 5 años",
     "ship": 88
   },
   {
     "asin": "B07FFWFKYD",
     "price": 549,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Playskool Señor Cara de Papa Disney/Pixar Toy Story 4 Mini 4 Pack Buzz, Woody, Ducky y Bunny Toy Figure",
-    "ship": 0
+    "ship": null
   },
   {
     "asin": "B07NQ9YL97",
     "price": 532,
-    "totalQuantity": 2,
+    "totalQuantity": 1,
     "title": "Barbie Muñeca Profesiones Nat Geo, Fotoperiodista",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B08J5XWSXH",
@@ -2944,14 +3210,14 @@
     "price": 715,
     "totalQuantity": 2,
     "title": "Marvel Figura Spider-Man 12 Pulgadas Titan Hero Series",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07FT75SS7",
-    "price": 746,
+    "price": 861,
     "totalQuantity": 1,
     "title": "Hamilton Beach 26071 Wafflera Eléctrica Modelo Belga, Chica, Negro",
-    "ship": 114
+    "ship": 0
   },
   {
     "asin": "B00PPWFY90",
@@ -2965,18 +3231,18 @@
     "price": 599,
     "totalQuantity": 1,
     "title": "MINNIE BOWTIQUE Set de Figuras coleccionables Disney Minnie y Sus Amigos",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B07YFWG8NY",
     "price": 959,
     "totalQuantity": 1,
     "title": "Fisher-Price Little People Sets De Juego Preescolares Escuelita De Los Amigos 24M+ GJC13",
-    "ship": 110
+    "ship": 0
   },
   {
     "asin": "B083W4C98K",
-    "price": 2210,
+    "price": 2324,
     "totalQuantity": 1,
     "title": "Fast & Furious 1:12 4x4 Dom's Dodge Charger Elite RC Control Remoto Coche 2.4 GHz, Juguetes para niños y Adultos",
     "ship": 141
@@ -2986,21 +3252,21 @@
     "price": 1359,
     "totalQuantity": 1,
     "title": "Barbie Signature Billie Jean King Muñeca para niñas de 6 años en adelante",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B07P8QTFYW",
     "price": 1499,
     "totalQuantity": 4,
     "title": "Paw Patrol Set Planeador Vehicle, Pack of 2",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B07D8HLS7Q",
     "price": 499,
     "totalQuantity": 2,
     "title": "Marvel Avengers: Endgame Titan Hero Series Figura de superhéroe Iron Man",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B07D89BGLB",
@@ -3014,7 +3280,7 @@
     "price": 799,
     "totalQuantity": 2,
     "title": "Frozen 2 Personajes Clásicos Kristoff",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07MJH9675",
@@ -3028,7 +3294,7 @@
     "price": 599,
     "totalQuantity": 3,
     "title": "Toy Story Surtido de Figuras Básicas Película, Buzz con Visor",
-    "ship": 84
+    "ship": 0
   },
   {
     "asin": "B072K82VHH",
@@ -3046,10 +3312,10 @@
   },
   {
     "asin": "B0829KVGXM",
-    "price": 278,
-    "totalQuantity": 0,
+    "price": 199,
+    "totalQuantity": 1,
     "title": "PLAYMOBIL Special Plus 70301 Cepillo de dientes Niña de 4 años en adelante",
-    "ship": null
+    "ship": 39
   },
   {
     "asin": "B01H3LNIWA",
@@ -3068,16 +3334,16 @@
   {
     "asin": "B019RP6OE4",
     "price": 2077,
-    "totalQuantity": 1,
+    "totalQuantity": 0,
     "title": "Fisher Price Imaginext Barco Ataque de Tiburón",
-    "ship": 129
+    "ship": null
   },
   {
     "asin": "B0716S4VCL",
     "price": 2699,
     "totalQuantity": 2,
     "title": "LEGO Juego de Construcción Star Wars First Order Heavy Scout Walker",
-    "ship": 96
+    "ship": 0
   },
   {
     "asin": "B07N9H9YLT",
@@ -3098,7 +3364,7 @@
     "price": 299,
     "totalQuantity": 1,
     "title": "Playskool Figura Red Ranger Mega Mighties Power Rangers Action Figure",
-    "ship": 88
+    "ship": 0
   },
   {
     "asin": "B00V0EZB1S",
@@ -3119,14 +3385,14 @@
     "price": 306,
     "totalQuantity": 2,
     "title": "Muñeca Barbie Careers Tenista",
-    "ship": 83
+    "ship": 0
   },
   {
     "asin": "B06WPBPJ63",
     "price": 599,
     "totalQuantity": 2,
     "title": "Barbie Muñeca Profesiones, Jugadora de Tennis",
-    "ship": 81
+    "ship": 0
   },
   {
     "asin": "B075M51ZD7",
@@ -3144,7 +3410,7 @@
   },
   {
     "asin": "B015TNF1VU",
-    "price": 466,
+    "price": 499,
     "totalQuantity": 1,
     "title": "Mi Alegria Set Hada Reyna",
     "ship": 90
@@ -3168,7 +3434,7 @@
     "price": 1299,
     "totalQuantity": 1,
     "title": "PAW Patrol Vehiculo de Lujo, Skye",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B01IH8I3JQ",
@@ -3182,42 +3448,42 @@
     "price": 818,
     "totalQuantity": 4,
     "title": "Mi Alegria Laboratorio de Slime Juego De Mesa",
-    "ship": 94
+    "ship": 0
   },
   {
     "asin": "B087YYLTG2",
     "price": 805,
     "totalQuantity": 5,
     "title": "Mi Tienda de Comidas Estuche para Hacer Fondant",
-    "ship": 100
+    "ship": 0
   },
   {
     "asin": "B087Z2XCHN",
     "price": 864,
     "totalQuantity": 1,
     "title": "Mi Alegría Fábrica de Pays y Tartitas",
-    "ship": 109
+    "ship": 0
   },
   {
     "asin": "B07GBHCCD5",
-    "price": 972,
+    "price": 980,
     "totalQuantity": 2,
     "title": "Distroller Pastelirris Pachangueros Mi Alegria Fabrica de Pasteles",
-    "ship": 110
+    "ship": 0
   },
   {
     "asin": "B07VWCTNL2",
     "price": 730,
     "totalQuantity": 2,
     "title": "Mi Alegria Maquina de Palomitas de Maiz Game",
-    "ship": 98
+    "ship": 0
   },
   {
     "asin": "B01IH8HODC",
     "price": 1031,
     "totalQuantity": 4,
     "title": "Mi Alegría Juego de Mesa Equipo Eléctrico Computarizado",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B015TNB6JG",
@@ -3231,14 +3497,14 @@
     "price": 507,
     "totalQuantity": 2,
     "title": "MiAlegria Mi Primer Laboratorio",
-    "ship": 89
+    "ship": 0
   },
   {
     "asin": "B07LB6HL9L",
     "price": 295,
     "totalQuantity": 2,
     "title": "Mi Alegria Quimica Inicial (13 Experimentos)",
-    "ship": 83
+    "ship": 39
   },
   {
     "asin": "B07P2JV8C2",
@@ -3252,7 +3518,7 @@
     "price": 599,
     "totalQuantity": 1,
     "title": "Fisher-Price FYL39 Sort and Spill Learning Truck, Multicolor",
-    "ship": 97
+    "ship": 0
   },
   {
     "asin": "B07VSHNBTB",
@@ -3266,14 +3532,14 @@
     "price": 219,
     "totalQuantity": 1,
     "title": "Playskool Heroes Transformers Robot Mega Heatwave Action Figure",
-    "ship": 88
+    "ship": 39
   },
   {
     "asin": "B006JVUH1G",
     "price": 499,
     "totalQuantity": 1,
     "title": "Set de juego Imaginext Vehiculos Aviones Grandes",
-    "ship": 93
+    "ship": 0
   },
   {
     "asin": "B07FCWXCQV",
@@ -3291,24 +3557,24 @@
   },
   {
     "asin": "B0844QKQFB",
-    "price": 682,
+    "price": 799,
     "totalQuantity": 1,
     "title": "Mi Alegria FABRICA DE Empanadas",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B07GBHT353",
     "price": 567,
     "totalQuantity": 1,
     "title": "Distroller Cuentas al Hilo Mi Alegria Fabrica de Joyeria",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B017J01XGI",
     "price": 699,
     "totalQuantity": 3,
     "title": "Fabrica De Paletas Heladas [miscellaneous]",
-    "ship": 92
+    "ship": 0
   },
   {
     "asin": "B07QGLQ6LR",
@@ -3343,7 +3609,7 @@
     "price": 424,
     "totalQuantity": 5,
     "title": "Barbie Dreamhouse Adventures Daisy Princesa Moderna Muñeca para niñas de 3 años en adelante",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07GYY9MJN",
@@ -3357,7 +3623,7 @@
     "price": 499,
     "totalQuantity": 2,
     "title": "Barbie Fashion Muñeca Peinados De Ensueño Apto Para +3 Años",
-    "ship": 85
+    "ship": 0
   },
   {
     "asin": "B07GZZKKMW",
@@ -3396,10 +3662,10 @@
   },
   {
     "asin": "B07DKQ27T8",
-    "price": 585,
-    "totalQuantity": 2,
+    "price": 695,
+    "totalQuantity": 1,
     "title": "Fisher Price Rie y Aprende Laptop Aprende Conmigo",
-    "ship": 92
+    "ship": 0
   },
   {
     "asin": "B07HFV7FQR",
@@ -3420,7 +3686,7 @@
     "price": 149,
     "totalQuantity": 1,
     "title": "Fisher-Price Monstruos Tote-Along, Harvey",
-    "ship": 82
+    "ship": 39
   },
   {
     "asin": "B07NQGCRDK",
@@ -3438,24 +3704,24 @@
   },
   {
     "asin": "B01B1N5Q94",
-    "price": 545,
+    "price": 640,
     "totalQuantity": 4,
     "title": "Mi Alegria Fabrica de Pinta Velas",
-    "ship": 94
+    "ship": 0
   },
   {
     "asin": "B07NQGB4H4",
     "price": 999,
     "totalQuantity": 1,
     "title": "DC Comic Muñeca DC Super Hero Girls Wonder Woman Transformación, GBY52, Multicolor",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B07WGHZMGX",
     "price": 254,
     "totalQuantity": 1,
     "title": "BATMAN Figura de Acción, 30cm",
-    "ship": 87
+    "ship": 39
   },
   {
     "asin": "B075KJ1N6P",
@@ -3469,14 +3735,14 @@
     "price": 403,
     "totalQuantity": 1,
     "title": "Espirografo",
-    "ship": 86
+    "ship": 0
   },
   {
     "asin": "B01IH8IHPG",
-    "price": 300,
+    "price": 294,
     "totalQuantity": 1,
     "title": "Mi Alegría Kit Ciencia Anatomía Humana - El Torso",
-    "ship": 88
+    "ship": 39
   },
   {
     "asin": "B07F6LR3MF",
@@ -3497,7 +3763,7 @@
     "price": 399,
     "totalQuantity": 1,
     "title": "Jenga Clasico",
-    "ship": 99
+    "ship": 0
   },
   {
     "asin": "B01B1N5NLU",
@@ -3508,17 +3774,17 @@
   },
   {
     "asin": "B087WS67MR",
-    "price": 418,
+    "price": 498,
     "totalQuantity": 1,
     "title": "Mi Alegría Mundo Triceratops Dinosaurios Juguete Aprende Jugando",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B087WHVTNP",
-    "price": 339,
+    "price": 401,
     "totalQuantity": 1,
     "title": "Mundo Velociraptor Dinosaurios Mi Alegría Juguete Aprende Jugando",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B07VP21YW4",
@@ -3529,10 +3795,10 @@
   },
   {
     "asin": "B017J020EW",
-    "price": 578,
+    "price": 589,
     "totalQuantity": 2,
     "title": "Cristalizacion",
-    "ship": 80
+    "ship": 0
   },
   {
     "asin": "B015TNF7P0",
@@ -3560,20 +3826,20 @@
     "price": 1591,
     "totalQuantity": 1,
     "title": "Mi Alegría Set Microscopio con Luz y Proyector 100X 900X",
-    "ship": 96
+    "ship": 0
   },
   {
     "asin": "B011MIUQXY",
     "price": 199,
     "totalQuantity": 2,
-    "title": "Play Doh Pasteles Divertidos",
-    "ship": 88
+    "title": "Play-Doh Kitchen Creations Pasteles Divertidos - Set de Comida de Juguete para niños de 3 años en adelante, con Masa Play-Doh",
+    "ship": 39
   },
   {
     "asin": "B00004TZY8",
-    "price": 169,
-    "totalQuantity": 0,
+    "price": 189,
+    "totalQuantity": 2,
     "title": "Original UNO Card Game",
-    "ship": null
+    "ship": 39
   }
 ]

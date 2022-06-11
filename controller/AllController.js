@@ -200,10 +200,10 @@ class AllController {
 
     async copyAmazonPrimeToWooyML(boolean = true, p = {
         primeURLS: [ //* Páginas de busqueda que seran escrapeadas.
-            'https://www.amazon.com.mx/s?k=barbie&i=toys&rh=n%3A11260442011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=J1IGWN38BQIX&qid=1652278668&rnid=9754433011&sprefix=barbie%2Caps%2C634&ref=sr_nr_p_6_1', //*Barbie
-            'https://www.amazon.com.mx/s?k=hot+wheels&i=toys&rh=p_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&crid=3IMSMBU62AMYN&qid=1652294952&rnid=9754433011&sprefix=ho%2Ctoys%2C558&ref=sr_nr_p_6_1', //* hot wheels
-            'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic+world&i=toys&rh=n%3A11337634011%2Cp_90%3A11829015011%2Cp_6%3AAVDBXBAVVSXLQ&dc&qid=1652295028&rnid=9754433011&sprefix=figuras+de+accion+j%2Caps%2C316&ref=sr_nr_p_6_1', //* Jurassic World
-            'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic+park&i=toys&rh=n%3A11337634011%2Cp_90%3A11829015011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652295848&rnid=9754433011&ref=sr_nr_p_6_1', //* Jurassic Park
+            'https://www.amazon.com.mx/s?k=barbie&i=toys&rh=n%3A20939947011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1653884129&rnid=9754434011&ref=sr_nr_p_85_1', //*Barbie
+            'https://www.amazon.com.mx/s?k=hot+wheels&i=toys&rh=p_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1654003924&rnid=9754433011&ref=sr_nr_p_6_8&ds=v1%3ArhocgtvTGXzRlIYXc6RkZeJmd0FLJPndt9hfQ9GsIp8', //* hot wheels
+            'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic+world&i=toys&rh=n%3A11337634011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3ADS0BOmHbOj0MsCZzu6AXz5Ao5GhV76RCKqUjtvGLVEE&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1654392070&rnid=9754433011&ref=sr_nr_p_6_2', //* Jurassic World
+            'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic+park&i=toys&rh=n%3A11337634011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3A39N%2BnN61iR7PwUk6v6fXWoKl4YiUOTfFV%2FHm8TBqqcE&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1654392126&rnid=9754433011&ref=sr_nr_p_6_2', //* Jurassic Park
             'https://www.amazon.com.mx/s?k=fisher+price&i=toys&rh=n%3A11337634011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296390&rnid=9754433011&ref=sr_nr_p_6_1', //* Fisher Price
             'https://www.amazon.com.mx/s?k=playmobil&i=toys&rh=n%3A11337634011%2Cp_90%3A11829015011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296447&rnid=9754433011&ref=sr_nr_p_6_1', //* Playmobil
             'https://www.amazon.com.mx/s?k=mi+alegr%C3%ADa&i=toys&rh=n%3A11260442011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011%2Cp_85%3A9841545011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296569&rnid=9754434011&ref=sr_nr_p_85_1', //* Mi Alegria
@@ -271,7 +271,6 @@ class AllController {
                         console.log(error);
                         reject("Error en Woo getInventorySummaries.");
                     });
-
             } while (condicion)
 
             console.log("Inventarios: ", conciliar);
@@ -322,8 +321,8 @@ class AllController {
                                     console.log("Error en Woo createProduct de copyAmazonToWoocommerce: ", error);
                                     if (stop) await this.tools.pausa();
                                 });
-                            //* Si el producto es de Prime se crea el producto en Mercadolibre
-                            if (onAP) {
+                            //* Si el producto es de Prime o esta disponible para su venta inmediata se crea el producto en Mercadolibre
+                            if (onAP || inventory[grey].shipTime) {
                                 await this.mlMod.crearProducto(dataProduct)
                                     .then(async (res) => {
                                         console.log(`Producto ${dataProduct.title} creado en Mercadolibre con éxito. Response: ${JSON.stringify(res.data)}`);
@@ -396,7 +395,7 @@ class AllController {
                                 ]
                             };
 
-                            if (onAP) {
+                            if (onAP || inventory[grey].shipTime) {
                                 data['meta_data'].push({
                                     key: "_in_mercadolibre",
                                     value: 'on',
@@ -1786,7 +1785,7 @@ class AllController {
                     if (nombre !== element.name) r = r.filter((item) => item.name !== element.name)
                 }
                 return r
-            }).catch(async (e) => console.log(e));
+            }).catch(async (e) => { console.log(e); return []});
 
             if (res.length === 0) {//* si se devuelve un array vacío quiere decir que no existe la categoria y la crea
                 const {

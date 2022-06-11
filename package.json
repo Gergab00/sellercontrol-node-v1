@@ -36,15 +36,16 @@
     "dotenv": "^10.0.0",
     "flattie": "^1.1.0",
     "gergab-toolbox": "^1.0.1",
-    "html-to-text": "^8.1.0",
+    "html-to-text": "^8.2.0",
+    "inquirer": "^8.2.4",
     "jimp": "^0.16.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.3",
     "puppeteer": "^10.4.0",
     "puppeteer-autoscroll-down": "^0.1.7",
     "puppeteer-core": "^10.4.0",
     "re2": "^1.17.4",
     "request": "^2.88.2",
     "url-regex-safe": "^3.0.0",
-    "yargs": "^17.4.0"
+    "yargs": "^17.5.1"
   }
 }

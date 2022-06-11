@@ -20,6 +20,7 @@ class WoocommerceAPIModel {
                 consumerKey: process.env.WC_CONSUMER_KEY,
                 consumerSecret: process.env.WC_CONSUMER_SECRET,
                 version: "wc/v3",
+                timeout: 180000
             });
 
             if (this.api != null) {
@@ -120,12 +121,16 @@ class WoocommerceAPIModel {
     async existsProduct(sku, api = this.api) {
         return new Promise(async (resolve, reject) => {
             let ret;
-            console.log('Ejecutando WooAPIModel.existsProduct');
+            console.log('Ejecutando WooAPIModel.existsProduct ASIN: ', sku);
             api.get("products", {
                     sku: sku
                 })
                 .then((response) => {
-                    // Successful requess
+                    // Successful requess                
+                    //console.log("Response Status:", response.status);
+                    //console.log("Response Headers:", response.headers);
+                    console.log("Response Data:", response.data);
+                    
                     if (1 === response.data.length) {
                         ret = false;
                     } else {
@@ -174,7 +179,7 @@ class WoocommerceAPIModel {
                 .then((response) => {
                     // Successful requess
                     //if(this.debug)
-                    //console.log('Resultado de WoocommerceAPIModel.getProduct', response.data);
+                    console.log('Resultado de WoocommerceAPIModel.getProduct', response.data);
                     if(typeof response.data[0] === 'undefined') reject('El objeto no existe.');
                     if(response.data.length === 0) reject('El objeto no existe.');
                     resolve(response.data[0]);
@@ -185,6 +190,7 @@ class WoocommerceAPIModel {
                         // The request was made and the server responded with a status code
                         // that falls out of the range of 2xx
                         if(this.debug) console.log("Error en WoocommerceAPIModel.getProduct: " + error.response);
+                        console.log("Error en WoocommerceAPIModel.getProduct: " + error.response);
                         //console.log(error.response.status);
                         //console.log(error.response.headers);
                         reject(error.response.data)
@@ -329,6 +335,7 @@ class WoocommerceAPIModel {
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
                     if(this.debug) console.log(error.response.data);
+                    console.log(error.response.data);
                     //console.log(error.response.status);
                     //console.log(error.response.headers);
                     reject(error.response.data)
