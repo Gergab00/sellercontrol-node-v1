@@ -209,7 +209,7 @@ class AllController {
             'https://www.amazon.com.mx/s?k=mi+alegr%C3%ADa&i=toys&rh=n%3A11260442011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011%2Cp_85%3A9841545011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296569&rnid=9754434011&ref=sr_nr_p_85_1', //* Mi Alegria
             'https://www.amazon.com.mx/s?k=rompecabezas&i=toys&rh=p_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011%2Cp_85%3A9841545011&dc&crid=356BD07WTSL48&qid=1652296741&rnid=9754434011&sprefix=rompecab%2Ctoys%2C681&ref=sr_nr_p_85_1', //* rompecabezas
             'https://www.amazon.com.mx/s?k=maybelline&i=beauty&rh=n%3A10178470011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011&dc&crid=3CUVLOATXFFQE&qid=1652296870&rnid=11829013011&sprefix=may%2Caps%2C304&ref=sr_nr_p_90_1', //* maybelline
-            'https://www.amazon.com.mx/s?k=maquillaje&i=beauty&rh=n%3A11260452011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011%2Cp_90%3A11829015011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652297203&rnid=11829013011&ref=sr_nr_p_90_1', //* Maquillaje
+            'https://www.amazon.com.mx/s?k=maquillaje&i=beauty&rh=p_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=262WOCYKGS20K&qid=1655347101&rnid=9754433011&sprefix=maquillaje%2Cbeauty%2C1999&ref=sr_nr_p_6_1', //* Maquillaje
             'https://www.amazon.com.mx/s?k=art%C3%ADculos+para+bebe&i=baby&rh=n%3A9482650011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&qid=1652297337&rnid=9754433011&sprefix=articulos+%2Caps%2C263&ref=sr_nr_p_6_1', //* articulos para bebe
             'https://www.amazon.com.mx/s?i=fashion-womens&bbn=14093024011&rh=n%3A14093024011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011%2Cp_90%3A11829015011&dc&qid=1652297606&rnid=11829013011&ref=sr_nr_p_90_1', //* joyas para dama
             'https://www.amazon.com.mx/s?k=bolsas+para+dama&i=fashion-womens&rh=n%3A13848838011%2Cn%3A14093002011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652297764&rnid=9754433011&ref=sr_nr_p_6_1', //* bolsas para dama
@@ -1803,6 +1803,8 @@ class AllController {
                         return r
                     }).catch(async (e) => console.log(e));
 
+                    this.wooMod.setDebug(true);
+
                     await this.wooMod.setCategory(name, picture, parent_id)//* Se crea la categoria
                         .then(async (r) => {
                             if (root === path_from_root.length - 1){ resolve({ //* Si se llega a la ultima categoria devuelve el id
@@ -1811,9 +1813,22 @@ class AllController {
                             }
                             parent_id = r.id; //* Si todavia hay categoria se regresa el id a la función para ponerla como categoria padre
                         }).catch(async (e) => {//* Si ya existe la categoria la devuelve al parent id
-                            parent_id = e.data.resource_id;
+                            if (typeof e.data.resource_id === 'undefined'){
+                                console.log('Typeof resource')
+                                parent_id = 0;
+                            } else {
+                                try {
+                                    parent_id = e.data.resource_id;
+                                } catch (error) {
+                                    parent_id = 0;
+                                    console.log('Catch resource')
+                                }
+                            
+                            }
                             console.log("Catch: ", parent_id)
                         });
+
+                        this.wooMod.setDebug(false);
                 }
 
                 resolve({
