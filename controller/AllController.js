@@ -34,11 +34,11 @@ class AllController {
             const msgAmz = await this.amzMod.connect(this.amzMod.REFRESHTOKEN).catch(async (error) => {
                 reject(`\nError al conectar con Amazon. ${error}`)
             });
-            const msgML = await this.mlMod.connect(mlCode).catch(async (error) => {
-                reject(`${msg}\nError al conectar con Mercadolibre. ${error}`)
+           const msgML = await this.mlMod.connect(mlCode).catch(async (error) => {
+                reject(`\nError al conectar con Mercadolibre. ${error}`)
             });
             const msgWoo = await this.wooMod.connect().catch(async (error) => {
-                reject(`${msg}\nError al conectar con Woocomerce. ${error}`)
+                reject(`\nError al conectar con Woocomerce. ${error}`)
             });
             console.log('Amazon: ', msgAmz);
             console.log('Mercadolibre: ', msgML);
@@ -200,21 +200,26 @@ class AllController {
 
     async copyAmazonPrimeToWooyML(boolean = true, p = {
         primeURLS: [ //* Páginas de busqueda que seran escrapeadas.
-            'https://www.amazon.com.mx/s?k=barbie&i=toys&rh=n%3A20939947011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1653884129&rnid=9754434011&ref=sr_nr_p_85_1', //*Barbie
-            'https://www.amazon.com.mx/s?k=hot+wheels&i=toys&rh=p_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1654003924&rnid=9754433011&ref=sr_nr_p_6_8&ds=v1%3ArhocgtvTGXzRlIYXc6RkZeJmd0FLJPndt9hfQ9GsIp8', //* hot wheels
-            'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic+world&i=toys&rh=n%3A11337634011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3ADS0BOmHbOj0MsCZzu6AXz5Ao5GhV76RCKqUjtvGLVEE&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1654392070&rnid=9754433011&ref=sr_nr_p_6_2', //* Jurassic World
-            'https://www.amazon.com.mx/s?k=figuras+de+acci%C3%B3n+jurassic+park&i=toys&rh=n%3A11337634011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3A39N%2BnN61iR7PwUk6v6fXWoKl4YiUOTfFV%2FHm8TBqqcE&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1654392126&rnid=9754433011&ref=sr_nr_p_6_2', //* Jurassic Park
-            'https://www.amazon.com.mx/s?k=fisher+price&i=toys&rh=n%3A11337634011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296390&rnid=9754433011&ref=sr_nr_p_6_1', //* Fisher Price
-            'https://www.amazon.com.mx/s?k=playmobil&i=toys&rh=n%3A11337634011%2Cp_90%3A11829015011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296447&rnid=9754433011&ref=sr_nr_p_6_1', //* Playmobil
-            'https://www.amazon.com.mx/s?k=mi+alegr%C3%ADa&i=toys&rh=n%3A11260442011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011%2Cp_85%3A9841545011&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652296569&rnid=9754434011&ref=sr_nr_p_85_1', //* Mi Alegria
-            'https://www.amazon.com.mx/s?k=rompecabezas&i=toys&rh=p_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011%2Cp_85%3A9841545011&dc&crid=356BD07WTSL48&qid=1652296741&rnid=9754434011&sprefix=rompecab%2Ctoys%2C681&ref=sr_nr_p_85_1', //* rompecabezas
-            'https://www.amazon.com.mx/s?k=maybelline&i=beauty&rh=n%3A10178470011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_90%3A11829015011&dc&crid=3CUVLOATXFFQE&qid=1652296870&rnid=11829013011&sprefix=may%2Caps%2C304&ref=sr_nr_p_90_1', //* maybelline
-            'https://www.amazon.com.mx/s?k=maquillaje&i=beauty&rh=p_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=262WOCYKGS20K&qid=1655347101&rnid=9754433011&sprefix=maquillaje%2Cbeauty%2C1999&ref=sr_nr_p_6_1', //* Maquillaje
-            'https://www.amazon.com.mx/s?k=art%C3%ADculos+para+bebe&i=baby&rh=n%3A9482650011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&qid=1652297337&rnid=9754433011&sprefix=articulos+%2Caps%2C263&ref=sr_nr_p_6_1', //* articulos para bebe
-            'https://www.amazon.com.mx/s?i=fashion-womens&bbn=14093024011&rh=n%3A14093024011%2Cp_6%3AAVDBXBAVVSXLQ%2Cp_85%3A9841545011%2Cp_90%3A11829015011&dc&qid=1652297606&rnid=11829013011&ref=sr_nr_p_90_1', //* joyas para dama
-            'https://www.amazon.com.mx/s?k=bolsas+para+dama&i=fashion-womens&rh=n%3A13848838011%2Cn%3A14093002011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1652297764&rnid=9754433011&ref=sr_nr_p_6_1', //* bolsas para dama
-            'https://www.amazon.com.mx/s?k=fragancias+para+dama&i=beauty&rh=n%3A10178394011%2Cp_90%3A11829015011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&qid=1652297852&rnid=9754433011&ref=sr_nr_p_6_1', //* Fragancias para dama
-            'https://www.amazon.com.mx/s?k=perros&i=pets&rh=p_85%3A9841545011%2Cp_90%3A11829015011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=8P9M682GCVCH&qid=1652298092&rnid=9754433011&sprefix=perros%2Cpets%2C353&ref=sr_nr_p_6_1', //* perros
+        'https://www.amazon.com.mx/s?k=maquillaje&i=beauty&rh=n%3A11260452011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3AddWvNY59uQ33jZOeOvRotKuLfoICK6K6RFKAWrbBmkA&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1658376329&rnid=9754433011&ref=sr_nr_p_6_1',
+        'https://www.amazon.com.mx/s?bbn=11260442011&rh=n%3A11260442011%2Cp_6%3AAVDBXBAVVSXLQ&dc&qid=1658376551&rnid=9754433011&ref=lp_11260443011_nr_p_6_1',
+        'https://www.amazon.com.mx/s?k=lego&i=toys&rh=n%3A11260442011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1658376812&rnid=9754433011&ref=sr_nr_p_6_2&ds=v1%3AaMka%2Bmw7kMMXKnl0Xac0IgShJKBrA%2F%2BmsKKZMja%2BNf0',
+        'https://www.amazon.com.mx/s?k=natura&i=beauty&rh=n%3A11260452011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3Atd0RCFxucGhyj%2FL2j6gdRPOBqa9alPW2disA3rnRTek&qid=1658376925&rnid=9754433011&ref=sr_nr_p_6_3',
+        'https://www.amazon.com.mx/s?k=tefal&i=kitchen&rh=n%3A9721682011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3Ay120u9RfgWG0889tdzEfJU1Dy9eclsFUTF%2FJK8a1jWw&qid=1658376977&rnid=9754433011&ref=sr_nr_p_6_1',
+        'https://www.amazon.com.mx/s?k=hot+wheels&i=toys&rh=n%3A11260442011%2Cp_85%3A9841545011%2Cp_6%3AAVDBXBAVVSXLQ&dc&ds=v1%3Az3unHbja4oib9fzkUO9p%2FuKPa7nSCTKuC%2FkAMDTs7HA&qid=1658377025&rnid=9754433011&ref=sr_nr_p_6_4',
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         ],
         selfInventory: [],
         debug: false,

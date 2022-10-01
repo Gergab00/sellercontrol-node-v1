@@ -14,7 +14,7 @@ const main = async () => {
     const Controller = new AllController();
     
 
-    await Controller.connectAll('TG-6287d003dc3cdd00142a2c00-1066828182')
+    await Controller.connectAll('TG-62c0a9ed68929400137304bd-86979722')
                     .then(async (res) => {
                         console.log("Respuesta de connectAll: ", res);
                     })

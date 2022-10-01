@@ -40,7 +40,7 @@ class AmazonAPIModel {
                     refresh_token: refresh_token,
                     options: {
                         //credentials_path:'../amazon/amzspapi/credentials.env',
-                        auto_request_tokens: true
+                        auto_request_tokens: false
                     }
                 });
 

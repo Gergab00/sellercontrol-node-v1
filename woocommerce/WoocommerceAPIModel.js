@@ -15,13 +15,16 @@ class WoocommerceAPIModel {
 
     async connect() {
         return new Promise(async (resolve, reject) => {
+            try{
             this.api = new WooCommerceRestApi({
                 url: this.url,
                 consumerKey: process.env.WC_CONSUMER_KEY,
                 consumerSecret: process.env.WC_CONSUMER_SECRET,
                 version: "wc/v3",
-                timeout: 180000
             });
+            } catch(e){
+                reject(`Error al intentar conectar con Woocommerce, error al crear el objeto.${JSON. stringify(e)}`)
+            }
 
             if (this.api != null) {
                 resolve(`Conexión con Woocommerce a ${this.url}`)
