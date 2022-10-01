@@ -1,306 +1,54 @@
-//require('dotenv').config();
-//requiere('colors');
-const fs = require('fs');
-const AllController = require('./controller/AllController');
+/**
+ * app.js
+ *
+ * Use `app.js` to run your app without `sails lift`.
+ * To start the server, run: `node app.js`.
+ *
+ * This is handy in situations where the sails CLI is not relevant or useful,
+ * such as when you deploy to a server, or a PaaS like Heroku.
+ *
+ * For example:
+ *   => `node app.js`
+ *   => `npm start`
+ *   => `forever start app.js`
+ *   => `node debug app.js`
+ *
+ * The same command-line arguments and env vars are supported, e.g.:
+ * `NODE_ENV=production node app.js --port=80 --verbose`
+ *
+ * For more information see:
+ *   https://sailsjs.com/anatomy/app.js
+ */
 
 
-(async () => {
+// Ensure we're in the project directory, so cwd-relative paths work as expected
+// no matter where we actually lift from.
+// > Note: This is not required in order to lift, but it is a convenient default.
+process.chdir(__dirname);
 
-    const Controller = new AllController();
 
-    let key = 17;
-    let b = false;
-    let inventory = [];
-    let asin = 'B08SRB1PTX';
-    let ml_cat = 'MLM1610';
-    let cl_cat = '20251';
 
-    switch (key) {
-        case 1: //Doc Actualizar stock Mercadolibre
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-            await Controller.updateStockPriceMercadolibre(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de updateStockPriceMercadolibre: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de updateStockPriceMercadolibre: ", error);
-                });
+// Attempt to import `sails` dependency, as well as `rc` (for loading `.sailsrc` files).
+var sails;
+var rc;
+try {
+  sails = require('sails');
+  rc = require('sails/accessible/rc');
+} catch (err) {
+  console.error('Encountered an error when attempting to require(\'sails\'):');
+  console.error(err.stack);
+  console.error('--');
+  console.error('To run an app using `node app.js`, you need to have Sails installed');
+  console.error('locally (`./node_modules/sails`).  To do that, just make sure you\'re');
+  console.error('in the same directory as your app and run `npm install`.');
+  console.error();
+  console.error('If Sails is installed globally (i.e. `npm install -g sails`) you can');
+  console.error('also run this app with `sails lift`.  Running with `sails lift` will');
+  console.error('not run this file (`app.js`), but it will do exactly the same thing.');
+  console.error('(It even uses your app directory\'s local Sails install, if possible.)');
+  return;
+}//-•
 
-            break;
-        case 2: //Doc Copiar productos de Amazon a Woocommerce
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-            await Controller.copyAmazonToWoocommerce(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de copyAmazonToWoocommerce: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de copyAmazonToWoocommerce: ", error);
-                })
-            break;
-        case 3: //Doc Copiar productos a Mercadolibre
-            await Controller.connectAll('TG-62210466569000001b313f34-86979722')
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
 
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-
-            await Controller.copyWoocommerceToMercadoLibre(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de copyWoocommerceToMercadoLibre: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de copyWoocommerceToMercadoLibre: ", error);
-                });
-            break;
-
-        case 4: //doc Actualizar Woocommerce con Amazon
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
-
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-
-            await Controller.updateWoocommerce(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de updateWoocommerce: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de updateWoocommerce: ", error);
-                });
-
-            break;
-        case 5: //Doc Copiar productos de woocommerce a Claroshop
-            await Controller.connectWoo()
-                .then(async (res) => {
-                    console.log("Respuesta de connectWoo: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectWoo: ", error);
-                });
-
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-
-            await Controller.copyWoocommerceToClaroshop(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de copyWoocommerceToClaroshop: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de copyWoocommerceToClaroshop: ", error);
-                })
-            break;
-        case 6: //Doc Actualizar precio y stock en Woocommerce
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectWoo: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectWoo: ", error);
-                });
-
-            await Controller.updateWoocommerceStock(false)
-                .then(async (res) => {
-                    console.log("Respuesta de updateWoocommerceStock: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de updateWoocommerceStock: ", error);
-                })
-            break;
-        case 7: //Doc Elimina Productos de Claroshop
-            await Controller.eliminarTodosLosProductosClaroshop()
-                .then(async (res) => {
-                    console.log("Respuesta de eliminarTodosLosProductosClaroshop: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de eliminarTodosLosProductosClaroshop: ", error);
-                })
-            break;
-        case 8: //Doc Obtener Atributos de la categoria de mercadolibre.
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
-
-            await Controller.getMercadolibreCategories(ml_cat)
-            .then(async (res) => {
-                console.log("Respuesta de getMercadolibreCategories: ", res);
-            })
-            .catch(async (error) => {
-                console.log("Error de getMercadolibreCategories: ", error);
-            });
-            break;
-        case 9: //Doc Actualizar inventario y precio de Claroshop
-            await Controller.connectWoo()
-                .then(async (res) => {
-                    console.log("Respuesta de connectWoo: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectWoo: ", error);
-                });
-
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-
-            await Controller.updateClaroPriceInventory(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de updateClaroPriceInventory: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de updateClaroPriceInventory: ", error);
-                })
-            break;
-
-        case 10: //Doc Obtener información de un producto de Amazon
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectWoo: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectWoo: ", error);
-                });
-
-            await Controller.getAmazonProducto(false, asin)
-                .then(async (res) => {
-                    console.log("Respuesta de getAmazonProducto: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de getAmazonProducto: ", error);
-                });
-            
-            break;
-            case 11: //Doc Obtener información de un producto de Woocomerce
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectWoo: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectWoo: ", error);
-                });
-
-            await Controller.getWoocommerceProducto(asin)
-                .then(async (res) => {
-                    console.log("Respuesta de getWoocommerceProducto: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de getWoocommerceProducto: ", error);
-                });
-            
-            break;
-            case 12: //Doc Obtener información de un producto de Mercadolibre
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectWoo: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectWoo: ", error);
-                });
-
-            await Controller.getMercadolibreProducto(asin)
-                .then(async (res) => {
-                    console.log("Respuesta de getMercadolibreProducto: ", res.response.data);
-                })
-                .catch(async (error) => {
-                    console.log("Error de getMercadolibreProducto: ", error);
-                });
-            
-            break;
-        
-            case 14: //Doc Obtener información de un producto de Claroshop
-                console.log("No hay acciones programadas")
-            break;
-            case 15://Doc Obtener atributos de categoria de Claroshop
-                await Controller.getAtributosCategoriaClaro(cl_cat)
-                .then(async (res) => {
-                    console.log("Respuesta de getAtributosCategoriaClaro: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de getAtributosCategoriaClaro: ", error);
-                });
-                break;
-            case 16://Doc Actualizar Woocommerce con información de Mercadolibre
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
-
-            if (b) {
-                let rawdata = fs.readFileSync('./json/simple_data.json', 'utf8');
-                inventory = await JSON.parse(rawdata);
-            }
-
-            await Controller.updateWoocommerceWithMercadoLibre(false, inventory)
-                .then(async (res) => {
-                    console.log("Respuesta de updateWoocommerceWithMercadoLibre: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de updateWoocommerceWithMercadoLibre: ", error);
-                });
-            break;
-            case 17://Doc Copiar productos de Amazon Prime a Woocommerce y ML
-            await Controller.connectAll()
-                .then(async (res) => {
-                    console.log("Respuesta de connectAll: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de connectAll: ", error);
-                });
-                    
-            await Controller.copyAmazonPrimeToWooyML(false)
-                .then(async (res) => {
-                    console.log("Respuesta de copyAmazonPrimeToWooyML: ", res);
-                })
-                .catch(async (error) => {
-                    console.log("Error de copyAmazonPrimeToWooyML: ", error);
-                });
-            break;
-        default:
-            break;
-    }
-
-    await Controller.createLogFile();
-
-})();
+// Start server
+sails.lift(rc('sails'));

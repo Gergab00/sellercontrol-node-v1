@@ -1,17 +1,8 @@
 {
-  "name": "sellercontrol-node-v1",
-  "version": "2022.04.28",
-  "description": "Software para control del seller, conexión con Amazon, Mercadolibre y claroshop.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[D\u001b[D, Woocommerce y Claroshop.",
-  "main": "app.js",
-  "scripts": {
-    "log": "git log --oneline --decorate --graph --all",
-    "sync": "git push origin --all",
-    "unir": "concurrently \"git checkout master\" \"git merge dev\" \"git checkout dev\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gergab00/sellercontrol-node-v1.git"
-  },
+  "name": "sellercontrol",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Control software to manage and synchronize 4 marketplaces (Woocommerce, Amazon, Mercadolibre and Claroshop).",
   "keywords": [
     "nodejs",
     "node",
@@ -21,13 +12,15 @@
     "claroshop",
     "api"
   ],
-  "author": "Gerardo Gonzalez",
-  "license": "GPL-2.0-only",
-  "bugs": {
-    "url": "https://github.com/Gergab00/sellercontrol-node-v1/issues"
-  },
-  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme",
   "dependencies": {
+    "sails": "^1.5.3",
+    "grunt": "1.0.4",
+    "sails-hook-grunt": "^5.0.0",
+    "sails-hook-orm": "^4.0.0",
+    "sails-hook-sockets": "^2.0.0",
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "@sailshq/lodash": "^3.10.3",
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "amazon-sp-api": "^0.7.8",
     "chrome-launcher": "^0.15.0",
@@ -47,5 +40,31 @@
     "request": "^2.88.2",
     "url-regex-safe": "^3.0.0",
     "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "init" : "sails lift",
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "log": "git log --oneline --decorate --graph --all",
+    "sync": "git push origin --all"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gergab00/sellercontrol-node-v1.git"
+  },
+  "author": "Gerardo Gonzalez",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/Gergab00/sellercontrol-node-v1/issues"
+  },
+  "homepage": "https://github.com/Gergab00/sellercontrol-node-v1#readme",
+  "engines": {
+    "node": "^14.19"
   }
 }
