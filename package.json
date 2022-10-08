@@ -41,15 +41,9 @@
     "url-regex-safe": "^3.0.0",
     "yargs": "^17.5.1"
   },
-  "devDependencies": {
-    "eslint": "5.16.0"
-  },
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
+    "start": "",
     "init" : "sails lift",
-    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
-    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
     "log": "git log --oneline --decorate --graph --all",
     "sync": "git push origin --all"
   },
