@@ -13,14 +13,6 @@
     "api"
   ],
   "dependencies": {
-    "sails": "^1.5.3",
-    "grunt": "1.0.4",
-    "sails-hook-grunt": "^5.0.0",
-    "sails-hook-orm": "^4.0.0",
-    "sails-hook-sockets": "^2.0.0",
-    "@sailshq/connect-redis": "^3.2.1",
-    "@sailshq/socket.io-redis": "^5.2.0",
-    "@sailshq/lodash": "^3.10.3",
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "amazon-sp-api": "^0.7.8",
     "chrome-launcher": "^0.15.0",
@@ -33,7 +25,7 @@
     "inquirer": "^8.2.4",
     "jimp": "^0.16.1",
     "moment": "^2.29.3",
-    "puppeteer": "^10.4.0",
+    "puppeteer": "^19.0.0",
     "puppeteer-autoscroll-down": "^0.1.7",
     "puppeteer-core": "^10.4.0",
     "re2": "^1.17.4",
@@ -43,7 +35,7 @@
   },
   "scripts": {
     "start": "",
-    "init" : "sails lift",
+    "init": "sails lift",
     "log": "git log --oneline --decorate --graph --all",
     "sync": "git push origin --all"
   },
